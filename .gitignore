@@ -6,7 +6,6 @@
 *target*
 *classes*
 *.properties
-pom.xml
 count.txt
 localAdData.txt
 testng.xml
