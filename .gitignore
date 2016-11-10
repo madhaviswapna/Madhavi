@@ -1,0 +1,13 @@
+*.classpath
+*.metadata
+*.settings
+*settings*
+*test-output*
+*target*
+*classes*
+*.properties
+pom.xml
+count.txt
+localAdData.txt
+testng.xml
+cachedTestData.txt

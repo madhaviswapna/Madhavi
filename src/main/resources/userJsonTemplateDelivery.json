@@ -1,0 +1,130 @@
+{
+    "_class" : "com.shc.pi.crm.domain.CSSUserDetails",
+    "ocaSalesId" : "testdelivery0001",
+    "username" : "testdelivery0001",
+    "password" : "TestPassword",
+    "firstName" : "TestDelivery0001",
+    "lastName" : "",
+    "queues" : [ 
+        "SHCQ_STQ1", 
+        "SHCQ_STQ2", 
+        "SHCQ_STQ3", 
+        "SHCQ_STQ4", 
+        "SHCQ_STQ5", 
+        "SHCQ_STQ6", 
+        "SHCQ_STQ7", 
+        "SHCQ_STQ8", 
+        "MDO_HD_AFTER_3PM", 
+        "MDO_HD_AFTER_3PM_FOLLOWUP", 
+        "MDO_HD_AFTER_3PM_ROUTING", 
+        "MDO_HD_CARRIER_SETTLEMENT_DISPUTE", 
+        "MDO_HD_CARRIER_SETTLEMENT_DISPUTE_FOLLOWUP", 
+        "MDO_HD_CERTIFICATE_OF_INSURANCE", 
+        "MDO_HD_CERTIFICATE_OF_INSURANCE_FOLLOWUP", 
+        "MDO_HD_DAMAGE_CLAIM_72", 
+        "MDO_HD_DAMAGE_CLAIM_72_FOLLOWUP", 
+        "MDO_HD_DDL_PEND", 
+        "MDO_HD_DDL_PEND_FOLLOWUP", 
+        "MDO_HD_DDS_PEND", 
+        "MDO_HD_DDS_PEND_FOLLOWUP", 
+        "MDO_HD_GAS_LEAK", 
+        "MDO_HD_GAS_LEAK_FOLLOWUP", 
+        "MDO_HD_GO_BACK_REQUEST", 
+        "MDO_HD_GO_BACK_REQUEST_FOLLOWUP", 
+        "MDO_HD_HYBRID_SHIP_CONFIRMED_IN_ERROR", 
+        "MDO_HD_HYBRID_SHIP_CONFIRMED_IN_ERROR_FOLLOWUP", 
+        "MDO_HD_ROUTES_PUBLISHED", 
+        "MDO_HD_ROUTES_PUBLISHED_1ST_ATTEMPT", 
+        "MDO_HD_ROUTES_PUBLISHED_1ST_ATTEMPT_FOLLOWUP", 
+        "MDO_HD_ROUTES_PUBLISHED_FOLLOWUP", 
+        "MDO_HD_SHIP_CONFIRM", 
+        "MDO_HD_SHIP_CONFIRMED_IN_ERROR", 
+        "MDO_HD_SHIP_CONFIRMED_IN_ERROR_FOLLOWUP", 
+        "MDO_HD_SHIP_CONFIRM_FOLLOWUP", 
+        "MDO_HD_SHUTTLE_PRODUCT_INQUIRY", 
+        "MDO_HD_SHUTTLE_PRODUCT_INQUIRY_FOLLOWUP", 
+        "MDO_HD_SPECIAL_HANDLING", 
+        "MDO_HD_SPECIAL_HANDLING_FOLLOWUP", 
+        "MDO_HD_TURNAROUND_REQUEST", 
+        "MDO_HD_TURNAROUND_REQUEST_FOLLOWUP", 
+        "MDO_HD_WATER_LEAK", 
+        "MDO_HD_WATER_LEAK_FOLLOWUP"
+    ],
+    "surveyEligible" : false,
+    "accountNonExpired" : true,
+    "accountNonLocked" : true,
+    "credentialsNonExpired" : true,
+    "enabled" : true,
+    "maxNumCases" : 2,
+    "defaultStore" : "STORE_TYPE_Sears",
+    "defaultChannel" : "PHONE",
+    "testUser" : true,
+    "onVacation" : false,
+    "authorities" : [ 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("53fe3e3964ecf0bd2bd45e06")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("52dea100300463ad597eabf3")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("52b20067300442c8c92f3fc2")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("52c726f5300430a972878825")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("52b20067300442c8c92f3fc3")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5452a69364ecf0bd2bd45e1b")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5452a69364ecf0bd2bd45e1a")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5452a69364ecf0bd2bd45e1e")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5373bbde64ecf0bd2b593026")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("52d83f06e4b0eea5c3e2973f")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5452a69364ecf0bd2bd45e1f")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5452a69364ecf0bd2bd45e1c")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5452a69364ecf0bd2bd45e20")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("5452a69364ecf0bd2bd45e1d")
+        }, 
+        {
+            "$ref" : "cssRole",
+            "$id" : ObjectId("535a6eaf498ecaf96eb39c6c")
+        }
+    ],
+    "currentRole" : {
+        "$ref" : "cssRole",
+        "$id" : ObjectId("5452a69364ecf0bd2bd45e1a")
+    },
+    "mdoFacts" : []
+}

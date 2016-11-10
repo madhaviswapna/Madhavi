@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE api-test-suite SYSTEM "../../../api-tests-config.dtd">
+<!-- API Test Configuration file to define tests on APIs. Tests are configured 
+	to execute APIs based on different test scenarios identified in input sources 
+	and validate results -->
+<!-- api-config-file attribute contains the file where the APIs defined for 
+	the test suite -->
+<api-test-suite name="APITESTS">
+	<!-- define the API Test. Test will be called from testNG using the test-name. -->
+
+	<api-test api-to-test="GetOrders" test-name="GetOrdersByEmail">
+		<api-request>
+			<payload>
+				{
+				"email": "maheshssonarr@gmail.com"
+				}
+			</payload>
+			<api-response>
+				<validations>
+					<validate path="response.orders[0].billingAddress.phoneNumber"
+						validation-type="equals" expected-value="8478853267" />
+				</validations>
+				<get-fields>
+					<field name="success" path="success" />
+					<field name="Order" path="response.orders[0].orderNumber" />
+				</get-fields>
+			</api-response>
+		</api-request>
+	</api-test>
+
+</api-test-suite>
+	

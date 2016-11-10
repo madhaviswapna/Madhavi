@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE api-test-suite SYSTEM "../../../api-config.dtd">
+<!-- This file is used as API specification document. It defines all the 
+	details/skeleton required for an API such as API URL, type of request, URL 
+	Parameters, PayLoad etc. APIs defined in this file are referred by the api-tests-config.xml 
+	or directly by the test cases for testing these APIs for different scenarios -->
+<api-config>
+	<api name="GetOrders" type="POST">
+		<end-point>getOrders</end-point>
+		<path>/rubix-cube/interactions/getOrders</path>
+		<header-params>
+			<param name="Authorization" value="Basic SW50ZXJhY3Rpb25zOlNtOXphR2xUYUdGcGJHVnphQT09" />
+			<param name="Content-Type" value="application/json" />
+		</header-params>
+		<default-environment>qa</default-environment>
+	</api>
+
+
+</api-config>

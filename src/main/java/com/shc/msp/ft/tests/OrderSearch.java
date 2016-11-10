@@ -1,0 +1,552 @@
+package com.shc.msp.ft.tests;
+
+import java.util.ArrayList;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import com.shc.automation.BaseTests;
+import com.shc.automation.FrameworkProperties;
+import com.shc.automation.data.TestData;
+import com.shc.automation.dataprovider.TestDataProvider;
+import com.shc.automation.utils.TestUtils.TestStepType;
+import com.shc.msp.ft.actions.LogFormatterAction;
+import com.shc.msp.ft.entities.As;
+import com.shc.msp.ft.entities.User;
+import com.shc.msp.ft.util.Constant;
+import com.shc.msp.ft.util.ExcelUtil;
+import com.shc.msp.ft.util.TestGroup;
+import com.shc.msp.ft.util.UserPool;
+
+public class OrderSearch extends BaseTests{
+	String url=FrameworkProperties.SELENIUM_BASE_URL;
+	@Test(dataProvider = "DP_SearchAll", groups = {TestGroup.MSPGroupSearch, "SearchOrderByOnlineAgentTests"}
+
+    , description = "Verify search by name, orderid, phone, email, salescheck and store", enabled = true)
+	public void MSP_Search_Tests(String orderId, String firstName, String lastName, String phonenumber, String email, String salesCheckNO,String agentID, String store) throws Exception {
+		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+		addCloneIDHostname(data);
+	
+		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+		
+	    User user = new User();
+	    
+	    user.userName = agentID;
+	    user.password = Constant.OnlinePassword;
+	    
+	     
+	    As.guestUser.goToHomePage()
+	    		.addlogType(TestStepType.WHEN)
+	            .login(user)
+	            .addlogType(TestStepType.THEN)
+	            .verifyonlineagent()
+	            .addlogType(TestStepType.GIVEN)
+	            .searchCustomer()
+	            .addlogType(TestStepType.WHEN)
+	            .searchByOrderId(orderId)
+	            .closeWarningPopupWindow()
+	            ._OrderDetailsAction()
+	            .addlogType(TestStepType.THEN)
+	            .verifyOrderDetailsPageDisplayed()
+	            ._NavigationAction()
+	            .addlogType(TestStepType.GIVEN)
+	            .searchCustomer()
+	            .addlogType(TestStepType.WHEN)
+	            .searchByName(firstName, lastName)
+	            .selectOrderInMyRecentInteractions(1)
+	             .closeWarningPopupWindow()
+	            ._OrderDetailsAction()
+	            .addlogType(TestStepType.THEN)
+	            .verifyOrderDetailsPageDisplayed()
+	            ._NavigationAction()
+	            .addlogType(TestStepType.GIVEN)
+	            .searchCustomer()
+	            .addlogType(TestStepType.WHEN)
+	            .searchByPhone(phonenumber)
+	             .selectOrderInMyRecentInteractions(1)
+	             .closeWarningPopupWindow()
+	            ._OrderDetailsAction()
+	            .addlogType(TestStepType.THEN)
+	            .verifyOrderDetailsPageDisplayed()
+	            ._NavigationAction()
+	            .addlogType(TestStepType.GIVEN)
+	            .searchCustomer()
+	            .addlogType(TestStepType.WHEN)
+	            .searchByEmail(email)
+	             .selectOrderInMyRecentInteractions(1)
+	             .closeWarningPopupWindow()
+	            ._OrderDetailsAction()
+	            .addlogType(TestStepType.THEN)
+	            .verifyOrderDetailsPageDisplayed()
+	            ._NavigationAction()
+	            .addlogType(TestStepType.GIVEN)
+	            .searchCustomer()
+	            .addlogType(TestStepType.WHEN)
+	            .searchBySalesCheck(salesCheckNO,store)
+	            .closeWarningPopupWindow()
+	            ._OrderDetailsAction()
+	            .addlogType(TestStepType.THEN)
+	            .verifyOrderDetailsPageDisplayed();
+		
+	}
+	
+	
+	/*
+	 * Online Agent   
+	 */
+
+		@Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "SearchOrderByOrderIDByOnlineAgentTests"}
+
+        , description = "Verify search by order id", enabled = true, priority=1)
+		public void MSP_Online_Agent_Search_By_OrderNumber(String orderId,String agentID) throws Exception {
+			
+			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+			addCloneIDHostname(data);
+		
+			ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+			
+		    LogFormatterAction.beginSetup();
+		
+		    User user = new User();
+		    if(url.contains("msp.prod.global")){
+		    	user.userName = agentID;
+		    	user.password = Constant.OnlinePasswordProd;
+		    }else{
+		    	user.userName = agentID;
+		    	user.password = Constant.OnlinePassword;
+		    }
+		     
+		    As.guestUser.goToHomePage()
+		    		.addlogType(TestStepType.WHEN)
+		            .login(user)
+		            .closeWarningPopupWindow()
+		            .addlogType(TestStepType.WHEN)
+		            .searchByOrderId(orderId)
+		            ._OrderDetailsAction()
+		            .addlogType(TestStepType.THEN)
+		            .verifyOrderDetailsPageDisplayed();
+		    
+		}
+		
+		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"MSP_Online_Order_Search_By_SubOrder"}
+		, description = "Verify Order search using Suborder Number")
+		public void MSP_Online_Order_Search_By_SubOrder(TestData data) throws Exception {
+			User user = new User();
+			user.userName = UserPool.getUser();
+			
+			// Below line has to be substituted with the getproducttotest() statements			
+			String subOrderID = "1410092472"; 
+			
+			As.guestUser.goToHomePage()
+    		.addlogType(TestStepType.WHEN)
+            .login(user)
+            .closeWarningPopupWindow()
+            .addlogType(TestStepType.WHEN)
+            .searchBySubOrderId(subOrderID)
+            ._OrderDetailsAction()
+            .addlogType(TestStepType.THEN)
+            .verifyOrderDetailsPageDisplayed();
+		}
+		
+		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,TestGroup.MSPP0SanityProdTests,"MSP_Online_Search_Layaway_By_Contract_Id"}
+		, description = "MSP_Online_Search_Layaway_By_Contract_Id")
+		public void MSP_Online_Search_Layaway_By_Contract_Id(TestData data) throws Exception {
+			String contractId = null;
+			User user = new User();
+			contractId = getProductToTest("MSP_Layaway_Contract_ID");
+		
+			if(url.contains("msp.prod.global")){
+				user.userName = "testonline0509";
+				user.password = Constant.OnlinePasswordProd;
+		    }else{
+		    	user.userName = UserPool.getUser();
+		    }
+
+			As.guestUser.goToHomePage()
+    		.addlogType(TestStepType.WHEN)
+            .login(user)
+            .closeWarningPopupWindow()
+            .addlogType(TestStepType.WHEN)
+            .searchByLayawayContractID(contractId)
+            ._OrderDetailsAction()
+            .addlogType(TestStepType.WHEN)
+            .verifyLayawayDetailsPageDisplayed();
+		}
+		
+		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"MSP_Online_Search_Layaway_By_Phone_Number"}
+		, description = "MSP_Online_Search_Layaway_By_Phone_Number")
+		public void MSP_Online_Search_Layaway_By_PhoneNumber(TestData data) throws Exception {
+			User user = new User();
+			String phNumber= null;
+			phNumber = getProductToTest("MSP_Layaway_Phone_Number");
+			System.out.println(phNumber);
+			
+			if(url.contains("msp.prod.global")){
+				user.userName = "testonline0509";
+				user.password = Constant.OnlinePasswordProd;
+				//phNumber = "9103311499";
+		    }else{
+		    	user.userName = UserPool.getUser();
+		    }
+			
+			As.guestUser.goToHomePage()
+    		.addlogType(TestStepType.WHEN)
+            .login(user)
+            .closeWarningPopupWindow()
+            .addlogType(TestStepType.WHEN)
+            .searchByLayawayphoneNumber(phNumber)
+            .addlogType(TestStepType.WHEN)
+            .selectLayawayOrderFromSearchResults(1)
+            ._OrderDetailsAction()
+            .addlogType(TestStepType.WHEN)
+            .verifyLayawayDetailsPageDisplayed();
+		}
+		
+		@Test(dataProvider = "DP_SearchByFName_LName", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByCustomerNameTests"}
+	            , description = "Verify search by name", enabled = true, priority=2)
+		      
+		public void MSP_Online_Agent_Search_By_Name(String firstName, String lastName,String agentID) throws Exception {
+			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+			addCloneIDHostname(data);
+			 
+    		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+    	
+	        LogFormatterAction.beginSetup();
+	        User user = new User();
+	        user.userName = agentID;
+	        user.password = Constant.OnlinePassword;
+	        
+	        As.guestUser.goToHomePage()
+	        	.addlogType(TestStepType.WHEN)
+	                .login(user)
+	                .addlogType(TestStepType.THEN)
+	                .verifyonlineagent()
+	                .closeWarningPopupWindow()
+	                .addlogType(TestStepType.WHEN)
+	                .searchByName(firstName, lastName)
+	                .selectOrderInMyRecentInteractions(1)
+	                ._OrderDetailsAction()
+	                .addlogType(TestStepType.THEN)
+	                .verifyOrderDetailsPageDisplayed();
+	    	
+	    }
+	 
+		
+	
+		@Test(dataProvider = "DP_SearchBySalesCheckNo",	groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderBySalesCheckNOTests"}
+	            , description = "Verify search by salescheck", enabled = true, priority=3)
+	
+	    public void MSP_Online_Agent_Search_SalesCheck(String salesCheck,String agentID,String store) throws Exception {
+			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+			addCloneIDHostname(data);
+	
+    		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+    	
+	        LogFormatterAction.beginSetup();
+
+	        User user = new User();
+	        user.userName = agentID;
+	        user.password = Constant.OnlinePassword;
+  
+	        As.guestUser.goToHomePage()
+	        		.addlogType(TestStepType.WHEN)
+	                .login(user)
+	                .addlogType(TestStepType.THEN)
+	                .verifyonlineagent()
+	                .closeWarningPopupWindow()
+	                .addlogType(TestStepType.WHEN)
+	                .searchBySalesCheck(salesCheck,store)
+	                ._OrderDetailsAction()
+	                .addlogType(TestStepType.THEN)
+		            .verifyOrderDetailsPageDisplayed();
+	    }
+	    
+		@Test(dataProvider = "DP_SearchByPhone", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByPhoneNOTests"}
+	            , description = "Verify agent search by phone number", enabled = true, priority=4)
+	    
+		public void MSP_Online_Agent_Search_Phone(String phoneNumber,String agentID) throws Exception {
+			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+			addCloneIDHostname(data);
+		    	
+    		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+    	
+	        LogFormatterAction.beginSetup();
+	        
+	        User user = new User();
+	        user.userName = agentID;
+	        user.password = Constant.OnlinePassword;
+        
+	        As.guestUser.goToHomePage()
+	        	.addlogType(TestStepType.WHEN)
+	                .login(user)
+	                .addlogType(TestStepType.THEN)
+	                .verifyonlineagent()
+	                .closeWarningPopupWindow()
+	                .addlogType(TestStepType.WHEN)
+	                .searchByPhone(phoneNumber)
+	                .selectOrderInMyRecentInteractions(1)
+	                ._OrderDetailsAction()
+	                .addlogType(TestStepType.THEN)
+	                .verifyOrderDetailsPageDisplayed() ;
+		    	
+	    }
+	    
+	    
+	    @Test(dataProvider = "DP_SearchByEmail", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByEmailTests"}
+	            , description = "Verify order search by email", enabled = true, priority=5)
+	    
+	    public void MSP_Online_Agent_Search_Email(String email,String agentID) throws Exception {
+			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+			addCloneIDHostname(data);
+		    	
+	    	ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+	 
+	        LogFormatterAction.beginSetup();
+
+	        User user = new User();
+	        user.userName = agentID;
+	        user.password = Constant.OnlinePassword;
+	        
+	        As.guestUser.goToHomePage()
+	        		.addlogType(TestStepType.WHEN)
+	                .login(user)
+	                .addlogType(TestStepType.THEN)
+	                .verifyonlineagent()
+	                .closeWarningPopupWindow()
+	                .addlogType(TestStepType.WHEN)
+	                .searchByEmail(email)
+	                .selectOrderInMyRecentInteractions_SearchByEmail(1)
+	                ._OrderDetailsAction()
+	                .addlogType(TestStepType.THEN)
+	                .verifyOrderDetailsPageDisplayed() ;
+	    	
+	    }
+	    
+	 	@DataProvider (name="DP_SearchByOrderID",parallel=true)
+	    public Object[][] DP_SearchByOrderID() throws Exception{
+			
+			Object[][] testData =null;
+			
+			if(url.contains("msp.prod.global")){
+				testData = ExcelUtil.getExcelUtil().getDataArray("OrderSearchProd",Constant.StartRow_SearchOrder, 
+	        		 Constant.StartColumn_SearchByOrderIDProd, Constant.TotalCols_SearchByOrderIDProd);
+			}else{
+				ArrayList<String> orderID = ExcelUtil.getExcelUtil().searchKeyWord("OrderID2", Constant.OrderSearch, 
+						Constant.StartColumn_SearchBySiteOrderID, Constant.TotalCols_SearchByOrderID);
+				ArrayList<String> agentID = ExcelUtil.getExcelUtil().searchKeyWord("OrderID2", Constant.OrderSearch, 
+						Constant.StartColumn_AgentID, Constant.TotalCols_SearchByOrderID);
+				testData=new String[orderID.size()][2];
+				 for (int i=0;i<orderID.size();i++) { 
+
+					 testData[i][0]=orderID.get(i).trim();
+					 testData[i][1]=agentID.get(i).trim();
+					   System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]);
+
+					  }
+			
+			}
+	         return testData;
+	 
+			}
+		
+		@DataProvider (name="DP_SearchBySalesCheckNo",parallel=true)
+	    public Object[][] DP_SearchBySalesCheckNo() throws Exception{
+			Object[][] testData =null;
+			ArrayList<String> salesCheckNo = ExcelUtil.getExcelUtil().searchKeyWord("SalesCheckNo", Constant.OrderSearch,
+					Constant.StartColumn_SearcByhSC,Constant.TotalCols_SearchBySC);
+			ArrayList<String> agentID = ExcelUtil.getExcelUtil().searchKeyWord("SalesCheckNo", Constant.OrderSearch, 
+					Constant.StartColumn_AgentID, Constant.TotalCols_SearchByOrderID);
+			ArrayList<String> storeID = ExcelUtil.getExcelUtil().searchKeyWord("OrderSummary", Constant.OrderSearch, 
+					Constant.StartColumn_StoreID, Constant.TotalCols_SearchByOrderID);
+			testData=new String[salesCheckNo.size()][3];
+			 for (int i=0;i<salesCheckNo.size();i++) { 
+
+				 testData[i][0]=salesCheckNo.get(i).trim();
+				 testData[i][1]=agentID.get(i).trim();
+				 testData[i][2]=storeID.get(i).trim();
+				   System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]+","+testData[i][2]);
+
+				  }
+			
+	         return (testData);
+	 
+			}
+		
+		@DataProvider(name="DP_SearchByFName_LName",parallel=true) 
+	    public Object[][] DP_SearchByFName_LName() throws Exception{
+			ArrayList<String> firstname = ExcelUtil.getExcelUtil().searchKeyWord("CustomerName", Constant.OrderSearch,
+					Constant.StartColumn_SearchByFName,Constant.TotalCols_SearchByName);
+			ArrayList<String> lastname = ExcelUtil.getExcelUtil().searchKeyWord("CustomerName", Constant.OrderSearch,
+						Constant.StartColumn_SearchByLName,Constant.TotalCols_SearchByName);
+			ArrayList<String> agentID = ExcelUtil.getExcelUtil().searchKeyWord("CustomerName", Constant.OrderSearch, 
+					Constant.StartColumn_AgentID, Constant.TotalCols_SearchByOrderID);
+			String[][] dataArray = null;
+			dataArray=new String[firstname.size()][3];
+			 
+			 for (int i=0;i<firstname.size();i++) { 
+
+				   dataArray[i][0]=firstname.get(i).trim();
+				   dataArray[i][1]=lastname.get(i).trim();
+				   dataArray[i][2]=agentID.get(i).trim();
+				   System.out.println("testing data "+(i+1)+": "+dataArray[i][0]+","+dataArray[i][1]+","+dataArray[i][2]);
+
+				  }
+			
+				return dataArray;
+		   
+		}
+		
+		@DataProvider(name="DP_SearchByFName_LNameSpecT",parallel=true) 
+	    public Object[][] DP_SearchByFName_LNameSpecT() throws Exception{
+			ArrayList<String> firstname = ExcelUtil.getExcelUtil().searchKeyWord("CustomerNameSpec", Constant.OrderSearch,
+					Constant.StartColumn_SearchByFName,Constant.TotalCols_SearchByName);
+			ArrayList<String> lastname = ExcelUtil.getExcelUtil().searchKeyWord("CustomerNameSpec", Constant.OrderSearch,
+						Constant.StartColumn_SearchByLName,Constant.TotalCols_SearchByName);
+			String[][] dataArray = null;
+			dataArray=new String[firstname.size()][2];
+			 
+			 for (int i=0;i<firstname.size();i++) { 
+
+				   dataArray[i][0]=firstname.get(i).trim();
+				   dataArray[i][1]=lastname.get(i).trim();
+				   System.out.println("testing data "+(i+1)+": "+dataArray[i][0]+","+dataArray[i][1]);
+
+				  }
+			
+				return dataArray;
+		   
+		}
+		
+
+		@DataProvider (name="DP_SearchByEmail",parallel=true) 
+	    public Object[][] DP_SearchByEmail() throws Exception{
+			Object[][] testData =null;
+			ArrayList<String> email = ExcelUtil.getExcelUtil().searchKeyWord("Email", Constant.OrderSearch,
+					Constant.StartColumn_SearchByEmail,Constant.TotalCols_SearchByEmail);
+			ArrayList<String> agentID = ExcelUtil.getExcelUtil().searchKeyWord("Email", Constant.OrderSearch, 
+					Constant.StartColumn_AgentID, Constant.TotalCols_SearchByOrderID);
+			testData=new String[email.size()][2];
+			 for (int i=0;i<email.size();i++) { 
+
+				 testData[i][0]=email.get(i).trim();
+				 testData[i][1]=agentID.get(i).trim();
+				   System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]);
+
+				  }
+	         return (testData);
+	 
+			}
+		
+		@DataProvider (name="DP_SearchByEmailSpecT",parallel=true) 
+	    public Object[][] DP_SearchByEmailSpecT() throws Exception{
+			ArrayList<String> searchrows = ExcelUtil.getExcelUtil().searchKeyWord("EmailSpec", Constant.OrderSearch,
+					Constant.StartColumn_SearchByEmail,Constant.TotalCols_SearchByEmail);
+	         Object[][] testData = ExcelUtil.getExcelUtil().getFilterDataArray(searchrows,Constant.TotalCols_SearchByEmail);
+	 
+	         return (testData);
+	 
+			}
+
+		@DataProvider (name="DP_SearchByPhone",parallel=true) 
+	    public Object[][] DP_SearchByPhone() throws Exception{
+			Object[][] testData =null;
+			ArrayList<String> phoneNo = ExcelUtil.getExcelUtil().searchKeyWord("PhoneNumber", Constant.OrderSearch,
+					Constant.StartColumn_SearchByPhone,Constant.TotalCols_SearchByPhone);
+			ArrayList<String> agentID = ExcelUtil.getExcelUtil().searchKeyWord("PhoneNumber", Constant.OrderSearch, 
+					Constant.StartColumn_AgentID, Constant.TotalCols_SearchByOrderID);
+			testData=new String[phoneNo.size()][2];
+			 for (int i=0;i<phoneNo.size();i++) { 
+
+				 testData[i][0]=phoneNo.get(i).trim();
+				 testData[i][1]=agentID.get(i).trim();
+				   System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]);
+
+				  }
+	         return (testData);
+	 
+			}
+
+		@DataProvider (name="DP_SearchByPhoneSpecT",parallel=true) 
+	    public Object[][] DP_SearchByPhoneSpecT() throws Exception{
+			ArrayList<String> searchrows = ExcelUtil.getExcelUtil().searchKeyWord("PhoneNumberSpec", Constant.OrderSearch,
+					Constant.StartColumn_SearchByPhone,Constant.TotalCols_SearchByPhone);
+	         Object[][] testData = ExcelUtil.getExcelUtil().getFilterDataArray(searchrows, Constant.TotalCols_SearchByPhone);
+	 
+	         return (testData);
+	 
+			}
+		@DataProvider (name="DP_SearchAll, parallel=true")
+		public Object[][] DP_SearchAll() throws Exception{
+			ArrayList<String> orderID = ExcelUtil.getExcelUtil().searchKeyWord("OrderID2", Constant.OrderSearch, 
+					Constant.StartColumn_SearchBySiteOrderID, Constant.TotalCols_SearchByOrderID);
+			ArrayList<String> firstName = ExcelUtil.getExcelUtil().searchKeyWord("CustomerName", Constant.OrderSearch,
+					Constant.StartColumn_SearchByFName,Constant.TotalCols_SearchByName);
+			ArrayList<String> lastName = ExcelUtil.getExcelUtil().searchKeyWord("CustomerName", Constant.OrderSearch,
+						Constant.StartColumn_SearchByLName,Constant.TotalCols_SearchByName);
+			 ArrayList<String> phoneNumber = ExcelUtil.getExcelUtil().searchKeyWord("PhoneNumber", Constant.OrderSearch,
+						Constant.StartColumn_SearchByPhone,Constant.TotalCols_SearchByPhone);
+			 ArrayList<String> email = ExcelUtil.getExcelUtil().searchKeyWord("Email", Constant.OrderSearch,
+						Constant.StartColumn_SearchByEmail,Constant.TotalCols_SearchByEmail);
+			 ArrayList<String> salesCheckNo = ExcelUtil.getExcelUtil().searchKeyWord("SalesCheckNo", Constant.OrderSearch,
+						Constant.StartColumn_SearcByhSC,Constant.TotalCols_SearchBySC);
+			 ArrayList<String> agentID = ExcelUtil.getExcelUtil().searchKeyWord("OrderID2", Constant.OrderSearch, 
+						Constant.StartColumn_AgentID, Constant.TotalCols_SearchByOrderID);
+			 ArrayList<String> storeID = ExcelUtil.getExcelUtil().searchKeyWord("SalesCheckNo", Constant.OrderSearch, 
+						Constant.StartColumn_StoreID, Constant.TotalCols_SearchByOrderID);
+			 ArrayList<Integer> dpsize = new ArrayList<Integer>();
+			 String[][] testData = null;
+			 dpsize.add(orderID.size());
+			 dpsize.add(firstName.size());
+			 dpsize.add(phoneNumber.size());
+			 dpsize.add(email.size());
+			 dpsize.add(salesCheckNo.size());
+			 dpsize.add(agentID.size());
+			 int rowNum = dpsize.get(0);
+
+			 for (int i = 1; i < dpsize.size(); i++) {
+			     if (dpsize.get(i) > rowNum) {
+			    	 rowNum = dpsize.get(i);
+			     }
+			 }
+			 testData = new String[rowNum][8];
+			 for (int i=0;i<orderID.size();i++) { 
+
+				 testData[i][0]=orderID.get(i).trim();
+				 System.out.println("Order ID "+(i+1)+": "+testData[i][0]);
+				  }
+			 for (int i=0;i<firstName.size();i++) { 
+
+				 testData[i][1]=firstName.get(i).trim();
+				 testData[i][2]=lastName.get(i).trim();
+				 System.out.println("Customer Name "+(i+1)+": "+testData[i][1]+","+testData[i][2]);
+				  }
+			 for (int i=0;i<phoneNumber.size();i++) { 
+
+				 testData[i][3]=phoneNumber.get(i).trim();
+				 System.out.println("Phone Number "+(i+1)+": "+testData[i][3]);
+				  }
+			 for (int i=0;i<email.size();i++) { 
+
+				 testData[i][4]=email.get(i).trim();
+				 System.out.println("Email "+(i+1)+": "+testData[i][4]);
+				  }
+			 for (int i=0;i<salesCheckNo.size();i++) { 
+
+				 testData[i][5]=salesCheckNo.get(i).trim();
+				 System.out.println("SalesCheckNo "+(i+1)+": "+testData[i][5]);
+				  }
+			 for (int i=0;i<agentID.size();i++) { 
+
+				 testData[i][6]=agentID.get(i).trim();
+				 System.out.println("Agent ID "+(i+1)+": "+testData[i][6]);
+				  }
+			 for (int i=0;i<storeID.size();i++) { 
+
+				 testData[i][7]=storeID.get(i).trim();
+				 System.out.println("Store ID "+(i+1)+": "+testData[i][7]);
+				  }
+			 
+		         return (testData);
+		 
+		}
+}
