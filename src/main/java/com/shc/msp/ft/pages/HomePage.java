@@ -347,6 +347,10 @@ public class HomePage extends Page {
 			getAction().waitFor(1000);
 			getAction().click(SWITCH_ROLE_POPUP);
 			getAction().waitFor(1000);
+			if(AjaxCondition.forElementVisible(PHONE_ID_CANCEL_BUTTON).waitWithoutException(10)){
+				Logger.log("Click Cancel on Phone ID dialog",TestStepType.SUBSTEP);
+				getAction().click(PHONE_ID_CANCEL_BUTTON);
+			}
 			if(AjaxCondition.forElementVisible(VIEW_PROFILE_LINK).waitForResponse(30)){
 				getAction().waitFor(3000);
 				getAction().click(VIEW_PROFILE_LINK);
