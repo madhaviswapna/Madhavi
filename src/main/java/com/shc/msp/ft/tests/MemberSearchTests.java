@@ -101,8 +101,8 @@ public class MemberSearchTests extends BaseTests{
 			zipCode = "34614";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	name = "Madhavi Swap";
-	    	zipCode = "60148";
+	    	name = "Lam last";
+	    	zipCode = "60601";
 	    }
 		
 		
