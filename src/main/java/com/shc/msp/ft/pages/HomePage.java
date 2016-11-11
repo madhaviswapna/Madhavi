@@ -1828,6 +1828,10 @@ public class HomePage extends Page {
 	public void refreshPage() {
 		Logger.log("Refresh Page" , TestStepType.STEP);
 		getAction().pageRefresh();
+		if(AjaxCondition.forElementVisible(PHONE_ID_CANCEL_BUTTON).waitWithoutException(15)){
+			Logger.log("Click Cancel on Phone ID dialog",TestStepType.SUBSTEP);
+			getAction().click(PHONE_ID_CANCEL_BUTTON);
+		}
 	}
 	
 	public void verifyRoleChange(String user,String role){
