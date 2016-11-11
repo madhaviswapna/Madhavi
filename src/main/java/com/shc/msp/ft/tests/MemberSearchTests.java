@@ -45,7 +45,7 @@ public class MemberSearchTests extends BaseTests{
 			SYW_No = "7081127519381493";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	SYW_No = "7081327656165630";
+	    	SYW_No = "7081017604162033";
 	    }
 		
 		As.guestUser.goToHomePage()
