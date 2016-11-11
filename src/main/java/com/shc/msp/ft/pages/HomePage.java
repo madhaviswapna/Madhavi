@@ -1590,6 +1590,7 @@ public class HomePage extends Page {
 	public HomePage chooseReleasedHDOrders(){
 
 		Logger.log("Click on any RELEASED HD orders",TestStepType.STEP);
+		int num=0;
 		if(AjaxCondition.forElementVisible(RELEASED_HD_ORDERS).waitWithoutException(8)){
 		getAction().click(RELEASED_HD_ORDERS);
 		getAction().waitFor(1000);	
@@ -1606,9 +1607,13 @@ public class HomePage extends Page {
 				getAction().click(MOVE_RIGHT_RESULTS);
 				if(AjaxCondition.forElementVisible(RELEASED_HD_ORDERS).waitWithoutException(8)){
 					getAction().click(RELEASED_HD_ORDERS);
+					num++;
 					break;
 					}
 				
+			}
+			if(num==0){
+				PageAssert.fail("Released orders are not available for the particular dos order ID and dos unit id");
 			}
 			
 			
