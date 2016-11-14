@@ -1462,7 +1462,7 @@ public class HomePage extends Page {
 		getAction().waitFor(2000);
 		getAction().click(SEARCH);	
 		getAction().waitFor(8000);
-		SoftAssert.checkElementAndContinueOnFailure(SHOP_CART, "Verify cart is displayeD on shop page", CheckLocatorFor.isVisible);
+		SoftAssert.checkElementAndContinueOnFailure(SHOP_CART, "Verify cart is displayed on shop page", CheckLocatorFor.isVisible);
 		SoftAssert.checkElementAndContinueOnFailure(SEARCH_BOX, "Verify  that search box is visible in shop page", CheckLocatorFor.isVisible);
 		SoftAssert.checkElementAndContinueOnFailure(SHOP_MENU_BAR,"Verify  that Category Bar is displayed",CheckLocatorFor.isVisible);
 		SoftAssert.checkElementAndContinueOnFailure(SHOP_CATEGORY_SECTION,"Verify category page is displayed",CheckLocatorFor.isVisible);

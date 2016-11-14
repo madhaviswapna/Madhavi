@@ -255,7 +255,7 @@ public class NavigationAction extends BaseAction {
 		return this;
 	}
 	public NavigationAction searchAndVerifyProduct(String store, String product){
-		Logger.log("Agent searches for a product in "+store+"using product tab search search",TestStepType.THEN);
+		Logger.log("Agent searches for a product in "+store+" using product tab search search",TestStepType.THEN);
 		this.factory.homePage().searchAndVerifyProduct(store, product);
 		return this;
 	}
