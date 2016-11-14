@@ -161,7 +161,7 @@ public class SalesCheckDetailsPage extends Page {
 	public static final Locator PAYMENTS_EXPIRATION_DATE_DETAIL = new Locator("PAYMENTS_EXPIRATION_DATE_DETAIL", "//legend[text()='Payments']/following-sibling::div[@ng-if='selectedSalesCheck.payment']/table/tbody/tr/td[5]", "Payments Expiration Date Details");
 	public static final Locator SALES_CHECK_NUMBER_N= new Locator("SALES_CHECK_NUMBER", "//a[@class='spacetwo ng-binding']", "Sales Check Number");
 	public static final Locator SALES_CHECK_DETAIL_PAGE= new Locator("SALES_CHECK_DETAIL_PAGE", "//div[@id='salesCheckDiv']", "Sales Check Detail Page");
-	//DDC” fulfillment 
+	//DDC fulfillment 
 	public final Locator DELIVERYDETAILS_TEXT = new Locator("DELIVERYDETAILS TEXT","//legend[text()='Delivery Details']","DELIVERYDETAILS TEXT");
 	public final Locator DELIVERYDETAILS = new Locator("DELIVERYDETAILS","//div[@ng-if='verifyHomeDelivery()']","DELIVERYDETAILS");
 	public final Locator DELIVERYDETAILS_TABS = new Locator("DELIVERYDETAILS TABS","//a[text()='{0}']","DELIVERYDETAILS TABS");
@@ -222,8 +222,8 @@ public class SalesCheckDetailsPage extends Page {
 		Logger.log("Verify Sales Check Summary column is present", TestStepType.STEP);
 		PageAssert.textPresent(SALES_CHECK_SUMMARY_TITLE, "Sales Check Summary");
 		
-
-
+		String url=FrameworkProperties.SELENIUM_BASE_URL;
+		if(!url.contains("msp.prod.global")){
 		if(subtotal.size()!=0 || total_shipping.size()!=0 || surcharge.size()!=0 || tax_percent.size()!=0 ||  tax.size()!=0 
 				||  total!=null){
 			if(getAction().isVisible(SALES_CHECK_SUMMARY_TABLE)) { 
@@ -293,6 +293,44 @@ public class SalesCheckDetailsPage extends Page {
 			}
 		}else{
 			Logger.log(" There are no Sales Check Summary information in Database", TestStepType.STEP);
+		}
+		}
+		else{
+			
+			
+		    SoftAssert.checkConditionAndContinueOnFailure("Subtotal column is Present",
+            		getAction().getText(SUBTOTAL_TEXT).equalsIgnoreCase("Subtotal"));
+			
+		    SoftAssert.checkConditionAndContinueOnFailure("Total Shipping column is Present",
+            		getAction().getText(TOTAL_SHIPPING_TEXT).equalsIgnoreCase("Total Shipping"));
+		    
+		    
+		    SoftAssert.checkConditionAndContinueOnFailure("Surcharge column is Present",
+            		getAction().getText(SURCHARGE_TEXT).equalsIgnoreCase("Surcharge"));
+			
+		    SoftAssert.checkConditionAndContinueOnFailure("Tax Percent column is Present",
+            		getAction().getText(TAX_PERCENT_TEXT).equalsIgnoreCase("Tax Percent"));
+			
+		    SoftAssert.checkConditionAndContinueOnFailure("Tax column is Present",
+            		getAction().getText(TAX_TEXT).equalsIgnoreCase("Tax"));
+			
+		    SoftAssert.checkConditionAndContinueOnFailure("Total column is Present",
+            		getAction().getText(TOTAL_TEXT).equalsIgnoreCase("Total"));
+		    
+		    SoftAssert.checkConditionAndContinueOnFailure("Subtotal amount in database should match with application", 
+	    			!getAction().getText(SUBTOTAL_CONTENT).isEmpty());
+
+    	 SoftAssert.checkConditionAndContinueOnFailure("Total Shipping in database should match with application", 
+	    			!getAction().getText(TOTAL_SHIPPING_CONTENT).isEmpty());
+    	 
+	   	 SoftAssert.checkConditionAndContinueOnFailure("Surcharge in database should match with application", 
+	    			!getAction().getText(SURCHARGE_CONTENT).isEmpty());
+		
+	   	 SoftAssert.checkConditionAndContinueOnFailure("Tax Percent in database should match with application", 
+	    			!getAction().getText(TAX_PERCENT_CONTENT).isEmpty());
+		
+	   	 SoftAssert.checkConditionAndContinueOnFailure("Tax amount in database should match with application", 
+	    			!getAction().getText(TAX_CONTENT).isEmpty());
 		}
 		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 		return this;
