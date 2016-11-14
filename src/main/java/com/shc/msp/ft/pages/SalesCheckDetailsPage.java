@@ -317,19 +317,19 @@ public class SalesCheckDetailsPage extends Page {
 		    SoftAssert.checkConditionAndContinueOnFailure("Total column is Present",
             		getAction().getText(TOTAL_TEXT).equalsIgnoreCase("Total"));
 		    
-		    SoftAssert.checkConditionAndContinueOnFailure("Subtotal amount in database should match with application", 
+		    SoftAssert.checkConditionAndContinueOnFailure("Subtotal amount in database should not be empty", 
 	    			!getAction().getText(SUBTOTAL_CONTENT).isEmpty());
 
-    	 SoftAssert.checkConditionAndContinueOnFailure("Total Shipping in database should match with application", 
+    	 SoftAssert.checkConditionAndContinueOnFailure("Total Shipping in database should not be empty", 
 	    			!getAction().getText(TOTAL_SHIPPING_CONTENT).isEmpty());
     	 
-	   	 SoftAssert.checkConditionAndContinueOnFailure("Surcharge in database should match with application", 
+	   	 SoftAssert.checkConditionAndContinueOnFailure("Surcharge in database should not be empty", 
 	    			!getAction().getText(SURCHARGE_CONTENT).isEmpty());
 		
-	   	 SoftAssert.checkConditionAndContinueOnFailure("Tax Percent in database should match with application", 
+	   	 SoftAssert.checkConditionAndContinueOnFailure("Tax Percent in database should not be empty", 
 	    			!getAction().getText(TAX_PERCENT_CONTENT).isEmpty());
 		
-	   	 SoftAssert.checkConditionAndContinueOnFailure("Tax amount in database should match with application", 
+	   	 SoftAssert.checkConditionAndContinueOnFailure("Tax amount in database should not be empty", 
 	    			!getAction().getText(TAX_CONTENT).isEmpty());
 		}
 		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}

@@ -1620,6 +1620,8 @@ public class OrderDetailsPage extends Page {
 		PageAssert.textPresent(ORDER_SUMMARY_TITLE_TEXT, "Order Summary");
 		Logger.log("Verify Order Summary Text is Present", TestStepType.STEP);
 		getAction().scrollTo(ORDER_SUMMARY_TITLE_TEXT);
+		String url=FrameworkProperties.SELENIUM_BASE_URL;
+		if(!url.contains("msp.prod.global")){
 		if(orderNumber!=null || store!=null || phurchaseTimeStamp!=null || orderStatus!=null 
 				|| orderSource!=null || assoc_ID!=null || loyaltyNumber!=null){
 			if(getAction().isVisible(ORDER_SUMMARY_TABLE)){
@@ -1677,6 +1679,35 @@ public class OrderDetailsPage extends Page {
 			}
 		}else{
 			Logger.log("There are no order summary information in Database", TestStepType.STEP);
+		}
+		}
+		else{
+			AjaxCondition.forElementVisible(ORDER_SUMMARY_TABLE).waitForResponse();
+			Logger.log("Verify Order Summary Table is Visible", TestStepType.STEP);
+			Logger.log("Verify Order Number", TestStepType.STEP);
+			PageAssert.textPresent(ORDER_SUMMARY_ORDER_NUMBER_TEXT, "Order Number");
+			SoftAssert.checkConditionAndContinueOnFailure("Verify Order Number should not be empty", 
+	    			!getAction().getText(ORDER_SUMMARY_ORDER_NUMBER).isEmpty());
+
+			Logger.log("Verify Store Name in Order Summary", TestStepType.STEP);
+			PageAssert.textPresent(ORDER_SUMMARY_STORE_TEXT, "Store");
+			SoftAssert.checkConditionAndContinueOnFailure("Verify Store Name should not be empty", 
+	    			!getAction().getText(ORDER_SUMMARY_STORE_NAME).isEmpty());
+	
+
+			Logger.log("Verify Purchase Date Text is Present", TestStepType.STEP);
+			PageAssert.textPresent(ORDER_SUMMARY_PURCHASE_DATE_TEXT, "Purchase Date");
+
+			Logger.log("Verify Order Status Text is Present", TestStepType.STEP);
+			PageAssert.textPresent(ORDER_SUMMARY_ORDER_STATUS_TEXT, "Order Status");
+
+			Logger.log("Verify Order Satus in Order Summary", TestStepType.STEP);
+			SoftAssert.checkConditionAndContinueOnFailure("Verify Order Satus in Order Summary should not be empty", 
+	    			!getAction().getText(ORDER_SUMMARY_ORDER_STATUS).isEmpty());
+			
+			Logger.log("Verify 'Order Placed By' Text is Present", TestStepType.STEP);
+			PageAssert.textPresent(ORDER_SUMMARY_PLACED_BY_TEXT, "Order Placed By");
+
 		}
 		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 		return this;
