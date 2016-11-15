@@ -300,6 +300,7 @@ public class Search_Summary extends BaseTests {
 		.verifyOrderDetailsPageDisplayed()
 		.addlogType(TestStepType.THEN)
 		.captureInteractionCaseId()
+		.captureOrderIdFromODPage()
 		.addlogType(TestStepType.THEN)
 		.verifyCreateCaseByRouting()
 		.addlogType(TestStepType.THEN)

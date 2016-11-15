@@ -332,6 +332,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().captureInteractionCaseId();
 		return this;
 	}
+	public OrderDetailsAction captureOrderIdFromODPage() {
+		Logger.log("Capture order Id",TestStepType.THEN);
+		this.factory.orderdetailspage().captureOrderIdFromODPage();
+		return this;
+	}
 
 	public OrderDetailsAction verifyOrderWrapUp() {
 		Logger.log("Verify Order Wrap Up",TestStepType.THEN);

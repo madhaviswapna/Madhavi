@@ -3916,6 +3916,9 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(CURRENT_INTERACTION).waitForResponse();
 		setData("caseId", getMatchingTextGroup("# ([0-9]+) ", getAction().getText(CURRENT_INTERACTION).trim()));
 		Logger.log("Current Interaction Case Id - "+getDataString("caseId")+" stored", TestStepType.VERIFICATION_STEP);
+		
+	}
+	public void captureOrderIdFromODPage(){
 		AjaxCondition.forElementVisible(ORDER_ID).waitForResponse();
 		String []order=getAction().getText(ORDER_ID).split("#");
 		Logger.log("Current order Id:"+order[1].replace(" ", "").trim(), TestStepType.SUBSTEP);
