@@ -45,7 +45,7 @@ public class MemberSearchTests extends BaseTests{
 			SYW_No = "7081127519381493";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	SYW_No = "7081017604162033";
+	    	SYW_No = "7081450000056022";
 	    }
 		
 		As.guestUser.goToHomePage()
@@ -101,7 +101,7 @@ public class MemberSearchTests extends BaseTests{
 			zipCode = "34614";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	name = "Lam last";
+	    	name = "edwin john";
 	    	zipCode = "60601";
 	    }
 		
