@@ -124,6 +124,8 @@ public class OrderDetailsPage extends Page {
 	public final Locator CATEGORY_OPTION = new Locator("","(//select[@id='category']//option)[{0}]","Caregory Option");
 	public final Locator REASON_CODE_TEXT = new Locator("REASON CODE TEXT","//label[text()='Reason Code']","Reason Code Text");
 	public final Locator REASON_CODE_DROPDOWN = new Locator("REASON CODE DROPDOWN","//select[@id='reasonCode']","Reason Code Dropdown");
+	public final Locator CASE_CREATED = new Locator("Case already created message","//div[contains(text(),'Order has open case in this queue already, please add notes and close interaction.')]","Case already created message");
+	
 	public final Locator REASON_CODE_OPTION = new Locator("","(//select[@id='reasonCode']//option)[{0}]","Reason Code Option");
 	public final Locator GUIDED_EXPERIENCE_TEXT = new Locator("GUIDED EXPERIENCE TEXT","//label[text()='Guided Experience']","Guided Experience Text");
 	public final Locator GUIDED_EXPERIENCE_DROPDOWN = new Locator("GUIDED EXPERIENCE DROPDOWN","//select[@id='guidedExperience']","Guided Experience Dropdown");
@@ -3959,6 +3961,7 @@ public class OrderDetailsPage extends Page {
 	}
 	public void verifyCreateCaseByRouting() {
 		selectWrapUpTab();
+		String queue="USPS";
 		if(getAction().isVisible(CATEGORY_DROPDOWN)&& getAction().isVisible(REASON_CODE_DROPDOWN)){
 			getAction().click(CATEGORY_DROPDOWN);
 			getAction().selectByVisibleText(CATEGORY_DROPDOWN, "Damaged Order");
@@ -3969,8 +3972,13 @@ public class OrderDetailsPage extends Page {
 			getAction().selectByVisibleText(REASON_CODE_DROPDOWN, "ACTION NEEDED - APO/FPO Damaged");
 			getAction().waitFor(1000);
 			Logger.log("Select 'ACTION NEEDED - APO/FPO Damaged' in Reason Code", TestStepType.STEP);
+			if(AjaxCondition.forElementVisible(CASE_CREATED).waitWithoutException(10)){
+				getAction().click(OK_BUTTON);
+				queue="no queue since a case already exists in USPS queue for that order";
+			}
+			else{
 			SoftAssert.checkConditionAndContinueOnFailure("Verify USPS Queue selected to route", getAction().getText(SELECT_QUEUE_ONE_RESPONSE).trim().equals("USPS"));
-
+			}
 		}
 		SoftAssert.checkConditionAndContinueOnFailure("Verify Select Queue to route Text is Present", getAction().getText(SELECT_QUEUE_TO_ROUTE).equals("Select Queue to route"));
 
@@ -3981,7 +3989,7 @@ public class OrderDetailsPage extends Page {
 		}else if(getAction().isVisible(SELECT_QUEUE_NO_RESPONSE)){
 			Logger.log("Verify Not Applicable "+"'"+getAction().getText(SELECT_QUEUE_NO_RESPONSE)+"'"+" Is Visible ", TestStepType.VERIFICATION_PASSED);
 		}
-		getAction().type(ORDER_NOTES_TEXT_AREA, "Routing Case to Queue - USPS");
+		getAction().type(ORDER_NOTES_TEXT_AREA, "Routing Case to "+queue);
 		SoftAssert.checkElementAndContinueOnFailure(ORDER_NOTES_REQUIREDFIELD_SIGN, "Verify Order Notes Required Field Sign is Present", CheckLocatorFor.isPresent);
 
 		getAction().click(SELECT_QUEUE_TO_ROUTE);
