@@ -391,6 +391,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator GET_TOKEN_BUTTON = new Locator("Get Token button","//a[text()='Get Token']","Get Token button");
 	public final Locator TOKEN_POPUP = new Locator("","//div[@class='modal-dialog']//h5/b[contains(text(),'The Token ID is : ')]","Token popup");
 	public final Locator CLOSE_TOKEN = new Locator("","//button[@class='close']","Close token popup");
+	public final Locator ORDER_ID = new Locator("","//h3[contains(text(),'Order# ')]","order ID in order details page");
 	//DDC fulfillment 
 
 	public final Locator DELIVERYDETAILS_TEXT = new Locator("DELIVERYDETAILS TEXT","//legend[text()='Delivery Details']","DELIVERYDETAILS TEXT");
@@ -3915,6 +3916,10 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(CURRENT_INTERACTION).waitForResponse();
 		setData("caseId", getMatchingTextGroup("# ([0-9]+) ", getAction().getText(CURRENT_INTERACTION).trim()));
 		Logger.log("Current Interaction Case Id - "+getDataString("caseId")+" stored", TestStepType.VERIFICATION_STEP);
+		AjaxCondition.forElementVisible(ORDER_ID).waitForResponse();
+		String []order=getAction().getText(ORDER_ID).split("#");
+		Logger.log("Current order Id:"+order[1].replace(" ", "").trim(), TestStepType.SUBSTEP);
+		setData("orderId", order[1].replace(" ", "").trim());
 	}
 
 	public void verifyOrderWrapUp() {
