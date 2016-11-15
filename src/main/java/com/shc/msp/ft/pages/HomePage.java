@@ -196,9 +196,9 @@ public class HomePage extends Page {
 	public final Locator DELPHONENUMBER_SEARCH = new Locator("DEL_PHONENUMBER_SEARCH","	//div[@class='input-group']//input[@id='P']","Delivery phone number search");
 	public final Locator DELSEARCH_BUTTON = new Locator("", "//button[@ng-click='search()']", "Search button");
 	public final Locator DELIVERY_DATE = new Locator("", "//strong[contains(text(),'Delivery Date: ')]//ancestor::div[@class='form-group']//span[2]", "Delivery date");
-	public final Locator RELEASED_HD_ORDERS = new Locator("", "//span[contains(text(),'Released') and //span[contains(text(),'Home Delivery')]]//ancestor::div[contains(@class,'mspselector ')]", "released HD orders ");
-	public final Locator PARTIALLY_SHIPPED_HD_ORDERS = new Locator("", "//span[contains(text(),'Partially Shipped') and //span[contains(text(),'Home Delivery')]]//ancestor::div[contains(@class,'mspselector ')]", "Partially shipped HD orders ");
-	public final Locator SHIPPED_HD_ORDERS = new Locator("", "//span[contains(text(),'Shipped') and //span[contains(text(),'Home Delivery')]]//ancestor::div[contains(@class,'mspselector ')]", "Shipped HD orders ");
+	public final Locator RELEASED_HD_ORDERS = new Locator("", "//span[contains(text(),'Released')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "released HD orders ");
+	public final Locator PARTIALLY_SHIPPED_HD_ORDERS = new Locator("", "//span[contains(text(),'Partially Shipped')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Partially shipped HD orders ");
+	public final Locator SHIPPED_HD_ORDERS = new Locator("", "//span[contains(text(),'Shipped')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Shipped HD orders ");
 
 
 	public final Locator MEMBER_INFO_TXT_BOX = new Locator("","memberInfo","Member Information textbox",TagAttributes.ID);
