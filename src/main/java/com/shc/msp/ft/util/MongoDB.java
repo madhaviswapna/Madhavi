@@ -25,7 +25,7 @@ public class MongoDB {
 		try {
 			BasicDBObject searchQuery = new BasicDBObject();
 			searchQuery.put("order.orderId", orderId);
-			//MongoDB.getDB().getCollection("cssCases").remove(searchQuery);
+			MongoDB.getDB().getCollection("cssCases").remove(searchQuery);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
