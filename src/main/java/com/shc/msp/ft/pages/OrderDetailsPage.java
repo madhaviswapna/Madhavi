@@ -4556,7 +4556,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		else if(tabArray[i].equalsIgnoreCase("Delivery Detail")){
 			AjaxCondition.forElementVisible(TIME_WINDOW.format(2)).waitForResponse();
 			String timeWindow=getAction().getText(TIME_WINDOW.format(2));
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether time Window not empty.time Window displayed:"+timeWindow,!timeWindow.isEmpty());
+			SoftAssert.checkConditionAndContinueOnFailure("Verify whether time Window not empty.Time Window displayed:"+timeWindow,!timeWindow.isEmpty());
 			AjaxCondition.forElementVisible(ORIGINAL_DELIVERY_DATE.format(1)).waitForResponse();
 			String origDelDate=getAction().getText(ORIGINAL_DELIVERY_DATE.format(1));
 			SoftAssert.checkConditionAndContinueOnFailure("Verify whether original delivery date not empty.original delivery Date displayed:"+origDelDate,!origDelDate.isEmpty());
