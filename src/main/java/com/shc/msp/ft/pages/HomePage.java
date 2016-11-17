@@ -245,7 +245,12 @@ public class HomePage extends Page {
 		getAction().waitFor(1000);
 		Logger.log("Click on login button",TestStepType.STEP);
 		getAction().click(LOGIN_BUTTON); 
-		getAction().waitFor(1000);
+		getAction().waitFor(3000);
+		// Temporary code for Login issue in prod 
+		if(getAction().isElementPresent(LOGIN_BUTTON)){
+			System.out.println("------------------------------------------------Login failure---------------------------------------");
+			login(user);
+		}
 		// Temporary code for CTI testing, should be removed.
 		if (!FrameworkProperties.getProperty("cti", "false").equalsIgnoreCase("true")) {
 			AjaxCondition.forElementVisible(PHONE_ID).waitWithoutException(5);
