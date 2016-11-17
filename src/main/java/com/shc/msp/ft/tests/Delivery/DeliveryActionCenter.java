@@ -82,7 +82,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		//.rereserveItem("whole order")
+		.rereserveItem("whole order")
 		;
 		
 	}  
@@ -240,7 +240,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyPickupbuttonPresent()
 		.addlogType(TestStepType.THEN)
-		//.pickupEntireOrder()
+		.pickupEntireOrder()
 		;
 
 	}  
