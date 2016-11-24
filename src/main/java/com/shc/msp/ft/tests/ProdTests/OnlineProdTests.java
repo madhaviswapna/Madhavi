@@ -878,7 +878,7 @@ public class OnlineProdTests extends BaseTests{
 		
 
 	}  
-	@Test(groups = {TestGroup.MSPP0SanityProdTests}
+	/*@Test(groups = {TestGroup.MSPP0SanityProdTests}
 	, description = "Verify if cancel button is present", enabled = true)
 	public void Verify_Tabs_Released_Order() throws Exception {
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -902,7 +902,7 @@ public class OnlineProdTests extends BaseTests{
 		.verifyTabsDelivery("released");
 		
 
-	}  
+	}  */
 	@Test(groups = {TestGroup.MSPP0SanityProdTests}
 	, description = "Verify if cancel button is present", enabled = true)
 	public void Verify_Tabs_Shipped_Order() throws Exception {
