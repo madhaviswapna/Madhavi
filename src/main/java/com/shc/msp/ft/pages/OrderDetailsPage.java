@@ -2549,7 +2549,7 @@ public class OrderDetailsPage extends Page {
 		String carrier = null;
 		JSONArray itemSummaryArray=null;
 		JSONObject orderSummary = null;
-		if(!FrameworkProperties.TEST_ENV.equalsIgnoreCase("PROD")){
+		if(FrameworkProperties.TEST_ENV.equalsIgnoreCase("qa")){
 			String Sql ="select oi.ORDER_ITEM_STS_CD, oi.ITEM_NM, oi.ITEM_ID, oi.QUANTITY, oi.SUBTOTAL_AMOUNT, fm.ffm_class_id, oi.SHIPPING_AMT "
 					+ "from ord o, ord_item oi, ffm_method fm "
 					+ "where o.order_id = oi.order_id and oi.ffm_method_id = fm.ffm_method_id and o.site_gen_ord_id =?";
