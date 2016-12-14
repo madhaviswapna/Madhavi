@@ -107,7 +107,7 @@ public class EvenExchange extends BaseTestsEx{
 					.VerifyDeliveryAgent()
 					.closeWarningPopupWindow()
 					.addlogType(TestStepType.WHEN)
-					.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+					.searchByDeliveryOrderId(orderId, dc_no)
 
 			        .addlogType(TestStepType.WHEN)
 			        .chooseHDOrders(orderType)
