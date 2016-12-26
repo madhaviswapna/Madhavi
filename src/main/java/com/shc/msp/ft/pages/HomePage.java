@@ -224,6 +224,7 @@ public class HomePage extends Page {
 	public static final Locator CTI_LOGOUT_CONFIRMATION_YES = new Locator("", "//button[contains(text(),'Yes')]", "CTI Logout Confirmation Yes");
 	public static final Locator CTI_LOGOUT_CONFIRMATION_NO = new Locator("", "//button[contains(text(),'No')]", "CTI Logout Confirmation No");
 	
+	private int invalidLoginCount = 1;
 	
 	public void maximizeWindow() {
 		getAction().driver.manage().window().maximize();
@@ -247,10 +248,12 @@ public class HomePage extends Page {
 		getAction().click(LOGIN_BUTTON); 
 		getAction().waitFor(3000);
 		// Temporary code for Login issue in prod 
-		if(getAction().isElementPresent(LOGIN_BUTTON)){
-			System.out.println("------------------------------------------------Login failure---------------------------------------");
+		if(getAction().isElementPresent(LOGIN_BUTTON) && (invalidLoginCount<5)){
+			System.out.println("------------------------------------------------Login failure---------------------------------------Attempt # "+invalidLoginCount);
+			invalidLoginCount++;
 			login(user);
 		}
+		invalidLoginCount =1;
 		// Temporary code for CTI testing, should be removed.
 		if (!FrameworkProperties.getProperty("cti", "false").equalsIgnoreCase("true")) {
 			AjaxCondition.forElementVisible(PHONE_ID).waitWithoutException(5);
