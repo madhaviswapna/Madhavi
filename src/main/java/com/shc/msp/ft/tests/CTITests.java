@@ -15,7 +15,7 @@ import com.shc.msp.ft.util.UserPool;
 
 public class CTITests extends BaseTests{
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Manual Search is disabled on Connecting to CTI as Online Agent")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Manual Search is disabled on Connecting to CTI as Online Agent")
 	public void CTI_Manual_Search_Disabled_On_Connected(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();	    
@@ -36,7 +36,7 @@ public class CTITests extends BaseTests{
 	            ;
 		
 	}	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Phone Id text displyed next to Connected Text")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Phone Id text displyed next to Connected Text")
 	public void CTI_PhoneIdText_Displayed_On_Connected(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();	    
@@ -58,7 +58,7 @@ public class CTITests extends BaseTests{
 		
 	}	
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Error messages for Invalid Phone Id - Online Agent")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Error messages for Invalid Phone Id - Online Agent")
 	public void CTI_Verify_Invalid_PhoneId_Errors(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();	    
@@ -81,7 +81,7 @@ public class CTITests extends BaseTests{
 		
 	}	
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Phone Id Cancel button and Reconnect")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify Phone Id Cancel button and Reconnect")
 	public void CTI_Verify_PhoneId_Cancel_And_Reconnect(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();	    
@@ -107,7 +107,7 @@ public class CTITests extends BaseTests{
 	            ;
 		
 	}	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog displayed for CTI Role - Online Agent")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog displayed for CTI Role - Online Agent")
 	public void CTI_Verify_PhoneId_Dialog_Online_Agent(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();	    
@@ -122,7 +122,7 @@ public class CTITests extends BaseTests{
 	            ;
 		
 	}	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog displayed for CTI Role - Delivery Agent")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog displayed for CTI Role - Delivery Agent")
 	public void CTI_Verify_PhoneId_Dialog_Delivery_Agent(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getDeliveryUser();	    
@@ -138,7 +138,7 @@ public class CTITests extends BaseTests{
 		
 	}	
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog displayed for CTI Role - Senior Associate")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog displayed for CTI Role - Senior Associate")
 	public void CTI_Verify_PhoneId_Dialog_Senior_Asociate(TestData data) throws Exception {
 		User user = new User();
 		user.userName = "testseniorassociate001";
@@ -158,7 +158,7 @@ public class CTITests extends BaseTests{
 	            ;
 		
 	}	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog NOT displayed for Non CTI Roles - Offline Agent")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.CTI_Tests_IE_11,TestGroup.CTI_Tests,TestGroup.CTI_Tests_Prod,TestGroup.MSP_Holiday_Tests}, description = "Verify PhoneId Dialog NOT displayed for Non CTI Roles - Offline Agent")
 	public void CTI_Verify_PhoneId_Dialog_Offline_Agent(TestData data) throws Exception {
 		User user = new User();
 		user.userName = "testofflineagent0001";
