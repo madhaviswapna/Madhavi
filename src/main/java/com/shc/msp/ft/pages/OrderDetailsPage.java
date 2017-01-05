@@ -33,6 +33,7 @@ import com.shc.automation.utils.TestUtils.TestStepType;
 import com.shc.msp.ft.entities.CancelReasonCode;
 import com.shc.msp.ft.entities.OrderCharge;
 import com.shc.msp.ft.factory.SiteFactory;
+import com.shc.msp.ft.pages.OrderDetailsPage.OrderTab;
 import com.shc.msp.ft.util.FileUtil;
 import com.shc.msp.ft.util.MongoDB;
 import com.shc.msp.ft.util.MysqlDBConnection;
@@ -338,6 +339,9 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_DETAILS_TABLE_CONTENT = new Locator("ORDER DETAILS TABLE CONTENT","//table[@ng-table='lineItemTableParams']//tbody","Order Details Table Content");
 	public final Locator STATUS_COL_NAME = new Locator("STATUS COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[1]","Order Details Status Column Name");
 	public final Locator DESCRIPTION_COL_NAME = new Locator("DESCRIPTION COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[2]","Order Details Description Column Name");
+	
+	public final Locator DESCRIPTION_COL_NAME_TEXT = new Locator("DESCRIPTION_COL_NAME_TEXT","(//table[@ng-table='lineItemTableParams']/tbody//td[@data-title-text='Description']/div)[{0}]","Order Details Description Column text");
+	
 	public final Locator SKU_COL_NAME = new Locator("SKU COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[3]","Order Details SKU Column Name");
 	public final Locator QTY_COL_NAME = new Locator("QTY COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[4]","Order Details Quantity Column Name");
 	public final Locator PRICE_COL_NAME = new Locator("PRICE COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[5]","Order Details Price Column Name");
@@ -542,6 +546,17 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_DETAIL= new Locator("ORDER_DETAIL","//a[contains(text(),'Order Detail')]","ORDER DETAIL");
 	public final Locator DELIVERY_NOTES_DATA= new Locator("DELIVERY_NOTES_DATA","//td[contains(text(),'{0}')]","DELIVERY NOTES DATA");
 
+	public final Locator SYW_LINK_LINKED_INFORMATION = new Locator("SYW_LINK_LINKED_INFORMATION", "//*[contains(@ng-repeat,'member in memberData.member')]//div[contains(text(),'Linked')]", "SYW_LINK_LINKED_INFORMATION");
+	public final Locator SYW_LINK_ADDRESS_INFORMATION = new Locator("SYW_LINK_ADDRESS_INFORMATION", "//*[contains(@ng-repeat,'member in memberData.member')]//div[contains(text(),'Address')]", "SYW_LINK_ADDRESS_INFORMATION");
+	public final Locator SYW_LINK_EMAIL_INFORMATION = new Locator("SYW_LINK_EMAIL_INFORMATION", "//*[contains(@ng-repeat,'member in memberData.member')]//div[contains(text(),'Email')]", "SYW_LINK_EMAIL_INFORMATION");
+	public final Locator SYW_LINK_CITY_INFORMATION = new Locator("SYW_LINK_CITY_INFORMATION", "//*[contains(@ng-repeat,'member in memberData.member')]//div[contains(text(),'City')]", "SYW_LINK_CITY_INFORMATION");
+	public final Locator SYW_NO_SEARCH_RESULTS_LABEL = new Locator("", "//span[contains(text(),'No records found for this search criteria')]", "SYW_NO_SEARCH_RESULTS_LABEL");
+	
+	public final Locator AUDIT_TRAIL_DETAIL_PAGE = new Locator("AUDIT_TRAIL_Detail","//div[@ng-controller='auditTrailCtrl']","AUDIT TRAIL Detail");
+	public final Locator SYW_MAX_DETAIL_PAGE = new Locator("SYW_MAX_Detail","//div[@ng-controller='sywMaxCtrl']//div/p","SYW MAX Detail");
+	public final Locator NOT_A_SYW_MAX_MEMBER = new Locator("NOT_A_SYW_MAX_MEMBER","//div[@ng-controller='sywMaxCtrl']","NOT_A_SYW_MAX_MEMBER");
+
+	
 	DecimalFormat formatter = new DecimalFormat("#,##0.00");
 	DecimalFormat df = new DecimalFormat("0.00");
 	Connection conn1 = null;
@@ -613,7 +628,25 @@ public class OrderDetailsPage extends Page {
 
 		return this;
 	}
-
+	
+	public OrderDetailsPage clickSYWMaxTabandVerify(String usertype){
+		
+		if(getAction().isVisible(SYW_MAX_TAB)){
+			clickOnOrderTabInODP(OrderTab.SYW_MAX);
+		}
+		//get the text from the syw max tab
+		getAction().waitFor(2000);
+		if(usertype.equalsIgnoreCase("active")){
+			String text=getAction().getText(SYW_MAX_DETAIL_PAGE);
+			PageAssert.textPresentIn(SYW_MAX_DETAIL_PAGE, "ACTIVE");
+		}
+		else if(usertype.equalsIgnoreCase("inactive")){
+			String text=getAction().getText(NOT_A_SYW_MAX_MEMBER);
+			PageAssert.textPresentIn(NOT_A_SYW_MAX_MEMBER, "Not a ShopYourWay Max member.");
+		}
+		return this;
+	}
+	
 	public OrderDetailsPage verifyOrderDetailsPageDisplayed() {
 		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
@@ -626,6 +659,25 @@ public class OrderDetailsPage extends Page {
 			SoftAssert.checkElementAndContinueOnFailure(AGENT_NOTES_IN_ODP, "Verify if Agent Notes is displayed", CheckLocatorFor.isVisible);
 			//SoftAssert.checkElementAndContinueOnFailure(SEARCH_FOR_ANOTHER_ORDER_LINK, "Verify if Agent Notes is displayed", CheckLocatorFor.isVisible);
 
+		}	
+		return this;
+	}
+	public OrderDetailsPage verifyOrderDetailsDescription(String itemcondition,String rowNumber) {
+		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
+		getAction().waitFor(2000);
+		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)) 	
+			Logger.log("Test Data is not valid");
+		else
+		{
+			System.out.println("---------------------------------------------------"+DESCRIPTION_COL_NAME_TEXT.format(rowNumber).getValue());
+			//System.out.println("---------------------------------"+getAction().getText(DESCRIPTION_COL_NAME_TEXT.format("2")));
+			String actualItemCondition=getAction().getText(DESCRIPTION_COL_NAME_TEXT.format(rowNumber));
+			if(actualItemCondition.contains(itemcondition)){
+				System.out.println("----------------------------------order level verification of item condition pass");
+			}
+			else
+				System.out.println("-----------------------------------order level verification of item condition fail");
+			//SoftAssert.checkElementAndContinueOnFailure(DESCRIPTION_COL_NAME, "Verify item description is displayed", getAction().getText(DESCRIPTION_COL_NAME));
 		}	
 		return this;
 	}
@@ -3890,8 +3942,7 @@ public class OrderDetailsPage extends Page {
 		return this;
 
 	}
-	public final Locator AUDIT_TRAIL_DETAIL_PAGE = new Locator("","//div[@ng-controller='auditTrailCtrl']","AUDIT TRAIL Detail");
-	public final Locator SYW_MAX_DETAIL_PAGE = new Locator("","//div[@ng-controller='sywMaxCtrl']","SYW MAX Detail");
+
 
 	public OrderDetailsPage clickTabs(){
 		getAction().waitFor(3000);
@@ -5113,6 +5164,24 @@ public void OpenMsatEmail() {
 	AjaxCondition.forElementVisible(RFC_GUEST_ICON).waitForResponse();
 	getAction().click(RFC_GUEST_ICON);
 	getAction().driver.get("https://mail.cognizant.com");
+}
+public OrderDetailsPage verifySywLinkDetailsPageDisplayed() {
+	Logger.log("Verify if syw Details Page is displayed", TestStepType.VERIFICATION_STEP);
+	getAction().waitFor(2000);
+	if(AjaxCondition.forElementVisible(SYW_NO_SEARCH_RESULTS_LABEL).waitWithoutException(1)){
+		Logger.log("Test Data is not valid");
+		System.out.println("--------------------------------------------no results");
+	}
+		
+	else
+	{
+		System.out.println("--------------------pass");
+		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_LINKED_INFORMATION, "Verify syw Linked section is displayed", CheckLocatorFor.isVisible);
+		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_ADDRESS_INFORMATION, "Verify address Information section is displayed", CheckLocatorFor.isVisible);
+		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_EMAIL_INFORMATION, "Verify email Information is displayed", CheckLocatorFor.isVisible);
+		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_CITY_INFORMATION, "Verify city Information is displayed", CheckLocatorFor.isVisible);
+	}
+	return this;
 }
 	
 }

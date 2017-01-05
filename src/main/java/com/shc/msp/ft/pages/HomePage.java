@@ -224,6 +224,11 @@ public class HomePage extends Page {
 	public static final Locator CTI_LOGOUT_CONFIRMATION_YES = new Locator("", "//button[contains(text(),'Yes')]", "CTI Logout Confirmation Yes");
 	public static final Locator CTI_LOGOUT_CONFIRMATION_NO = new Locator("", "//button[contains(text(),'No')]", "CTI Logout Confirmation No");
 	
+	public final Locator SYW_LINK_TAB = new Locator("", "//div[contains(@ng-click,'Link')]", "SYW link");
+	public final Locator SYW_LINK_PHONE_NUMBER = new Locator("", "//*[@id='phoneNumber']", "SYW link phone number");
+	public final Locator SYW_LINK_EMAIL = new Locator("", "//*[@id='email']", "SYW link phone number");
+	public final Locator SYW_LINK_SEARCH_RESULT = new Locator("","//*[contains(@ng-repeat,'member in memberData.member')][1]","SYW_LINK_SEARCH_RESULT");
+
 	private int invalidLoginCount = 1;
 	
 	public void maximizeWindow() {
@@ -2203,5 +2208,69 @@ public class HomePage extends Page {
 		}
 		
 		
+	}
+	public HomePage searchBySYWlinkPhoneNumber(String phoneNumber) {
+		getAction().waitFor(2000);
+		Logger.log("Search using syw link phone number ", TestStepType.STEP);
+		
+		if( AjaxCondition.forElementVisible(SYW_LINK_TAB).waitWithoutException(1)){
+			Logger.log("Click on syw link tab", TestStepType.STEP);
+			AjaxCondition.forElementVisible(SYW_LINK_TAB).waitForResponse();
+			getAction().click(SYW_LINK_TAB);
+			Logger.log("Enter phone number :" + phoneNumber, TestStepType.SUBSTEP);
+			AjaxCondition.forElementVisible(SYW_LINK_PHONE_NUMBER).waitForResponse();
+			getAction().click(SYW_LINK_PHONE_NUMBER);
+			getAction().type(SYW_LINK_PHONE_NUMBER, phoneNumber);
+			getAction().waitFor(1000);
+			if(getAction().getText(SYW_LINK_PHONE_NUMBER)==""){
+				Logger.log("phone number was not entered " , TestStepType.STEP);
+			}else{
+				Logger.log("Click on Search Button", TestStepType.STEP);
+				AjaxCondition.forElementVisible(SEARCH_BUTTON).waitForResponse(3000);
+				getAction().focus(SEARCH_BUTTON);
+				getAction().click(SEARCH_BUTTON);
+				getAction().waitFor(2000);
+				if(NO_RESULT.equals("Total Found: 0")){
+					Logger.log("Invalid phone number ", TestStepType.STEP);
+				}
+			}
+		}
+		else
+			Logger.log("syw link tab not visible", TestStepType.STEP);
+		return this;
+	}
+	public HomePage searchBySYWlinkEmail(String email) {
+		getAction().waitFor(2000);
+		Logger.log("Search using syw link email id ", TestStepType.STEP);
+		
+		if(AjaxCondition.forElementVisible(SYW_LINK_TAB).waitWithoutException(1)){
+			Logger.log("Click on syw link tab", TestStepType.STEP);
+			AjaxCondition.forElementVisible(SYW_LINK_TAB).waitForResponse();
+			getAction().click(SYW_LINK_TAB);
+			
+			Logger.log("Enter email :" + email, TestStepType.SUBSTEP);
+			AjaxCondition.forElementVisible(SYW_LINK_EMAIL).waitForResponse();
+			getAction().click(SYW_LINK_EMAIL);
+			getAction().type(SYW_LINK_EMAIL, email);
+			getAction().waitFor(1000);
+			if(getAction().getText(SYW_LINK_EMAIL)==""){
+				Logger.log("phone number was not entered " , TestStepType.STEP);
+			}
+			else{
+				Logger.log("Click on Search Button", TestStepType.STEP);
+				AjaxCondition.forElementVisible(SEARCH_BUTTON).waitForResponse(3000);
+				getAction().focus(SEARCH_BUTTON);
+				getAction().click(SEARCH_BUTTON);
+				getAction().waitFor(2000);
+				if(NO_RESULT.equals("Total Found: 0")){
+					Logger.log("Invalid phone number ", TestStepType.STEP);
+				}
+			}
+		}
+		else
+			Logger.log("syw link not visible", TestStepType.STEP);
+		
+		
+		return this;
 	}
 }

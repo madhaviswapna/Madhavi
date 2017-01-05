@@ -120,6 +120,14 @@ public class LineItemDetailsAction extends BaseAction {
 		this.factory.lineItemDetailsPage().lineItemSummaryVerify(saleschecknumber);
         return this;
 	}
+	
+	public LineItemDetailsAction veryItemConditionInlineItemSummary(int saleschecknumber,String itemCondition) throws ParseException {
+		Logger.log("Summary of the line item should be displayed", TestUtils.TestStepType.THEN);
+		this.factory.lineItemDetailsPage().veryItemConditionInlineItemSummary(saleschecknumber,itemCondition);
+        return this;
+	}
+	
+	
 
 	/*public LineItemDetailsAction lineItemNumberVerify() {
 		this.factory.lineItemDetailsPage().lineItemNumberVerify();

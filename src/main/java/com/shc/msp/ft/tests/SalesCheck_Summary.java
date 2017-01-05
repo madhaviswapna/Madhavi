@@ -89,29 +89,7 @@ public class SalesCheck_Summary extends BaseTests{
 	        		.storePOStoWEBVerify();
 	}
 	
-	@Test(dataProvider = "DP_SearchByOrderID3",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSalesCheckSummary, "MSPSalesCheckShippingAddressTests"}
-    , description = "Verify shipping address for salescheck", enabled = true, priority =18)
-	public void salesCheckSummaryShippingAddressVerify(String OrderID) throws Exception{
-			addCloneIDHostname(data);
-	        User user = new User(); user.userName=UserPool.getUser();
-	        As.guestUser.goToHomePage()
-	        		.addlogType(TestStepType.WHEN)
-	                .login(user)
-	                .addlogType(TestStepType.THEN)
-	                .verifyonlineagent()
-	                .addlogType(TestStepType.WHEN)
-	                .searchByOrderId(OrderID)
-	                ._OrderDetailsAction()
-	                .addlogType(TestStepType.THEN)
-	                .verifyOrderDetailsPageDisplayed()
-	                .addlogType(TestStepType.WHEN)
-	                .clickOnSalesCheckNumberUnderSalesCheckTab(1)
-	                ._SalesCheckDetailsAction()
-	                .addlogType(TestStepType.THEN)
-	        		.salesCheckShippingAddressVerify(OrderID);
 
-	}
-	
 	@Test(dataProvider = "DP_SearchByOrderID4",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSalesCheckSummary, "MSPSalesCheckContactInfoTests"}
     , description = "Verify contact information for salescheck", enabled = true, priority =19)
 	public void salesCheckSummaryContactInfoVerify(String OrderID) throws Exception{

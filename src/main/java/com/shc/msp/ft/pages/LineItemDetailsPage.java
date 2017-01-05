@@ -70,6 +70,8 @@ public class LineItemDetailsPage extends Page {
 	public static final Locator LINE_ITEM_MFR_MODEL_NUMBER_DETAIL = new Locator("LINE_ITEM_MFR_MODEL_NUMBER_DETAIL", "//legend[text()='Line Item Summary']/following-sibling::form//label[text()='Mfr Model #']/following-sibling::div/p", "Line Item Summary Mfr Model # Detail");
 	public static final Locator LINE_ITEM_STORE_DETAIL = new Locator("LINE_ITEM_STORE_DETAIL", "//legend[text()='Line Item Summary']/following-sibling::form//label[text()='Store']/following-sibling::div/p", "Line Item Summary Store Detail");
 	public static final Locator LINE_ITEM_WEIGHT_DETAIL = new Locator("LINE_ITEM_WEIGHT_DETAIL", "//legend[text()='Line Item Summary']/following-sibling::form//label[text()='Weight (in lbs)']/following-sibling::div/p", "Line Item Summary Weight (in lbs) Detail");
+	public static final Locator LINE_ITEM_CONDITION_DETAIL = new Locator("LINE_ITEM_CONDITION_DETAIL", "//legend[text()='Line Item Summary']/following-sibling::form//label[text()='Condition']/following-sibling::div/p", "Line Item Summary item condition details");
+	
 	public static final Locator LINE_ITEM_PRICE_DETAIL = new Locator("LINE_ITEM_PRICE_DETAIL", "//legend[text()='Line Item Summary']/following-sibling::form//label[text()='Price']/following-sibling::div/p", "Line Item Summary Price Detail");
 	public static final Locator LINE_ITEM_TAX_DETAIL = new Locator("LINE_ITEM_TAX_DETAIL", "//legend[text()='Line Item Summary']/following-sibling::form//label[text()='Tax']/following-sibling::div/p", "Line Item Summary Tax Detail");
 	public static final Locator LINE_ITEM_TAX_PERCENT_DETAIL = new Locator("LINE_ITEM_TAX_PERCENT_DETAIL", "//legend[text()='Line Item Summary']/following-sibling::form//label[text()='Tax Percent']/following-sibling::div/p", "Line Item Summary Tax Percent Detail");
@@ -260,6 +262,17 @@ public class LineItemDetailsPage extends Page {
 		       storeIDNameMap.put("10161","My Gofer 2");
 		       storeIDNameMap.put("30154","Shopsears market place items");
 		      return storeIDNameMap.get(storeID);
+    }
+    
+    
+    public LineItemDetailsPage veryItemConditionInlineItemSummary(int saleschecknumber,String itemCondition) throws ParseException{
+    	String actualItemCondition=getAction().getText(LINE_ITEM_CONDITION_DETAIL);
+    	if(actualItemCondition.equalsIgnoreCase(itemCondition)){
+    		System.out.println("---------------------------------------line item pass");
+    	}
+    	else
+    		System.out.println("---------------------------------------line item fail");
+    	return this;
     }
     public LineItemDetailsPage lineItemSummaryVerify(int saleschecknumber) throws ParseException{
         String expectedShipDate = null;

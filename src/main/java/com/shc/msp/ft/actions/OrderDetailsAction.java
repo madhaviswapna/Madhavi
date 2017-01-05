@@ -42,7 +42,10 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().customerInfoVerify(OrderID);
 		return this;
 	}
-
+	public OrderDetailsAction  clickSYWMaxTabandVerify(String usertype) {
+		this.factory.orderdetailspage().clickSYWMaxTabandVerify(usertype);
+		return null;
+	}
 
 	public OrderDetailsAction verifyOrderSummary(String OrderID) throws ParseException, SQLException{
 		Logger.log("Order summary should be displayed",TestStepType.THEN);
@@ -110,6 +113,12 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyOrderDetailsPageDisplayed();
 		return this;
 	}
+	public OrderDetailsAction verifyOrderDetailsDescription(String itemcondition,String rowNumber) {
+		Logger.log("Order details page should be displayed", TestUtils.TestStepType.THEN);
+		this.factory.orderdetailspage().verifyOrderDetailsDescription(itemcondition,rowNumber);
+		return this;
+	}
+	
 	
 	//Real time MSAT - Online Agent wrapping up order and submitting RFC
 	public OrderDetailsAction msatOnlineAgentOrderWrapupRFC() {
@@ -499,6 +508,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().clickSearchAnotherOrder();
 		return this;
 	}
-
+	public OrderDetailsAction verifySywLinkDetailsPageDisplayed() {
+		Logger.log("verifySywLinkDetailsPageDisplayed", TestUtils.TestStepType.WHEN);
+    	this.factory.orderdetailspage().verifySywLinkDetailsPageDisplayed();
+    	return this;
+		
+	}
 
 }

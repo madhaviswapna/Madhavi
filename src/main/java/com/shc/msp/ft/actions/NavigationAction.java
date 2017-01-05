@@ -658,4 +658,15 @@ public class NavigationAction extends BaseAction {
 		this.factory.homePage().validateAgentChannel(channel);
 		return this;
 	}
+	public NavigationAction searchBySYWlinkPhoneNumber(String phno) {
+		Logger.log("searchBySYWlinkPhoneNumber", TestUtils.TestStepType.THEN);
+		this.factory.homePage().searchBySYWlinkPhoneNumber(phno);
+		return this;
+	}
+	public NavigationAction searchBySYWlinkEmail(String email) {
+		Logger.log("searchBySYWlinkPhoneNumber", TestUtils.TestStepType.THEN);
+		this.factory.homePage().searchBySYWlinkEmail(email);
+		return this;
+	}
+	
 }
