@@ -12,14 +12,14 @@ public class MysqlDBConnection {
 		final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 		// final String DB_URL =
 		// "jdbc:mysql://dbomsqa2.qa.ch3.s.com:3306/shc_oms";
-		final String DB_URL = "jdbc:mysql://dvoms2q.qa.ch3.s.com:3306/shc_oms";
+		final String DB_URL = "jdbc:mysql://dvomsq.qa.ch3.s.com:3306/shc_oms";
 
 		Connection conn = null;
 		try {
 
 			Class.forName(JDBC_DRIVER).newInstance();
 
-			Reporter.log("Connecting to database - dvoms2q.qa.ch3.s.com:3306/shc_oms");
+			Reporter.log("Connecting to database - dvomsq.qa.ch3.s.com:3306/shc_oms");
 
 			Reporter.log("DB Username - omsdev");
 			Reporter.log("DB Pwd - 0msd3v");

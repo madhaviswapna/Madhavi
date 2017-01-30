@@ -24,7 +24,8 @@ public class LineItemLevelRuleActionTests extends BaseTests {
             groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Sales_Adjustment_Eligible"}
             , description = "Verify sales adjustment can be done at line item level", enabled = true)
     public void  line_Item_Level_Verify_Sales_Adjustment_Eligible(TestData data) {
-		String[] test_data = getProductToTest("MSP_OL_ItemLevel_SaleAdjustmentData").split("\\|");
+		//String[] test_data = getProductToTest("MSP_OL_ItemLevel_SaleAdjustmentData").split("\\|");
+		String[] test_data ="940155199|02208196000".split("\\|");
 		String orderId=test_data[0];
 		String sku = test_data[1];
         addCloneIDHostname(data);
@@ -158,7 +159,9 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	           groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
 	            , description = "Verify return functionality at line item level for eligible items", enabled = true)
 	    public void line_Item_Level_Verify_Return_Item_Eligible(TestData data) {
-		 	String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnEligible").split("\\|");
+		 //	String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnEligible").split("\\|");
+		 String[] test_data ="940220064|02252449000".split("\\|");
+		 	
  			String orderId=test_data[0];
  			String sku = test_data[1];
 	        addCloneIDHostname(data);
@@ -637,7 +640,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		           groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
 		            , description = "Verify Start Automated Return functionality at line item level for eligible items", enabled = true)
 		    public void line_Item_Level_Verify_Start_Automated_Return_Item_Eligible(String orderId,String sku) {
-			 	//orderId="941263566";sku="08210827000";
+			 	orderId="940155199";sku="02208196000";
 				
 		        addCloneIDHostname(data);
 		        LogFormatterAction.beginSetup();
@@ -667,7 +670,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		           groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
 		            , description = "Verify Start Automated Return functionality at line item level for eligible items", enabled = true)
 		    public void line_Item_Level_Verify_Start_Automated_Return_Item_NonEligible(String orderId,String sku) {
-			 	//orderId="941263566";sku="08210827000";
+			 	orderId="941263566";sku="08210827000";
 		        addCloneIDHostname(data);
 		        LogFormatterAction.beginSetup();
 		        User user = new User(); user.userName=UserPool.getUser();

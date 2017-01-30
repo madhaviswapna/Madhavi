@@ -108,7 +108,7 @@ public class HomePage extends Page {
 	public final Locator SUB_ORDER_NUMBER_FIELD = new Locator ("","//input[@id='subOrderNumber']","SUBORDER_NUMBER_TEXTBOX"); 
 	public final Locator SEARCH_LAYAWAY_RADIO_BUTTON = new Locator("","//input[@value='Layaway']","SEARCH_LAYAWAY_RADIO_BUTTON"); 
 	public final Locator LAYAWAY_CONTRACT_ID_TEXTBOX = new Locator("","//input[@id='contractId']","LAYAWAY_CONTRACT_ID_TEXTBOX");
-	public final Locator LAYAWAY_PHONE_NUMBER_TEXTBOX = new Locator("","//form[@name='searchLayawayForm']//input[@id='phoneNumber']","LAYAWAY_PHONE_NUMBER_TEXTBOX");
+	public final Locator LAYAWAY_PHONE_NUMBER_TEXTBOX = new Locator("LAYAWAY_PHONE_NUMBER_TEXTBOX","//form[@name='searchLayawayForm']//input[@id='phoneNumber']","LAYAWAY_PHONE_NUMBER_TEXTBOX");
 	public final Locator LAYAWAY_STORE_NO_TEXTBOX = new Locator("","//input[@id='storeNo']","LAYAWAY_STORE_NO_TEXTBOX");
 	public final Locator LAYAWAY_SEARCH_BUTTON = new Locator("","//form[@name='searchLayawayForm']//button[contains(text(),'Search')]","LAYAWAY_SEARCH_BUTTON");
 	public final Locator LAYAWAY_SEARCH_RESULT = new Locator("","(//tr[contains(@ng-repeat,'layaway')])[{0}]/td[1]/a","LAYAWAY_SEARCH_RESULT");
@@ -1135,9 +1135,11 @@ public class HomePage extends Page {
 		Logger.log("Switch to Order Tab",TestStepType.STEP);
 		selectOrderTab();
 		Logger.log("Select Layaway radio button",TestStepType.STEP);
-		AjaxCondition.forElementVisible(SEARCH_LAYAWAY_RADIO_BUTTON).waitWithoutException(5);
+		AjaxCondition.forElementVisible(SEARCH_LAYAWAY_RADIO_BUTTON).waitWithoutException(205);
 		getAction().click(SEARCH_LAYAWAY_RADIO_BUTTON);
 		Logger.log("Enter Phone Number",TestStepType.STEP);
+		getAction().waitFor(1000);
+		System.out.println("-------------------------------------------------------------");
 		getAction().type(LAYAWAY_PHONE_NUMBER_TEXTBOX, phNumber);
 		Logger.log("Click Search button",TestStepType.STEP);
 		getAction().waitFor(1000);
@@ -1913,8 +1915,10 @@ public class HomePage extends Page {
 		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(REPORTS_DROPDOWN).waitForResponse();
 		getAction().click(REPORTS_DROPDOWN);
-		AjaxCondition.forElementVisible(REPORTS_DROPDOWN_OPTION).waitForResponse();
-		getAction().click(REPORTS_DROPDOWN_OPTION);
+		getAction().waitFor(4000);
+		Locator REPORTS_DROPDOWN_OPTION_REPORT = new Locator("REPORTS_DROPDOWN_OPTION_REPORT","//select[@id='reportName']//option[contains(text(),'Queue Volume')]","REPORTS_DROPDOWN_OPTION_REPORT");
+		AjaxCondition.forElementVisible(REPORTS_DROPDOWN_OPTION_REPORT).waitForResponse();	
+		getAction().click(REPORTS_DROPDOWN_OPTION_REPORT);
 		AjaxCondition.forElementVisible(GENERATE).waitForResponse();
 		getAction().click(GENERATE);
 		getAction().waitFor(2000);		

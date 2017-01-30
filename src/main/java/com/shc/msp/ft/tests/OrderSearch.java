@@ -230,9 +230,10 @@ public class OrderSearch extends BaseTests{
 		, description = "MSP_Online_Search_Layaway_By_Phone_Number")
 		public void MSP_Online_Search_Layaway_By_PhoneNumber(TestData data) throws Exception {
 			User user = new User();
-			String phNumber= null;
-			phNumber = getProductToTest("MSP_Layaway_Phone_Number");
-			System.out.println(phNumber);
+			//String phNumber= getProductToTest("MSP_Layaway_Phone_Number");
+			String phNumber= "9876543210";
+		
+			System.out.println("-----------------------------------------"+phNumber);
 			
 			if(url.contains("msp.prod.global")){
 				user.userName = "testonline0509";

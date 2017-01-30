@@ -225,6 +225,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     public void sales_Check_Level_ReadyForPickupEmail_Option_Eligible(TestData data) {
 		
 		String orderId=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup");
+		System.out.println("-------------------------------"+orderId);
 		
         addCloneIDHostname(data);
         

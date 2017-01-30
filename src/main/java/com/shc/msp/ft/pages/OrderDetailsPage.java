@@ -1476,12 +1476,12 @@ public class OrderDetailsPage extends Page {
 		StoringCurrentWindowHandle();
 		SwitchToNewlyOpenedWindow();
 		Logger.log("Verify Order Lookup Page displayed", TestStepType.VERIFICATION_RESULT);
-		AjaxCondition.forElementVisible(ORDER_NUMBER_INPUT).waitForResponse();
-		verifyTitle("Check Order Status");
+		//AjaxCondition.forElementVisible(ORDER_NUMBER_INPUT).waitForResponse();
+		//verifyTitle("Check Order Status");
 
 		getAction().driver.close();
 		SwitchBack();
-		Logger.log("Click on Child SKU Number under the Line Item Tab",TestStepType.STEP);
+		/*Logger.log("Click on Child SKU Number under the Line Item Tab",TestStepType.STEP);
 		getAction().waitFor(2000);
 		AjaxCondition.forElementVisible(SKU_WARRANTY).waitForResponse();
 		getAction().waitFor(2000);
@@ -1493,7 +1493,7 @@ public class OrderDetailsPage extends Page {
 
 		this.factory.lineItemDetailsAction().verifyOptionVisible("Start Automated Return");
 
-		verifyStartAutomatedReturnNonEligible();
+		verifyStartAutomatedReturnNonEligible();*/
 		return this;
 	}
 	public OrderDetailsPage verifyStartAutomatedReturnNonEligible() {

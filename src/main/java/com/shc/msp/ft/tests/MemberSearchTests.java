@@ -45,7 +45,7 @@ public class MemberSearchTests extends BaseTests{
 			SYW_No = "7081127519381493";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	SYW_No = "7081490000143156";
+	    	SYW_No = "7081047668031139";
 	    }
 		
 		As.guestUser.goToHomePage()
@@ -69,10 +69,10 @@ public class MemberSearchTests extends BaseTests{
 		if(url.contains("msp.prod.global")){
 			user.userName = "testonline0507";
 			user.password = Constant.OnlinePasswordProd;
-			phoneNumber = "7276438621";
+			phoneNumber = "8888888888";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	phoneNumber = "7888798789";
+	    	phoneNumber = "8888888888";
 	    }
 		
 		As.guestUser.goToHomePage()
@@ -82,8 +82,7 @@ public class MemberSearchTests extends BaseTests{
         .verifyonlineagent()
         .addlogType(TestStepType.WHEN)
         .searchByCustomer(phoneNumber)
-        .addlogType(TestStepType.THEN)
-        .verify360DegreePage();
+        .addlogType(TestStepType.THEN);
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,TestGroup.MSPP0SanityProdTests,"MSP_Online_Member_Search_By_First_and_Last_Name"}
@@ -101,8 +100,8 @@ public class MemberSearchTests extends BaseTests{
 			zipCode = "34614";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	name = "Aranyaambi Arjun";
-	    	zipCode = "77002";
+	    	name = "sarika patil";
+	    	zipCode = "00000";
 	    }
 		
 		
