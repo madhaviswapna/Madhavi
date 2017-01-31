@@ -2074,8 +2074,7 @@ public static void returnGC_OrderID() throws Exception{
 	Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 	Sql_Retrun_Gift_Card_Eligible = "select o.site_gen_ord_id,sc.sales_check_number from ord o, ord_item oi, giftcard_order_item goi, sales_check sc "
 			+ "where o.order_id = oi.order_id and oi.order_item_id = goi.order_item_id and oi.item_nm like '%Gift Card%' and oi.order_id = sc.order_id "
-			+ "and oi.order_item_sts_cd in ('CAN','RET') and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
-			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id like '9%' "
+			+ "and oi.order_item_sts_cd in ('RET') "
 			+ "and o.site_gen_ord_id REGEXP '^-?[0-9]+$' order by o.last_updated_ts desc limit 1;";
 
 	try {
@@ -2103,12 +2102,17 @@ public static void delivery_Details_OrderID() throws Exception{
 	String lastMonthDate=now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DATE);
 	Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 	
-	Sql_Delivery_Details_Eligible = "select o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
+	/*Sql_Delivery_Details_Eligible = "select o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
 			+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and fm.ffm_class_id = 'DDC' "
 			+ "and o.site_gen_ord_id like '9%' and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
 			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '"+lastMonthDate+" 01:01:01' "
-			+ "and o.last_updated_ts < '"+currentDate+" 01:01:01' order by o.last_updated_ts desc limit 1;";
-
+			+ "and o.last_updated_ts < '"+currentDate+" 01:01:01' order by o.last_updated_ts desc limit 1;";*/
+	
+	Sql_Delivery_Details_Eligible = "select o.site_gen_ord_id, sc.sales_check_number"
+			+" from ord o, ord_item oi, sales_check sc, ffm_method fm"
+			+" where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and"
+			+" oi.sales_check_id = sc.sales_check_id and o.site_gen_ord_id REGEXP '^-?[0-9]+$'  and fm.ffm_class_id='DDC' and   o.site_id = 40153"
+			+" order by o.last_updated_ts desc limit 1";
 	try {
 		
 		st = conn.prepareStatement(Sql_Delivery_Details_Eligible);

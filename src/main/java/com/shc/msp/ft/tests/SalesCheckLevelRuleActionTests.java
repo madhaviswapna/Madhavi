@@ -21,7 +21,8 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
             , description = "Verify release at sales check level", enabled = true, priority=45)
     public void sales_Check_Level_Release_Sales_Check_Eligible(TestData data) {
-		String orderId=getProductToTest("MSP_OL_OrderEligibleForSalesCheckLevelRelease");
+	//	String orderId=getProductToTest("MSP_OL_OrderEligibleForSalesCheckLevelRelease");
+		String orderId="840022993";
         addCloneIDHostname(data);
         
         User user = new User(); user.userName=UserPool.getUser();
@@ -224,10 +225,9 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
             , description = "Verify ready for pickup mails", enabled = true, priority=53)
     public void sales_Check_Level_ReadyForPickupEmail_Option_Eligible(TestData data) {
 		
-		String orderId=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup");
-		System.out.println("-------------------------------"+orderId);
-		
-        addCloneIDHostname(data);
+		//String orderId=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup");
+		String orderId="840026362";
+		addCloneIDHostname(data);
         
       
         User user = new User(); user.userName=UserPool.getUser();
