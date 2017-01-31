@@ -1309,71 +1309,71 @@ public class OrderDetailsPage extends Page {
 		return this;
 	}
 	public OrderDetailsPage verifyEvenExchangeEntireOrder(){
-		
-		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);		
-		Logger.log("Click on Even Exchange Button",TestStepType.STEP);
-		try{
-			getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
-			getAction().click(EVEN_EXCHANGE_BUTTON);
-		}catch(Exception e){
-			clickJ(EVEN_EXCHANGE_BUTTON);
-		}
-		
-		Logger.log("Click on Line Item",TestStepType.STEP);
-		int num=getAction().getVisibleElementCount(EVEN_EXCHANGE_ITEM_TABLE);
-		for(int i=1;i<=num;i++){
-		AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM.format(i)).waitForResponse(5);
-		try {
-			getAction().scrollTo(EVEN_EXCHANGE_ITEM.format(i));
-			getAction().click(EVEN_EXCHANGE_ITEM.format(i));
-		} catch (Exception e) {
-			clickJ(EVEN_EXCHANGE_ITEM.format(i));
-		}
-		
-		Logger.log("Select the Reason for Pickup",TestStepType.STEP);
-		AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i)).waitForResponse(5);
-		getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i), 3);
-		
-		Logger.log("Click on Continue",TestStepType.STEP);
-		AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY_COUNT.format(i)).waitForResponse();
-		getAction().type(LINE_ITEM_ROW_QUANTITY_COUNT.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
-		getAction().waitFor(1000);
-		}
-		AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
-		getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
-		Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
-		AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
-		getAction().click(OFFER_CONSESSION_NO_BUTTON);
-		Logger.log("Select the Category Code",TestStepType.STEP);
-		for(int i=1;i<=num;i++){
-			AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
-			getAction().click(CATEGORY_CODE_DROPDOWN.format(i));
-			getAction().waitFor(3000);
-			AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
-			getAction().click(CATEGORY_CODE_DROPDOWN_OPTION.format(i));
-			getAction().waitFor(3000);
-			AjaxCondition.forElementVisible(PICKUP_REASON_CODE_DROPDOWN.format(i)).waitForResponse();
-			getAction().click(PICKUP_REASON_CODE_DROPDOWN.format(i));
-			getAction().waitFor(3000);
-			AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
-			getAction().click(REASON_CODE_DROPDOWN_OPTION.format(i));
-			}
-		Logger.log("Click Create Order button",TestStepType.STEP);
-		AjaxCondition.forElementVisible(EVEN_EXCHANGE_CREATE_ORDER_BUTTON).waitForResponse(5);
-		getAction().click(EVEN_EXCHANGE_CREATE_ORDER_BUTTON);
-		Logger.log("Verify the Success pop up is displayed",TestStepType.STEP);
-		AjaxCondition.forElementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE).waitForResponse(10);
-		PageAssert.elementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE);
-		Logger.log("Click 'OK' on pop up",TestStepType.STEP);
-		getAction().click(EVEN_EXCHANGE_SUCCESS_DIALOG_OK_BUTTON);
-		getAction().waitFor(5000);
-		String newDosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
-		System.out.println("New order created    "+newDosOrderNumber+" Old order "+dosOrderNumber);
-		SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
-		Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
-		AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
-		return this;
-	}
+
+		  String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
+		  Logger.log("Click on Even Exchange Button",TestStepType.STEP);
+		  try{
+		   getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
+		   getAction().click(EVEN_EXCHANGE_BUTTON);
+		  }catch(Exception e){
+		   clickJ(EVEN_EXCHANGE_BUTTON);
+		  }
+		  getAction().waitFor(3000);
+		  Logger.log("Click on Line Item",TestStepType.STEP);
+		  int num=getAction().getVisibleElementCount(EVEN_EXCHANGE_ITEM_TABLE);
+		  for(int i=1;i<=num;i++){
+		   AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM.format(i)).waitForResponse(5);
+		   try {
+		    getAction().scrollTo(EVEN_EXCHANGE_ITEM.format(i));
+		    getAction().click(EVEN_EXCHANGE_ITEM.format(i));
+		   } catch (Exception e) {
+		    clickJ(EVEN_EXCHANGE_ITEM.format(i));
+		   }
+
+		   Logger.log("Select the Reason for Pickup",TestStepType.STEP);
+		   AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i)).waitForResponse(5);
+		   getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i), 3);
+
+		   Logger.log("Click on Continue",TestStepType.STEP);
+		   AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY_COUNT.format(i)).waitForResponse();
+		   getAction().type(LINE_ITEM_ROW_QUANTITY_COUNT.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
+		   getAction().waitFor(1000);
+		  }
+		  AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
+		  getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
+		  Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
+		  AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
+		  getAction().click(OFFER_CONSESSION_NO_BUTTON);
+		  Logger.log("Select the Category Code",TestStepType.STEP);
+		  for(int i=1;i<=num;i++){
+		   AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
+		   getAction().click(CATEGORY_CODE_DROPDOWN.format(i));
+		   getAction().waitFor(3000);
+		   AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
+		   getAction().click(CATEGORY_CODE_DROPDOWN_OPTION.format(i));
+		   getAction().waitFor(3000);
+		   AjaxCondition.forElementVisible(PICKUP_REASON_CODE_DROPDOWN.format(i)).waitForResponse();
+		   getAction().click(PICKUP_REASON_CODE_DROPDOWN.format(i));
+		   getAction().waitFor(3000);
+		   AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
+		   getAction().click(REASON_CODE_DROPDOWN_OPTION.format(i));
+		  }
+		  Logger.log("Click Create Order button",TestStepType.STEP);
+		  AjaxCondition.forElementVisible(EVEN_EXCHANGE_CREATE_ORDER_BUTTON).waitForResponse(5);
+		  getAction().click(EVEN_EXCHANGE_CREATE_ORDER_BUTTON);
+		  Logger.log("Verify the Success pop up is displayed",TestStepType.STEP);
+		  AjaxCondition.forElementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE).waitForResponse(10);
+		  PageAssert.elementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE);
+		  Logger.log("Click 'OK' on pop up",TestStepType.STEP);
+		  getAction().click(EVEN_EXCHANGE_SUCCESS_DIALOG_OK_BUTTON);
+		  getAction().waitFor(5000);
+		  String newDosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
+		  System.out.println("New order created    "+newDosOrderNumber+" Old order "+dosOrderNumber);
+		  SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
+		  Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
+		  AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
+		  return this;
+		 }
 
 	public OrderDetailsPage verifyEvenExchangeEligibility(String orderType){
 		if(orderType.equalsIgnoreCase("Open")){
@@ -4274,6 +4274,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		if(order.equalsIgnoreCase("whole order")){
 			num=getAction().getVisibleElementCount(RERESERVE_ITEM_COUNT);
 		for(int i=1;i<=num;i++){
+			getAction().scrollTo(RERESERVE_ITEM.format(i));
 			AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
 			getAction().click(RERESERVE_ITEM.format(i));
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
@@ -4399,7 +4400,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(PICKUP_BUTTON);
 		getAction().waitFor(3000);
 		int num=getAction().getVisibleElementCount(SELECT_ITEM_NUMBER);
-		for(int i=1;i<=num;i++){
+		for(int i=num;i>0;i--){
 		AjaxCondition.forElementVisible(SELECT_ITEM.format(i)).waitForResponse();
 		getAction().click(SELECT_ITEM.format(i));
 		getAction().waitFor(3000);
@@ -4420,6 +4421,8 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CONCESSION_YES).waitForResponse();
 		getAction().click(CONCESSION_YES);
+		AjaxCondition.forElementVisible(CONCESSIONACCEPTED_NO).waitForResponse();
+		getAction().click(CONCESSIONACCEPTED_NO);
 		for(int i=1;i<=num;i++){
 		AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
 		getAction().click(CATEGORY_CODE_DROPDOWN.format(i));

@@ -117,11 +117,11 @@ public class HomePage extends Page {
 	public final Locator DOS_ORDER_NUMBER_FIELD = new Locator("", "//input[@id='orderNo']", "DOS Order number ");
 	public final Locator DOS_UNIT_NUMBER_FIELD = new Locator("", "//input[@id='dosUnit']", "DOS Unit number ");
 	public final Locator SEARCH_DELIVERY_BUTTON = new Locator("", "//button[@ng-click='search()']", "Search Delivery");
-	public final Locator ORDERS_IN_MY_RECENT_DELIVERY_INTERACTIONS = new Locator("ORDER_ID_IN_MY_RECENT_DELIVERY_INTERACTIONS", "(//div[@ng-repeat='order in deliveryOrders'])[{0}]", "Order Id in My Recent Delivery Interactions");
+	public final Locator ORDERS_IN_MY_RECENT_DELIVERY_INTERACTIONS = new Locator("ORDER_ID_IN_MY_RECENT_DELIVERY_INTERACTIONS", "//div[@ng-repeat='order in deliveryOrders'][{0}]/div", "Order Id in My Recent Delivery Interactions");
 	public final Locator DOS_PHONE_FIELD = new Locator("DOS_PHONE_FIELD","//input[@name='P']", "DOS Phone Number Field");
 	public final Locator DOS_SALESCHECK_FIELD = new Locator("DOS_SALESCHECK_FIELD","//input[@name='S']", "Sales Check Number Field");
 	public final Locator DOS_DATEFROM_FIELD = new Locator("DOS_DATEFROM_FIELD", "//input[@id='deliveryDate']", "Delivery Date Field");
-	public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[3]//tr[2]//td[contains(@id,'datepicker')][1]","Selected DOS Data");
+	public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[3]//tr[2]//td[contains(@id,'datepicker')][8]","Selected DOS Data");
 	//public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[2]//tr[5]//td[contains(@id,'datepicker')][1]","Selected From Data");
 
 

@@ -65,7 +65,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		//String phoneNumber ="6164503584";
 		//String salescheck= getProductToTest("Rereserve_Eligible_Open_Order");	
 		
-		String orderId= getProductToTest("Rereserve_Eligible_Open_Line_Item",true);	
+		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);	
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -423,7 +423,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		
-		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);	
+		String orderId= getProductToTest("Cancel_Eligible_Line_Item",true);	
 		
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -442,7 +442,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleDeliveryOrder("OPEN","Line Item")
 		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("RESCHEDULED");
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: PARTIAL RELEASE");
 		
 	} 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -626,7 +626,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleDeliveryOrder("PARTIALLY SHIPPED","Line Item")
 		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("RESCHEDULED");
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: PARTIAL RELEASE");
 		
 	}  
 	
@@ -723,10 +723,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	            .addlogType(TestStepType.THEN)
 		        .verifyUpdateOptionForPendedOrder(dosorderID,dosunitID);
 	}
-	
-	
-
-
 }
 	
 	

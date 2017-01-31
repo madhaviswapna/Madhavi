@@ -87,39 +87,30 @@ public class EvenExchange extends BaseTestsEx{
 			        .verifyEvenExchangeEligibility(orderType);
 			}
 			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-		            groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Test_Even_Exchange_Open_Order"}
-		            , description = "Even Exchange for Open Order", enabled = true)
+		            groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Test_Even_Exchange_Shipped_Order"}
+		            , description = "Even Exchange for Shipped Order", enabled = true)
 		     	public void Test_Even_Exchange_Whole_Order(TestData data) {
-					LogFormatterAction.beginSetup();
-		    		User user = new User(); 
-		    		user.userName=UserPool.getDeliveryUser();
-					String orderType = "Open";
-					//ProductData orderDetails= getProductDataToTest("Even_Exchange_Open_HD_Order");
-					String[] values= getProductToTest("Even_Exchange_Shipped_HD_Line_Item",true).split(",");
-		    		String orderId=values[0];
-		    		String dc_no=values[1];
+				addCloneIDHostname(data);
+				  LogFormatterAction.beginSetup();
+				  User user = new User(); user.userName=UserPool.getDeliveryUser();
+				  String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");
 
-					As.guestUser.goToHomePage()
-					._NavigationAction()
-					.addlogType(TestStepType.WHEN)
-					.login(user)
-					.addlogType(TestStepType.THEN)
-					.VerifyDeliveryAgent()
-					.closeWarningPopupWindow()
-					.addlogType(TestStepType.WHEN)
-					.searchByDeliveryOrderId(orderId, dc_no)
-
-			        .addlogType(TestStepType.WHEN)
-			        .chooseHDOrders(orderType)
-			        
-			        ._OrderDetailsAction()
-			        .addlogType(TestStepType.WHEN)
-			        .goToActionCenter()
-			        
-			        .addlogType(TestStepType.THEN)
-			        .verifyEvenExchangeEligibility(orderType)
-			         .addlogType(TestStepType.THEN)
-			        //.verifyEvenExchangeEntireOrder()
-			         ;
-			}
+				  As.guestUser.goToHomePage()
+				  ._NavigationAction()
+				  .addlogType(TestStepType.WHEN)
+				  .login(user)
+				  .addlogType(TestStepType.THEN)
+				  .VerifyDeliveryAgent()
+				  .closeWarningPopupWindow()
+				  .addlogType(TestStepType.WHEN)
+				  .searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+				  .addlogType(TestStepType.GIVEN)
+				  .chooseShippedHDOrders()
+				  ._OrderDetailsAction()
+				  .addlogType(TestStepType.WHEN)
+				  .goToActionCenter()
+				  .addlogType(TestStepType.THEN)
+				  .verifyEvenExchangeEntireOrder()
+				  ;
+				 }
 }
