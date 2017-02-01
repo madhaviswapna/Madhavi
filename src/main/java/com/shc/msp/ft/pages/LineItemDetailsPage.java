@@ -267,11 +267,8 @@ public class LineItemDetailsPage extends Page {
     
     public LineItemDetailsPage veryItemConditionInlineItemSummary(int saleschecknumber,String itemCondition) throws ParseException{
     	String actualItemCondition=getAction().getText(LINE_ITEM_CONDITION_DETAIL);
-    	if(actualItemCondition.equalsIgnoreCase(itemCondition)){
-    		System.out.println("---------------------------------------line item pass");
-    	}
-    	else
-    		System.out.println("---------------------------------------line item fail");
+    	SoftAssert.checkConditionAndContinueOnFailure("Verify the Item Condition is being displayed on the application",
+        		getAction().getText(LINE_ITEM_CONDITION_DETAIL).equalsIgnoreCase(itemCondition));
     	return this;
     }
     public LineItemDetailsPage lineItemSummaryVerify(int saleschecknumber) throws ParseException{
