@@ -158,21 +158,20 @@ public class OrderSearch extends BaseTests{
 		   
 		     
 		    As.guestUser.goToHomePage()
-		    		.addlogType(TestStepType.WHEN)
-		            .login(user)
-		            .closeWarningPopupWindow()
-		            .addlogType(TestStepType.WHEN)
-		            .searchByOrderId(orderId)
-		            .closeWarningPopupWindow()
-		            ._OrderDetailsAction()
-		            .addlogType(TestStepType.THEN)
-		            .verifyOrderDetailsPageDisplayed()
-		            .verifyOrderDetailsDescription(itemcondition,"1")
-		            .clickOnSkuNumberUnderLineItemTab(1)
-	                ._LineItemDetailsAction()
-	                .addlogType(TestStepType.WHEN)
-	        		.veryItemConditionInlineItemSummary(1,itemcondition);
-		    
+	        .addlogType(TestStepType.WHEN)
+	              .login(user)
+	              .closeWarningPopupWindow()
+	              .addlogType(TestStepType.WHEN)
+	              .searchByOrderId(orderId)
+	              .closeWarningPopupWindow()
+	              ._OrderDetailsAction()
+	              .addlogType(TestStepType.THEN)
+	              .verifyOrderDetailsPageDisplayed()
+	              .verifyOrderDetailsDescription(itemcondition,"1")
+	              .clickOnSkuNumberUnderLineItemTab(1)
+	              ._LineItemDetailsAction()
+	              .addlogType(TestStepType.WHEN)
+	              .veryItemConditionInlineItemSummary(1,itemcondition); 
 		}
 		
 		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"MSP_Online_Order_Search_By_SubOrder"}

@@ -669,15 +669,14 @@ public class OrderDetailsPage extends Page {
 			Logger.log("Test Data is not valid");
 		else
 		{
-			System.out.println("---------------------------------------------------"+DESCRIPTION_COL_NAME_TEXT.format(rowNumber).getValue());
-			//System.out.println("---------------------------------"+getAction().getText(DESCRIPTION_COL_NAME_TEXT.format("2")));
+			SoftAssert.checkElementAndContinueOnFailure(MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
+			
 			String actualItemCondition=getAction().getText(DESCRIPTION_COL_NAME_TEXT.format(rowNumber));
 			if(actualItemCondition.contains(itemcondition)){
 				System.out.println("----------------------------------order level verification of item condition pass");
 			}
 			else
 				System.out.println("-----------------------------------order level verification of item condition fail");
-			//SoftAssert.checkElementAndContinueOnFailure(DESCRIPTION_COL_NAME, "Verify item description is displayed", getAction().getText(DESCRIPTION_COL_NAME));
 		}	
 		return this;
 	}
