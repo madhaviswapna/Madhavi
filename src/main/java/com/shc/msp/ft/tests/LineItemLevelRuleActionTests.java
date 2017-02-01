@@ -670,7 +670,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		           groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
 		            , description = "Verify Start Automated Return functionality at line item level for eligible items", enabled = true)
 		    public void line_Item_Level_Verify_Start_Automated_Return_Item_NonEligible(String orderId,String sku) {
-			 	orderId="941263566";sku="08210827000";
+			 	orderId="840018754";sku="02213003000";
 		        addCloneIDHostname(data);
 		        LogFormatterAction.beginSetup();
 		        User user = new User(); user.userName=UserPool.getUser();
