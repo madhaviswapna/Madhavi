@@ -412,7 +412,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleDeliveryOrder("OPEN","ORDER")
 		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("RESCHEDULED");
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
 		
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
