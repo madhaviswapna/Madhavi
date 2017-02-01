@@ -67,6 +67,7 @@ instance"
 		<cars.log.enable>true</cars.log.enable>
 		<cti>false</cti>
 		<screenpopapi>false</screenpopapi>
+		<external.host>true</external.host>
 
 	</properties>
 
