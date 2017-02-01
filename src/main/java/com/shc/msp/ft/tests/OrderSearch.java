@@ -171,13 +171,7 @@ public class OrderSearch extends BaseTests{
 		            .clickOnSkuNumberUnderLineItemTab(1)
 	                ._LineItemDetailsAction()
 	                .addlogType(TestStepType.WHEN)
-	        		.verifylineItemSummary(1)
-	        		.veryItemConditionInlineItemSummary(1,itemcondition)
-	        		._OrderDetailsAction()
-	        		.clickOnSalesCheckNumberUnderSalesCheckTab(1)
-		            ._SalesCheckDetailsAction()
-		            .addlogType(TestStepType.THEN)
-		            .verifySalesCheckSummary(orderId);
+	        		.veryItemConditionInlineItemSummary(1,itemcondition);
 		    
 		}
 		
