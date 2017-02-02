@@ -109,7 +109,8 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
             , description = "Verify Update Sales Check option is not shown for ineligible orders", enabled = true, priority=48)
     public void sales_Check_Level_Update_Sales_Check_NonEligible(TestData data) {
 		
-		String orderId=getProductToTest("MSP_OL_OrderInEligibleForUpdateSalesCheck");
+		//String orderId=getProductToTest("MSP_OL_OrderInEligibleForUpdateSalesCheck");
+		String orderId="941374199";
 	    addCloneIDHostname(data);    	        
         User user = new User(); user.userName=UserPool.getUser();
          
@@ -226,7 +227,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     public void sales_Check_Level_ReadyForPickupEmail_Option_Eligible(TestData data) {
 		
 		//String orderId=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup");
-		String orderId="840026362";
+		String orderId="840027665";
 		addCloneIDHostname(data);
         
       

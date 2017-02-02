@@ -54,7 +54,7 @@ public class HomePage extends Page {
 	public static final Locator GENERATE= new Locator("GENERATE", "//button[contains(text(),' Generate')]", "GENERATE button");
 	public static final Locator QUEUE_VOLUME_TITLE= new Locator("QUEUE_VOLUME_TITLE", "//h4[contains(text(),'Cases for ')]", "QUEUE_VOLUME_TITLE");
 	public static final Locator QUEUE_VOLUME_QUEUE_NAME= new Locator("QUEUE_VOLUME_QUEUE_NAME", "//div[contains(text(),'Queue Name')]", "QUEUE_VOLUME_QUEUE_NAME");
-	public static final Locator QUEUE_VOLUME_UNASSIGNED= new Locator("QUEUE_VOLUME_UNASSIGNED", "//td[@data-title-text='Unassigned']/a", "QUEUE_VOLUME_UNASSIGNED LINK");
+	public static final Locator QUEUE_VOLUME_UNASSIGNED= new Locator("QUEUE_VOLUME_UNASSIGNED", "(//td[@data-title-text='Unassigned']/a)[3]", "QUEUE_VOLUME_UNASSIGNED LINK");
 	public static final Locator QUEUE_VOLUME_CASES_UNASSIGNED= new Locator("QUEUE_VOLUME_CASES_UNASSIGNED", "//h4[contains(text(),'Cases for ')]", "QUEUE_VOLUME_CASES_UNASSIGNED");
 	public static final Locator MANAGE_EMAIL_TEMPLATE= new Locator("MANAGE_EMAIL_TEMPLATE", "//span[contains(text(),'Manage Email Template')]", "MANAGE_EMAIL_TEMPLATE");
 	public static final Locator MANAGE_USERS= new Locator("MANAGE_USERS", "//span[contains(text(),'Manage Users')]", "MANAGE_USERS");
@@ -1922,13 +1922,13 @@ public class HomePage extends Page {
 		AjaxCondition.forElementVisible(GENERATE).waitForResponse();
 		getAction().click(GENERATE);
 		getAction().waitFor(2000);		
-		SoftAssert.checkElementAndContinueOnFailure(QUEUE_VOLUME_TITLE, "Verify whether title for queue volume report is displayed", CheckLocatorFor.isVisible);
+		
 		SoftAssert.checkElementAndContinueOnFailure(QUEUE_VOLUME_QUEUE_NAME, "Verify whether queue name in queue volume report is displayed", CheckLocatorFor.isVisible);
 		AjaxCondition.forElementVisible(QUEUE_VOLUME_UNASSIGNED).waitForResponse();
 		SoftAssert.checkElementAndContinueOnFailure(QUEUE_VOLUME_QUEUE_NAME, "Verify whether unassigned cases in queue volume report is displayed", CheckLocatorFor.isVisible);
-		getAction().click(QUEUE_VOLUME_QUEUE_NAME);
+		getAction().click(QUEUE_VOLUME_UNASSIGNED);
+		SoftAssert.checkElementAndContinueOnFailure(QUEUE_VOLUME_TITLE, "Verify whether title for queue volume report is displayed", CheckLocatorFor.isVisible);
 		SoftAssert.checkElementAndContinueOnFailure(QUEUE_VOLUME_CASES_UNASSIGNED, "Verify whether unassigned cases link in queue volume report is displayed and it redirects to queue specific unassigned cases", CheckLocatorFor.isVisible);
-
 	}
 
 
