@@ -535,7 +535,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_HD_Line_Item"}
-	, description = "Verify if a line item for released order can be rescheduled", enabled = true)
+	, description = "Verify if a line item for released order can be rescheduled", enabled = false)
 	public void MSP_Delivery_Test_Reschedule_Released_HD_Line_Item(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -590,7 +590,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleDeliveryOrder("PARTIALLY SHIPPED","ORDER")
 		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("RESCHEDULED");
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
 		
 	}  
 	

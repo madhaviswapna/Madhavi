@@ -4485,6 +4485,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 	public void verifyDataInDeliveryNotes(String data){
 		Logger.log("verify Data In DeliveryNotes", TestStepType.STEP);
 		getAction().waitFor(3000);
+		getAction().scrollTo(DELIVERY_NOTES_DATA.format(data));
 		AjaxCondition.forElementVisible(DELIVERY_NOTES_DATA.format(data)).waitForResponse();
 		Logger.log("verified DeliveryNotes has data:"+data, TestStepType.VERIFICATION_PASSED);
 	}
