@@ -74,6 +74,8 @@ public class ActionDropdown extends Module {
     	getAction().waitFor(3000);
 		   Logger.log("Verify if "+optionName+" Option is Present in Action Dropdown",TestStepType.VERIFICATION_STEP);
 		   AjaxCondition.forElementVisible(ACTION_DROPDOWN.format(pageName.getValue())).waitForResponse();
+		   
+		   System.out.println("-------------------------------"+ACTION_DROPDOWN.format(pageName.getValue()));
 		  
 		   PageAssert.textPresentIn(ACTION_DROPDOWN.format(pageName.getValue()), optionName);  
 		   selectAction(pageName, optionName);

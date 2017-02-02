@@ -23,7 +23,8 @@ public class OrderLevelRuleActionTests extends BaseTests{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests","order_Level_Sales_Tax_Adjustment_Eligible"}
 	, description = "Verify sale adjustment at order level", enabled = true, priority=34)	
 	public void order_Level_Sales_Tax_Adjustment_Eligible(TestData data) {
-		String OrderID = getProductToTest("SaleAdjustmentOrder");
+		//String OrderID = getProductToTest("SaleAdjustmentOrder");
+		String OrderID = "840027769";
 		
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -67,8 +68,8 @@ public class OrderLevelRuleActionTests extends BaseTests{
 			groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
 	, description = "Verify shipping adjustment is available for eligible orders", enabled = true, priority=35)
 	public void order_Level_Shipping_Adjustment_Eligible(TestData data) {
-		String OrderID = getProductToTest("ShippingAdjustmentEligibleOrder");
-		
+		//String OrderID = getProductToTest("ShippingAdjustmentEligibleOrder");
+		String OrderID = "840027700";
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getUser();
