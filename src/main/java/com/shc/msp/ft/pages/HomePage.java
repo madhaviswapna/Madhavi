@@ -228,7 +228,7 @@ public class HomePage extends Page {
 	public final Locator SYW_LINK_PHONE_NUMBER = new Locator("", "//*[@id='phoneNumber']", "SYW link phone number");
 	public final Locator SYW_LINK_EMAIL = new Locator("", "//*[@id='email']", "SYW link phone number");
 	public final Locator SYW_LINK_SEARCH_RESULT = new Locator("","//*[contains(@ng-repeat,'member in memberData.member')][1]","SYW_LINK_SEARCH_RESULT");
-
+	public final Locator IGNORE_CERTIFICATE_ERROR = new Locator("", "//a[@id='overridelink']", "Certificate error IE 11");
 	private int invalidLoginCount = 1;
 	
 	public void maximizeWindow() {
@@ -236,6 +236,14 @@ public class HomePage extends Page {
 	}
 
 	public HomePage login(User user) {
+		
+		// proceed on Certificate error
+		if (getAction().isElementPresent(IGNORE_CERTIFICATE_ERROR)){
+			System.out.println("------------------------------- Certificate Error, clicking on proceed -------------------------------");
+			Logger.log("Certificate Error, clicking on proceed",TestStepType.STEP);
+			getAction().click(IGNORE_CERTIFICATE_ERROR);
+		}
+		
 		Logger.log("Login using the Agent credentials" , TestStepType.STEP);
 		AjaxCondition.forElementVisible(LOGIN_BUTTON).waitForResponse(5);
 		getAction().waitFor(2000);
@@ -252,6 +260,14 @@ public class HomePage extends Page {
 		Logger.log("Click on login button",TestStepType.STEP);
 		getAction().click(LOGIN_BUTTON); 
 		getAction().waitFor(3000);
+		
+		// Closing certificate alert if present
+		if(getAction().isAlertPresent()){
+			System.out.println("-----------------------  Certificate Alert Present, closing alert -----------------------------");
+			Logger.log("Certificate Alert Present, closing alert",TestStepType.STEP);
+			getAction().closeAlertIfPresent();
+		}
+				
 		// Temporary code for Login issue in prod 
 		if(getAction().isElementPresent(LOGIN_BUTTON) && (invalidLoginCount<5)){
 			System.out.println("------------------------------------------------Login failure---------------------------------------Attempt # "+invalidLoginCount);
@@ -259,16 +275,18 @@ public class HomePage extends Page {
 			login(user);
 		}
 		invalidLoginCount =1;
-		// Temporary code for CTI testing, should be removed.
+		
+		// Close popup when not testing CTI
 		if (!FrameworkProperties.getProperty("cti", "false").equalsIgnoreCase("true")) {
 			AjaxCondition.forElementVisible(PHONE_ID).waitWithoutException(5);
 			if (getAction().isElementPresent(PHONE_ID)) {
 				Logger.log("Click cancel on the PHONE ID popup", TestStepType.STEP);
 				verifyPhoneIdCancel();
-				TAB_NAME = new Locator("TAB_NAME", "//div[@class='layout horizontal start-justified center']//div[contains(text(),'{0}')]//parent::span/div[2]", "TAB_NAME");// This code has to be removed after commissioning the CTI Code.
+				TAB_NAME = new Locator("TAB_NAME", "//div[@class='layout horizontal start-justified center']//div[contains(text(),'{0}')]//parent::span/div[2]", "TAB_NAME");
 			}
+			
 		}
-	
+				
 		return this;
 	}
 
