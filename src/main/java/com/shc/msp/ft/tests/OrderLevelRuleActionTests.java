@@ -358,8 +358,43 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.verifyAdjustmentCapturedInNotes("Sales Tax Adjustment")
-
 		;
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Shipping_Adjustment_CapturedNotesInteraction"}
+	, description = "Verify sale adjustment at order level", enabled = true, priority=34)	
+	public void Order_Level_Shipping_Adjustment_CapturedNotesInteraction(TestData data) {
+		String OrderID = getProductToTest("ShippingAdjustmentOrder");
+		
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB(OrderID)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyOptionVisible("Shipping Adjustment")
+		.taxadjustment("Shipping Adjustment",0.1,OrderID)
+		.verifyTrialBalance()
+		.verifyAdjustmentCapturedInInteraction("Shipping Adjustment")
+		.verifyOrderWrapUp()
+		.addlogType(TestStepType.THEN)
+		.fillRFCForm()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
+		;
+		
 	}
 
 	/***********

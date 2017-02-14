@@ -1079,6 +1079,7 @@ public class OrderDetailsPage extends Page {
 				AjaxCondition.forElementVisible(ADJUSTMENT_NOTES).waitForResponse();
 				getAction().click(ADJUSTMENT_NOTES);
 				getAction().type(ADJUSTMENT_NOTES,"Customer Satisfaction");
+				getContext().put("adjustmentOption", "Customer Satisfaction");
 				AjaxCondition.forElementVisible(SUBMIT_BUTTON).waitForResponse();
 				getAction().findElement(SUBMIT_BUTTON).isEnabled();		 
 				Logger.log("Submit Shipping Adjustment buttton is present and clickable",TestStepType.VERIFICATION_STEP);
