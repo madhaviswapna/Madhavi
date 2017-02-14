@@ -396,6 +396,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator TOKEN_POPUP = new Locator("","//div[@class='modal-dialog']//h5/b[contains(text(),'The Token ID is : ')]","Token popup");
 	public final Locator CLOSE_TOKEN = new Locator("","//button[@class='close']","Close token popup");
 	public final Locator ORDER_ID = new Locator("","//h3[contains(text(),'Order# ')]","order ID in order details page");
+	public final Locator CONTACT_HISTORY_MENU_DOWN = new Locator("", "//i[contains(@class,'glyphicon-chevron-down')]", "Contact History Menu down");
 	//DDC fulfillment 
 
 	public final Locator DELIVERYDETAILS_TEXT = new Locator("DELIVERYDETAILS TEXT","//legend[text()='Delivery Details']","DELIVERYDETAILS TEXT");
@@ -4226,6 +4227,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 		String type=(String) getContext().get("adjustmentOption");
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type)).waitForResponse();
+		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
 	}
 	public void verifyEmailCapturedInNotes(){
@@ -4237,7 +4239,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		AjaxCondition.forElementVisible(CONTACT_HISTORY_EMAILTEMPLATE.format(getContext().get("selectedemailtemplatename"))).waitForResponse();
 		getAction().click(CONTACT_HISTORY_EMAILTEMPLATE.format(getContext().get("selectedemailtemplatename")));
 		PageAssert.textPresent(CONTACT_HISTORY_EMAILTEMPLATE.format(getContext().get("selectedemailtemplatename")), (String) getContext().get("selectedemailtemplatename"));
-
+		getAction().waitFor(1000);
 	}
 
 	public void verifyAdjustmentCapturedInNotes(String adjust){
