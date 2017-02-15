@@ -362,7 +362,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Shipping_Adjustment_CapturedNotesInteraction"}
-	, description = "Verify sale adjustment at order level", enabled = true, priority=34)	
+	, description = "Verify sale adjustment at order level with Interaction Notes", enabled = true, priority=34)	
 	public void Order_Level_Shipping_Adjustment_CapturedNotesInteraction(TestData data) {
 		String OrderID = getProductToTest("ShippingAdjustmentOrder");
 		
@@ -394,7 +394,6 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		._OrderDetailsAction()
 		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
 		;
-		
 	}
 
 	/***********

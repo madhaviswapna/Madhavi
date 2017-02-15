@@ -695,6 +695,55 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	            	.verifyStartAutomatedReturnNonEligible();
 		 }
 		
+
+			
+			//Sale Adjustment
+			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+		            groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Sales_Adjustment_CapturedNotesInteraction"}
+		            , description = "Verify sales adjustment can be done at line item level", enabled = true)
+		    public void  line_Item_Level_Verify_Sales_Adjustment_CapturedNotesInteraction(TestData data) {
+				String[] test_data = getProductToTest("MSP_OL_ItemLevel_SaleAdjustmentData").split("\\|");
+				//String[] test_data ="940155199|02208196000".split("\\|");
+				String orderId=test_data[0];
+				String sku = test_data[1];
+		        addCloneIDHostname(data);
+		        LogFormatterAction.beginSetup();
+		        User user = new User(); user.userName=UserPool.getUser();
+		        As.guestUser.goToHomePage()
+		        	._NavigationAction()
+		        	.addlogType(TestStepType.WHEN)
+		        	.login(user)
+		        	.addlogType(TestStepType.THEN)
+		        	.verifyonlineagent()
+		        	.addlogType(TestStepType.WHEN)
+		        	.searchByOrderId(orderId)
+		        	.closeWarningPopupWindow()
+		        	._OrderDetailsAction()
+		        	.addlogType(TestStepType.THEN)
+		        	.verifyOrderDetailsPageDisplayed()
+		        	.addlogType(TestStepType.GIVEN)
+		        	.clickOnSkuNumberUnderLineItemTab(sku)
+		        	._NavigationAction()
+		        	.closeWarningPopupWindow()
+		        	._OrderDetailsAction()
+		        	.addlogType(TestStepType.THEN)
+		        	.verifylineitemdetails()
+		        	.verifyOptionVisible("Sale Adjustment")
+		        	.addlogType(TestStepType.GIVEN)
+		            .taxadjustment("Sale Adjustment",0.1,orderId)
+		            .verifyTrialBalance()
+		            .verifyAdjustmentCapturedInInteraction("Sale Adjustment")
+		    		.verifyOrderWrapUp()
+		    		.addlogType(TestStepType.THEN)
+		    		.fillRFCForm()
+		    		._NavigationAction()
+		    		.addlogType(TestStepType.WHEN)
+		    		.searchByOrderId(orderId)
+		    		.closeWarningPopupWindow()
+		    		._OrderDetailsAction()
+		    		.verifyAdjustmentCapturedInNotes("Sale Adjustment")
+		    		;
+		    }
 		
 
 		@DataProvider (name="DP_CancelOrder_Eligible")
