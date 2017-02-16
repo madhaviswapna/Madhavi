@@ -279,6 +279,45 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .verifyOptionIsNotVisible("Ready for Pickup Email");
     }
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests","sales_Check_Level_EmailToCustomer_CapturedInNotes"}
+            , description = "sales_Check_Level_EmailToCustomer_CapturedInNotes", enabled = true, priority=54)
+    public void sales_Check_Level_EmailToCustomer_CapturedInNotes(TestData data) {
+		
+		String orderId=getProductToTest("MSP_OL_OrderEligibleForContactCustomerAtSalescheck");
+        addCloneIDHostname(data);
+        
+        User user = new User(); user.userName=UserPool.getUser();
+       As.guestUser.goToHomePage()
+       			.addlogType(TestStepType.WHEN)
+                .login(user)
+                .addlogType(TestStepType.THEN)
+                .verifyonlineagent()
+                .addlogType(TestStepType.WHEN)
+                .searchByOrderId(orderId)
+                .closeWarningPopupWindow()
+                ._OrderDetailsAction()
+                .addlogType(TestStepType.THEN)
+                .verifyOrderDetailsPageDisplayed()
+                .addlogType(TestStepType.WHEN)
+                .clickOnSalesCheckNumberUnderSalesCheckTab(1)
+                .addlogType(TestStepType.THEN)
+                .verifyOptionVisible("Contact Customer")
+                .addlogType(TestStepType.THEN)
+       			.verifyEmailCapturedInInteraction()
+        		.addlogType(TestStepType.THEN)
+        		.verifyOrderWrapUp()
+        		.addlogType(TestStepType.THEN)
+        		.fillRFCForm()
+        		._NavigationAction()
+        		.addlogType(TestStepType.WHEN)
+        		.searchByOrderId(orderId)
+        		._OrderDetailsAction()
+        		.addlogType(TestStepType.THEN)
+        		.verifyEmailCapturedInNotes()
+        		;
+	}
+	
 	@DataProvider (name="DP_Release_Sales_Check_Eligible")
     public Object[][] DP_Release_SalesCheck_Eligible_OrderID() throws Exception{
 		 Retrieval_Test_Data_By_Query.release_Sales_Check_Data();

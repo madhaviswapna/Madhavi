@@ -745,6 +745,50 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		    		;
 		    }
 		
+			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+		            groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Contact_Customer_CapturedNotesInteraction"}
+		            , description = "line_Item_Level_Contact_Customer_CapturedNotesInteraction", enabled = true)
+		    public void  line_Item_Level_Contact_Customer_CapturedNotesInteraction(TestData data) {
+				String[] test_data = getProductToTest("MSP_OL_ItemLevelContactCustomerEligible").split("\\|");
+				//String[] test_data ="940155199|02208196000".split("\\|");
+				String orderId=test_data[0];
+				String sku = test_data[1];
+		        addCloneIDHostname(data);
+		        LogFormatterAction.beginSetup();
+		        User user = new User(); user.userName=UserPool.getUser();
+		        As.guestUser.goToHomePage()
+		        	._NavigationAction()
+		        	.addlogType(TestStepType.WHEN)
+		        	.login(user)
+		        	.addlogType(TestStepType.THEN)
+		        	.verifyonlineagent()
+		        	.addlogType(TestStepType.WHEN)
+		        	.searchByOrderId(orderId)
+		        	.closeWarningPopupWindow()
+		        	._OrderDetailsAction()
+		        	.addlogType(TestStepType.THEN)
+		        	.verifyOrderDetailsPageDisplayed()
+		        	.addlogType(TestStepType.GIVEN)
+		        	.clickOnSkuNumberUnderLineItemTab(sku)
+		        	._NavigationAction()
+		        	.closeWarningPopupWindow()
+		        	._OrderDetailsAction()
+		        	.addlogType(TestStepType.THEN)
+		        	.verifylineitemdetails()
+		        	.verifyOptionVisible("Contact Customer")
+		        	.addlogType(TestStepType.THEN)
+	       			.verifyEmailCapturedInInteraction()
+	        		.addlogType(TestStepType.THEN)
+	        		.verifyOrderWrapUp()
+	        		.addlogType(TestStepType.THEN)
+	        		.fillRFCForm()
+	        		._NavigationAction()
+	        		.addlogType(TestStepType.WHEN)
+	        		.searchByOrderId(orderId)
+	        		._OrderDetailsAction()
+	        		.addlogType(TestStepType.THEN)
+	        		.verifyEmailCapturedInNotes();
+			}
 
 		@DataProvider (name="DP_CancelOrder_Eligible")
 		    public Object[][] DP_Cancellation_Eligible_OrderID() throws Exception{

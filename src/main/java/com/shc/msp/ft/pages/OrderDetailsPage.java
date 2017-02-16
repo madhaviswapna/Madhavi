@@ -430,7 +430,8 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_CONTACT_HISTORY_INTERACTION= new Locator("","(//tbody[@ng-repeat='caseEvent in caseModal.events']//tr//td[3])[1]","Order Contact history interaction");
 	public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT= new Locator("","//td[contains(text(),'{0}')]//parent::tr//td/div[contains(text(),'{1}')]","Order Contact history");
 	public final Locator ORDER_CONTACT_HISTORY_NOTES= new Locator("","//td[contains(text(),'{0}')]//ancestor::table[@class='table table-condensed']//tr[4]/td/div","Order Contact history NOTES");
-	public final Locator EMAIL_TEMPLATE_NOTES= new Locator("","//div[@class='ng-isolate-scope']//a","Email Template in interaction");
+	//public final Locator EMAIL_TEMPLATE_NOTES= new Locator("","//div[@class='ng-isolate-scope']//a","Email Template in interaction");
+	public final Locator EMAIL_TEMPLATE_NOTES= new Locator("","//td[contains(text(),'{0}')]//parent::tr//a[contains(text(),'{1}')]","Email Template in interaction");
 	public final Locator ACTION_DROPDOWN= new Locator("","//select[@id='summaryAction']","Action  dropdown");
 	public final Locator ACTION_DROPDOWN_OPTION= new Locator("","//select[@id='summaryAction']/option[@value='Contact Customer']","Action dropdown option");
 	public final Locator GO_BUTTON= new Locator("","//button[text()='Go']","Go button");
@@ -4209,11 +4210,11 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(EMAIL_TEMPLATE_NOTES).waitForResponse();
-		getAction().click(EMAIL_TEMPLATE_NOTES);
+		AjaxCondition.forElementVisible(EMAIL_TEMPLATE_NOTES.format("Contact Customer",emailTemplateName)).waitForResponse();
+		getAction().click(EMAIL_TEMPLATE_NOTES.format("Contact Customer",emailTemplateName));
 		getAction().waitFor(3000);
 		//if(!getAction().containsString(getAction().getText(EMAIL_TEMPLATE_NOTES), templatename)){
-		PageAssert.textPresent(EMAIL_TEMPLATE_NOTES, emailTemplateName);
+		PageAssert.textPresent(EMAIL_TEMPLATE_NOTES.format("Contact Customer",emailTemplateName), emailTemplateName);
 		getAction().waitFor(3000);
 
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
