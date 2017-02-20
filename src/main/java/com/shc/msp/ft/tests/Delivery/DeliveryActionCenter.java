@@ -729,8 +729,10 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	@Test(dataProvider = "DP_reasonName", groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_RPA_Concession_Request_Reason_Code_Presence"}
 	, description = "Verify RPA concession reason Code presence", enabled = true)
 	public void Verify_RPA_Concession_Request_Reason_Code_Presence(String reasonName, boolean presence) throws ParseException {
-		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+		
+		TestData<String, String, Integer> data = new TestData<String, String, Integer>(reasonName, String.valueOf(presence), 1);
 		addCloneIDHostname(data);
+		
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");	
