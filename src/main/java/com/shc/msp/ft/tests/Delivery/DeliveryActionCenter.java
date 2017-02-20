@@ -753,7 +753,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyReasonCodePresence(reasonName, presence);
 	}
 
-	@DataProvider (name="DP_reasonName",parallel=true)
+	@DataProvider (name="DP_reasonName",parallel=false)
 	public Object[][] DP_queueName() throws Exception{
 		Object[][] testData = null;
 		//List<String> list= new ArrayList<String>();
