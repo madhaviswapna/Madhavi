@@ -1,6 +1,7 @@
 package com.shc.msp.ft.actions;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -513,6 +514,11 @@ public class OrderDetailsAction extends BaseAction {
     	this.factory.orderdetailspage().verifySywLinkDetailsPageDisplayed();
     	return this;
 		
+	}
+	public OrderDetailsAction verifyReasonCodePresence(String reasonName, boolean presence) {
+		Logger.log("verify reason code presence", TestUtils.TestStepType.THEN);
+    	this.factory.orderdetailspage().verifyReasonCodePresence(reasonName,presence);
+    	return this;
 	}
 
 }

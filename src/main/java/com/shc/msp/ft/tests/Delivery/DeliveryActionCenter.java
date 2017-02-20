@@ -1,8 +1,11 @@
 package com.shc.msp.ft.tests.Delivery;
 
 import java.text.ParseException;
+import java.util.Iterator;
+import java.util.List;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.shc.automation.BaseTests;
@@ -722,6 +725,65 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	            ._OrderDetailsAction()
 	            .addlogType(TestStepType.THEN)
 		        .verifyUpdateOptionForPendedOrder(dosorderID,dosunitID);
+	}
+	@Test(dataProvider = "DP_reasonName", groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_RPA_Concession_Request_Reason_Code_Presence"}
+	, description = "Verify RPA concession reason Code presence", enabled = true)
+	public void Verify_RPA_Concession_Request_Reason_Code_Presence(String reasonName, boolean presence) throws ParseException {
+		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.chooseShippedHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyReasonCodePresence(reasonName, presence);
+	}
+
+	@DataProvider (name="DP_reasonName",parallel=true)
+	public Object[][] DP_queueName() throws Exception{
+		Object[][] testData = null;
+		//List<String> list= new ArrayList<String>();
+		String[] reason_presence=null;
+		String reasonCodes=null;
+		int i = 0;
+		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
+		Iterator<Object> itr= keywords.iterator();
+		testData=new Object[keywords.size()][2];
+		while (itr.hasNext()) {
+
+			ProductData part_num = (ProductData) itr.next();
+			reasonCodes=part_num.getPartNumber().toString();
+			reason_presence = reasonCodes.split(",");
+			testData[i][0]=reason_presence[0];
+			testData[i][1]=Boolean.parseBoolean(reason_presence[1]);
+			System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]);
+			//list.add(reasonCodes);
+			i++;
+		}
+
+
+		/*testData=new Object[list.size()][2];
+		for(int i=0;i<list.size();i++){
+			reason_presence=list.get(i).split(",");			
+			testData[i][0]=reason_presence[j];
+			testData[i][1]=Boolean.parseBoolean(reason_presence[j+1]);
+
+			System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]);*/
+		return testData;
 	}
 }
 	

@@ -557,6 +557,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator AUDIT_TRAIL_DETAIL_PAGE = new Locator("AUDIT_TRAIL_Detail","//div[@ng-controller='auditTrailCtrl']","AUDIT TRAIL Detail");
 	public final Locator SYW_MAX_DETAIL_PAGE = new Locator("SYW_MAX_Detail","//div[@ng-controller='sywMaxCtrl']//div/p","SYW MAX Detail");
 	public final Locator NOT_A_SYW_MAX_MEMBER = new Locator("NOT_A_SYW_MAX_MEMBER","//div[@ng-controller='sywMaxCtrl']","NOT_A_SYW_MAX_MEMBER");
+	public final Locator REASON_DROPDOWN= new Locator("REASON_DROPDOWN","//select[@ng-model='selected.reasonCode']","REASON DROPDOWN");
 
 	
 	DecimalFormat formatter = new DecimalFormat("#,##0.00");
@@ -5191,7 +5192,23 @@ public OrderDetailsPage verifySywLinkDetailsPageDisplayed() {
 	}
 	return this;
 }
-	
+public OrderDetailsPage verifyReasonCodePresence(String reasonName, boolean statusPresence){
+	Logger.log("Verify for reason code presence in queue for follow up", TestStepType.STEP);
+	AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
+	getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
+	getAction().click(QUEUE_FOR_FOLLOW_UP);
+	AjaxCondition.forElementVisible(REASON_DROPDOWN).waitForResponse();
+	getAction().click(REASON_DROPDOWN);	
+	scrollDown();
+
+	if(statusPresence){
+		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is present", CheckLocatorFor.isVisible);
+	}
+	else
+		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is not present", CheckLocatorFor.isNotVisible);
+	return this;
+}
+
 }
 
 
