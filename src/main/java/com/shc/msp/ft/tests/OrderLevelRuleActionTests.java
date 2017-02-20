@@ -408,7 +408,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 	 */
 	
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests"}
 	, description = "Verify cancellation is not shown for orders that are not eligible", enabled = true, priority=42)
 	public void order_Level_Verify_NoCancellation_FBM(TestData data) {
 		String OrderID = getProductToTest("OrderLevelFBMCancellation");
@@ -442,7 +442,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 	 */
 	
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests"}
 	, description = "Verify cancellation is not shown for orders that are not eligible", enabled = true, priority=42)
 	public void order_Level_Verify_NoCancellation_FBM_kmart(TestData data) {
 		String OrderID = getProductToTest("OrderLevelFBMCancellationKmart");
