@@ -317,6 +317,84 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
         		.verifyEmailCapturedInNotes()
         		;
 	}
+	/*
+	 * Test case Name :sales_Check_Level_Verify_NoCancellation_FBM
+	 * Input parameters : order id from OHM
+	 * Description:Verify that we don't show cancel option for market place item, 
+	 				* this test case is specifically checking cancel sales check option is not shown.
+	 				* the salescheck which is being tested is held CSI status.
+	 * Date Modified:
+	 * Author:Sarika Patil
+	 * comments:
+	 */
+	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+            , description = "Verify ineligible orders does not have cancel options", enabled = true, priority=52)
+    public void sales_Check_Level_Verify_NoCancellation_FBM(TestData data) {
+		String[] test_data = getProductToTest("SalesCheckLevelFBMCancellation").split(",");
+  		String OrderID=test_data[0];
+  		String salescheckNumber = test_data[1];
+  		
+        addCloneIDHostname(data);
+        User user = new User(); user.userName=UserPool.getUser();
+
+        	As.guestUser.goToHomePage()
+        		.addlogType(TestStepType.WHEN)
+                .login(user)
+                .addlogType(TestStepType.THEN)
+                .verifyonlineagent()
+                .addlogType(TestStepType.WHEN)
+                .searchByOrderId(OrderID)
+                .closeWarningPopupWindow()
+                ._OrderDetailsAction()
+                .addlogType(TestStepType.WHEN)
+                .clickOnSalesCheckNumberUnderSalesCheckTab(salescheckNumber)
+                ._SalesCheckDetailsAction()
+                .addlogType(TestStepType.THEN)
+                .verifyOptionIsNotVisible("Cancellation - Sales Check");
+ 
+	}
+	
+	/* * Test case Name :sales_Check_Level_Verify_NoCancellation_FBM
+	 * Input parameters : order id from OHM
+	 * Description:Verify that we don't show cancel option for market place item(Kmart), 
+	 				* this test case is specifically checking cancel sales check option is not shown.
+	 				* the salescheck which is being tested is held PAC status.
+	 * Date Modified:
+	 * Author:Sarika Patil
+	 * comments:
+	 */
+	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+            , description = "Verify ineligible orders does not have cancel options", enabled = true, priority=52)
+    public void sales_Check_Level_Verify_NoCancellation_FBMKmart(TestData data) {
+		String[] test_data = getProductToTest("SalesCheckLevelFBMCancellationKmart").split(",");
+  		String OrderID=test_data[0];
+  		String salescheckNumber = test_data[1];
+  		
+        addCloneIDHostname(data);
+        User user = new User(); user.userName=UserPool.getUser();
+
+        	As.guestUser.goToHomePage()
+        		.addlogType(TestStepType.WHEN)
+                .login(user)
+                .addlogType(TestStepType.THEN)
+                .verifyonlineagent()
+                .addlogType(TestStepType.WHEN)
+                .searchByOrderId(OrderID)
+                .closeWarningPopupWindow()
+                ._OrderDetailsAction()
+                .addlogType(TestStepType.WHEN)
+                .clickOnSalesCheckNumberUnderSalesCheckTab(salescheckNumber)
+                ._SalesCheckDetailsAction()
+                .addlogType(TestStepType.THEN)
+                .verifyOptionIsNotVisible("Cancellation - Sales Check");
+ 
+	}
 	
 	@DataProvider (name="DP_Release_Sales_Check_Eligible")
     public Object[][] DP_Release_SalesCheck_Eligible_OrderID() throws Exception{

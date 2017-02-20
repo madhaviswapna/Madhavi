@@ -395,6 +395,74 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
 		;
 	}
+	
+	/*
+	 * Test case Name :order_Level_Verify_NoCancellation_FBM
+	 * Input parameters : order id from OHM(sears)
+	 * Description:Verify that we don't show cancel option for market place item(Kmart), 
+	 				* this test case is specifically checking cancel order option is not shown.
+	 				* the order which is being tested in EDIT status.
+	 * Date Modified:
+	 * Author:Sarika Patil
+	 * comments:
+	 */
+	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	, description = "Verify cancellation is not shown for orders that are not eligible", enabled = true, priority=42)
+	public void order_Level_Verify_NoCancellation_FBM(TestData data) {
+		String OrderID = getProductToTest("OrderLevelFBMCancellation");
+		
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyOptionIsNotVisible("Cancellation - Order");
+
+	}
+	
+	/*
+	 * Test case Name :order_Level_Verify_NoCancellation_FBM
+	 * Input parameters : order id from OHM(Kmart)
+	 * Description:Verify that we don't show cancel option for market place item, 
+	 				* this test case is specifically checking cancel order option is not shown.
+	 				* the order which is being tested in EDIT status.
+	 * Date Modified:
+	 * Author:Sarika Patil
+	 * comments:
+	 */
+	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	, description = "Verify cancellation is not shown for orders that are not eligible", enabled = true, priority=42)
+	public void order_Level_Verify_NoCancellation_FBM_kmart(TestData data) {
+		String OrderID = getProductToTest("OrderLevelFBMCancellationKmart");
+		
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyOptionIsNotVisible("Cancellation - Order");
+	}
+
 
 	/***********
 	 * Data Provider

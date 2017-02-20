@@ -789,6 +789,90 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	        		.addlogType(TestStepType.THEN)
 	        		.verifyEmailCapturedInNotes();
 			}
+			
+			  /*
+			 * Test case Name :line_Item_Level_Verify_NoCancellation_FBM
+			 * Input parameters : order id from OHM
+			 * Description:Verify that we don't show cancel option for market place item, 
+			 				* this test case is specifically checking cancel line item option is not shown.
+			 				* the line item status which is being tested here is CNF status
+			 * Date Modified:
+			 * Author:Sarika Patil
+			 * comments:
+			 */
+			 
+
+		    @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+		  	          groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Eligible"}
+		  	            , description = "Verify cancellation at line item level for eligible orders", enabled = true)
+		  	    public void line_Item_Level_Verify_NoCancellation_FBM(TestData data) {
+		      		String[] test_data = getProductToTest("ItemLevelFBMCancellation").split(",");
+		      		String OrderID=test_data[0];
+		      		String sku = test_data[1];
+		          
+		  	       addCloneIDHostname(data);
+		  	        LogFormatterAction.beginSetup();
+		  	        User user = new User(); user.userName=UserPool.getUser();
+		  	        As.guestUser.goToHomePage()
+		                  ._NavigationAction()
+		                  .addlogType(TestStepType.WHEN)
+		                  .login(user)
+		                  .addlogType(TestStepType.THEN)
+		                  .verifyonlineagent()
+		                  .addlogType(TestStepType.WHEN)
+		                  .searchByOrderId(OrderID)
+		                  .closeWarningPopupWindow()
+		                  ._OrderDetailsAction()
+		                  .addlogType(TestStepType.THEN)
+		                  .verifyOrderDetailsPageDisplayed()
+		                  .addlogType(TestStepType.GIVEN)
+		                  .clickOnSkuNumberUnderLineItemTab(sku)
+		                  ._LineItemDetailsAction()
+		                  .addlogType(TestStepType.THEN)
+		                  .verifyOptionNotVisible("Cancellation - Line Item");
+		  	 }
+		    /*
+		   	 * Test case Name :line_Item_Level_Verify_NoCancellation_FBM
+		   	 * Input parameters : order id from OHM 
+		   	 * Description:Verify that we don't show cancel option for market place item(Kmart), 
+		   	 				* this test case is specifically checking cancel line item option is not shown.
+		   	 				* the line item status which is being tested here is VDC status
+		   	 * Date Modified:
+		   	 * Author:Sarika Patil
+		   	 * comments:
+		   	 */
+		   	 
+
+		       @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+		     	          groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Eligible"}
+		     	            , description = "Verify cancellation at line item level for eligible orders", enabled = true)
+		     	    public void line_Item_Level_Verify_NoCancellation_FBMKmart(TestData data) {
+		         		String[] test_data = getProductToTest("ItemLevelFBMCancellationKmart").split(",");
+		         		String OrderID=test_data[0];
+		         		String sku = test_data[1];
+		             
+		     	       addCloneIDHostname(data);
+		     	        LogFormatterAction.beginSetup();
+		     	        User user = new User(); user.userName=UserPool.getUser();
+		     	        As.guestUser.goToHomePage()
+		                     ._NavigationAction()
+		                     .addlogType(TestStepType.WHEN)
+		                     .login(user)
+		                     .addlogType(TestStepType.THEN)
+		                     .verifyonlineagent()
+		                     .addlogType(TestStepType.WHEN)
+		                     .searchByOrderId(OrderID)
+		                     .closeWarningPopupWindow()
+		                     ._OrderDetailsAction()
+		                     .addlogType(TestStepType.THEN)
+		                     .verifyOrderDetailsPageDisplayed()
+		                     .addlogType(TestStepType.GIVEN)
+		                     .clickOnSkuNumberUnderLineItemTab(sku)
+		                     ._LineItemDetailsAction()
+		                     .addlogType(TestStepType.THEN)
+		                     .verifyOptionNotVisible("Cancellation - Line Item");
+		     	 }
+			 
 
 		@DataProvider (name="DP_CancelOrder_Eligible")
 		    public Object[][] DP_Cancellation_Eligible_OrderID() throws Exception{
