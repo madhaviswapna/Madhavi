@@ -4,13 +4,18 @@ import java.io.IOException;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.bouncycastle.asn1.x509.ReasonFlags;
 import org.json.JSONException;
 import org.xml.sax.SAXException;
 
 import com.shc.automation.Logger;
+import com.shc.automation.dao.ProductData;
 import com.shc.automation.utils.TestUtils;
 import com.shc.automation.utils.TestUtils.Feature;
 import com.shc.automation.utils.TestUtils.TestStepType;
@@ -65,7 +70,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyDiscounts(OrderID);
 		return this;
 	}
-	
+
 	public OrderDetailsAction updateAndVerifyNameEmailNumber() {
 		Logger.log("Updating name,Email and home phone number",TestStepType.THEN);
 		this.factory.orderdetailspage().updateAndVerifyNameEmailNumber();
@@ -88,14 +93,14 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyActionsPresent(level);
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyCurrentInteraction(String level) throws SQLException{
 		Logger.log("verify that the actions are displayed correctly in current interaction",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyCurrentInteraction(level);
 		return this;
 	}
-	
-	
+
+
 
 	public OrderDetailsAction verifyOrderDetails(String OrderID, String storeId) throws SQLException, JSONException{
 		Logger.log("Order details should be displayed",TestStepType.THEN);
@@ -119,15 +124,15 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyOrderDetailsDescription(itemcondition,rowNumber);
 		return this;
 	}
-	
-	
+
+
 	//Real time MSAT - Online Agent wrapping up order and submitting RFC
 	public OrderDetailsAction msatOnlineAgentOrderWrapupRFC() {
 		Logger.log("Order details page should be displayed", TestUtils.TestStepType.THEN);
 		this.factory.orderdetailspage().msatOnlineAgentOrderWrapupRFC();
 		return this;
 	}
-	
+
 	//Real time MSAT - Online Agent submitting RFC from home page - General Inquiry
 	public OrderDetailsAction msatOnlineAgentGeneralInquiryWrapupRFC() {
 		Logger.log("Order details page should be displayed", TestUtils.TestStepType.THEN);
@@ -135,29 +140,29 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 
-	
+
 	public OrderDetailsAction verifyLayawayDetailsPageDisplayed(){
 		Logger.log("layaway details page should be displayed", TestUtils.TestStepType.THEN);
 		this.factory.orderdetailspage().verifyLayawayDetailsPageDisplayed();
 		return this;
 	}
-	
-	
+
+
 	//For Delivery Flow - Order Details page
 	public OrderDetailsAction verifySearchedDOSOrderIsDisplayed(String searchVal, String searchField) {
 		Logger.log("Verification for the searched order withing the order details page", TestUtils.TestStepType.THEN);
 		this.factory.orderdetailspage().verifySearchedDOSOrderIsDisplayed(searchVal, searchField);
 		return this;
 	}
-	
-	
+
+
 	//For Delivery Flow - Order Details page
 	public OrderDetailsAction verifyUpdateOptionForPendedOrder(String dosorderid, String dosunitid) {
 		Logger.log("Verification for the searched order withing the order details page", TestUtils.TestStepType.THEN);
 		this.factory.orderdetailspage().verifyUpdateOptionForPendedOrder(dosorderid, dosunitid);
 		return this;
 	}
-	
+
 	//For Delivery Flow - Suggested Address Validation
 	public OrderDetailsAction verifySuggestedAddressForAddressUpdates(String dosorderid, String dosunitid) {
 		Logger.log("Verification for the searched order withing the order details page", TestUtils.TestStepType.THEN);
@@ -398,7 +403,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyCloseCaseByWrapupOfflineAgent();
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyRereservebuttonPresent() {
 		Logger.log("Verify Rereserve button present in action center",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyRereservebuttonPresent();
@@ -409,7 +414,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().rereserveItem(order);
 		return this;
 	}
-	
+
 	public OrderDetailsAction goToActionCenter() {
 		Logger.log("Navigating to action center",TestStepType.WHEN);
 		this.factory.orderdetailspage().goToActionCenter();
@@ -426,7 +431,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().pickupEntireOrder();
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyEvenExchangeEligibility(String orderType){
 		Logger.log("Verify, if Even Exchange button is present",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyEvenExchangeEligibility(orderType);
@@ -473,7 +478,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().scheduleFollowUp();
 		return this;
 	}
-	
+
 	public OrderDetailsAction queueForFollowUp(String queueName) throws ParseException {
 		Logger.log("Add to queue for follow up",TestStepType.THEN);
 		this.factory.orderdetailspage().queueForFollowUp(queueName);
@@ -503,7 +508,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyOrderPhoneNumber(phoneNumber);
 		return this;
 	}
-	
+
 	public OrderDetailsAction clickSearchAnotherOrder(){
 		Logger.log("Click on Search for Another Order", TestStepType.WHEN);
 		this.factory.orderdetailspage().clickSearchAnotherOrder();
@@ -511,14 +516,36 @@ public class OrderDetailsAction extends BaseAction {
 	}
 	public OrderDetailsAction verifySywLinkDetailsPageDisplayed() {
 		Logger.log("verifySywLinkDetailsPageDisplayed", TestUtils.TestStepType.WHEN);
-    	this.factory.orderdetailspage().verifySywLinkDetailsPageDisplayed();
-    	return this;
-		
+		this.factory.orderdetailspage().verifySywLinkDetailsPageDisplayed();
+		return this;
+
 	}
-	public OrderDetailsAction verifyReasonCodePresence(String reasonName, boolean presence) {
+	/*public OrderDetailsAction verifyReasonCodePresence(String reasonName, boolean presence) {
 		Logger.log("verify reason code presence", TestUtils.TestStepType.THEN);
     	this.factory.orderdetailspage().verifyReasonCodePresence(reasonName,presence);
     	return this;
+	}*/
+	public OrderDetailsAction verifyReasonCodes(String reasonName, boolean statusPresence) {
+		Logger.log("verify reason code   "+reasonName, TestUtils.TestStepType.THEN);
+		this.factory.orderdetailspage().verifyReasonCodes(reasonName,statusPresence);
+		return this;
+	}
+	public OrderDetailsAction clickOnReasonDropdown() {
+		Logger.log("Navigate to queue for follow up action ", TestUtils.TestStepType.THEN);
+		this.factory.orderdetailspage().clickOnReasonDropdown();
+		return this;
 	}
 
+	public void verifyAllReasonCodePresence(List <Object> keyword) {
+		clickOnReasonDropdown();
+		Iterator<Object> itr= keyword.iterator();
+		while (itr.hasNext()) {
+
+			ProductData incoming =   (ProductData) itr.next();
+			String [] split = incoming.getPartNumber().toString().split(",");
+			System.out.println("test array action level      "+split[0]+"           "+Boolean.parseBoolean(split[1]));
+			verifyReasonCodes(split[0],Boolean.parseBoolean(split[1]));
+		}
+
+	}
 }

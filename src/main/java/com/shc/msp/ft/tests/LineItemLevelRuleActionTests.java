@@ -803,7 +803,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 			 
 
 		    @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-		  	          groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Eligible"}
+		  	          groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_NoCancellation_FBM"}
 		  	            , description = "Verify cancellation at line item level for eligible orders", enabled = true)
 		  	    public void line_Item_Level_Verify_NoCancellation_FBM(TestData data) {
 		      		String[] test_data = getProductToTest("ItemLevelFBMCancellation").split(",");
@@ -844,7 +844,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		   	 
 
 		       @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-		     	          groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Eligible"}
+		     	          groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_NoCancellation_FBMKmart"}
 		     	            , description = "Verify cancellation at line item level for eligible orders", enabled = true)
 		     	    public void line_Item_Level_Verify_NoCancellation_FBMKmart(TestData data) {
 		         		String[] test_data = getProductToTest("ItemLevelFBMCancellationKmart").split(",");

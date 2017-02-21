@@ -726,7 +726,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	            .addlogType(TestStepType.THEN)
 		        .verifyUpdateOptionForPendedOrder(dosorderID,dosunitID);
 	}
-	@Test(dataProvider = "DP_reasonName", groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_RPA_Concession_Request_Reason_Code_Presence"}
+	/*@Test(dataProvider = "DP_reasonName", groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_RPA_Concession_Request_Reason_Code_Presence"}
 	, description = "Verify RPA concession reason Code presence", enabled = true)
 	public void Verify_RPA_Concession_Request_Reason_Code_Presence(String reasonName, boolean presence) throws ParseException {
 		
@@ -754,7 +754,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyReasonCodePresence(reasonName, presence);
 	}
-
+	
 	@DataProvider (name="DP_reasonName",parallel=true)
 	public Object[][] DP_queueName() throws Exception{
 		Object[][] testData = null;
@@ -778,15 +778,46 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		}
 
 
-		/*testData=new Object[list.size()][2];
+		testData=new Object[list.size()][2];
 		for(int i=0;i<list.size();i++){
 			reason_presence=list.get(i).split(",");			
 			testData[i][0]=reason_presence[j];
 			testData[i][1]=Boolean.parseBoolean(reason_presence[j+1]);
 
-			System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]);*/
+			System.out.println("testing data "+(i+1)+": "+testData[i][0]+","+testData[i][1]);
 		return testData;
+	}*/
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_RPA_Concession_Request_Reason_Code_Presence"}
+	, description = "Verify RPA concession reason code is not present", enabled = true)
+	public void Verify_RPA_Concession_Request_Reason_Code_Presence(TestData data) throws ParseException {
+		
+		addCloneIDHostname(data);
+		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.chooseShippedHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyAllReasonCodePresence(keywords);
 	}
+	
 }
+
+	
 	
 	
