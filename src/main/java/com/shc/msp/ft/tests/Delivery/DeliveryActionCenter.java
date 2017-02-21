@@ -796,7 +796,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");	
+		String dosorderID= getProductToTest("Delivery_Shipped_Order");	
 
 		As.guestUser.goToHomePage()
 		._NavigationAction()
