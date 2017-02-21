@@ -330,7 +330,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests, "sales_Check_Level_Verify_NoCancellation_FBM"}
             , description = "Verify ineligible orders does not have cancel options", enabled = true, priority=52)
     public void sales_Check_Level_Verify_NoCancellation_FBM(TestData data) {
 		String[] test_data = getProductToTest("SalesCheckLevelFBMCancellation").split(",");
@@ -369,7 +369,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests, "sales_Check_Level_Verify_NoCancellation_FBMKmart"}
             , description = "Verify ineligible orders does not have cancel options", enabled = true, priority=52)
     public void sales_Check_Level_Verify_NoCancellation_FBMKmart(TestData data) {
 		String[] test_data = getProductToTest("SalesCheckLevelFBMCancellationKmart").split(",");
