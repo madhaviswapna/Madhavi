@@ -67,7 +67,6 @@ instance"
 		<cars.log.enable>true</cars.log.enable>
 		<cti>false</cti>
 		<screenpopapi>false</screenpopapi>
-		<webdriver.framework.version>8.0</webdriver.framework.version>
 		<external.host>false</external.host>
 
 	</properties>
@@ -145,7 +144,7 @@ instance"
 		<dependency>
 			<groupId>com.shc.automation</groupId>
 			<artifactId>cars-webdriver-framework</artifactId>
-			<version>${webdriver.framework.version}</version>
+			<version>8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
