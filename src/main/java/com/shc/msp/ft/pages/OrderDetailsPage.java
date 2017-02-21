@@ -22,6 +22,7 @@ import org.json.XML;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.shc.automation.AjaxCondition;
 import com.shc.automation.FrameworkProperties;
 import com.shc.automation.Locator;
@@ -5192,7 +5193,7 @@ public OrderDetailsPage verifySywLinkDetailsPageDisplayed() {
 	}
 	return this;
 }
-public OrderDetailsPage verifyReasonCodePresence(String reasonName, boolean statusPresence){
+/*public OrderDetailsPage verifyReasonCodePresence(String reasonName, boolean statusPresence){
 	Logger.log("Verify for reason code presence in queue for follow up", TestStepType.STEP);
 	AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
 	getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
@@ -5207,10 +5208,30 @@ public OrderDetailsPage verifyReasonCodePresence(String reasonName, boolean stat
 	else
 		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is not present", CheckLocatorFor.isNotVisible);
 	return this;
-}
+	
+}*/
+public OrderDetailsPage clickOnReasonDropdown(){
+	Logger.log("Click on the queue for folow up button", TestStepType.STEP);
+	AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
+	getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
+	getAction().click(QUEUE_FOR_FOLLOW_UP);
+	Logger.log("Click on the reasons dropdown", TestStepType.STEP);
+	AjaxCondition.forElementVisible(REASON_DROPDOWN).waitForResponse();
+	getAction().click(REASON_DROPDOWN);
+	getAction().waitFor(3000);
+	return this;
 
 }
-
+public OrderDetailsPage verifyReasonCodes(String reasonName, boolean statusPresence){
+	if(statusPresence){
+		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is present", CheckLocatorFor.isVisible);
+	}
+	else
+		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is not present", CheckLocatorFor.isNotVisible);
+	return this;
+}
+}
+	
 
 
 
