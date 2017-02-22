@@ -307,6 +307,10 @@ public class OrderSearch extends BaseTests{
 	                .addlogType(TestStepType.THEN)
 		            .verifyOrderDetailsPageDisplayed();
 	    }
+		/*Sarika Patil ,22/2/2017 -- changed the test data 
+		 * ,earlier the test data was taken from XL sheet and the test data did not fetch any results ,
+			so changed it to take the test data from OHM,created the keyword MSP_OnlineAgent_Phone_Number in OHM*/
+		
 	    
 		@Test(dataProvider = "DP_SearchByPhone", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByPhoneNOTests"}
 	            , description = "Verify agent search by phone number", enabled = true, priority=4)
@@ -316,7 +320,9 @@ public class OrderSearch extends BaseTests{
 			addCloneIDHostname(data);
 		    	
     		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
-    	
+    		
+    		
+    		phoneNumber=getProductToTest("MSP_OnlineAgent_Phone_Number");
 	        LogFormatterAction.beginSetup();
 	        
 	        User user = new User();
