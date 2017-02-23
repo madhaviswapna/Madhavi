@@ -101,116 +101,192 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}  
+
+	//Melvin - Updated code using product id
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_DOS_Order_And_DOS_Unit"}
+
+	, description = "Verify search by order id", enabled = true, priority=1)
+	public void MSP_Delivery_Agent_Search_By_DOS_Order_And_DOS_Unit(TestData data) throws Exception {
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		ProductData order = getProductDataToTest("MSP_Delivery_Order");
+		String dosorderID=order.getPartNumber().toString();
+		String dosunitID=order.getUnitNumber().toString();
+		String dosOrderInfo = dosorderID + "-" + dosunitID;
+
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDeliveryOrderId(dosorderID,dosunitID)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
+	}
+
+
+	//Melvin - Updated code using product id
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_PhoneNumber"}
+	, description = "Verify search by phone number", enabled = true, priority=1)
+	public void MSP_Delivery_Agent_Search_By_PhoneNumber(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName = UserPool.getDeliveryUser();
+
+		ProductData order = getProductDataToTest("MSP_Delivery_Phone");
+		String phoneNumber=order.getPartNumber().toString();
+
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDOSPhone(phoneNumber)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(phoneNumber, "Phone");
+	}
+
+
+	//Melvin - Updated code using product id
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_SalesCheck"}
+	, description = "Verify search by sales check", enabled = true, priority=1)
+	public void MSP_Delivery_Agent_Search_By_SalesCheck(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName = UserPool.getDeliveryUser();
+
+		ProductData order = getProductDataToTest("MSP_Delivery_Salescheck");
+		String salescheckNumber=order.getPartNumber().toString();
+
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDOSSalesCheck(salescheckNumber)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(salescheckNumber, "Salescheck");
+	}
+
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_Date"}
+	, description = "Verify search by delivery date", enabled = true, priority=1)
+	public void MSP_Delivery_Agent_Search_By_Date(TestData data) throws Exception {
+
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+
+		User user = new User();
+		user.userName = UserPool.getDeliveryUser();
+
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchDOSOrdersByDate()
+		.selectOrderInMyRecentDeliveryInteractions(3)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed("", "Date");
+	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "Delivery_Search_By_DOS_Order_Number"}
+
+	, description = "Verify search by order id", enabled = true, priority=1)
+	public void Delivery_Search_By_DOS_Order_Number(TestData data) throws Exception {
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		String dosorderId= getProductToTest("Reschedule_Open_HD_Order",true);
+
+
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDeliveryOrderId(dosorderId, "")
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(dosorderId, "dosorderId");
+	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Release_Order"}
+
+	, description = "Verify search by order id", enabled = true, priority=1)
+	public void Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Release_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+
+		String orderId= getProductToTest("Rereserve_Eligible_Released_Order",true);	
+		String dosOrderInfo = orderId + "-" + DcNumber.DC_NO;
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
+	}
 	
-        //Melvin - Updated code using product id
-		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_OrderNumber"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Partially_Shipped_Order"}
 
-        , description = "Verify search by order id", enabled = true, priority=1)
-		public void MSP_Delivery_Agent_Search_By_OrderNumber(TestData data) throws Exception {
-			addCloneIDHostname(data);
-		
-		    LogFormatterAction.beginSetup();
-		
-		    User user = new User();
-		    user.userName=UserPool.getDeliveryUser();
-		    ProductData order = getProductDataToTest("MSP_Delivery_Order");
-		    String dosorderID=order.getPartNumber().toString();
-			String dosunitID=order.getUnitNumber().toString();
-			String dosOrderInfo = dosorderID + "-" + dosunitID;
+	, description = "Verify search by order id", enabled = true, priority=1)
+	public void Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Partially_Shipped_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
 
-			As.guestUser.goToHomePage()
-		    		.addlogType(TestStepType.WHEN)
-		            .login(user)
-		            .addlogType(TestStepType.WHEN)
-		            .closeWarningPopupWindow()
-		            .searchByDeliveryOrderId(dosorderID,dosunitID)
-		            .selectOrderInMyRecentDeliveryInteractions(1)
-		            .closeWarningPopupWindow()
-		            ._OrderDetailsAction()
-		            .addlogType(TestStepType.THEN)
-		            .verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
-		}
-		
+		LogFormatterAction.beginSetup();
 
-		//Melvin - Updated code using product id
-		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_PhoneNumber"}
-        , description = "Verify search by phone number", enabled = true, priority=1)
-		public void MSP_Delivery_Agent_Search_By_PhoneNumber(TestData data) throws Exception {
-			addCloneIDHostname(data);
-		    LogFormatterAction.beginSetup();
-		
-		    User user = new User();
-		    user.userName = UserPool.getDeliveryUser();
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
+		String dosOrderInfo = orderId + "-" + DcNumber.DC_NO;
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
+	}
 
-		    ProductData order = getProductDataToTest("MSP_Delivery_Phone");
-		    String phoneNumber=order.getPartNumber().toString();
-		    
-		    As.guestUser.goToHomePage()
-		    		.addlogType(TestStepType.WHEN)
-		            .login(user)
-		            .addlogType(TestStepType.WHEN)
-		            .closeWarningPopupWindow()
-		            .searchByDOSPhone(phoneNumber)
-		            .selectOrderInMyRecentDeliveryInteractions(1)
-		            .closeWarningPopupWindow()
-		            ._OrderDetailsAction()
-		            .addlogType(TestStepType.THEN)
-		            .verifySearchedDOSOrderIsDisplayed(phoneNumber, "Phone");
-		}
 
-		
-		//Melvin - Updated code using product id
-		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_SalesCheck"}
-        , description = "Verify search by sales check", enabled = true, priority=1)
-		public void MSP_Delivery_Agent_Search_By_SalesCheck(TestData data) throws Exception {
-			addCloneIDHostname(data);
-		    LogFormatterAction.beginSetup();
-		
-		    User user = new User();
-		    user.userName = UserPool.getDeliveryUser();
-		    
-		    ProductData order = getProductDataToTest("MSP_Delivery_Salescheck");
-		    String salescheckNumber=order.getPartNumber().toString();
-		    
-		    As.guestUser.goToHomePage()
-		    		.addlogType(TestStepType.WHEN)
-		            .login(user)
-		            .addlogType(TestStepType.WHEN)
-		            .closeWarningPopupWindow()
-		            .searchByDOSSalesCheck(salescheckNumber)
-		            .selectOrderInMyRecentDeliveryInteractions(1)
-		            .closeWarningPopupWindow()
-		            ._OrderDetailsAction()
-		            .addlogType(TestStepType.THEN)
-		            .verifySearchedDOSOrderIsDisplayed(salescheckNumber, "Salescheck");
-		}
-		
-
-		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_Date"}
-        , description = "Verify search by delivery date", enabled = true, priority=1)
-		public void MSP_Delivery_Agent_Search_By_Date(TestData data) throws Exception {
-			
-			addCloneIDHostname(data);
-			
-		    LogFormatterAction.beginSetup();
-		
-		     
-		    User user = new User();
-		    user.userName = UserPool.getDeliveryUser();
-		    
-		    As.guestUser.goToHomePage()
-		    		.addlogType(TestStepType.WHEN)
-		            .login(user)
-		            .addlogType(TestStepType.WHEN)
-		            .closeWarningPopupWindow()
-		            .searchDOSOrdersByDate()
-            		.selectOrderInMyRecentDeliveryInteractions(3)
-            		.closeWarningPopupWindow()
-            		._OrderDetailsAction()
-		            .addlogType(TestStepType.THEN)
-		            .verifySearchedDOSOrderIsDisplayed("", "Date");
-		}
-	 	
 }
 
 

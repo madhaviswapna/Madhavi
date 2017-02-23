@@ -711,6 +711,9 @@ public class OrderDetailsPage extends Page {
 			SoftAssert.checkElementAndContinueOnFailure(DOS_MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
 			SoftAssert.checkElementAndContinueOnFailure(DOS_ORDER_NO_LONGER_EXIST, "Verify Order Exists", CheckLocatorFor.isNotVisible);
 
+			if(searchField=="dosorderId")
+			PageAssert.verifyEqual(searchVal, getAction().getText(DOS_ORDER_SUMMARY_ORDER_NUMBER));
+
 			if (searchField=="Order") {
 				String[] str_array = searchVal.split("-");
 				String dosorderId = str_array[0]; 
