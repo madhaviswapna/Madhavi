@@ -462,6 +462,40 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.addlogType(TestStepType.THEN)
 		.verifyOptionIsNotVisible("Cancellation - Order");
 	}
+	/*
+	 * 
+	 * 
+	 */
+	@Test(groups = {TestGroup.MSPP1Tests, "ostrder_Level_Sales_Tax_Adjustment_Eligible_for_Commercial_TWOrder"})	
+	public void order_Level_Sales_Tax_Adjument_Eligible_for_Commercial_TWOrder() {
+		String OrderID = getProductToTest("MSPCommercialTWOrderForSaleTaxAdjustment");
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyOptionVisible("Sales Tax Adjustment")
+		.taxadjustment("Sales Tax Adjustment",0.01,OrderID)
+		.verifyTrialBalance()
+		.verifyAdjustmentCapturedInInteraction("Sales Tax Adjustment")
+		.verifyOrderWrapUp()
+		.addlogType(TestStepType.THEN)
+		.fillRFCForm()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyAdjustmentCapturedInNotes("Sales Tax Adjustment")
+		;
+	}
 
 
 	/***********

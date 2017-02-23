@@ -4226,6 +4226,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 	public void verifyAdjustmentCapturedInInteraction(String adjust){
 		getAction().waitFor(5000);
 		Logger.log("Verify adjustment done on order are captured in Current Interaction", TestStepType.STEP);
+		System.out.println("----------------------------verifyAdjustmentCapturedInInteraction");
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);

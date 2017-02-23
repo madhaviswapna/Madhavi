@@ -29,6 +29,7 @@ public class TestGroup {
 	public static final String MSPLineItemLevelRuleActionTest = "MSPLineItemLevelRuleActionTests";
 	public static final String MSPSuperAdminTest = "MSPSuperAdminTest";
 	public static final String MSPP0Tests = "MSPP0Tests";
+	public static final String MSPP1Tests = "MSPP1Tests";
 	public static final String MSPP0SanityProdTests = "MSPP0SanityProdTests";
 	public static final String MSPP1OnlineTests = "MSPP1OnlineTests";
 	public static final String MSPP0DeliveryTests = "MSPP0DeliveryTests";
