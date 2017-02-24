@@ -87,6 +87,31 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.taxadjustment("Shipping Adjustment",0.1,OrderID)
 		;
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	, description = "Verify shipping adjustment is available for eligible orders", enabled = true, priority=35)
+	public void order_Level_Shipping_Adjustment_Eligible_1(TestData data) {
+		//String OrderID = getProductToTest("ShippingAdjustmentEligibleOrder");
+		String OrderID = "840027700";
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.verifyOptionVisible("Shipping Adjustment")
+		.taxadjustment("Shipping Adjustment",0.1,OrderID)
+		;
+	}
+
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -494,6 +519,76 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.verifyAdjustmentCapturedInNotes("Sales Tax Adjustment")
+		;
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Shipping_Adjustment_CapturedNotesInteraction"}
+	, description = "Verify sale adjustment at order level with Interaction Notes", enabled = true, priority=34)	
+	public void order_Level_Shipping_Adjustment_Eligible_for_Commercial_TWOrder(TestData data) {
+		String OrderID = getProductToTest("MSPCommercialTWOrderForSaleTaxAdjustment");
+		
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB(OrderID)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyOptionVisible("Shipping Adjustment")
+		.taxadjustment("Shipping Adjustment",0.1,OrderID)
+		.verifyTrialBalance()
+		.verifyAdjustmentCapturedInInteraction("Shipping Adjustment")
+		.verifyOrderWrapUp()
+		.addlogType(TestStepType.THEN)
+		.fillRFCForm()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
+		;
+	}
+	
+	@Test(groups = {TestGroup.MSPP1Tests, "ostrder_Level_Sales_Tax_Adjustment_Eligible_for_Commercial_TWOrder"})	
+	public void order_Level_Shipping_Adjustment_Eligible_for_Commercial_TWOrder() {
+		String OrderID = getProductToTest("MSPCommercialTWOrderForSaleTaxAdjustment");
+//String OrderID = getProductToTest("ShippingAdjustmentOrder");
+		
+		//addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB(OrderID)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyOptionVisible("Shipping Adjustment")
+		.taxadjustment("Shipping Adjustment",0.1,OrderID)
+		.verifyTrialBalance()
+		.verifyAdjustmentCapturedInInteraction("Shipping Adjustment")
+		.verifyOrderWrapUp()
+		.addlogType(TestStepType.THEN)
+		.fillRFCForm()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
 		;
 	}
 
