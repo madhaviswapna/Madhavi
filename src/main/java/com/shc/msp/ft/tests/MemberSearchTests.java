@@ -19,9 +19,7 @@ public class MemberSearchTests extends BaseTests{
 	public void MSP_Online_Member_Search_By_Email(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();
-		
-		String searchEmail = "mswapna@searshc.com";
-				
+		String searchEmail = getSearchTermToTest("MSP_MemberSearch_Email");		
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
         .login(user)
@@ -37,15 +35,15 @@ public class MemberSearchTests extends BaseTests{
 	, description = "Verify Member Search using SYW Number")
 	public void MSP_Online_Member_Search_By_SYW_No(TestData data) throws Exception {
 		User user = new User();		
-		String SYW_No = null;
+		String SYW_No = getSearchTermToTest("MSP_MemberSearch_By_SYWNumber");
 		
 		if(url.contains("msp.prod.global")){
 			user.userName = "testonline0509";
 			user.password = Constant.OnlinePasswordProd;
-			SYW_No = "7081127519381493";
+			//SYW_No = "7081127519381493";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	SYW_No = "7081047668031139";
+	    	//SYW_No = "7081047668031139";
 	    }
 		
 		As.guestUser.goToHomePage()
@@ -64,15 +62,13 @@ public class MemberSearchTests extends BaseTests{
 	public void MSP_Online_Member_Search_By_Phone_Number(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();
-		String phoneNumber = null;
+		String phoneNumber = getSearchTermToTest("MSP_MemberSearch_By_PhoneNumber");
 		
 		if(url.contains("msp.prod.global")){
 			user.userName = "testonline0507";
 			user.password = Constant.OnlinePasswordProd;
-			phoneNumber = "8888888888";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	phoneNumber = "8888888888";
 	    }
 		
 		As.guestUser.goToHomePage()
@@ -86,22 +82,17 @@ public class MemberSearchTests extends BaseTests{
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,TestGroup.MSPP0SanityProdTests,"MSP_Online_Member_Search_By_First_and_Last_Name"}
-	, description = "Verify Member Search using Phone Number")
+	, description = "Verify Member Search by first name and last name")
 	public void MSP_Online_Member_Search_By_First_and_Last_Name(TestData data) throws Exception {
 		User user = new User();
 		user.userName = UserPool.getUser();
-		String name = null;
-		String zipCode = null;
+		String name = getSearchTermToTest("MSP_MemberSearch_By_FirstAndLastName");
+		String zipCode = "00000";
 		
 		if(url.contains("msp.prod.global")){
 			user.userName = "testonline0507";
-			user.password = Constant.OnlinePasswordProd;
-			name = "JOHN NIGRATO";
-			zipCode = "34614";
 	    }else{
 	    	user.userName = UserPool.getUser();
-	    	name = "sarika patil";
-	    	zipCode = "00000";
 	    }
 		
 		
