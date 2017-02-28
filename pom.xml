@@ -67,8 +67,8 @@ instance"
 		<cars.log.enable>true</cars.log.enable>
 		<cti>false</cti>
 		<screenpopapi>false</screenpopapi>
-		<internal.site>true</internal.site>
-		<external.host>true</external.host> 
+		<!-- <internal.site>true</internal.site>
+		<external.host>true</external.host>  -->
 
 	</properties>
 
@@ -142,10 +142,15 @@ instance"
 			<artifactId>cars-dao-framework</artifactId>
 			<version>2.10.5</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.shc.automation</groupId>
 			<artifactId>cars-webdriver-framework</artifactId>
 			<version>8.2-SNAPSHOT</version>
+		</dependency> -->
+		<dependency>
+			<groupId>com.shc.automation</groupId>
+			<artifactId>cars-webdriver-framework</artifactId>
+			<version>8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
