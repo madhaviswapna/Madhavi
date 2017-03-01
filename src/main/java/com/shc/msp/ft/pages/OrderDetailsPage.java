@@ -4950,6 +4950,8 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		String fDate=getAction().getText(DELIVERY_DATE);
 
 		String pend1=getAction().getText(PEND_CODE);
+		
+		String orderStatus = getAction().getText(ORDER_STATUS);
 		goToActionCenter();
 
 		AjaxCondition.forElementVisible(HOLD_FOR_DELIVERY).waitForResponse();
@@ -4967,7 +4969,15 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		String lDate=getAction().getText(DELIVERY_DATE);
 
 		String pend2=getAction().getText(PEND_CODE);
-		PageAssert.verifyEqual(pend2, "DDH");
+		System.out.println("pend 2 -------------------"+pend2);
+		if(orderStatus.equalsIgnoreCase("Open")){
+			PageAssert.verifyEqual(pend2, "DDH");
+			
+		}else if (orderStatus.equalsIgnoreCase("Released")) {
+			PageAssert.verifyEqual(pend2, "TBH");
+			
+		}
+		
 		Logger.log("Verified that pend code before reshedule was: "+pend1+" and pend code after reshedule is:"+pend2,TestStepType.VERIFICATION_PASSED);
 
 		String[] dateArray=lDate.split("/");
