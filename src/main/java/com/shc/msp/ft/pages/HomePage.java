@@ -237,12 +237,12 @@ public class HomePage extends Page {
 
 	public HomePage login(User user) {
 		
-		// proceed on Certificate error
+		/*// proceed on Certificate error
 		if (getAction().isElementPresent(IGNORE_CERTIFICATE_ERROR)){
 			System.out.println("------------------------------- Certificate Error, clicking on proceed -------------------------------");
 			Logger.log("Certificate Error, clicking on proceed",TestStepType.STEP);
 			getAction().click(IGNORE_CERTIFICATE_ERROR);
-		}
+		}*/
 		
 		Logger.log("Login using the Agent credentials" , TestStepType.STEP);
 		AjaxCondition.forElementVisible(LOGIN_BUTTON).waitForResponse(5);
@@ -261,12 +261,12 @@ public class HomePage extends Page {
 		getAction().click(LOGIN_BUTTON); 
 		getAction().waitFor(3000);
 		
-		// Closing certificate alert if present
+		/*// Closing certificate alert if present
 		if(getAction().isAlertPresent()){
 			System.out.println("-----------------------  Certificate Alert Present, closing alert -----------------------------");
 			Logger.log("Certificate Alert Present, closing alert",TestStepType.STEP);
 			getAction().closeAlertIfPresent();
-		}
+		}*/
 				
 		// Temporary code for Login issue in prod 
 		if(getAction().isElementPresent(LOGIN_BUTTON) && (invalidLoginCount<5)){
