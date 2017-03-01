@@ -220,7 +220,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
-		String dosorderId= getProductToTest("Reschedule_Open_HD_Order",true);
+		String dosorderId= getProductToTest("Reschedule_Open_HD_Order");
 
 
 		As.guestUser.goToHomePage()
@@ -246,7 +246,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
 
-		String orderId= getProductToTest("Rereserve_Eligible_Released_Order",true);	
+		String orderId= getProductToTest("Rereserve_Eligible_Released_Order");	
 		String dosOrderInfo = orderId + "-" + DcNumber.DC_NO;
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
@@ -271,7 +271,32 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
+		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+		String dosOrderInfo = orderId + "-" + DcNumber.DC_NO;
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Shipped_Order"}
+
+	, description = "Verify search by order id", enabled = true, priority=1)
+	public void Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Shipped_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Delivery_Shipped_Order");	
 		String dosOrderInfo = orderId + "-" + DcNumber.DC_NO;
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
