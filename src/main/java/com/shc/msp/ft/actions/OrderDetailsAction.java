@@ -393,6 +393,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyAdjustmentCapturedInNotes(adjust);
 		return this;
 	}
+	public OrderDetailsAction verifyActionCapturedInNotes(String action) {
+		Logger.log("Verify  Action "+action+"is captured in notes",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyActionCapturedInNotes(action);
+		return this;
+	}
 	public OrderDetailsAction verifyRoutingForOfflineAgent() {
 		Logger.log("Verify Email sent to customer is captured in notes",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyRoutingForOfflineAgent();
@@ -547,5 +552,10 @@ public class OrderDetailsAction extends BaseAction {
 			verifyReasonCodes(split[0],Boolean.parseBoolean(split[1]));
 		}
 
+	}
+	public OrderDetailsAction wrapUpOrderWithoutContactDelivery(){
+		Logger.log("Wrapup Order and Contact", TestUtils.TestStepType.WHEN);
+		this.factory.orderdetailspage().wrapUpOrderWithoutContactDelivery();
+		return this;
 	}
 }

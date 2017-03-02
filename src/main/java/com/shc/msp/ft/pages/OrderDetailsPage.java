@@ -29,6 +29,7 @@ import com.shc.automation.Locator;
 import com.shc.automation.Logger;
 import com.shc.automation.PageAssert;
 import com.shc.automation.SoftAssert;
+import com.shc.automation.utils.TagAttributes;
 import com.shc.automation.utils.TestUtils.CheckLocatorFor;
 import com.shc.automation.utils.TestUtils.TestStepType;
 import com.shc.msp.ft.entities.CancelReasonCode;
@@ -431,6 +432,8 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_CONTACT_HISTORY_INTERACTION= new Locator("","(//tbody[@ng-repeat='caseEvent in caseModal.events']//tr//td[3])[1]","Order Contact history interaction");
 	public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT= new Locator("","//td[contains(text(),'{0}')]//parent::tr//td/div[contains(text(),'{1}')]","Order Contact history");
 	public final Locator ORDER_CONTACT_HISTORY_NOTES= new Locator("","//td[contains(text(),'{0}')]//ancestor::table[@class='table table-condensed']//tr[4]/td/div","Order Contact history NOTES");
+	public final Locator ORDER_CONTACT_HISTORY_NOTES_DELIVERY= new Locator("","//td[contains(text(),'{0}')]","Order Contact history NOTES");
+	
 	//public final Locator EMAIL_TEMPLATE_NOTES= new Locator("","//div[@class='ng-isolate-scope']//a","Email Template in interaction");
 	public final Locator EMAIL_TEMPLATE_NOTES= new Locator("","//td[contains(text(),'{0}')]//parent::tr//a[contains(text(),'{1}')]","Email Template in interaction");
 	public final Locator ACTION_DROPDOWN= new Locator("","//select[@id='summaryAction']","Action  dropdown");
@@ -560,6 +563,15 @@ public class OrderDetailsPage extends Page {
 	public final Locator NOT_A_SYW_MAX_MEMBER = new Locator("NOT_A_SYW_MAX_MEMBER","//div[@ng-controller='sywMaxCtrl']","NOT_A_SYW_MAX_MEMBER");
 	public final Locator REASON_DROPDOWN= new Locator("REASON_DROPDOWN","//select[@ng-model='selected.reasonCode']","REASON DROPDOWN");
 
+	 public final Locator CATEGORY_DROPDOWN_CODE_COUNT= new Locator("CATEGORY_DROPDOWN_CODE","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select/option","CATEGORY_DROPDOWN_CODE");
+	 public final Locator CATEGORY_DROPDOWN_CODE= new Locator("CATEGORY_DROPDOWN_CODE_COUNT","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select","CATEGORY_DROPDOWN_CODE_COUNT");
+	 public final Locator DELIVERY_REASON_DROPDOWN_COUNT= new Locator("DELIVERY_REASON_DROPDOWN","//select[@name='reasonCode']/option","DELIVERY_REASON_DROPDOWN");
+	 public final Locator DELIVERY_REASON_DROPDOWN= new Locator("DELIVERY_REASON_DROPDOWN_COUNT","//select[@name='reasonCode']","DELIVERY_REASON_DROPDOWN_COUNT");
+	 public final Locator WRAP_UP_NOTES= new Locator("WRAP_UP_NOTES","//strong[contains(text(),'Notes')]/parent::span/following-sibling::div//textarea","WRAP_UP_NOTES");
+	 public final Locator SELECT_ITEMS_FOR_CONTACT= new Locator("SELECT_ITEMS_FOR_CONTACT","//th[contains(text(),'Description')]/parent::tr//input","SELECT_ITEMS_FOR_CONTACT");
+	 public final Locator WRAP_UP_WITHOUT_CONTACT= new Locator("WRAP_UP_WITHOUT_CONTACT","//button[contains(text(),'WRAP UP & CONTINUE W/ CONTACT')]","WRAP_UP_WITHOUT_CONTACT");
+	 public final Locator WRAP_UP_ORDER_CONTACT= new Locator("WRAP UP ORDER & CONTACT","//button[contains(text(),'WRAP UP ORDER & CONTACT')]","WRAP UP ORDER & CONTACT");
+	 
 	
 	DecimalFormat formatter = new DecimalFormat("#,##0.00");
 	DecimalFormat df = new DecimalFormat("0.00");
@@ -4234,10 +4246,12 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);
 		String type=(String) getContext().get("adjustmentOption");
+		System.out.println("locatro under trial "+ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type).getValue());
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type)).waitForResponse();
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
 	}
+	
 	public void verifyEmailCapturedInNotes(){
 		Logger.log("Verify Email sent to customer are captured in Notes", TestStepType.STEP);
 		getAction().waitFor(3000);
@@ -4258,8 +4272,18 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 
 		PageAssert.textPresent(ORDER_CONTACT_HISTORY_NOTES.format(adjust), "Notes: "+(String) getContext().get("adjustmentOption"));
-
 	}
+
+	public void verifyActionCapturedInNotes(String action){
+		Logger.log("Verify adjustment done on order are captured in Notes", TestStepType.STEP);
+		getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
+		getAction().click(ORDER_CONTACT_HISTORY);
+		getAction().waitFor(3000);
+
+		PageAssert.elementPresent(ORDER_CONTACT_HISTORY_NOTES_DELIVERY.format(action));
+	}
+	
 	public void verifyRereservebuttonPresent(){
 		Logger.log("Verify Rereserve button is present in action center", TestStepType.STEP);
 		getAction().waitFor(3000);
@@ -4957,6 +4981,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		AjaxCondition.forElementVisible(HOLD_FOR_DELIVERY).waitForResponse();
 		getAction().scrollTo(HOLD_FOR_DELIVERY);
 		getAction().click(HOLD_FOR_DELIVERY);
+		getContext().put("adjustmentOption", "");
 		AjaxCondition.forElementVisible(SCHEDULE_FOLLOW_UP).waitForResponse();
 		getAction().scrollTo(SCHEDULE_FOLLOW_UP);
 		getAction().click(SCHEDULE_FOLLOW_UP);
@@ -4966,11 +4991,14 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		AjaxCondition.forElementVisible(RESCHEDULE_SUBMIT).waitForResponse();
 		getAction().click(RESCHEDULE_SUBMIT);
 		getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(DELIVERY_DATE).waitForResponse();
 		String lDate=getAction().getText(DELIVERY_DATE);
-
+		
+		AjaxCondition.forElementVisible(PEND_CODE).waitForResponse();
 		String pend2=getAction().getText(PEND_CODE);
 		System.out.println("pend 2 -------------------"+pend2);
 		if(orderStatus.equalsIgnoreCase("Open")){
+			
 			PageAssert.verifyEqual(pend2, "DDH");
 			
 		}else if (orderStatus.equalsIgnoreCase("Released")) {
@@ -5244,6 +5272,40 @@ public OrderDetailsPage verifyReasonCodes(String reasonName, boolean statusPrese
 		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is not present", CheckLocatorFor.isNotVisible);
 	return this;
 }
+
+public int generateRandomNumberSelect(Locator select){
+	System.out.println("Count for select"+getAction().getElementCount(select));
+	System.out.println("Conunt Locator "+select.getValue());
+	int randomCode=util.randomGenerator(getAction().getElementCount(select));
+	 if(randomCode<1){
+		 randomCode++;
+	 }
+	return randomCode;
+}
+public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
+	 Logger.log("Click on Wrap Up button in Action Center");
+	 AjaxCondition.forElementVisible(WRAPUP_BUTTON).waitForResponse();
+	 getAction().scrollTo(WRAPUP_BUTTON);
+	 getAction().click(WRAPUP_BUTTON);
+	 getAction().waitFor(4000);
+	 
+	 int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
+	 Logger.log("Select option #"+rndCodeCategory+" in category select");
+	 AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
+	 getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
+	 
+	 int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
+	 Logger.log("Select option #"+rndCodeReason+" in category select");
+	 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
+	 getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
+	 Logger.log("Select All in Items for contact");
+	 getAction().click(SELECT_ITEMS_FOR_CONTACT);
+	 Logger.log("Click WRAP UP & CONTINUE W/ CONTACT");
+	 getAction().click(WRAP_UP_WITHOUT_CONTACT);
+	 getAction().waitFor(4000);
+	 return this;
+
+	}
 }
 	
 
