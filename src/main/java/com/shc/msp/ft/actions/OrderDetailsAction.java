@@ -113,7 +113,18 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().CancelOrder(orderId);
 		return this;
 	}
-
+	
+	public OrderDetailsAction verifyEmpowermentGuidelinePopUp(){
+		Logger.log("Verify Empowerment Guideline pop up",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyEmpowermentGuidelinePopUp();
+		return this;
+	}
+	
+	public OrderDetailsAction verifyEmpowermentGuidelineStatusColor(String Enabled){
+		Logger.log("Verify Empowerment Guideline pop up",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyEmpowermentGuidelineStatusColor(Enabled);
+		return this;
+	}
 	public OrderDetailsAction verifyOrderDetailsPageDisplayed() {
 		Logger.log("Order details page should be displayed", TestUtils.TestStepType.THEN);
 		this.factory.orderdetailspage().verifyOrderDetailsPageDisplayed();

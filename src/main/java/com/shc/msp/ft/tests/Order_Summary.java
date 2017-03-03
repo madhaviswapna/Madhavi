@@ -1,5 +1,6 @@
 package com.shc.msp.ft.tests;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import org.testng.annotations.DataProvider;
@@ -248,7 +249,49 @@ public class Order_Summary extends BaseTests {
 
 	}
 	
-
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "verifyEmpowermentGuidelineNotificationEnabled"}
+    , description = "verifyEmpowermentGuidelineNotificationEnabled", enabled = true, priority=14)
+	public void verifyEmpowermentGuidelineNotificationEnabled(TestData data) throws Exception{
+		addCloneIDHostname(data);
+		//String OrderID = "840044331";
+		String OrderID = getProductToTest("MSP_Online_LTV_Enabled_Order");
+        LogFormatterAction.beginSetup();
+        User user = new User(); user.userName=UserPool.getUser();
+        As.guestUser.goToHomePage()
+        .addlogType(TestStepType.WHEN)
+            .login(user)
+            .addlogType(TestStepType.THEN)
+            .verifyonlineagent()
+            .addlogType(TestStepType.WHEN)
+            .searchByOrderId(OrderID)
+            ._OrderDetailsAction()
+            .addlogType(TestStepType.THEN)
+            .verifyEmpowermentGuidelinePopUp()
+            .addlogType(TestStepType.THEN)
+            .verifyEmpowermentGuidelineStatusColor("enabled");
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "verifyEmpowermentGuidelineNotificationDisabled"}
+    , description = "verifyEmpowermentGuidelineNotificationDisabled", enabled = true, priority=14)
+	public void verifyEmpowermentGuidelineNotificationDisabled(TestData data) throws Exception{
+		addCloneIDHostname(data);
+		//String OrderID = "840044803";
+		String OrderID = getProductToTest("MSP_Online_LTV_Disabled_Order"); 
+				
+        LogFormatterAction.beginSetup();
+        User user = new User(); user.userName=UserPool.getUser();
+        As.guestUser.goToHomePage()
+        .addlogType(TestStepType.WHEN)
+            .login(user)
+            .addlogType(TestStepType.THEN)
+            .verifyonlineagent()
+            .addlogType(TestStepType.WHEN)
+            .searchByOrderId(OrderID)
+            ._OrderDetailsAction()
+            .addlogType(TestStepType.THEN)
+            .verifyEmpowermentGuidelineStatusColor("disabled");
+	}
+	
 	 @DataProvider (name="DP_SearchByOrderID1",parallel=true)
 	 public Object[][] DP_SearchByOrderID1() throws Exception{		
 	 ArrayList<String> searchrows = ExcelUtil.getExcelUtil().searchKeyWord("OrderSummary1", Constant.OrderSearch, 

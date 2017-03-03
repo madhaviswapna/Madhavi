@@ -275,7 +275,10 @@ public class OrderDetailsPage extends Page {
 	public final Locator LAYAWAY_BALANCE = new Locator("ORDER SUMMARY LOYALTY BALANCE NO","(//form[@role='form']//div)[14]//p","Layaway Balance ");
 	public final Locator ORDER_SUMMARY_LOYALTY_NO_TEXT = new Locator("ORDER SUMMARY LOYALTY NO TEXT","//strong[text()='Loyalty #']","Order Summary Loyalty # Text");
 	public final Locator ORDER_SUMMARY_LOYALTY_NO = new Locator("ORDER SUMMARY LOYALTY NO","//strong[text()='Loyalty #']//parent::span//following-sibling::div//p","Order Summary Loyalty #");
-
+	public final Locator ORDER_SUMMARY_EMPOWERMENT_GUIDELINE_POPUP = new Locator("", "//div[@class='modal-content']", "Empower Guideline popup");
+	public final Locator EMPOWERMENT_GUIDELINE_POPUP_OK_BUTTON = new Locator("", "//button[@id='modalclose']", "Empower Guideline popup Ok button");
+	public final Locator EMPOWERMENT_GUIDELINE_STATUS_COLOR = new Locator("", "//strong[contains(text(),'Empowerment Guideline')]/parent::span/following-sibling::span", "Empower Guideline popup status color");
+	
 	//Order Summary Order Charge
 	public final Locator ORDER_CHARGES_TITLE_TEXT = new Locator("ORDER CHARGES TITLE TEXT","//legend[text()='Order Charges']","Order Charges Title Text");
 	public final Locator ORDER_CHARGES_TABLE = new Locator("ORDER CHARGES TABLE","//legend[text()='Order Charges']//following-sibling::div//table","Order Charges Table");
@@ -678,6 +681,35 @@ public class OrderDetailsPage extends Page {
 		}	
 		return this;
 	}
+	
+	public OrderDetailsPage verifyEmpowermentGuidelinePopUp(){
+		Logger.log("Verify the Empower Guideline message is present in the Popup",TestStepType.STEP);
+		AjaxCondition.forElementVisible(ORDER_SUMMARY_EMPOWERMENT_GUIDELINE_POPUP).waitWithoutException(3);
+		String empowermentNotificationMessage = getAction().getAttribute(ORDER_SUMMARY_EMPOWERMENT_GUIDELINE_POPUP, "innerText");
+		PageAssert.verifyTrue(empowermentNotificationMessage.contains("This order originates from one of our best members and therefore we want to do more for them. Select the Tool Tip next to the Empowerment Guideline to see what more can be done for them depending upon their reason for contact today. Ensure you thank them for being one of our best members."), "Improper Text present in Empowerment guideline popup"+empowermentNotificationMessage);
+		Logger.log("Close Empower Guideline Popup",TestStepType.STEP);
+		getAction().click(EMPOWERMENT_GUIDELINE_POPUP_OK_BUTTON);
+		return this;
+	}
+	
+	public OrderDetailsPage verifyEmpowermentGuidelineStatusColor(String enabled){
+		Logger.log("Verify the Empower Guideline status color is shown",TestStepType.STEP);
+		AjaxCondition.forElementVisible(EMPOWERMENT_GUIDELINE_STATUS_COLOR).waitWithoutException(3);
+		//String empowermentNotificationStatusColor = getAction().getAttribute(EMPOWERMENT_GUIDELINE_STATUS_COLOR,"style");
+		String empowermentNotificationStatusColor =getAction().driver.findElement(getAction().getWebElement(EMPOWERMENT_GUIDELINE_STATUS_COLOR)).getCssValue("color");
+		System.out.println("color retrieved------------------------------  "+ empowermentNotificationStatusColor);
+		if (enabled.equalsIgnoreCase("enabled")){
+			SoftAssert.checkConditionAndContinueOnFailure("Verify empowerment guideline status color is Green", empowermentNotificationStatusColor.equalsIgnoreCase("rgba(46, 204, 113, 1)"));
+			//System.out.println("Result  ----          color ------------"+empowermentNotificationStatusColor.equalsIgnoreCase("rgba(46, 204, 113, 1)"));
+		}
+		else{
+			SoftAssert.checkConditionAndContinueOnFailure("Verify empowerment guideline status color is Grey", empowermentNotificationStatusColor.equalsIgnoreCase("rgba(189, 195, 199, 1)"));
+			//System.out.println("Result  ----          color ------------"+empowermentNotificationStatusColor.equalsIgnoreCase("rgba(189, 195, 199, 1)"));
+		}
+		return this;
+		
+	}
+	
 	public OrderDetailsPage verifyOrderDetailsDescription(String itemcondition,String rowNumber) {
 		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
