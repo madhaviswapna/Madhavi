@@ -558,7 +558,7 @@ public class OrderDetailsAction extends BaseAction {
 		while (itr.hasNext()) {
 
 			ProductData incoming =   (ProductData) itr.next();
-			String [] split = incoming.getPartNumber().toString().split(",");
+			String [] split = incoming.getPartNumber().toString().split(":");
 			System.out.println("test array action level      "+split[0]+"           "+Boolean.parseBoolean(split[1]));
 			verifyReasonCodes(split[0],Boolean.parseBoolean(split[1]));
 		}

@@ -574,7 +574,10 @@ public class OrderDetailsPage extends Page {
 	 public final Locator SELECT_ITEMS_FOR_CONTACT= new Locator("SELECT_ITEMS_FOR_CONTACT","//th[contains(text(),'Description')]/parent::tr//input","SELECT_ITEMS_FOR_CONTACT");
 	 public final Locator WRAP_UP_WITHOUT_CONTACT= new Locator("WRAP_UP_WITHOUT_CONTACT","//button[contains(text(),'WRAP UP & CONTINUE W/ CONTACT')]","WRAP_UP_WITHOUT_CONTACT");
 	 public final Locator WRAP_UP_ORDER_CONTACT= new Locator("WRAP UP ORDER & CONTACT","//button[contains(text(),'WRAP UP ORDER & CONTACT')]","WRAP UP ORDER & CONTACT");
-	 
+	 		
+	public final Locator CASE_EXISTS= new Locator("CASE_EXISTS"," //div[contains(text(),'Open Case')]","CASE_EXISTS");
+	public final Locator OK_BUTTON_ON_POPUP= new Locator("OK_BUTTON_ON_POPUP","//button[@id='modalclose']","OK_BUTTON_ON_POPUP");
+
 	
 	DecimalFormat formatter = new DecimalFormat("#,##0.00");
 	DecimalFormat df = new DecimalFormat("0.00");
@@ -5069,33 +5072,42 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		Logger.log("Order successfully routed to HD-Account validation queue",TestStepType.VERIFICATION_PASSED);	
 
 	}
-	public void queueForFollowUp(String queueName){
-		Logger.log("Verify whether item can be routed queue:"+queueName, TestStepType.STEP);
+		public void queueForFollowUp(String queueName){
+			Logger.log("Verify whether item can be routed queue:"+queueName, TestStepType.STEP);
+			AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
+			getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
+			getAction().click(QUEUE_FOR_FOLLOW_UP);
+			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
+			getAction().click(REASON_DROPDOWN_CANCEL);
+			AjaxCondition.forElementVisible(SELECTED_OPTION_QUEUE.format(queueName)).waitForResponse();
+			getAction().click(SELECTED_OPTION_QUEUE.format(queueName));
+			getAction().waitFor(2000);
+			AjaxCondition.forElementVisible(QUEUE_NAME).waitForResponse();
+			String queue=getAction().getText(QUEUE_NAME);
+			getContext().put("queue", queue);
 
-		AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
-		getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
-		getAction().click(QUEUE_FOR_FOLLOW_UP);
-		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
-		getAction().click(REASON_DROPDOWN_CANCEL);
-		AjaxCondition.forElementVisible(SELECTED_OPTION_QUEUE.format(queueName)).waitForResponse();
-		getAction().click(SELECTED_OPTION_QUEUE.format(queueName));
-		AjaxCondition.forElementVisible(QUEUE_NAME).waitForResponse();
-		String queue=getAction().getText(QUEUE_NAME);
-		getContext().put("queue", queue);
-		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
-		getAction().click(CONTINUE_BUTTON);
-		AjaxCondition.forElementVisible(ADJUSTMENT_NOTES).waitForResponse();
-		getAction().type(ADJUSTMENT_NOTES, "Test");
-		AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_CHECKBOX).waitForResponse();
-		getAction().click(QUEUE_FOR_FOLLOW_UP_CHECKBOX);
-		AjaxCondition.forElementVisible(BUTTON_WRAP_ORDER).waitForResponse();
-		getAction().waitFor(3000);
-		getAction().click(BUTTON_WRAP_ORDER);
-		AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_VERIFY).waitForResponse();		
-		Logger.log("Order successfully routed to HD-Account validation queue",TestStepType.VERIFICATION_PASSED);	
+			if( getAction().isVisible(CASE_EXISTS)){
+				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(CASE_EXISTS), true);
+				Logger.log("click on OK button",TestStepType.STEP);
+				getAction().click(OK_BUTTON_ON_POPUP);
+				SoftAssert.checkConditionAndContinueOnFailure("Continue button is disable as case already exists ", (!getAction().findElement(CONTINUE_BUTTON).isEnabled()));}
 
-
-	}
+			else{
+				AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+				getAction().click(CONTINUE_BUTTON);
+				AjaxCondition.forElementVisible(ADJUSTMENT_NOTES).waitForResponse();
+				getAction().type(ADJUSTMENT_NOTES, "Test");
+				AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_CHECKBOX).waitForResponse();
+				getAction().click(QUEUE_FOR_FOLLOW_UP_CHECKBOX);
+				AjaxCondition.forElementVisible(BUTTON_WRAP_ORDER).waitForResponse();
+				getAction().waitFor(3000);
+				getAction().click(BUTTON_WRAP_ORDER);
+				AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_VERIFY).waitForResponse();		
+				Logger.log("Order successfully routed to HD-Account validation queue",TestStepType.VERIFICATION_PASSED);
+				getAction().click(OK_BUTTON_ON_POPUP);
+				getAction().waitFor(3000);
+			}
+		}
 	public void verifyOrderPhoneNumber(String phoneNumber) {
 		Logger.log("Verify Call phone number matches with order phone number on Order details page "+phoneNumber ,TestStepType.VERIFICATION_PASSED);
 		AjaxCondition.forElementVisible(CUSTOMER_PHONE_NUMBER).waitForResponse();

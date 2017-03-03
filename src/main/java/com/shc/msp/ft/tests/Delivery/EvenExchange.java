@@ -93,7 +93,7 @@ public class EvenExchange extends BaseTestsEx{
 				addCloneIDHostname(data);
 				  LogFormatterAction.beginSetup();
 				  User user = new User(); user.userName=UserPool.getDeliveryUser();
-				  String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");
+				  String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item",true);
 
 				  As.guestUser.goToHomePage()
 				  ._NavigationAction()

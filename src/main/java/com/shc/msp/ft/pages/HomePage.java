@@ -1173,6 +1173,7 @@ public class HomePage extends Page {
 	}
 	
 	public HomePage searchByDeliveryOrderId(String dosorderID, String dosunitID) {
+		setData("dosorderID", dosorderID);
 		selectOrderTab();
 		Logger.log("Search using delivery order : "+dosorderID+" "+dosunitID, TestStepType.STEP);
 		AjaxCondition.forElementVisible(DOS_ORDER_NUMBER_FIELD).waitForResponse();

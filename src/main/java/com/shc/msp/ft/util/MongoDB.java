@@ -32,7 +32,22 @@ public class MongoDB {
 			return false;
 		}
 		return true;
-	}	
+	}
+	
+	public static synchronized boolean deleteCasesforOrderfromDB(String jsonPath,String orderId) {
+		try {
+			BasicDBObject searchQuery = new BasicDBObject();
+			searchQuery.put(jsonPath, orderId);
+			MongoDB.getDB().getCollection("cssCases").remove(searchQuery);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	
 	public static synchronized boolean createUser(String userName) {
 		return createUser(userName,"testonline0001");
 	}

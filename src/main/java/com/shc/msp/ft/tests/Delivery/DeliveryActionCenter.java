@@ -884,7 +884,130 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyAllReasonCodePresence(keywords);
 	}
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order"}
+	, description = "Verify changed reason code appears correctly for shipped order", enabled = true)
+	public void Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order(TestData data) throws ParseException {
+		
+		addCloneIDHostname(data);
+		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String dosorderID= getProductToTest("Delivery_Shipped_Order");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.chooseShippedHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyAllReasonCodePresence(keywords);
+	}
+	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Account_Validation_Queue"}
+	, description = "Verify case exists pop up comes account validation queue for duplicate case creation", enabled = true)
+	public void Verify_Case_Exist_Popup_for_Account_Validation_Queue(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		
+		String dosorderID= getProductToTest("Rereserve_Eligible_Open_Order",true);	
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+    	.deleteCasesforOrderfromDB("queue.queueDescreption","HD - Account Validation")
+    	.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Account Validation - Member receiving notifications for delivery not purchased")
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Account Validation - Member receiving notifications for delivery not purchased");
+		
+		
+	} 
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Mattress_Exchange"}
+	, description = "Verify case exists pop up comes mattress exchange queue for duplicate case creation", enabled = true)
+	public void Verify_Case_Exist_Popup_for_Mattress_Exchange(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		
+		//String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item",true);
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+    	.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Mattress Exchange Request")
+    	.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId("20600", DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Mattress Exchange - Member requests matress exchange")
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId("20600", DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Mattress Exchange - Member requests matress exchange");
+		
+		
+	} 
+	
 }
+	
 
 	
 	
