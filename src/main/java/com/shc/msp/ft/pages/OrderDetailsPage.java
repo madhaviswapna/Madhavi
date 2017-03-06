@@ -5087,7 +5087,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 
 	}
 		public void queueForFollowUp(String queueName){
-			Logger.log("Verify whether item can be routed queue:"+queueName, TestStepType.STEP);
+			Logger.log("Verify whether item can be routed to queue:"+queueName, TestStepType.STEP);
 			AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
 			getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
 			getAction().click(QUEUE_FOR_FOLLOW_UP);
@@ -5117,7 +5117,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 				getAction().waitFor(3000);
 				getAction().click(BUTTON_WRAP_ORDER);
 				AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_VERIFY).waitForResponse();		
-				Logger.log("Order successfully routed to HD-Account validation queue",TestStepType.VERIFICATION_PASSED);
+				Logger.log("Order successfully routed to "+getContext().get("queue")+" "+TestStepType.VERIFICATION_PASSED);
 				getAction().click(OK_BUTTON_ON_POPUP);
 				getAction().waitFor(3000);
 			}

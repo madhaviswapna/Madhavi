@@ -860,7 +860,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_RPA_Concession_Request_Reason_Code_Presence"}
 	, description = "Verify RPA concession reason code is not present", enabled = true)
 	public void Verify_RPA_Concession_Request_Reason_Code_Presence(TestData data) throws ParseException {
-		
+
 		addCloneIDHostname(data);
 		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
 		LogFormatterAction.beginSetup();
@@ -884,12 +884,12 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyAllReasonCodePresence(keywords);
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order"}
 	, description = "Verify changed reason code appears correctly for shipped order", enabled = true)
 	public void Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order(TestData data) throws ParseException {
-		
+
 		addCloneIDHostname(data);
 		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
 		LogFormatterAction.beginSetup();
@@ -913,18 +913,18 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyAllReasonCodePresence(keywords);
 	}
-	
-	
+
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Account_Validation_Queue"}
-	, description = "Verify case exists pop up comes account validation queue for duplicate case creation", enabled = true)
+	, description = "Verify case exists pop up comes in account validation queue for duplicate case creation", enabled = true)
 	public void Verify_Case_Exist_Popup_for_Account_Validation_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		
-		String dosorderID= getProductToTest("Rereserve_Eligible_Open_Order",true);	
-		
+
+		String dosorderID= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -933,8 +933,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-    	.deleteCasesforOrderfromDB("queue.queueDescreption","HD - Account Validation")
-    	.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB("queue.queueDescreption","HD - Account Validation")
+		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
@@ -957,20 +957,20 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
 		.queueForFollowUp("Account Validation - Member receiving notifications for delivery not purchased");
-		
-		
+
+
 	} 
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Mattress_Exchange"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Mattress_Exchange_Queue"}
 	, description = "Verify case exists pop up comes mattress exchange queue for duplicate case creation", enabled = true)
-	public void Verify_Case_Exist_Popup_for_Mattress_Exchange(TestData data) throws Exception {
+	public void Verify_Case_Exist_Popup_for_Mattress_Exchange_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		
-		//String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item",true);
-		
+
+		String dosorderID= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -979,9 +979,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-    	.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Mattress Exchange Request")
-    	.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId("20600", DcNumber.DC_NO)
+		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Mattress Exchange Request")
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
@@ -995,7 +995,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.login(user)
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId("20600", DcNumber.DC_NO)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
@@ -1003,20 +1003,159 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
 		.queueForFollowUp("Mattress Exchange - Member requests matress exchange");
-		
-		
+
+
 	} 
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Earlier_Delivery_Date_Queue"}
+	, description = "Verify case exists pop up comes in earlier delivery date queue for duplicate case creation", enabled = true)
+	public void Verify_Case_Exist_Popup_for_Earlier_Delivery_Date_Queue(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String dosorderID= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Earlier Delivery Date")
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Earlier Delivery Date Request")
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Earlier Delivery Date Request");
+
+
+	} 
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Manual_Work_Order_Request_Queue"}
+	, description = "Verify case exists pop up comes in  Manual Work Order Request queue for duplicate case creation", enabled = true)
+	public void Verify_Case_Exist_Popup_for_Manual_Work_Order_Request_Queue(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String dosorderID= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Manual Work Order Request")
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Manual Work Order Request- delivery team to return to complete delivery service")
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Manual Work Order Request- delivery team to return to complete delivery service");
+
+
+	} 
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Part_Request_Queue"}
+	, description = "Verify case exists pop up comes in Part_Request queue for duplicate case creation", enabled = true)
+	public void Verify_Case_Exist_Popup_for_Part_Request_Queue(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String dosorderID= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Part Request")
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Part Request - Member requests replacement of missing, broken, or non-functional part on a recently delivered item")
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Part Request - Member requests replacement of missing, broken, or non-functional part on a recently delivered item");
+
+	}
+
+
 	//verify all the reason codes present in the queue for followup in delivery open order with pend code as TBC
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder"}
 	, description = "verify all the queues for delivery open order with ped code TBC", enabled = true)
 	public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder(TestData data) throws ParseException {
-		
+
 		addCloneIDHostname(data);
 		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		String dosorderID= getProductToTest("MSP_DeliveryOpenOrder_PendCode_TBC");	
-		
+
 		ArrayList<String> reasonCode=new ArrayList<String>();
 		reasonCode.add("Select");
 		reasonCode.add("Account Validation - Member receiving notifications for delivery not purchased");
@@ -1043,7 +1182,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		reasonCode.add("T Pend Past Due - TB Pend Code to be worked");
 		reasonCode.add("Turnaround Request - Member Stating they will Cancel");
 		reasonCode.add("Water Leak - Member requests urgent assistance with water leak");
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
