@@ -1007,7 +1007,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		
 	} 
 	//verify all the reason codes present in the queue for followup in delivery open order with pend code as TBC
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_RPA_Concession_Request_Reason_Code_Presence"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder"}
 	, description = "verify all the queues for delivery open order with ped code TBC", enabled = true)
 	public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder(TestData data) throws ParseException {
 		
