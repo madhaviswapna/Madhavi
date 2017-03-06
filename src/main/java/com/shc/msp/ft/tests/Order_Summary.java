@@ -271,6 +271,53 @@ public class Order_Summary extends BaseTests {
             .verifyEmpowermentGuidelineStatusColor("enabled");
 	}
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "verifyEmpowermentGuidelineNotificationEnabledMarketPlaceItem"}
+    , description = "verifyEmpowermentGuidelineNotificationEnabledMarketPlaceItem", enabled = true, priority=14)
+	public void verifyEmpowermentGuidelineNotificationEnabledMarketPlaceItem(TestData data) throws Exception{
+		addCloneIDHostname(data);
+		
+		String OrderID = getProductToTest("MSP_Online_LTV_Enabled_Marketplace_Order");
+        LogFormatterAction.beginSetup();
+        User user = new User(); user.userName=UserPool.getUser();
+        As.guestUser.goToHomePage()
+        .addlogType(TestStepType.WHEN)
+            .login(user)
+            .addlogType(TestStepType.THEN)
+            .verifyonlineagent()
+            .addlogType(TestStepType.WHEN)
+            .searchByOrderId(OrderID)
+            ._OrderDetailsAction()
+            .addlogType(TestStepType.THEN)
+            .verifyEmpowermentGuidelinePopUp()
+            .addlogType(TestStepType.THEN)
+            .verifyMarketplaceItemPopUp()
+            .addlogType(TestStepType.THEN)
+            .verifyEmpowermentGuidelineStatusColor("enabled");
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "verifyEmpowermentGuidelineNotificationDisabledMarketPlaceItem"}
+    , description = "verifyEmpowermentGuidelineNotificationEnabledMarketPlaceItem", enabled = true, priority=14)
+	public void verifyEmpowermentGuidelineNotificationDisabledMarketPlaceItem(TestData data) throws Exception{
+		addCloneIDHostname(data);
+		
+		String OrderID = getProductToTest("MSP_Online_LTV_Disabled_Marketplace_Order");
+		
+        LogFormatterAction.beginSetup();
+        User user = new User(); user.userName=UserPool.getUser();
+        As.guestUser.goToHomePage()
+        .addlogType(TestStepType.WHEN)
+            .login(user)
+            .addlogType(TestStepType.THEN)
+            .verifyonlineagent()
+            .addlogType(TestStepType.WHEN)
+            .searchByOrderId(OrderID)
+            ._OrderDetailsAction()
+            .addlogType(TestStepType.THEN)
+            .verifyMarketplaceItemPopUp()
+            .addlogType(TestStepType.THEN)
+            .verifyEmpowermentGuidelineStatusColor("disabled");
+	}
+	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "verifyEmpowermentGuidelineNotificationDisabled"}
     , description = "verifyEmpowermentGuidelineNotificationDisabled", enabled = true, priority=14)
 	public void verifyEmpowermentGuidelineNotificationDisabled(TestData data) throws Exception{

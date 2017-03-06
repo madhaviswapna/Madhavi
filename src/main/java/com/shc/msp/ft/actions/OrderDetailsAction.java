@@ -120,6 +120,12 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 	
+	public OrderDetailsAction verifyMarketplaceItemPopUp(){
+		Logger.log("Verify Marketplace Item pop up",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyMarketplaceItemPopUp();
+		return this;
+	}
+	
 	public OrderDetailsAction verifyEmpowermentGuidelineStatusColor(String Enabled){
 		Logger.log("Verify Empowerment Guideline pop up",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyEmpowermentGuidelineStatusColor(Enabled);
