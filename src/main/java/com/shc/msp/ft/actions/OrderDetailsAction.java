@@ -551,18 +551,22 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().clickOnReasonDropdown();
 		return this;
 	}
-
+	public void verifyAllReasonCodePresence(ArrayList<String> keyword) {
+		clickOnReasonDropdown();
+		for(int i=0;i<keyword.size();i++){
+			verifyReasonCodes(keyword.get(i).toString(),true);
+		}
+	}
 	public void verifyAllReasonCodePresence(List <Object> keyword) {
+		
 		clickOnReasonDropdown();
 		Iterator<Object> itr= keyword.iterator();
 		while (itr.hasNext()) {
-
 			ProductData incoming =   (ProductData) itr.next();
 			String [] split = incoming.getPartNumber().toString().split(":");
 			System.out.println("test array action level      "+split[0]+"           "+Boolean.parseBoolean(split[1]));
 			verifyReasonCodes(split[0],Boolean.parseBoolean(split[1]));
 		}
-
 	}
 	public OrderDetailsAction wrapUpOrderWithoutContactDelivery(){
 		Logger.log("Wrapup Order and Contact", TestUtils.TestStepType.WHEN);
