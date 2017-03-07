@@ -127,7 +127,7 @@ public class OrderDetailsAction extends BaseAction {
 	}
 	
 	public OrderDetailsAction verifyEmpowermentGuidelineStatusColor(String Enabled){
-		Logger.log("Verify Empowerment Guideline pop up",TestStepType.THEN);
+		Logger.log("Verify Empowerment Guideline Status Color",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyEmpowermentGuidelineStatusColor(Enabled);
 		return this;
 	}
