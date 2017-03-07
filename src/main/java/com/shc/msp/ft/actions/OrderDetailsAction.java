@@ -501,9 +501,9 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 
-	public OrderDetailsAction queueForFollowUp(String queueName) throws ParseException {
+	public OrderDetailsAction queueForFollowUp(String reasonName) throws ParseException {
 		Logger.log("Add to queue for follow up",TestStepType.THEN);
-		this.factory.orderdetailspage().queueForFollowUp(queueName);
+		this.factory.orderdetailspage().queueForFollowUp(reasonName);
 		return this;
 	}
 

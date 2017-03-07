@@ -5086,15 +5086,16 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		Logger.log("Order successfully routed to HD-Account validation queue",TestStepType.VERIFICATION_PASSED);	
 
 	}
-		public void queueForFollowUp(String queueName){
-			Logger.log("Verify whether item can be routed to queue:"+queueName, TestStepType.STEP);
+		public void queueForFollowUp(String reasonName){
+			Logger.log("Click on the queue for follow up button" , TestStepType.STEP);
 			AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
 			getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
 			getAction().click(QUEUE_FOR_FOLLOW_UP);
+			Logger.log("Click on the reason dropdown" , TestStepType.STEP);
 			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
 			getAction().click(REASON_DROPDOWN_CANCEL);
-			AjaxCondition.forElementVisible(SELECTED_OPTION_QUEUE.format(queueName)).waitForResponse();
-			getAction().click(SELECTED_OPTION_QUEUE.format(queueName));
+			AjaxCondition.forElementVisible(SELECTED_OPTION_QUEUE.format(reasonName)).waitForResponse();
+			getAction().click(SELECTED_OPTION_QUEUE.format(reasonName));
 			getAction().waitFor(2000);
 			AjaxCondition.forElementVisible(QUEUE_NAME).waitForResponse();
 			String queue=getAction().getText(QUEUE_NAME);
@@ -5107,12 +5108,15 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 				SoftAssert.checkConditionAndContinueOnFailure("Continue button is disable as case already exists ", (!getAction().findElement(CONTINUE_BUTTON).isEnabled()));}
 
 			else{
+				SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is present", CheckLocatorFor.isPresent);
+				Logger.log("Click on the continue button" , TestStepType.STEP);
 				AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
 				getAction().click(CONTINUE_BUTTON);
 				AjaxCondition.forElementVisible(ADJUSTMENT_NOTES).waitForResponse();
 				getAction().type(ADJUSTMENT_NOTES, "Test");
 				AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_CHECKBOX).waitForResponse();
 				getAction().click(QUEUE_FOR_FOLLOW_UP_CHECKBOX);
+				Logger.log("Click on the wrap up button" , TestStepType.STEP);
 				AjaxCondition.forElementVisible(BUTTON_WRAP_ORDER).waitForResponse();
 				getAction().waitFor(3000);
 				getAction().click(BUTTON_WRAP_ORDER);

@@ -669,7 +669,7 @@ public class NavigationAction extends BaseAction {
 		return this;
 	}
 	public NavigationAction deleteCasesforOrderfromDB(String jsonPath,String orderId) {
-		Logger.log("Delete existing cases from Database for an order id - "+orderId, TestUtils.TestStepType.WHEN);
+		Logger.log("Delete existing cases from Database for a "+orderId, TestUtils.TestStepType.WHEN);
 		MongoDB.deleteCasesforOrderfromDB(jsonPath,orderId);
 		return this;
 	}

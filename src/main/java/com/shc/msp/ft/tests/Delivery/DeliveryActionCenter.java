@@ -887,7 +887,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order"}
-	, description = "Verify changed reason code appears correctly for shipped order", enabled = true)
+	, description = "Verify changed reason code appears correctly for shipped order", enabled = false)
 	public void Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order(TestData data) throws ParseException {
 
 		addCloneIDHostname(data);
@@ -1143,7 +1143,51 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.queueForFollowUp("Part Request - Member requests replacement of missing, broken, or non-functional part on a recently delivered item");
 
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Uneven_Exchange_com_Queue"}
+	, description = "Verify case exists pop up comes in Uneven Exchange.com  queue for duplicate case creation", enabled = true)
+	public void Verify_Case_Exist_Popup_for_Uneven_Exchange_com_Queue(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
 
+		String dosorderID= getProductToTest("Delivery_Shipped_Order");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Uneven Exchange .com")
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Uneven Exchange .com - Exchange for different item than the one previously delivered")
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Uneven Exchange .com - Exchange for different item than the one previously delivered");
+
+	}
 
 	//verify all the reason codes present in the queue for followup in delivery open order with pend code as TBC
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder"}
