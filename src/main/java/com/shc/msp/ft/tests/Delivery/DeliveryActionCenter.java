@@ -703,6 +703,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		
 		
 	}
+	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Schedule_Follow_Up_Released_HD_Order"}
 	, description = "Verify if an open HD order can be scheduled for follow up", enabled = true)
@@ -729,7 +730,53 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.scheduleFollowUp();
 		
+		
 	} 
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Schedule_Follow_Up_Released_HD_Order_Captured_Notes_Interactions"}
+	, description = "MSP_Delivery_Test_Schedule_Follow_Up_Released_HD_Order_Captured_Notes_Interactions", enabled = true)
+	public void MSP_Delivery_Test_Schedule_Follow_Up_Released_HD_Order_Captured_Notes_Interactions(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		
+		String orderId= getProductToTest("Reschedule_Released_HD_Order",true);	
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.scheduleFollowUp()
+		.verifyAdjustmentCapturedInInteraction("Hold for Future Date")
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+ 		._NavigationAction()
+ 		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+ 		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+ 		.closeWarningPopupWindow()
+ 		._OrderDetailsAction()
+ 		.verifyActionCapturedInNotes("Hold for Future Date")
+ 		;
+		
+	} 
+	
+	
+	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_verify_ReasonCode_HD_Account_Validation_Queue"}
