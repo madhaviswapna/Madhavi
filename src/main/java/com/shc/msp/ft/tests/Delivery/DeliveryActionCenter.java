@@ -1191,7 +1191,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(dosorderID, "8730")
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
 		.addlogType(TestStepType.GIVEN)
 		.chooseOpenHDOrders()
 		._OrderDetailsAction()
@@ -1203,14 +1203,14 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	
 	//verify all the reason codes present in the queue for followup in delivery open order with pend code as TBC
 			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder"}
-			, description = "verify all the queues for delivery open order with ped code TBC", enabled = true)
+			, description = "verify all the queues for delivery released order with ped code TBH", enabled = true)
 			public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder(TestData data) throws ParseException {
 				
 				addCloneIDHostname(data);
 				List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
 				LogFormatterAction.beginSetup();
 				User user = new User(); user.userName=UserPool.getDeliveryUser();
-				String dosorderID= getProductToTest("MSP_DeliveryOpenOrder_PendCode_TBC");	
+				String dosorderID= getProductToTest("MSP_DeliveryReleasedOrder_PendCode_TBH");	
 				
 				ArrayList<String> reasonCode=new ArrayList<String>();
 				reasonCode.add("Select");
@@ -1250,7 +1250,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 				.VerifyDeliveryAgent()
 				.closeWarningPopupWindow()
 				.addlogType(TestStepType.WHEN)
-				.searchByDeliveryOrderId("615210", "8730")
+				.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
 				.addlogType(TestStepType.GIVEN)
 				.chooseOpenHDOrders()
 				._OrderDetailsAction()
