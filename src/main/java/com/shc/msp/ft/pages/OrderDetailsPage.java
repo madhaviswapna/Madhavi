@@ -4345,7 +4345,13 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			Logger.log("Rereserve button is present ",TestStepType.VERIFICATION_PASSED);
 
 	}
-	public void rereserveItem(String order){
+	public void rereserveItem(String orderType,String order){
+		
+		if (orderType.equalsIgnoreCase("Shipped")||orderType.equalsIgnoreCase("Cancelled")){
+		PageAssert.elementNotVisible(RERESERVE_BUTTON);
+		Logger.log("Rereserve button is not available in Action Center" , TestStepType.VERIFICATION_PASSED);}
+			
+		else{
 		Logger.log("Verify Rereserve button is present in action center", TestStepType.STEP);
 		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
 		getAction().waitFor(3000);
@@ -4400,7 +4406,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
 			Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
 			AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
-		
+		}
 	}
 	public void verifyPickupbuttonPresent(){
 		Logger.log("Verify Pickup button is present in action center", TestStepType.STEP);

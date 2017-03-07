@@ -431,9 +431,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyRereservebuttonPresent();
 		return this;
 	}
-	public OrderDetailsAction rereserveItem(String order) {
-		Logger.log("Verify Rereserve is possible for:"+order,TestStepType.THEN);
-		this.factory.orderdetailspage().rereserveItem(order);
+	public OrderDetailsAction rereserveItem(String orderType,String order) {
+		Logger.log("Verify Rereserve action for "+orderType,TestStepType.THEN);
+		this.factory.orderdetailspage().rereserveItem(orderType,order);
 		return this;
 	}
 
