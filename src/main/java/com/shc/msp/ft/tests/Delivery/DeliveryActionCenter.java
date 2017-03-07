@@ -662,7 +662,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}  
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Schedule_Follow_Up_Open_HD_Order_Captured_Notes_Interactions"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Schedule_Follow_Up_Open_HD_Order_Captured_Notes_Interactions"}
 	, description = "MSP_Delivery_Test_Schedule_Follow_Up_Open_HD_Order_Captured_Notes_Interactions", enabled = true)
 	public void MSP_Delivery_Test_Schedule_Follow_Up_Open_HD_Order_Captured_Notes_Interactions(TestData data) throws Exception {
 		addCloneIDHostname(data);
