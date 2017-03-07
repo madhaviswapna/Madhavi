@@ -1252,7 +1252,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 				.addlogType(TestStepType.WHEN)
 				.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
 				.addlogType(TestStepType.GIVEN)
-				.chooseOpenHDOrders()
+				.chooseReleasedHDOrders()
 				._OrderDetailsAction()
 				.addlogType(TestStepType.WHEN)
 				.goToActionCenter()
