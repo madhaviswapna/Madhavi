@@ -1195,7 +1195,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder(TestData data) throws ParseException {
 
 		addCloneIDHostname(data);
-		List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		String dosorderID= getProductToTest("MSP_DeliveryOpenOrder_PendCode_TBC");	
@@ -1249,9 +1248,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder"}
 			, description = "verify all the queues for delivery released order with ped code TBH", enabled = true)
 			public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder(TestData data) throws ParseException {
-				
-				addCloneIDHostname(data);
-				List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
 				LogFormatterAction.beginSetup();
 				User user = new User(); user.userName=UserPool.getDeliveryUser();
 				String dosorderID= getProductToTest("MSP_DeliveryReleasedOrder_PendCode_TBH");	
