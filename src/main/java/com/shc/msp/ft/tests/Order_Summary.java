@@ -318,12 +318,12 @@ public class Order_Summary extends BaseTests {
             .verifyEmpowermentGuidelineStatusColor("disabled");
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "verifyEmpowermentGuidelineNotificationDisabled"}
-    , description = "verifyEmpowermentGuidelineNotificationDisabled", enabled = true, priority=14)
-	public void verifyEmpowermentGuidelineNotificationDisabled(TestData data) throws Exception{
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "verifyEmpowermentGuidelineNotificationDisabledKmart"}
+    , description = "verifyEmpowermentGuidelineNotificationDisabledKmart", enabled = true, priority=14)
+	public void verifyEmpowermentGuidelineNotificationDisabledKmart(TestData data) throws Exception{
 		addCloneIDHostname(data);
-		//String OrderID = "840044803";
-		String OrderID = getProductToTest("MSP_Online_LTV_Disabled_Order"); 
+		//String OrderID = "840048306";//840044803";
+		String OrderID = getProductToTest("MSP_Online_LTV_Disabled_Order_Kmart"); 
 				
         LogFormatterAction.beginSetup();
         User user = new User(); user.userName=UserPool.getUser();
