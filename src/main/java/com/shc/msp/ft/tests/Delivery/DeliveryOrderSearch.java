@@ -101,6 +101,31 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}  
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder"}
+	, description = "Update the phone number, address line, name and email and verify whether updated", enabled = true)
+	public void MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		//user.userName = "testdelivery0001";
+		//user.password = "TestPassword";
+		String[] orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true).split(",");	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId[0],  orderId[1])
+		.choosePartiallyshippedHDOrders()
+		._OrderDetailsAction()
+		.updateAndVerifyNameEmailNumber()
+
+		;
+	}  
 
 	//Melvin - Updated code using product id
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_DOS_Order_And_DOS_Unit"}

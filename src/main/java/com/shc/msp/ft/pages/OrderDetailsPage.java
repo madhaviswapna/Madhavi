@@ -888,6 +888,7 @@ public class OrderDetailsPage extends Page {
 
 			AjaxCondition.forElementVisible(locValues[i]).waitForResponse();
 			val=getAction().getText(locValues[i]);
+			System.out.println("-------------------------------------------"+val);
 
 			AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
 			getAction().scrollTo(UPDATE_BUTTON);
