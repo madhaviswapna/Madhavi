@@ -1200,6 +1200,65 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyAllReasonCodePresence(reasonCode);
 	}
+	
+	//verify all the reason codes present in the queue for followup in delivery open order with pend code as TBC
+			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder"}
+			, description = "verify all the queues for delivery open order with ped code TBC", enabled = true)
+			public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder(TestData data) throws ParseException {
+				
+				addCloneIDHostname(data);
+				List<Object> keywords= getAllProductToTest("reasonNameShippedOrder");
+				LogFormatterAction.beginSetup();
+				User user = new User(); user.userName=UserPool.getDeliveryUser();
+				String dosorderID= getProductToTest("MSP_DeliveryOpenOrder_PendCode_TBC");	
+				
+				ArrayList<String> reasonCode=new ArrayList<String>();
+				reasonCode.add("Select");
+				reasonCode.add("Account Validation - Member receiving notifications for delivery not purchased");
+				reasonCode.add("Carrier Settlement Dispute - Member is unhappy with settlement offer");
+				reasonCode.add("Certificate of Insurance Request");
+				reasonCode.add("DDL Pend - Delivery Date Late");
+				reasonCode.add("DDS Pend - Source Ship Problem");
+				reasonCode.add("Gas Leak - Member requests urgent assistance with gas leak");
+				reasonCode.add("Go Back Request - Member threatening to cancel");
+				reasonCode.add("Hybrid Ship Confirmed in Error - Member has not received product");
+				reasonCode.add("Installation Request - Member requesting Installation");
+				reasonCode.add("Manual Work Order Request- delivery team to return to complete delivery service");
+				reasonCode.add("Mattress Exchange - Member requests matress exchange");
+				reasonCode.add("MDO Ship Confirmed in Error - Member has not received product");
+				reasonCode.add("Open Damage Claim >72 Hrs - Member has not been contacted");
+				reasonCode.add("Part Request - Member requests replacement of missing, broken, or non-functional part on a recently delivered item");
+				reasonCode.add("Recovery- Member has experienced a failed delivery,reselection needed");
+				reasonCode.add("Research Check - Member requesting status of concession");
+				reasonCode.add("Research Credit - Member requesting status of concession");
+				reasonCode.add("Research Gift Card - Member requesting status of concession");
+				reasonCode.add("Research Parts - Member requesting status of concession");
+				reasonCode.add("Research RPA - Member requesting status of concession");
+				reasonCode.add("Ship Confirm Requested - Member has received merchandise, order status needs to be updated");
+				reasonCode.add("Shuttle/Outlet Product Inquiry - Member requests info on Shuttle / Store Stock");
+				reasonCode.add("Special Handling - Special Handling required on scheduled delivery");
+				reasonCode.add("T Pend Past Due - TB Pend Code to be worked");
+				reasonCode.add("Turnaround Request - Member Stating they will Cancel");
+				reasonCode.add("Uneven Exchange - Exchange for a different item than is currently in the home.");
+				reasonCode.add("Water Leak - Member requests urgent assistance with water leak");
+				
+				As.guestUser.goToHomePage()
+				._NavigationAction()
+				.addlogType(TestStepType.WHEN)
+				.login(user)
+				.addlogType(TestStepType.THEN)
+				.VerifyDeliveryAgent()
+				.closeWarningPopupWindow()
+				.addlogType(TestStepType.WHEN)
+				.searchByDeliveryOrderId("615210", "8730")
+				.addlogType(TestStepType.GIVEN)
+				.chooseOpenHDOrders()
+				._OrderDetailsAction()
+				.addlogType(TestStepType.WHEN)
+				.goToActionCenter()
+				.addlogType(TestStepType.THEN)
+				.verifyAllReasonCodePresence(reasonCode);
+			}
 }
 	
 
