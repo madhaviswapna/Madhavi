@@ -658,7 +658,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.scheduleFollowUp();	
+		.scheduleFollowUp()
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: UPDATE PEND CODE");
 	}  
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -728,7 +730,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.scheduleFollowUp();
+		.scheduleFollowUp()
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: UPDATE PEND CODE");
 		
 		
 	} 
