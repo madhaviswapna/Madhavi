@@ -34,6 +34,7 @@ public class TestGroup {
 	public static final String MSPP1OnlineTests = "MSPP1OnlineTests";
 	public static final String MSPP0DeliveryTests = "MSPP0DeliveryTests";
 	public static final String MSPP1DeliveryTests = "MSPP1DeliveryTests";
+	public static final String MSPP2DeliveryTests = "MSPP2DeliveryTests";
 	public static final String MSP_P2_ONLINE_VERIFY_ALL_CATEGORIES = "MSP_P2_ONLINE_VERIFY_ALL_CATEGORIES";
 	public static final String CTI_Tests = "CTI_Tests";
 	public static final String CTI_Tests_IE_11 = "CTI_Tests_IE_11";

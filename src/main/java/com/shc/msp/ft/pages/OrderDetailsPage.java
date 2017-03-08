@@ -578,7 +578,7 @@ public class OrderDetailsPage extends Page {
 	 		
 	public final Locator CASE_EXISTS= new Locator("CASE_EXISTS"," //div[contains(text(),'Open Case')]","CASE_EXISTS");
 	public final Locator OK_BUTTON_ON_POPUP= new Locator("OK_BUTTON_ON_POPUP","//button[@id='modalclose']","OK_BUTTON_ON_POPUP");
-
+	public final Locator ACTION_CENTER_INSTALLATION_NOTES = new Locator("", "//div[contains(text(),'Note') and contains(text(),'installation')]", "Installation Service Notification");
 	
 	DecimalFormat formatter = new DecimalFormat("#,##0.00");
 	DecimalFormat df = new DecimalFormat("0.00");
@@ -4935,6 +4935,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 	}
 
 	public void rescheduleDeliveryOrder(String type, String ordType) throws ParseException {
+		String orderWith;
 		Logger.log("Verify whether order can be rescheduled", TestStepType.STEP);
 
 		goToOrderDetail();
@@ -4945,7 +4946,18 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
 		getAction().scrollTo(RESCHEDULE_BUTTON);
 		getAction().click(RESCHEDULE_BUTTON);
-
+		
+		orderWith = (String) getContext().get("orderWith");
+		if (orderWith==null){
+			orderWith="nothingSpecial";
+		}
+		System.out.println("value of order with      -"+orderWith+"-");
+		if(orderWith.equalsIgnoreCase("InstallationItem")){
+			Logger.log("Verify the  Reschedule installation service notification is displayed", TestStepType.STEP);
+			AjaxCondition.forElementPresent(ACTION_CENTER_INSTALLATION_NOTES).waitWithoutException(5);
+			PageAssert.textPresent(ACTION_CENTER_INSTALLATION_NOTES, "Note: This order includes installation service, please reschedule the installation service.");
+		}
+		
 		if (ordType.equalsIgnoreCase("ORDER")) {
 			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
 			getAction().click(CANCEL_ENTIRE_ORDER);

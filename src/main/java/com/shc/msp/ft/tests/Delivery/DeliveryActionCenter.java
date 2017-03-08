@@ -1381,6 +1381,36 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.rereserveItem("shipped","")
 		;
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_Reschedule_Open_Installation_HD_Order"}
+	, description = "MSP_Delivery_Test_Reschedule_Open_Installation_HD_Order", enabled = true)
+	public void MSP_Delivery_Test_Reschedule_Open_Installation_HD_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		getContext().put("orderWith", "InstallationItem");
+		String orderId= getProductToTest("Reschedule_Open_Installation_HD_Order");
+		//String orderId= "209610";
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rescheduleDeliveryOrder("OPEN","ORDER")
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
+	}
 }
 
 
