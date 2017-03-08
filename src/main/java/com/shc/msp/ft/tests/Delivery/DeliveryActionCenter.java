@@ -55,7 +55,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rereserveItem("line item")
+		.rereserveItem("open","line item")
 		;
 
 	}  
@@ -86,7 +86,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rereserveItem("whole order")
+		.rereserveItem("open","whole order")
 		;
 		
 	}  
