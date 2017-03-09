@@ -48,13 +48,15 @@ public class OnlineProdTests extends BaseTests{
 		addCloneIDHostname(data);
 
 		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
-
+		
 		LogFormatterAction.beginSetup();
 		User user = new User();
 		user.userName = "testonline0505";
 		user.password = Constant.OnlinePasswordProd;
-		String firstName="ARANYA"; 
-		String lastName="ARJUN";
+		String name = getProductToTest("MSPProdSearchByFirsrtNameLastName");
+		
+		String firstName=name.split(":")[0]; 
+		String lastName=name.split(":")[1];;
 
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
@@ -68,7 +70,6 @@ public class OnlineProdTests extends BaseTests{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyOrderDetailsPageDisplayed();
-
 	}
 
 
