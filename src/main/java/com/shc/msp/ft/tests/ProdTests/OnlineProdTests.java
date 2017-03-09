@@ -910,6 +910,7 @@ public class OnlineProdTests extends BaseTests{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 		addCloneIDHostname(data);
 		User user = new User(); 
+		String orderId = getProductToTest("MSPProdTabsShippedOrder");
 		 user.userName = "testonline0519";
 		user.password = Constant.OnlinePasswordProd;
 		As.guestUser.goToHomePage()
@@ -920,7 +921,7 @@ public class OnlineProdTests extends BaseTests{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId("845710", "")
+		.searchByDeliveryOrderId(orderId, "")
 		.chooseShippedHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
