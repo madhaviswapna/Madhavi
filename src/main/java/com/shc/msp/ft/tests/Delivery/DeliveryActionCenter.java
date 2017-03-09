@@ -1411,6 +1411,34 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Reschedule_Open_Order_Having_KitHeader"}
+	, description = "Verify if an order having kit header can be re scheduled", enabled = true)
+	public void MSP_Delivery_Test_Reschedule_Open_Order_Having_KitHeader(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		
+		String orderId= getProductToTest("Reschedule_Open_KitHeader_Order");	
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rescheduleDeliveryOrder("OPEN","ORDER")
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
+	} 
 }
 
 
