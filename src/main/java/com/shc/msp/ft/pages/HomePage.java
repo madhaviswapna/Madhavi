@@ -2315,10 +2315,10 @@ public class HomePage extends Page {
 	}
 	public HomePage VerifyPerformanceSupportMessage(String msg) {
 		String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
-		PageAssert.verifyPartiallyEqual(msg1,msg);
+		System.out.println("dklfldshflds      "+msg1);
+		//PageAssert.verifyTrue(msg1.contains(msg), "TEst passedjkwefhwkjfhlasddh");
+		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg));
 		return this;
 	}
-
-	
 	
 }
