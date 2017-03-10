@@ -336,7 +336,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP1DeliveryTests, "Verify_Performance_Support_Message_PhoneNumber"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Performance_Support_Message_PhoneNumber"}
 	, description = "Verify search by order id", enabled = true, priority=1)
 	public void Verify_Performance_Support_Message_PhoneNumber(TestData data) throws Exception {
 		addCloneIDHostname(data);
