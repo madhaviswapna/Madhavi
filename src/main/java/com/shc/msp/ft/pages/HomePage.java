@@ -231,6 +231,10 @@ public class HomePage extends Page {
 	public final Locator IGNORE_CERTIFICATE_ERROR = new Locator("", "//a[@id='overridelink']", "Certificate error IE 11");
 	private int invalidLoginCount = 1;
 	
+	public final Locator PERFORMANCE_SUPPORT_DISPLAY_MSG = new Locator("","(//performance-support)[2]","PERFORMANCE_SUPPORT_DISPLAY_MSG");
+	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//label[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
+	
+	
 	public void maximizeWindow() {
 		getAction().driver.manage().window().maximize();
 	}
@@ -2296,4 +2300,25 @@ public class HomePage extends Page {
 		
 		return this;
 	}
+	
+	
+	public HomePage ClickOnOrderTab() {
+		getAction().click(ORDER_TAB);
+		return this;
+	}
+	public HomePage ClickOnPerformanceSupport(String name) {
+		AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_NAME.format(name)).waitForResponse();
+		getAction().click(PERFORMANCE_SUPPORT_NAME.format(name));
+		Logger.log("click on performance support", TestStepType.STEP);
+		getAction().waitFor(2000);
+		return this;
+	}
+	public HomePage VerifyPerformanceSupportMessage(String msg) {
+		String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
+		PageAssert.verifyPartiallyEqual(msg1,msg);
+		return this;
+	}
+
+	
+	
 }

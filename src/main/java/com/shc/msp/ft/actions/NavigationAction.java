@@ -673,5 +673,19 @@ public class NavigationAction extends BaseAction {
 		MongoDB.deleteCasesforOrderfromDB(jsonPath,orderId);
 		return this;
 	}
-	
+	 public NavigationAction ClickOnOrderTab() {
+	    	Logger.log("Click on the performance support(?) symbol", TestUtils.TestStepType.THEN);
+	        this.factory.homePage().ClickOnOrderTab();
+	        return this;
+	 }
+	 public NavigationAction ClickOnPerformanceSupport(String name) {
+	    	Logger.log("Click on the performance support(?) symbol", TestUtils.TestStepType.THEN);
+	        this.factory.homePage().ClickOnPerformanceSupport(name);
+	        return this;
+	 }
+	 public NavigationAction VerifyPerformanceSupportMessage(String msg) {
+	    	Logger.log("Verify the correct message is displayed after clicking on performance support", TestUtils.TestStepType.THEN);
+	        this.factory.homePage().VerifyPerformanceSupportMessage(msg);
+	        return this;
+	 }
 }

@@ -335,6 +335,28 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP1DeliveryTests, "Verify_Performance_Support_Message_PhoneNumber"}
+	, description = "Verify search by order id", enabled = true, priority=1)
+	public void Verify_Performance_Support_Message_PhoneNumber(TestData data) throws Exception {
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.VerifyDeliveryAgent()
+		.ClickOnOrderTab()
+		.ClickOnPerformanceSupport("Phone Number")
+		.VerifyPerformanceSupportMessage("Delivery Search – Simple – Phone Number")
+		.VerifyPerformanceSupportMessage("Search by Sold To, Deliver To or Alternate Phone #");
+	}
+
 
 
 }
