@@ -578,4 +578,27 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().wrapUpOrderWithoutContactDelivery();
 		return this;
 	}
+	
+
+	public OrderDetailsAction verifyCapturedInInteractionsforUpdateContact() {
+		Logger.log("Verify adjustment is updated in the current interaction for updated contact",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyCapturedInInteractionsforUpdateContact();
+		return this;
+	}
+	public OrderDetailsAction verifyActionCapturedInNotesForUpdateContact() {
+		Logger.log("Verify adjustment is updated in the current interaction",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyActionCapturedInNotesForUpdateContact();
+		return this;
+	}
+	public OrderDetailsAction verifyLineItemDetail() {
+		Logger.log("Verify delivery line item detail",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyLineItemDetail();
+		return this;
+	}
+	public OrderDetailsAction verifyAdjustmentCapturedInInteractions(String adjust) {
+		Logger.log("Verify delivery line item detail",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractions(adjust);
+		return this;
+	}
+
 }
