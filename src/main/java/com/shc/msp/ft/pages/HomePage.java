@@ -2315,6 +2315,8 @@ public class HomePage extends Page {
 	}
 	public HomePage VerifyPerformanceSupportMessage(String msg) {
 		String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
+		 msg = msg.replaceAll("[^a-zA-Z0-9]", ""); 
+		 msg1 = msg1.replaceAll("[^a-zA-Z0-9]", ""); 
 		System.out.println("-------------------------------------Performance support Message displayed on application is : "+msg1);
 		System.out.println("----------------------------------------my message which i need to verify is :"+msg);
 		//PageAssert.verifyTrue(msg1.contains(msg), "TEst passedjkwefhwkjfhlasddh");
