@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -579,6 +578,10 @@ public class OrderDetailsPage extends Page {
 	public final Locator CASE_EXISTS= new Locator("CASE_EXISTS"," //div[contains(text(),'Open Case')]","CASE_EXISTS");
 	public final Locator OK_BUTTON_ON_POPUP= new Locator("OK_BUTTON_ON_POPUP","//button[@id='modalclose']","OK_BUTTON_ON_POPUP");
 	public final Locator ACTION_CENTER_INSTALLATION_NOTES = new Locator("", "//div[contains(text(),'Note') and contains(text(),'installation')]", "Installation Service Notification");
+	
+	// Commmercial Order Popup
+	public final Locator COMMERCIAL_SALES_ORDER_POPUP_TEXT = new Locator("", "//div[contains(text(),'commercial sales')]", "COMMERCIAL_SALES_ORDER_POPUP_TEXT");
+	public final Locator COMMERCIAL_SALES_ORDER_POPUP_CONTINUE_BUTTON = new Locator("", "//button[contains(text(),'CONTINUE')]", "COMMERCIAL_SALES_ORDER_POPUP_CONTINUE_BUTTON");
 	
 	DecimalFormat formatter = new DecimalFormat("#,##0.00");
 	DecimalFormat df = new DecimalFormat("0.00");
@@ -4776,6 +4779,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(CANCEL_BUTTON).waitForResponse();
 			getAction().scrollTo(CANCEL_BUTTON);
 			getAction().click(CANCEL_BUTTON);
+			closeCommercialOrderNotificationPopUp();
 			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
 			getAction().click(CANCEL_ENTIRE_ORDER);
 			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
@@ -5386,6 +5390,15 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 	 getAction().waitFor(4000);
 	 return this;
 
+	}
+	public OrderDetailsPage closeCommercialOrderNotificationPopUp(){
+		Logger.log("Close the Commercial Sales Order Pop Up if present",TestStepType.STEP);
+		if (AjaxCondition.forElementVisible(COMMERCIAL_SALES_ORDER_POPUP_TEXT).waitWithoutException(3))
+		{	
+			getAction().click(COMMERCIAL_SALES_ORDER_POPUP_CONTINUE_BUTTON);
+		}
+		return this;
+		
 	}
 }
 	
