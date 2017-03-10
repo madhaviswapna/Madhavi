@@ -2315,7 +2315,8 @@ public class HomePage extends Page {
 	}
 	public HomePage VerifyPerformanceSupportMessage(String msg) {
 		String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
-		System.out.println("dklfldshflds      "+msg1);
+		System.out.println("-------------------------------------Performance support Message displayed on application is : "+msg1);
+		System.out.println("----------------------------------------my message which i need to verify is :"+msg);
 		//PageAssert.verifyTrue(msg1.contains(msg), "TEst passedjkwefhwkjfhlasddh");
 		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg));
 		return this;
