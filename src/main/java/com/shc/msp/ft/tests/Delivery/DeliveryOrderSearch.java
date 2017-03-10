@@ -353,7 +353,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.ClickOnOrderTab()
 		.ClickOnPerformanceSupport("Phone Number")
-		.VerifyPerformanceSupportMessage("Delivery Search – Simple – Phone Number")
+		.VerifyPerformanceSupportMessage("Delivery Search – Simple – Phone Number ")
 		.VerifyPerformanceSupportMessage("Search by Sold To, Deliver To or Alternate Phone #");
 	}
 

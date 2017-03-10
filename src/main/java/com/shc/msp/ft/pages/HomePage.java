@@ -2318,7 +2318,7 @@ public class HomePage extends Page {
 		System.out.println("-------------------------------------Performance support Message displayed on application is : "+msg1);
 		System.out.println("----------------------------------------my message which i need to verify is :"+msg);
 		//PageAssert.verifyTrue(msg1.contains(msg), "TEst passedjkwefhwkjfhlasddh");
-		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg));
+		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg.trim()));
 		return this;
 	}
 	
