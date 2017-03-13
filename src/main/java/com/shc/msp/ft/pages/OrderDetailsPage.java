@@ -602,7 +602,6 @@ public class OrderDetailsPage extends Page {
 		public final Locator DIVISION= new Locator("DIVISION","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Division')]","DIVISION");
 
 		public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE= new Locator("","//td[contains(text(),'{0}')]","Order Contact history");
-		public final Locator Cancelled_HD_ORDERS = new Locator("", "//span[contains(text(),'Cancelled')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Cancelled HD orders ");
 
 		Map<String, List<String>> map =new LinkedHashMap<>();
 
@@ -5523,17 +5522,6 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		System.out.println("locatro under trial "+ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,map.get("adjustmentOption")).getValue());
 		//AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type)).waitForResponse();
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
-
-	}
-	public void verifyPickupbuttonnotPresent(){
-		Logger.log("Verify Pickup button is not present in action center", TestStepType.STEP);
-		getAction().waitFor(3000);
-		if(getAction().isVisible(PICKUP_BUTTON)){
-			PageAssert.fail("Pickup button is Present");
-
-		}
-		else
-			Logger.log("Pickup button is not present ",TestStepType.VERIFICATION_PASSED);
 
 	}
 }
