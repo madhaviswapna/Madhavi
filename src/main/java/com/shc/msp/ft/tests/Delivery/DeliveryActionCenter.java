@@ -1505,6 +1505,35 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	} 
 	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Contact_Delivery"}
+	, description = "Update the contact details and verify notes and interaction are captured", enabled = true)
+	public void MSP_Delivery_Test_REreserve_not_Eligible_Cancelled_HD_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();		
+
+		String orderId= getProductToTest("Cancelled_order");
+		System.out.println("OrderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyRereservebuttonnotPresent();
+
+	}
 }
 
 

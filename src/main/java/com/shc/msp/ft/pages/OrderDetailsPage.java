@@ -5536,6 +5536,18 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 			Logger.log("Pickup button is not present ",TestStepType.VERIFICATION_PASSED);
 
 	}
+	
+	public void verifyRereservebuttonnotPresent(){
+		Logger.log("Verify Rereserve button is not present in action center", TestStepType.STEP);
+		getAction().waitFor(3000);
+		if(getAction().isVisible(RERESERVE_BUTTON)){
+			PageAssert.fail("Rereserve button is present");
+		}
+		else
+			Logger.log("Rereserve button is not present ",TestStepType.VERIFICATION_PASSED);
+
+	}
+	
 }
 	
 
