@@ -1438,44 +1438,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.rescheduleDeliveryOrder("OPEN","ORDER")
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
-	}
-	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Contact_Delivery"}
-	, description = "Update the contact details and verify notes and interaction are captured", enabled = true)
-	public void MSP_Delivery_Update_Contact_Delivery(TestData data) throws Exception {
-		addCloneIDHostname(data);
-		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Rereserve_Eligible_Open_Order",true);	
-
-		As.guestUser.goToHomePage()
-		._NavigationAction()
-		.addlogType(TestStepType.WHEN)
-		.login(user)
-		.addlogType(TestStepType.THEN)
-		.VerifyDeliveryAgent()
-		.closeWarningPopupWindow()
-		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		.chooseOpenHDOrders()
-		._OrderDetailsAction()
-		.updateAndVerifyNameEmailNumber()
-		.verifyCapturedInInteractionsforUpdateContact()
-		.addlogType(TestStepType.WHEN)
-		.goToActionCenter()
-		.wrapUpOrderWithoutContactDelivery()
-		._NavigationAction()
-		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		.addlogType(TestStepType.WHEN)
-		.chooseOpenHDOrders()
-		.closeWarningPopupWindow()
-		._OrderDetailsAction()
-		.verifyActionCapturedInNotesForUpdateContact()		;
-
-	}  
-	
+	} 
 }
 
 
