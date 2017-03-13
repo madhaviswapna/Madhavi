@@ -233,7 +233,7 @@ public class HomePage extends Page {
 	
 	public final Locator PERFORMANCE_SUPPORT_DISPLAY_MSG = new Locator("","(//performance-support)[2]","PERFORMANCE_SUPPORT_DISPLAY_MSG");
 	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//label[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
-	
+	public final Locator PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS = new Locator("", "//*[contains(text(),'{0}')]/parent::*/preceding-sibling::img","PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS");
 	
 	public void maximizeWindow() {
 		getAction().driver.manage().window().maximize();
@@ -2321,6 +2321,16 @@ public class HomePage extends Page {
 		System.out.println("----------------------------------------my message which i need to verify is :"+msg);
 		//PageAssert.verifyTrue(msg1.contains(msg), "TEst passedjkwefhwkjfhlasddh");
 		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg.trim()));
+		return this;
+	}
+	public HomePage ClickOnPerformanceSupportOnOrderSearchResults(String name) {
+		
+		getAction().waitFor(2000);
+		System.out.println("--------------------------------------------"+PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS.format(name).getValue());
+		AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS.format(name)).waitForResponse();
+		getAction().click(PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS.format(name));
+		Logger.log("click on performance support", TestStepType.STEP);
+		getAction().waitFor(2000);
 		return this;
 	}
 	

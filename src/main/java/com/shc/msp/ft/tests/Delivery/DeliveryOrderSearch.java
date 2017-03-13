@@ -354,10 +354,38 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.ClickOnOrderTab()
 		.ClickOnPerformanceSupport("Phone Number")
 		.VerifyPerformanceSupportMessage("Delivery Search - Simple - Phone Number ")
-		.VerifyPerformanceSupportMessage("Search by Sold To, Deliver To or Alternate Phone #");
+		.VerifyPerformanceSupportMessage("Search by Sold To, Deliver To or Alternate Phone #")
+		.ClickOnPerformanceSupport("DOS Order Number")
+		.VerifyPerformanceSupportMessage("Delivery Search – Advanced – Order Number")
+		.VerifyPerformanceSupportMessage("DOS order number required")
+		.ClickOnPerformanceSupport("Online Order Number")
+		.VerifyPerformanceSupportMessage("Delivery Search – Advanced – Online Order Number")
+		.VerifyPerformanceSupportMessage("Use the order number member received after they placed an order online.");
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Performance_Support_Message_OrderSearchResults"}
+	, description = "Verify search by order id", enabled = true, priority=1)
+	public void Verify_Performance_Support_Message_OrderSearchResults_RouteStatus(TestData data) throws Exception {
+		addCloneIDHostname(data);
 
+		LogFormatterAction.beginSetup();
 
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.VerifyDeliveryAgent()
+		.ClickOnOrderTab()
+		.searchByDeliveryOrderId("100","")
+		.ClickOnPerformanceSupportOnOrderSearchResults("Route Status:")
+		.VerifyPerformanceSupportMessage("Delivery Search Results – Route Status")	
+		.VerifyPerformanceSupportMessage("On-Time: ETA is within 2 hour window.")
+		.VerifyPerformanceSupportMessage("Warning: Risk of missing 2 hour window.")
+		.VerifyPerformanceSupportMessage("Late: Will arrive outside of 2 hour window.")
+		.VerifyPerformanceSupportMessage("Updated: The Delivery team has arrived at the member’s home.");
+	}
 
 }
 
