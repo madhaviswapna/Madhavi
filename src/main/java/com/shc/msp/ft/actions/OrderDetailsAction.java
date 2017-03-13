@@ -600,5 +600,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractions(adjust);
 		return this;
 	}
+	
+	public OrderDetailsAction verifyPickupbuttonnotPresent() {
+		Logger.log("Verify Pickup button not present in action center",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyPickupbuttonnotPresent();
+		return this;
+	}
 
 }

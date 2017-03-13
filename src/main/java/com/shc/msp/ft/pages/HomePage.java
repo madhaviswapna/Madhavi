@@ -230,9 +230,10 @@ public class HomePage extends Page {
 	public final Locator SYW_LINK_SEARCH_RESULT = new Locator("","//*[contains(@ng-repeat,'member in memberData.member')][1]","SYW_LINK_SEARCH_RESULT");
 	public final Locator IGNORE_CERTIFICATE_ERROR = new Locator("", "//a[@id='overridelink']", "Certificate error IE 11");
 	private int invalidLoginCount = 1;
-	
 	public final Locator PERFORMANCE_SUPPORT_DISPLAY_MSG = new Locator("","(//performance-support)[2]","PERFORMANCE_SUPPORT_DISPLAY_MSG");
 	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//label[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
+	
+	
 	
 	
 	public void maximizeWindow() {
@@ -1724,6 +1725,9 @@ public class HomePage extends Page {
 			}	
 		return this;
 	}
+	
+	
+	  
 	/**
 	 * Click on Home Delivery Order 
 	 * @param orderType Type of Order
@@ -2303,25 +2307,27 @@ public class HomePage extends Page {
 	
 	
 	public HomePage ClickOnOrderTab() {
-		getAction().click(ORDER_TAB);
-		return this;
-	}
-	public HomePage ClickOnPerformanceSupport(String name) {
-		AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_NAME.format(name)).waitForResponse();
-		getAction().click(PERFORMANCE_SUPPORT_NAME.format(name));
-		Logger.log("click on performance support", TestStepType.STEP);
-		getAction().waitFor(2000);
-		return this;
-	}
-	public HomePage VerifyPerformanceSupportMessage(String msg) {
-		String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
-		 msg = msg.replaceAll("[^a-zA-Z0-9]", ""); 
-		 msg1 = msg1.replaceAll("[^a-zA-Z0-9]", ""); 
-		System.out.println("-------------------------------------Performance support Message displayed on application is : "+msg1);
-		System.out.println("----------------------------------------my message which i need to verify is :"+msg);
-		//PageAssert.verifyTrue(msg1.contains(msg), "TEst passedjkwefhwkjfhlasddh");
-		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg.trim()));
-		return this;
-	}
-	
+		  getAction().click(ORDER_TAB);
+		  return this;
+		 }
+		 public HomePage ClickOnPerformanceSupport(String name) {
+		  AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_NAME.format(name)).waitForResponse();
+		  getAction().click(PERFORMANCE_SUPPORT_NAME.format(name));
+		  Logger.log("click on performance support", TestStepType.STEP);
+		  getAction().waitFor(2000);
+		  return this;
+		 }
+		 public HomePage VerifyPerformanceSupportMessage(String msg) {
+		  String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
+		   msg = msg.replaceAll("[^a-zA-Z0-9]", ""); 
+		   msg1 = msg1.replaceAll("[^a-zA-Z0-9]", ""); 
+		  System.out.println("-------------------------------------Performance support Message displayed on application is : "+msg1);
+		  System.out.println("----------------------------------------my message which i need to verify is :"+msg);
+		  //PageAssert.verifyTrue(msg1.contains(msg), "TEst passedjkwefhwkjfhlasddh");
+		  SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg.trim()));
+		  return this;
+		 }
+
+		
+		
 }

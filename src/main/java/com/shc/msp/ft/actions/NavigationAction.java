@@ -688,4 +688,7 @@ public class NavigationAction extends BaseAction {
 	        this.factory.homePage().VerifyPerformanceSupportMessage(msg);
 	        return this;
 	 }
+
+		
 }
+
