@@ -368,8 +368,6 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		addCloneIDHostname(data);
 
 		LogFormatterAction.beginSetup();
-		
-		String orderId= getProductToTest("Reschedule_Open_HD_Order",true);
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();

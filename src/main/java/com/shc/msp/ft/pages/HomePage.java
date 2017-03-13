@@ -2326,8 +2326,8 @@ public class HomePage extends Page {
 	public HomePage ClickOnPerformanceSupportOnOrderSearchResults(String name) {
 		
 		getAction().waitFor(2000);
-		System.out.println("--------------------------------------------"+PERFORMANCE_SUPPORT_NAME.format(name).getValue());
-		AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_NAME.format(name)).waitForResponse();
+		System.out.println("--------------------------------------------"+PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS.format(name).getValue());
+		AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS.format(name)).waitForResponse();
 		getAction().click(PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS.format(name));
 		Logger.log("click on performance support", TestStepType.STEP);
 		getAction().waitFor(2000);
