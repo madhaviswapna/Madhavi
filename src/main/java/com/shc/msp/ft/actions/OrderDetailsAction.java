@@ -606,5 +606,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyPickupbuttonnotPresent();
 		return this;
 	}
+	public OrderDetailsAction verifyRereservebuttonnotPresent() {
+		Logger.log("Verify REreserve button not present in action center",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyRereservebuttonnotPresent();
+		return this;
+	}
+	
 
-}
+	}
