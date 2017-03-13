@@ -688,4 +688,9 @@ public class NavigationAction extends BaseAction {
 	        this.factory.homePage().VerifyPerformanceSupportMessage(msg);
 	        return this;
 	 }
+	 public NavigationAction ClickOnPerformanceSupportOnOrderSearchResults(String name) {
+	    	Logger.log("Click on the performance support(?) symbol", TestUtils.TestStepType.THEN);
+	        this.factory.homePage().ClickOnPerformanceSupportOnOrderSearchResults(name);
+	        return this;
+	 }
 }
