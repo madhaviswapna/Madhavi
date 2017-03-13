@@ -1477,8 +1477,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Contact_Delivery"}
-	, description = "Update the contact details and verify notes and interaction are captured", enabled = true)
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Pickup_not_Eligible_Cancelled_HD_Order"}
+	, description = "verify pickup button is not eligible", enabled = true)
 	public void MSP_Delivery_Test_Pickup_not_Eligible_Cancelled_HD_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -1502,6 +1502,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyPickupbuttonnotPresent();
 	} 
+	
 	
 }
 
