@@ -579,6 +579,7 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 	
+	
 
 	public OrderDetailsAction verifyCapturedInInteractionsforUpdateContact() {
 		Logger.log("Verify adjustment is updated in the current interaction for updated contact",TestStepType.THEN);
@@ -598,6 +599,11 @@ public class OrderDetailsAction extends BaseAction {
 	public OrderDetailsAction verifyAdjustmentCapturedInInteractions(String adjust) {
 		Logger.log("Verify delivery line item detail",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractions(adjust);
+		return this;
+	}
+	public OrderDetailsAction verifyPickupbuttonnotPresent() {
+		Logger.log("Verify Pickup button not present in action center",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyPickupbuttonnotPresent();
 		return this;
 	}
 

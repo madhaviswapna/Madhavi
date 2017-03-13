@@ -5524,6 +5524,17 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
 	}
+	
+	public void verifyPickupbuttonnotPresent(){
+		Logger.log("Verify Pickup button is not present in action center", TestStepType.STEP);
+		getAction().waitFor(3000);
+		if(getAction().isVisible(PICKUP_BUTTON)){
+			PageAssert.fail("Pickup button is Present");
+		}
+		else
+			Logger.log("Pickup button is not present ",TestStepType.VERIFICATION_PASSED);
+	}
+
 }
 	
 
