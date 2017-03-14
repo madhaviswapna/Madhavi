@@ -230,11 +230,11 @@ public class HomePage extends Page {
 	public final Locator SYW_LINK_SEARCH_RESULT = new Locator("","//*[contains(@ng-repeat,'member in memberData.member')][1]","SYW_LINK_SEARCH_RESULT");
 	public final Locator IGNORE_CERTIFICATE_ERROR = new Locator("", "//a[@id='overridelink']", "Certificate error IE 11");
 	private int invalidLoginCount = 1;
+	
 	public final Locator PERFORMANCE_SUPPORT_DISPLAY_MSG = new Locator("","(//performance-support)[2]","PERFORMANCE_SUPPORT_DISPLAY_MSG");
-	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//label[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
-	
-	
-	
+	public final Locator PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE = new Locator("","//performance-support","PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE");
+	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//*[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
+	public final Locator PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS = new Locator("", "//*[contains(text(),'{0}')]/parent::*/preceding-sibling::img","PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS");
 	
 	public void maximizeWindow() {
 		getAction().driver.manage().window().maximize();
@@ -2327,7 +2327,18 @@ public class HomePage extends Page {
 		  SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", msg1.contains(msg.trim()));
 		  return this;
 		 }
-
+		 
+		 public HomePage ClickOnPerformanceSupportOnOrderSearchResults(String name) {
+				
+				getAction().waitFor(2000);
+				System.out.println("--------------------------------------------"+PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS .format(name).getValue());
+				AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS .format(name)).waitForResponse();
+				getAction().click(PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS.format(name));
+				Logger.log("click on performance support", TestStepType.STEP);
+				getAction().waitFor(2000);
+				return this;
+			}
+			
 		
 		
 }
