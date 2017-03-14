@@ -113,4 +113,39 @@ public class EvenExchange extends BaseTestsEx{
 				  .verifyEvenExchangeEntireOrder()
 				  ;
 				 }
+			
+			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+		            groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"Test_Even_Exchange_Div605_Shipped_Item"}
+		            , description = "Test_Even_Exchange_Div605_Shipped_Item", enabled = true)
+		     	public void Test_Even_Exchange_Div605_Shipped_Item(TestData data) {
+					LogFormatterAction.beginSetup();
+		    		User user = new User(); 
+		    		user.userName=UserPool.getDeliveryUser();
+					String orderType = "Shipped";
+					String orderIdDosNo = getProductToTest("MSPEvenExchangeDiv605ShippedOrder");
+					
+					String orderId=orderIdDosNo.split(",")[0];
+					String dosNo=orderIdDosNo.split(",")[1];
+					System.out.println(orderId+dosNo+"    5555555555555555555555555555");
+					As.guestUser.goToHomePage()
+					._NavigationAction()
+					.addlogType(TestStepType.WHEN)
+					.login(user)
+					.addlogType(TestStepType.THEN)
+					.VerifyDeliveryAgent()
+					.closeWarningPopupWindow()
+					.addlogType(TestStepType.WHEN)
+					.searchByDeliveryOrderId(orderId, dosNo)
+					
+			        .addlogType(TestStepType.WHEN)
+			        .chooseHDOrders(orderType)
+			        
+			        ._OrderDetailsAction()
+			        .addlogType(TestStepType.WHEN)
+			        .goToActionCenter()
+			        
+			        .addlogType(TestStepType.THEN)
+					  .verifyEvenExchangeNotAllowed()
+					  ;
+			}
 }

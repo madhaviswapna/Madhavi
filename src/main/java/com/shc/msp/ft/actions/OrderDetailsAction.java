@@ -469,6 +469,12 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyEvenExchangeEntireOrder();
 		return this;
 	}
+	
+	public OrderDetailsAction verifyEvenExchangeNotAllowed(){
+		Logger.log("Verify, no items are allowed for Even Exchange ",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyEvenExchangeNotAllowed();
+		return this;
+	}
 
 	public OrderDetailsAction verifyPickupbuttonPresent() {
 		Logger.log("Verify Pickup button present in action center",TestStepType.THEN);

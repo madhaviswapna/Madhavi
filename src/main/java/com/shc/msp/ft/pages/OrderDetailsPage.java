@@ -533,6 +533,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator RESCHEDULE_BUTTON= new Locator("RESCHEDULE_BUTTON","//button[contains(text(),'Reschedule Delivery')]","RESCHEDULE BUTTON");
 	public final Locator EVEN_EXCHANGE_SUCCESS_MESSAGE = new Locator("EVEN_EXCHANGE_SUCCESS_MESSAGE", "//div[contains(text(),'New order has been created')]", "New Order Created dialog");
 	public final Locator EVEN_EXCHANGE_SUCCESS_DIALOG_OK_BUTTON = new Locator("EVEN_EXCHANGE_SUCCESS_DIALOG_OK_BUTTON", "//button[contains(text(),'OK')]", "Ok Button on New Order Created dialog");
+	public final Locator EVEN_EXCHANGE_NO_ITEMS_ALLOWED = new Locator("EVEN_EXCHANGE_NO_ITEMS_ALLOWED","//span[contains(text(),'No items are eligible for Pickup/Exchange')]","");
 
 
 	public final Locator HOLD_FOR_DELIVERY= new Locator("HOLD_FOR_DELIVERY","//button[contains(text(),'Hold for Future Delivery')]","HOLD_FOR_DELIVERY");
@@ -1479,7 +1480,24 @@ public class OrderDetailsPage extends Page {
 		  AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
 		  return this;
 		 }
+	
+	public OrderDetailsPage verifyEvenExchangeNotAllowed(){
 
+		  String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
+		  Logger.log("Click on Even Exchange Button",TestStepType.STEP);
+		  try{
+		   getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
+		   getAction().click(EVEN_EXCHANGE_BUTTON);
+		  }catch(Exception e){
+		   clickJ(EVEN_EXCHANGE_BUTTON);
+		  }
+		  getAction().waitFor(3000);
+		  
+		  Logger.log("Verify None of the items are eligible for Even Exchange", TestStepType.STEP);
+		  PageAssert.elementVisible(EVEN_EXCHANGE_NO_ITEMS_ALLOWED);
+		  return this;
+	}
+	
 	public OrderDetailsPage verifyEvenExchangeEligibility(String orderType){
 		if(orderType.equalsIgnoreCase("Open")){
 			Logger.log("Verify Even Exchange Button is not avalable in Action Center" , TestStepType.STEP);
