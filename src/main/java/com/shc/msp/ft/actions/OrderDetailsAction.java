@@ -601,15 +601,19 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyLineItemDetail();
 		return this;
 	}
-	public OrderDetailsAction verifyAdjustmentCapturedInInteractions(String adjust) {
-		Logger.log("Verify delivery line item detail",TestStepType.THEN);
-		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractions(adjust);
+	public OrderDetailsAction verifyAdjustmentCapturedInInteractionsForCancelOrder(String adjust) {
+		Logger.log("Verify adjustment is updated in the current interaction for the cancel order",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractionsForCancelOrder(adjust);
 		return this;
 	}
-	
 	public OrderDetailsAction verifyPickupbuttonnotPresent() {
 		Logger.log("Verify Pickup button not present in action center",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyPickupbuttonnotPresent();
+		return this;
+	}
+	public OrderDetailsAction verifyActionCapturedHistoryNotes() {
+		Logger.log("Verify contact hisory is updated",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyActionCapturedHistoryNotes();
 		return this;
 	}
 

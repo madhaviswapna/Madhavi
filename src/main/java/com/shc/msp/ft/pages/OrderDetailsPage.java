@@ -158,7 +158,8 @@ public class OrderDetailsPage extends Page {
 	public final Locator UPDATE_NAME_VALUE = new Locator ("UPDATE_NAME_VALUE","//input[@ng-model='model.addrUpdate.name']//ancestor::p[@class='form-control-static']/div[@ng-show='!model.updatingAddress']","UPDATE NAME value");
 	public final Locator UPDATE_EMAIL = new Locator ("UPDATE_EMAIL","//input[@ng-model='model.addrUpdate.email']","UPDATE EMAIL textbox");
 	public final Locator UPDATE_EMAIL_VALUE = new Locator ("UPDATE_EMAIL_VALUE","//input[@ng-model='model.addrUpdate.email']//ancestor::p[@class='form-control-static']/div","UPDATE EMAIL value");
-	public final Locator UPDATE_PHONE = new Locator ("UPDATE_PHONE","//input[@ng-model='model.addrUpdate.homePhone']","UPDATE PHONE textbox");
+	public final Locator UPDATE_HOME_PHONE = new Locator ("UPDATE_HOME_PHONE","//input[@ng-model='model.addrUpdate.homePhone']","UPDATE_HOME_PHONE");
+	public final Locator UPDATE_WORK_PHONE = new Locator ("UPDATE_WORK_PHONE","//input[@ng-model='model.addrUpdate.workPhone']","UPDATE_WORK_PHONE");
 	public final Locator UPDATE_PHONE_VALUE = new Locator ("UPDATE_PHONE_VALUE","//input[@ng-model='model.addrUpdate.homePhone']//ancestor::p[@class='form-control-static']/div","UPDATE PHONE value");
 	public final Locator UPDATE_ADDRESS = new Locator ("UPDATE_ADDRESS","//input[@ng-model='model.addrUpdate.address1']","UPDATE ADDRESS textbox");
 	public final Locator UPDATE_ADDRESS_VALUE = new Locator ("UPDATE_ADDRESS_VALUE","//input[@ng-model='model.addrUpdate.address1']//ancestor::p[@class='form-control-static']/div","UPDATE ADDRESS value");
@@ -604,6 +605,7 @@ public class OrderDetailsPage extends Page {
 
 		public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE= new Locator("","//td[contains(text(),'{0}')]","Order Contact history");
 		public final Locator Cancelled_HD_ORDERS = new Locator("", "//span[contains(text(),'Cancelled')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Cancelled HD orders ");
+		public final Locator CONTACT_HISTORY_NOTES_CANCEL_ORDER = new Locator("CONTACT_HISTORY_NOTES_CANCEL_ORDER", "//div[contains(text(),'{0}')]", "CONTACT_HISTORY_NOTES_CANCEL_ORDER");
 
 		
 		public final Locator newxpath = new Locator("","//td[contains(text(),'Contact Customer')]/..//a[contains(text(),'Bad Order')]/parent::div/following-sibling::div","");
@@ -906,16 +908,18 @@ public class OrderDetailsPage extends Page {
 	public OrderDetailsPage updateAndVerifyNameEmailNumber(){
 		Logger.log("Updating name, email and home phone number ",TestStepType.STEP);
 
-		Locator [] loc={UPDATE_NAME,UPDATE_ADDRESS,UPDATE_EMAIL,UPDATE_PHONE};
+		Locator [] loc={UPDATE_NAME,UPDATE_ADDRESS,UPDATE_EMAIL,UPDATE_HOME_PHONE,UPDATE_WORK_PHONE};
 
 		int i;
 		String name="SEARS USER";
 		String email="SEARS@AUTOMATION.COM";
-		String phone="(808) 721-0247";
+		String homePhone="8087210247";
 		String address="SEARS TOWER";
+		String workPhone="4048210247";
 		String name2="KMART USER";
 		String email2="KMART@AUTOMATION.COM";
-		String phone2="(808) 721-0456";
+		String homephone2="8087210456";
+		String workPhone2="4049210247";
 		String address2="KMART T0WER";
 		String data="";
 
@@ -945,28 +949,31 @@ public class OrderDetailsPage extends Page {
 				getContext().put("updatedEmail", data);
 				break;
 			case 3:
-				getContext().put("originalPhone",getAction().getValue(loc[i]));
-				data=getContext().get("originalPhone").toString().equalsIgnoreCase(phone)?phone2:phone;	
-				getContext().put("updatedPhone", data);
+				getContext().put("originalHomePhone",getAction().getValue(loc[i]));
+				data=getContext().get("originalHomePhone").toString().equalsIgnoreCase(homePhone)?homephone2:homePhone;	
+				getContext().put("updatedHomePhone", data);
 				break;
-
+			case 4:
+				getContext().put("originalWorkPhone",getAction().getValue(loc[i]));
+				System.out.println(getContext().get("originalWorkPhone"));
+				try{
+				data=getContext().get("originaWorkPhone").toString().equalsIgnoreCase(workPhone)?workPhone2:workPhone;	
+				}catch (NullPointerException e) {
+					data=workPhone;
+				}
+				getContext().put("updatedWorkPhone", data);
+				break;	
 			}
 			getAction().type(loc[i], data);
 			getAction().waitFor(2000);
 		}
-		
+
 		String updatedName= (String) getContext().get("updatedName");
-		
-		
-
-		String updatedPhone= (String) getContext().get("updatedPhone");
-		
-		
+		String updatedHomePhone= (String) getContext().get("updatedHomePhone");
 		String updatedEmail= (String) getContext().get("updatedEmail");
-		
-
 		String updatedAddress= (String) getContext().get("updatedAddress");
-		
+		String updatedWorkPhone= (String) getContext().get("updatedWorkPhone");
+
 		AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse();
 		getAction().click(SAVE_BUTTON);
 		if(AjaxCondition.forElementVisible(SUGGESTED_ADDRESS).waitWithoutException(5000)){
@@ -976,9 +983,11 @@ public class OrderDetailsPage extends Page {
 			getAction().click(SUBMIT_BUTTON_ADDRESS);
 			AjaxCondition.forElementVisible(NOTATION_PAD).waitForResponse(3000);
 			SoftAssert.checkConditionAndContinueOnFailure("updatedName: "+updatedName, getAction().getValue(UPDATE_NAME).equalsIgnoreCase(updatedName));
-			SoftAssert.checkConditionAndContinueOnFailure("updatedAddress: "+updatedPhone, getAction().getValue(UPDATE_ADDRESS).equalsIgnoreCase(updatedPhone));
+			SoftAssert.checkConditionAndContinueOnFailure("updatedAddress: "+updatedAddress, getAction().getValue(UPDATE_ADDRESS).equalsIgnoreCase(updatedAddress));
 			SoftAssert.checkConditionAndContinueOnFailure("updatedEmail: "+updatedEmail, getAction().getValue(UPDATE_EMAIL).equalsIgnoreCase(updatedEmail));
-			SoftAssert.checkConditionAndContinueOnFailure("updatedPhone: "+updatedAddress, getAction().getValue(UPDATE_PHONE).equalsIgnoreCase(updatedAddress));
+			SoftAssert.checkConditionAndContinueOnFailure("updatedHomePhone: "+updatedHomePhone, getAction().getValue(UPDATE_HOME_PHONE).equalsIgnoreCase(updatedHomePhone));
+			SoftAssert.checkConditionAndContinueOnFailure("updatedWorkPhone: "+updatedWorkPhone, getAction().getValue(UPDATE_WORK_PHONE).equalsIgnoreCase(updatedWorkPhone));
+
 		}
 
 
@@ -5510,8 +5519,8 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		String updatedName= (String) getContext().get("updatedName");
 		
 		
-		String originalPhone= (String) getContext().get("originalPhone");
-		String updatedPhone= (String) getContext().get("updatedPhone");
+		String originalHomePhone= (String) getContext().get("originalHomePhone");
+		String updatedHomePhone= (String) getContext().get("updatedHomePhone");
 		
 		String originalEmail= (String) getContext().get("originalEmail");
 		String updatedEmail= (String) getContext().get("updatedEmail");
@@ -5530,7 +5539,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		//SoftAssert.checkConditionAndContinueOnFailure("Verify the original name is displayed in ",getAction().getText(VALUE.format(originalName)).equalsIgnoreCase(originalName));
 		System.out.println("------------------------------------------------------"+UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Name",originalName,updatedName).getValue());
 		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Name",originalName,updatedName),originalName+" has been updated to "+updatedName , CheckLocatorFor.isPresent);
-		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Home Phone",	 originalPhone,updatedPhone),originalPhone+" has been updated to "+updatedPhone , CheckLocatorFor.isPresent);
+		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Home Phone",	 originalHomePhone,updatedHomePhone),originalHomePhone+" has been updated to "+updatedHomePhone , CheckLocatorFor.isPresent);
 		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Sold To Email Address",originalEmail,updatedEmail),originalEmail+" has been updated to "+updatedEmail, CheckLocatorFor.isPresent);
 //		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Address",originalName,updatedName),"original value and updated value " , CheckLocatorFor.isPresent);
 		/*SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Name",originalName,updatedName),"original value and updated value " , CheckLocatorFor.isPresent);
@@ -5545,51 +5554,60 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT);
 		System.out.println("-------- "+openMultiLineItem);
 		Logger.log("Order have "+openMultiLineItem+" Open"+" multiline item");
-		//Map<String, List<String>> map =new LinkedHashMap<>();
-		
 		for (int i = 1; i <= openMultiLineItem; i++) {
 			list.add(getAction().getText(DIVISION.format(i))+getAction().getText(ITEM.format(i)) +"000");
 		}
-		//map.put("adjustmentOption", list);
 		getContext().put("adjustmentOption", list);
 	}
 
-	public void verifyAdjustmentCapturedInInteractions(String adjust){
+	public void verifyAdjustmentCapturedInInteractionsForCancelOrder(String adjust){
 		getAction().waitFor(5000);
 		Logger.log("Verify adjustment done on order are captured in Current Interaction", TestStepType.STEP);
 		System.out.println("----------------------------verifyAdjustmentCapturedInInteraction");
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);
+		@SuppressWarnings("unchecked")
 		List <String> list = (List<String>) getContext().get("adjustmentOption");
-		Iterator it = list.iterator();
-		StringBuilder str= new StringBuilder("Following Item(s) were cancelled : ");	
-		//String uuuu = "Following Item(s) were cancelled : [64683497000, 62247969000, 62076989000, 64651139000, 62217517000, 62222849000, 64601084000]";
+		Iterator<String> it = list.iterator();
+		String notes=null;
+		String historyNotes=null;
+		StringBuilder sb= new StringBuilder("Following Item(s) were cancelled : [");	
 		while (it.hasNext()){
 			String item = (String) it.next();
-			str.append(item);
-			
+			System.out.println(item);
+			notes =sb.append(item+", ").toString();
+			if(notes.endsWith(", "))
+		historyNotes =notes.substring(0, notes.length()-2)+"]";
 		}
-		System.out.println(str);
-//		Map<String, List<String>> map =new LinkedHashMap<>();
-		//map.get("adjustmentOption")
-		//String type=(String) getContext().get("adjustmentOption");
-		System.out.println("locatro under trial "+ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,map.get("adjustmentOption")).getValue());
-		//AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type)).waitForResponse();
+		System.out.println(historyNotes);
+		getContext().put("historyNotes", historyNotes);
+		System.out.println("locator under trial "+ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,historyNotes).getValue());
+		SoftAssert.checkElementAndContinueOnFailure(ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,historyNotes),historyNotes , CheckLocatorFor.isPresent);
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
 	}
+	
 	public void verifyPickupbuttonnotPresent(){
 		Logger.log("Verify Pickup button is not present in action center", TestStepType.STEP);
 		getAction().waitFor(3000);
 		if(getAction().isVisible(PICKUP_BUTTON)){
 			PageAssert.fail("Pickup button is Present");
-
 		}
 		else
 			Logger.log("Pickup button is not present ",TestStepType.VERIFICATION_PASSED);
-
 	}
+	
+	public void verifyActionCapturedHistoryNotes(){
+		Logger.log("Verify adjustment done on order are captured in History Notes", TestStepType.STEP);
+		getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
+		getAction().click(ORDER_CONTACT_HISTORY);
+		getAction().waitFor(3000);
+		String historyNotes=(String) getContext().get("historyNotes");
+		SoftAssert.checkElementAndContinueOnFailure(CONTACT_HISTORY_NOTES_CANCEL_ORDER.format(historyNotes),historyNotes , CheckLocatorFor.isPresent);
+	}
+
 	/**
 	 * Close warning  popup if its present
 	 * @return
