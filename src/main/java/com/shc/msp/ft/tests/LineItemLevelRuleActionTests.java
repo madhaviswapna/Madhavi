@@ -785,6 +785,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	        		._NavigationAction()
 	        		.addlogType(TestStepType.WHEN)
 	        		.searchByOrderId(orderId)
+	        		.closeWarningPopupWindow()
 	        		._OrderDetailsAction()
 	        		.addlogType(TestStepType.THEN)
 	        		.verifyEmailCapturedInNotes();
@@ -872,7 +873,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		                     .addlogType(TestStepType.THEN)
 		                     .verifyOptionNotVisible("Cancellation - Line Item");
 		     	 }
-			 
+		      	 
 
 		@DataProvider (name="DP_CancelOrder_Eligible")
 		    public Object[][] DP_Cancellation_Eligible_OrderID() throws Exception{

@@ -605,6 +605,16 @@ public class OrderDetailsPage extends Page {
 		public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE= new Locator("","//td[contains(text(),'{0}')]","Order Contact history");
 		public final Locator Cancelled_HD_ORDERS = new Locator("", "//span[contains(text(),'Cancelled')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Cancelled HD orders ");
 
+		
+		public final Locator newxpath = new Locator("","//td[contains(text(),'Contact Customer')]/..//a[contains(text(),'Bad Order')]/parent::div/following-sibling::div","");
+
+		//Error PopUp window
+		public final Locator ERROR_POPUP = new Locator("Error popup","//div[@class='modal-header dialog-header-error ng-scope ng-isolate-scope']","Error popup");
+		public final Locator ERROR_POPUP_CLOSE = new Locator("Error popup close","(//button[@id='modalclose'])","Error popup close");   
+		public final Locator WARNING_POPUP = new Locator("Warning popup","//h4[@class='modal-title text-info ng-binding']","Warning popup");
+		public final Locator WARNING_POPUP_CLOSE = new Locator("WARNING_POPUP close","//button[@id='modalclose']","WARNING_POPUP close");
+
+		
 		Map<String, List<String>> map =new LinkedHashMap<>();
 
 		
@@ -4323,9 +4333,10 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(EMAIL_SUBMIT_BUTTON);
 		getAction().waitFor(8000);
 		getContext().put("selectedemailtemplatename", emailTemplateName);
-		AjaxCondition.forElementVisible(SUCCESS_OK_BUTTON).waitForResponse();
-		getAction().click(SUCCESS_OK_BUTTON);
-		getAction().waitFor(3000);
+	//	AjaxCondition.forElementVisible(SUCCESS_OK_BUTTON).waitForResponse();
+		//getAction().click(SUCCESS_OK_BUTTON);
+		//getAction().waitFor(3000);
+		closeWarningPopupWindow();
 
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
 		getAction().click(ORDER_CONTACT_HISTORY);
@@ -4335,6 +4346,31 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 		//if(!getAction().containsString(getAction().getText(EMAIL_TEMPLATE_NOTES), templatename)){
 		PageAssert.textPresent(EMAIL_TEMPLATE_NOTES.format("Contact Customer",emailTemplateName), emailTemplateName);
+		
+		AjaxCondition.forElementVisible(newxpath).waitForResponse();
+		
+		System.out.println("-------------------------------------------------------"+getAction().getText(newxpath));
+		String emailcontent="Subject: Sears.com Order # (XXXXXX)"
++"Message:"
++" Dear  ,"
++" Thank you for shopping at Sears.  "
++" We have received your online order for the (item). However, your order did not properly process. If you would like us to replace the order for you, please call 1-800-283-6940 and a customer service representative will be happy to assist you.   We apologize for any inconvenience this may cause you. "
++" If you have any questions or concerns, please e-mail us at order@customerservice.sears.com or call us at 1-800-283-6940. "
++" Loook for Great Ideas throughout the store and find Sears exclusive innovations from great brands like Sony, Kenmore, NordicTrack, Craftsman and Reebok. "
++" Shop sears.com now to pick up great products for the season. "
++" http://www.sears.com" 
++"  Sincerely, "
++" Sears Customer Care"
++" order@customerservice.sears.com"
++" 1-800-283-6940";
+		
+		emailcontent = emailcontent.replaceAll("[^a-zA-Z0-9]", ""); 
+		String actualEmailContentDisplayed=getAction().getText(newxpath);
+		actualEmailContentDisplayed = actualEmailContentDisplayed.replaceAll("[^a-zA-Z0-9]", ""); 
+		System.out.println("-------------------------------------actualemail: "+actualEmailContentDisplayed);
+		System.out.println("-------------------------------------mycontent  : "+emailcontent);
+		
+		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", actualEmailContentDisplayed.contains(emailcontent.trim()));
 		getAction().waitFor(3000);
 
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
@@ -5553,6 +5589,30 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		else
 			Logger.log("Pickup button is not present ",TestStepType.VERIFICATION_PASSED);
 
+	}
+	/**
+	 * Close warning  popup if its present
+	 * @return
+	 */
+	public OrderDetailsPage closeWarningPopupWindow() {
+		
+		getAction().waitFor(3000);
+		if(AjaxCondition.forElementVisible(ERROR_POPUP_CLOSE).waitWithoutException(1)){
+			Logger.log("Close Error Pop-up Window", TestStepType.SUBSTEP);
+			int numOfCloseButtons = getAction().getElementCount(ERROR_POPUP_CLOSE);
+			Locator closeLocator = new Locator("","(//button[@id='modalclose'])[{0}]","Close button");
+			while(numOfCloseButtons>0){
+				getAction().click(closeLocator.format(numOfCloseButtons));
+				numOfCloseButtons--;
+				getAction().waitFor(1000);
+			}
+		}   
+		if(AjaxCondition.forElementVisible(WARNING_POPUP).waitWithoutException(1)){
+			Logger.log("Close Warning Pop-up Window", TestStepType.SUBSTEP);
+			getAction().click(WARNING_POPUP_CLOSE);
+			getAction().waitFor(1000);
+		}
+		return this;
 	}
 }
 	

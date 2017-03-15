@@ -312,6 +312,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
         		._NavigationAction()
         		.addlogType(TestStepType.WHEN)
         		.searchByOrderId(orderId)
+        		.closeWarningPopupWindow()
         		._OrderDetailsAction()
         		.addlogType(TestStepType.THEN)
         		.verifyEmailCapturedInNotes()

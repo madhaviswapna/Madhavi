@@ -591,6 +591,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
 		;
 	}
+	
 
 
 	/***********
