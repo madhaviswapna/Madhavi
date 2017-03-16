@@ -4662,6 +4662,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 	public void goToDeliveryNotes(){
 		Logger.log("Verify whether user is on delivery notes", TestStepType.STEP);
 		getAction().waitFor(3000);
+		getAction().scrollTo(DELIVERY_NOTES);
 		AjaxCondition.forElementVisible(DELIVERY_NOTES).waitForResponse();
 		getAction().click(DELIVERY_NOTES);
 	}
