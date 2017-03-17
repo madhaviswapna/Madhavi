@@ -516,7 +516,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and not(contains(text(),'Cancelled'))]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and contains(text(),'Cancelled')]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
 	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","(//tr[@value='item'])[1]","LINE ITEM ROW");
-	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//input[@name='selectedQuantity']//ancestor::tr//td[6]","LINE ITEM ROW Quantity Available");
+	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[6]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE= new Locator("","//input[@name='selectedQuantity']//ancestor::tr//td[8]","LINE ITEM ROW Quantity Available Even Exchange");
 	public final Locator LINE_ITEM_ROW_QUANTITY= new Locator("LINE_ITEM_ROW_QUANTITY","(//input[@name='selectedQuantity'])[{0}]","LINE ITEM ROW Quantity");
 	public final Locator LINE_ITEM_ROW_QUANTITY_COUNT= new Locator("LINE_ITEM_ROW_QUANTITY_COUNT","(//input[@name='selectedQuantity'])[{0}]","LINE ITEM ROW Quantity");
@@ -4466,7 +4466,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
 			getAction().click(RERESERVE_ITEM.format(i));
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
-			getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE));
+			getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(i)));
 			getAction().waitFor(3000);
 		}
 		}
@@ -4495,11 +4495,11 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(RERESERVE_CREATE_ORDER_BUTTON).waitForResponse(5);
 			getAction().click(RERESERVE_CREATE_ORDER_BUTTON);
 			Logger.log("Verify the Success pop up is displayed",TestStepType.STEP);
-			AjaxCondition.forElementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE).waitForResponse(10);
+			AjaxCondition.forElementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE).waitForResponse(5);
 			PageAssert.elementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE);
 			getAction().click(ORDERCREATED_OK_BUTTON);
 			getAction().waitFor(4000);
-			String newDosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
+			String newDosOrderNumber = getAction().getText(DOS_ORDER_SUMMARY_ORDER_NUMBER);
 			System.out.println("New order created    "+newDosOrderNumber+" Old order "+dosOrderNumber);
 			SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
 			Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
@@ -4662,8 +4662,8 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 	public void goToDeliveryNotes(){
 		Logger.log("Verify whether user is on delivery notes", TestStepType.STEP);
 		getAction().waitFor(3000);
+		AjaxCondition.forElementPresent(DELIVERY_NOTES).waitForResponse();
 		getAction().scrollTo(DELIVERY_NOTES);
-		AjaxCondition.forElementVisible(DELIVERY_NOTES).waitForResponse();
 		getAction().click(DELIVERY_NOTES);
 	}
 	public void clickSearchAnotherOrder(){
@@ -4675,9 +4675,20 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 	public void verifyDataInDeliveryNotes(String data){
 		Logger.log("verify Data In DeliveryNotes", TestStepType.STEP);
 		getAction().waitFor(3000);
+		System.out.println("----"+data);
+		System.out.println("------"+ getAction().getText(DELIVERY_NOTES_DATA.format(data)));
+		//System.out.println("----"+DELIVERY_NOTES_DATA.format(data).getValue());
 		getAction().scrollTo(DELIVERY_NOTES_DATA.format(data));
+		if(data.equalsIgnoreCase("MSP  ENTIRE ORDER HAS BEEN CANCELLED")){
+			
+			String cancelledOrderNotes="MSP ENTIRE ORDER HAS BEEN CANCELLED";
+			SoftAssert.checkConditionAndContinueOnFailure("verified DeliveryNotes has data:"+cancelledOrderNotes, getAction().getText(DELIVERY_NOTES_DATA.format(data)).contains(cancelledOrderNotes));
+			System.out.println(cancelledOrderNotes);
+		}
+		else{
 		AjaxCondition.forElementVisible(DELIVERY_NOTES_DATA.format(data)).waitForResponse();
-		Logger.log("verified DeliveryNotes has data:"+data, TestStepType.VERIFICATION_PASSED);
+		SoftAssert.checkConditionAndContinueOnFailure("verified DeliveryNotes has data:"+data, getAction().getText(DELIVERY_NOTES_DATA.format(data)).contains(data));
+	}
 	}
 
 	public void cancelOrderDelivery(String orderType) {

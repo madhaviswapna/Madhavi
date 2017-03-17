@@ -1551,8 +1551,61 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyActionCapturedHistoryNotes();
 	}
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_Rereserve_Order_Captured_Notes_Verification"}
+	, description = "Re-reserve whole order and verify Delivery notes", enabled = true)
+	public void Delivery_Rereserve_Order_Captured_Notes_Verification(TestData data) throws ParseException {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		List<String> list= new ArrayList<String>();
+		list.add("MSP  ENTIRE ORDER HAS BEEN CANCELLED");
+		list.add("MSP USER"+": "+user.userName);
+		list.add("OSH/MSO-WEB: RERESERVATION");
+		list.add("MSP USER"+": "+user.userName);
+		
+		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);	
+		System.out.println("OrderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rereserveItem("open","whole order")
+		._NavigationAction()
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToDeliveryNotes()
+		.verifyDeliveryOSHNotes(list)
+		
+		
+		
+		;
+
 	
 	
+	
+	
+	}
 }
 
 

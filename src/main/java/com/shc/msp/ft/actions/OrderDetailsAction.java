@@ -19,6 +19,7 @@ import com.shc.automation.dao.ProductData;
 import com.shc.automation.utils.TestUtils;
 import com.shc.automation.utils.TestUtils.Feature;
 import com.shc.automation.utils.TestUtils.TestStepType;
+import com.shc.msp.ft.entities.User;
 import com.shc.msp.ft.factory.SiteFactory;
 import com.shc.msp.ft.modules.ActionDropdown.SelectPage;
 import com.shc.msp.ft.util.Retrieval_Test_Data_By_Query;
@@ -524,7 +525,7 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 
-	public OrderDetailsAction verifyDataInDeliveryNotes(String data) {
+	public OrderDetailsAction verifyDataInDeliveryNotes(String data){
 		Logger.log("Verify data in delivery notes tab",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyDataInDeliveryNotes(data);
 		return this;
@@ -616,5 +617,16 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyActionCapturedHistoryNotes();
 		return this;
 	}
+	public OrderDetailsAction verifyDeliveryOSHNotes(List<String> list){
+		Logger.log("verify delivery notes updates",TestStepType.THEN);
 
+		Iterator<String> itr =list.iterator();
+		while(itr.hasNext()){
+			String rereserveDos=itr.next();
+			System.out.println(rereserveDos);
+			verifyDataInDeliveryNotes(rereserveDos);
+		}
+		return this;
+	}
+		
 }
