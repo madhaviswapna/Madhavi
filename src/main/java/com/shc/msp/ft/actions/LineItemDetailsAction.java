@@ -52,6 +52,12 @@ public class LineItemDetailsAction extends BaseAction {
         this.factory.vendorDetailsPage().verifyVendorDetailsPageDisplayed();
         return this;
     }
+    public LineItemDetailsAction verifyVendorDetailsPageContents() {
+    	Logger.log("Vendor details poup mail labels are displayed",TestStepType.THEN);
+        this.factory.vendorDetailsPage().verifyVendorDetailsPageContents();
+        return this;
+    }
+    
  
     public LineItemDetailsAction cancelLineItem() {
     	Logger.log("Agent should be able to cancel the order",TestStepType.THEN);
@@ -256,7 +262,7 @@ public class LineItemDetailsAction extends BaseAction {
 		Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().Line_Item_Start_Automated_Return_Data();
 		return this;
 	}
-
+	
 	
 	
 }

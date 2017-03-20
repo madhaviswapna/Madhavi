@@ -50,11 +50,48 @@ public class VendorDetailsPage extends Page {
     public static final Locator CONTRACT_ID= new Locator("CONTRACT_ID", " //input[@class='form-control input-sm ng-pristine ng-valid' and @id = 'contractId']", "Contract ID");
     public static final Locator LAYAWAY_CONTRACT_INFORMATION= new Locator("layaway contract information tab", "//legend[text()='Layaway Contract Information']", "layaway contract information tab");
     public final Locator MENU_BUTTON = new Locator("", "//div[@class='fa fa-bars header-icon']","Menu Button");
+    public final Locator VENDOR_DETAILS_PAGE_LEGENDS = new Locator("VENDOR_DETAILS_PAGE_LEGENDS", "//legend[contains(text(),'{0}')]","Menu Button");
+    public final Locator VENDOR_DETAILS_PAGE_CONTENTS = new Locator("VENDOR_DETAILS_PAGE_CONTENTS", "//Label[contains(text(),'{0}')]/parent::*/div/p","VENDOR_DETAILS_PAGE_CONTENTS");
+    public final Locator VENDOR_FORM = new Locator("VENDOR_FORM", "//*[@class='form-horizontal ng-pristine ng-valid']","VENDOR_FORM");
+  
+    
     public VendorDetailsPage verifyVendorDetailsPageDisplayed() {
     	Logger.log("Verify if vendor details page is displayed", TestStepType.VERIFICATION_STEP);
     	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE).waitForResponse();             
     	return this;
     }
+    public VendorDetailsPage verifyVendorDetailsPageContents() {
+    	Logger.log("verify in VendorDetails popup main headings are displayed like Vendor Details,Return Address,Primary Contact,Alt Vendor Contact 1 etc", TestStepType.VERIFICATION_STEP);
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_LEGENDS.format("Vendor Details")).waitForResponse();
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_LEGENDS.format("Return Address")).waitForResponse();
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_LEGENDS.format("Primary Contact")).waitForResponse();
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_LEGENDS.format("Alt Vendor Contact 1")).waitForResponse();
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_LEGENDS.format("Order Related Inquiry")).waitForResponse();
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_LEGENDS.format("Alt Vendor Contact 2")).waitForResponse();
+    	
+    	getAction().click(VENDOR_FORM);
+    	//verify vendor id is displayed
+    	System.out.println("-----------------------------------------VENDOR_DETAILS_PAGE_CONTENTS:"+VENDOR_DETAILS_PAGE_CONTENTS.format("Vendor ID").getValue());
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_CONTENTS.format("Vendor ID")).waitForResponse();
+    	String vendorID=getAction().getText(VENDOR_DETAILS_PAGE_CONTENTS.format("Vendor ID"));
+    	
+    	//String regex = "[0-9]";
+    	System.out.println("--------------------------------------------------------------"+vendorID);
+    	System.out.println("--------------------------------------------------------------"+vendorID.length());
+    	SoftAssert.checkConditionAndContinueOnFailure("Verify vendor id is displayed",vendorID.length()>0);
+    	
+    	//verify vendor name is displayed
+    	AjaxCondition.forElementVisible(VENDOR_DETAILS_PAGE_CONTENTS.format("Vendor Name")).waitForResponse();
+    	String vendorName=getAction().getText(VENDOR_DETAILS_PAGE_CONTENTS.format("Vendor Name"));
+    	//regex = "[a-zA-Z]";
+    	System.out.println("--------------------------------------------------------------"+vendorName);
+    	System.out.println("--------------------------------------------------------------"+vendorName.length());
+    	SoftAssert.checkConditionAndContinueOnFailure("Verify vendor name is displayed",vendorName.length()>0);
+    	
+    	return this;
+    }
+    
+    
     public VendorDetailsPage ManageQueues() {
     	Logger.log("Verify if queue priority changing", TestStepType.VERIFICATION_STEP);
     	getAction().waitFor(2000);

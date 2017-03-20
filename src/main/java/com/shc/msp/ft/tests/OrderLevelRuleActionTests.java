@@ -340,6 +340,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
 		.searchByOrderId(OrderId)
+		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyEmailCapturedInNotes()

@@ -430,7 +430,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		 * Verify if fulfilled orders have "Contact Vendor" option on the Line Item Level
 		 * */
 		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-	            groups = {TestGroup.MSPLineItemLevelRuleActionTest, "MSPLineItemLevelRuleActionTests"}
+	            groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemLevelRuleActionTest, "line_Item_Level_Verify_VendorFulfilledOrders_Have_ContactVendor_Option"}
 	            , description = " Verify if Vendor Fulfilled Orders have Contact Vendor option in Line Item Detail Page", enabled = true)
 	    public void  line_Item_Level_Verify_VendorFulfilledOrders_Have_ContactVendor_Option(TestData data) {
 			String[] test_data = getProductToTest("MSP_OL_ItemLevelContactVendorEligible").split("\\|");
@@ -458,7 +458,8 @@ public class LineItemLevelRuleActionTests extends BaseTests {
             	.addlogType(TestStepType.GIVEN)
             	.clickOnFulfillByUnderLineItemSummary()
             	.addlogType(TestStepType.THEN)
-            	.verifyVendorDetailsPageDisplayed();
+            	.verifyVendorDetailsPageDisplayed()
+            	.verifyVendorDetailsPageContents();
 	    }
 		
 		//Contact Customer
@@ -873,6 +874,8 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		                     .addlogType(TestStepType.THEN)
 		                     .verifyOptionNotVisible("Cancellation - Line Item");
 		     	 }
+		       
+		  
 		      	 
 
 		@DataProvider (name="DP_CancelOrder_Eligible")
