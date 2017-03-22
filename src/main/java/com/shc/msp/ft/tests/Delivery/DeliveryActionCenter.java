@@ -937,7 +937,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order"}
+			groups = {TestGroup.QA_Environment,"Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order"}
 	, description = "Verify changed reason code appears correctly for shipped order", enabled = false)
 	public void Verify_Changed_Reason_Code_Descriptions_For_Shipped_Order(TestData data) throws ParseException {
 
@@ -967,7 +967,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Account_Validation_Queue"}
+			groups = {TestGroup.QA_Environment,"Verify_Case_Exist_Popup_for_Account_Validation_Queue"}
 	, description = "Verify case exists pop up comes in account validation queue for duplicate case creation", enabled = true)
 	public void Verify_Case_Exist_Popup_for_Account_Validation_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1013,7 +1013,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	} 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Mattress_Exchange_Queue"}
+			groups = {TestGroup.QA_Environment,"Verify_Case_Exist_Popup_for_Mattress_Exchange_Queue"}
 	, description = "Verify case exists pop up comes mattress exchange queue for duplicate case creation", enabled = true)
 	public void Verify_Case_Exist_Popup_for_Mattress_Exchange_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1059,7 +1059,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	} 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Earlier_Delivery_Date_Queue"}
+			groups = {TestGroup.QA_Environment,"Verify_Case_Exist_Popup_for_Earlier_Delivery_Date_Queue"}
 	, description = "Verify case exists pop up comes in earlier delivery date queue for duplicate case creation", enabled = true)
 	public void Verify_Case_Exist_Popup_for_Earlier_Delivery_Date_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1105,7 +1105,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	} 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Manual_Work_Order_Request_Queue"}
+			groups = {TestGroup.QA_Environment,"Verify_Case_Exist_Popup_for_Manual_Work_Order_Request_Queue"}
 	, description = "Verify case exists pop up comes in  Manual Work Order Request queue for duplicate case creation", enabled = true)
 	public void Verify_Case_Exist_Popup_for_Manual_Work_Order_Request_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1151,7 +1151,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	} 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Part_Request_Queue"}
+			groups = {TestGroup.QA_Environment,"Verify_Case_Exist_Popup_for_Part_Request_Queue"}
 	, description = "Verify case exists pop up comes in Part_Request queue for duplicate case creation", enabled = true)
 	public void Verify_Case_Exist_Popup_for_Part_Request_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1196,7 +1196,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Case_Exist_Popup_for_Uneven_Exchange_com_Queue"}
+			groups = {TestGroup.QA_Environment,"Verify_Case_Exist_Popup_for_Uneven_Exchange_com_Queue"}
 	, description = "Verify case exists pop up comes in Uneven Exchange.com  queue for duplicate case creation", enabled = true)
 	public void Verify_Case_Exist_Popup_for_Uneven_Exchange_com_Queue(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1241,7 +1241,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	//verify all the reason codes present in the queue for followup in delivery open order with pend code as TBC
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder"}
 	, description = "verify all the queues for delivery open order with ped code TBC", enabled = true)
 	public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBC_OpenOrder(TestData data) throws ParseException {
 
@@ -1296,7 +1296,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	//verify all the reason codes present in the queue for followup in delivery open order with pend code as TBC
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,"Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder"}
 	, description = "verify all the queues for delivery released order with ped code TBH", enabled = true)
 	public void Verify_QueueForFollowup_ReasonCode_PENDCODE_TBH_ReleasedOrder(TestData data) throws ParseException {
 		LogFormatterAction.beginSetup();
@@ -1351,7 +1351,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyAllReasonCodePresence(reasonCode);
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Rereserve_Not_Eligible_For_Shipped_Orders"}
+			groups = {TestGroup.QA_Environment,"Rereserve_Not_Eligible_For_Shipped_Orders"}
 	, description = "Verify whether rereserve button is not present for shipped orders", enabled = true)
 	public void Rereserve_Not_Eligible_For_Shipped_Orders(TestData data) throws ParseException {
 		addCloneIDHostname(data);
@@ -1596,16 +1596,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToDeliveryNotes()
 		.verifyDeliveryOSHNotes(list)
-		
-		
-		
 		;
-
-	
-	
-	
-	
 	}
+		
 }
 
 

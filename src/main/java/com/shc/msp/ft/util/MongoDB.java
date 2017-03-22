@@ -1,7 +1,10 @@
 package com.shc.msp.ft.util;
 
+import java.util.Collection;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
