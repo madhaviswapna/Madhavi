@@ -2111,7 +2111,7 @@ public static void delivery_Details_OrderID() throws Exception{
 	Sql_Delivery_Details_Eligible = "select o.site_gen_ord_id, sc.sales_check_number"
 			+" from ord o, ord_item oi, sales_check sc, ffm_method fm"
 			+" where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and"
-			+" oi.sales_check_id = sc.sales_check_id and o.site_gen_ord_id REGEXP '^-?[0-9]+$'  and fm.ffm_class_id='DDC' and   o.site_id = 40153"
+			+" oi.sales_check_id = sc.sales_check_id and o.site_gen_ord_id REGEXP '^-?[0-9]+$'  and fm.ffm_class_id='DDC' and   o.site_id = 40153 and o.ORDER_SERVICE_ORGINATING_SERVER  in ('QA')"
 			+" order by o.last_updated_ts desc limit 1";
 	try {
 		
