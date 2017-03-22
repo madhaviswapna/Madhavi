@@ -23,8 +23,8 @@ public class OrderLevelRuleActionTests extends BaseTests{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests","order_Level_Sales_Tax_Adjustment_Eligible"}
 	, description = "Verify sale adjustment at order level", enabled = true, priority=34)	
 	public void order_Level_Sales_Tax_Adjustment_Eligible(TestData data) {
-		//String OrderID = getProductToTest("SaleAdjustmentOrder");
-		String OrderID = "840027769";
+		String OrderID = getProductToTest("SaleAdjustmentOrder");
+		//String OrderID = "840027769";
 		
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -407,7 +407,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Shipping Adjustment")
-		.taxadjustment("Shipping Adjustment",0.1,OrderID)
+		.taxadjustment("Shipping Adjustment",0.001,OrderID)
 		.verifyTrialBalance()
 		.verifyAdjustmentCapturedInInteraction("Shipping Adjustment")
 		.verifyOrderWrapUp()
