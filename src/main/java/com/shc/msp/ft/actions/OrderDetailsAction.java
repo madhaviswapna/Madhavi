@@ -628,6 +628,11 @@ public class OrderDetailsAction extends BaseAction {
 		}
 		return this;
 	}
+	public OrderDetailsAction clickSubmitButton() {
+		Logger.log("Trial balance option should be available", TestUtils.TestStepType.THEN);
+		this.factory.orderdetailspage().clickSubmitButton();
+		return this;	
+	}
 	
 		
 }

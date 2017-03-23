@@ -4387,6 +4387,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 
 	}
 	public void verifyAdjustmentCapturedInInteraction(String adjust){
+		closeWarningPopupWindow();
 		getAction().waitFor(5000);
 		Logger.log("Verify adjustment done on order are captured in Current Interaction", TestStepType.STEP);
 		System.out.println("----------------------------verifyAdjustmentCapturedInInteraction");
@@ -5642,6 +5643,12 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 			getAction().click(WARNING_POPUP_CLOSE);
 			getAction().waitFor(1000);
 		}
+		return this;
+	}
+	public OrderDetailsPage clickSubmitButton() {
+		getAction().waitFor(2000);
+		getAction().click(SUBMIT_BUTTON);
+		getAction().waitFor(2000);
 		return this;
 	}
 }
