@@ -160,19 +160,19 @@ public class VendorDetailsPage extends Page {
 
     public VendorDetailsPage VerifyLayawayContractDetails(String contractID){
        	Logger.log("Verify if Layaway Contract Details is displayed", TestStepType.VERIFICATION_STEP);
-       	getAction().waitFor(2000);
+       	getAction().waitFor(4000);
        	AjaxCondition.forElementVisible(MENU_BUTTON).waitForResponse(); 
        	getAction().click(MENU_BUTTON);
-       	getAction().waitFor(2000);
+       	getAction().waitFor(4000);
        	AjaxCondition.forElementVisible(SEARCH_LAYAWAY).waitForResponse();
        	getAction().click(SEARCH_LAYAWAY);
-       	getAction().waitFor(2000);
+       	getAction().waitFor(3000);
        	AjaxCondition.forElementVisible(CONTRACT_ID).waitForResponse();
        	getAction().type(CONTRACT_ID, contractID);
-       	getAction().waitFor(2000);
+       	getAction().waitFor(4000);
        	AjaxCondition.forElementVisible(LAYAWAY_SEARCH_BUTTON).waitForResponse();
        	getAction().click(LAYAWAY_SEARCH_BUTTON);
-       	getAction().waitFor(2000);
+       	getAction().waitFor(4000);
        	AjaxCondition.forElementVisible(LAYAWAY_CONTRACT_INFORMATION).waitForResponse();
        	
        	

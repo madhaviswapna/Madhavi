@@ -669,7 +669,7 @@ public class HomePage extends Page {
 	}
 
 	public HomePage verifySuperAdmin() {
-		getAction().waitFor(1000);
+		getAction().waitFor(4000);
 		closeWarningPopupWindow();
 		Logger.log("Verify User is in 'SUPER ADMIN' mode", TestStepType.STEP);
 		AjaxCondition.forElementVisible(VIEW_PROFILE_LINK).waitForResponse();
@@ -695,6 +695,7 @@ public class HomePage extends Page {
 			getAction().click(CLOSE_PROFILE_MODAL);
 
 		} else {
+			getAction().waitFor(4000);
 			AjaxCondition.forElementVisible(USER_ROLE).waitForResponse();
 			Logger.log("Currently user is in " + getSelectedOption(USER_ROLE), TestStepType.SUBSTEP);
 			Logger.log("Changing to  'SUPER ADMIN' mode", TestStepType.SUBSTEP);
