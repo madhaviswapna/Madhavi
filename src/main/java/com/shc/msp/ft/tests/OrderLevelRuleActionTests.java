@@ -559,42 +559,6 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
 		;
 	}
-	
-	@Test(groups = {TestGroup.MSPP1Tests, "ostrder_Level_Sales_Tax_Adjustment_Eligible_for_Commercial_TWOrder"})	
-	public void order_Level_Shipping_Adjustment_Eligible_for_Commercial_TWOrder() {
-		String OrderID = getProductToTest("MSPCommercialTWOrderForSaleTaxAdjustment");
-//String OrderID = getProductToTest("ShippingAdjustmentOrder");
-		
-		//addCloneIDHostname(data);
-		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getUser();
-		As.guestUser.goToHomePage()
-		.addlogType(TestStepType.WHEN)
-		.login(user)
-		.addlogType(TestStepType.THEN)
-		.verifyonlineagent()
-		.addlogType(TestStepType.WHEN)
-		.deleteCasesforOrderfromDB(OrderID)
-		.searchByOrderId(OrderID)
-		.closeWarningPopupWindow()
-		._OrderDetailsAction()
-		.addlogType(TestStepType.THEN)
-		.verifyOptionVisible("Shipping Adjustment")
-		.taxadjustment("Shipping Adjustment",0.1,OrderID)
-		.verifyTrialBalance()
-		.verifyAdjustmentCapturedInInteraction("Shipping Adjustment")
-		.verifyOrderWrapUp()
-		.addlogType(TestStepType.THEN)
-		.fillRFCForm()
-		._NavigationAction()
-		.addlogType(TestStepType.WHEN)
-		.searchByOrderId(OrderID)
-		.closeWarningPopupWindow()
-		._OrderDetailsAction()
-		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
-		;
-	}
-	
 
 
 	/***********
