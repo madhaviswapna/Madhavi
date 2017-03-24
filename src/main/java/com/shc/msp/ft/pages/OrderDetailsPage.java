@@ -599,13 +599,12 @@ public class OrderDetailsPage extends Page {
 		public final Locator VALUE= new Locator("VALUE","//tr[td[contains(text(),'Order Ship To Cutomer Name')]]/td[contains(text(),'{0}')]","VALUE");
 		public final Locator ORDER_SHIP_TO_CUSTOMER_NAME= new Locator("ORDER_SHIP_TO_CUSTOMER_NAME","//td[contains(text(),'{0}')] and //td[contains(text(),'{0}')]","VALUE");
 		public final Locator UPDATE_CONTACT_NOTES= new Locator("UPDATE_CONTACT_NOTES","//tbody[tr[td[contains(text(),'{0}')]/following-sibling::td[contains(text(),'{1}')]//following-sibling::td[contains(text(),'{2}')]]]","UPDATE_CONTACT_NOTES");
-		public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open')]","DOS_ITEM_STATUS_COUNT");
-		public final Locator ITEM= new Locator("ITEM","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Item')]","ITEM");
+		public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open') and @data-title-text='Dos Item Status']","DOS_ITEM_STATUS_COUNT");		public final Locator ITEM= new Locator("ITEM","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Item')]","ITEM");
 		public final Locator DIVISION= new Locator("DIVISION","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Division')]","DIVISION");
 
 		public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE= new Locator("","//td[contains(text(),'{0}')]","Order Contact history");
 		public final Locator Cancelled_HD_ORDERS = new Locator("", "//span[contains(text(),'Cancelled')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Cancelled HD orders ");
-		public final Locator CONTACT_HISTORY_NOTES_CANCEL_ORDER = new Locator("CONTACT_HISTORY_NOTES_CANCEL_ORDER", "//div[contains(text(),'{0}')]", "CONTACT_HISTORY_NOTES_CANCEL_ORDER");
+		public final Locator CONTACT_HISTORY_NOTES = new Locator("CONTACT_HISTORY_NOTES", "//div[contains(text(),'{0}')]", "CONTACT_HISTORY_NOTES");
 
 		
 		public final Locator newxpath = new Locator("","//td[contains(text(),'Contact Customer')]/..//a[contains(text(),'Bad Order')]/parent::div/following-sibling::div","");
@@ -615,6 +614,31 @@ public class OrderDetailsPage extends Page {
 		public final Locator ERROR_POPUP_CLOSE = new Locator("Error popup close","(//button[@id='modalclose'])","Error popup close");   
 		public final Locator WARNING_POPUP = new Locator("Warning popup","//h4[@class='modal-title text-info ng-binding']","Warning popup");
 		public final Locator WARNING_POPUP_CLOSE = new Locator("WARNING_POPUP close","//button[@id='modalclose']","WARNING_POPUP close");
+
+		//scim code
+		//public final Locator UPDATE_SCIM_CODE= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Code')]","UPDATE_SCIM_CODE");
+		//public final Locator UPDATE_SCIM_CODES= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Codes')]","UPDATE_SCIM_CODE");
+		//public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open')]","DOS_ITEM_STATUS_COUNT");
+		//public final Locator ITEM_DESCRIPTIONs= new Locator("ITEM_DESCRIPTIONs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
+		//public final Locator SCIM_CODEs= new Locator("SCIM_CODEs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
+		public final Locator ITEM_DESCRIPTION= new Locator("ITEM_DESCRIPTION","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
+		public final Locator SCIM_CODE= new Locator("SCIM_CODE","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
+		public final Locator CLICK_TO_UPDATE= new Locator("CLICK_TO_UPDATE","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]","CLICK_TO_UPDATE");
+		public final Locator SCIM_CODE_COUNT= new Locator("SCIM_CODE_COUNT","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[1]//td[9]/select/option","SCIM_CODE_COUNT");
+		public final Locator SCIM_CODE_SELECTION= new Locator("SCIM_CODE_SELECTION","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]/select/option[{1}]","SCIM_CODE_SELECTION");
+		public final Locator EARLIEST_AVAILABLE_DATE= new Locator("EARLIEST_AVAILABLE_DATE","//div[contains(text(),'earliest available date')]","EARLIEST_AVAILABLE_DATE");
+
+		//Recovery Service Windows
+		public final Locator UNRESTRICTED_TIME_WINDOWS= new Locator("UNRESTRICTED_TIME_WINDOWS","//strong[contains(text(),'Unrestricted Time Window')]/parent::div/following-sibling::div[{0}]/div[2]/button","UNRESTRICTED_TIME_WINDOWS");
+		public final Locator UNRESTRICTED_TIME_WINDOWS_COUNT= new Locator("UNRESTRICTED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'availableTimingForDate')]//button","UNRESTRICTED_TIME_WINDOWS_COUNT");
+
+		public final Locator PREFERRED_TIME_WINDOWS= new Locator("PREFERRED_TIME_WINDOWS","//strong[contains(text(),'Preferred Time Windows (must qualify)')]/parent::div/following-sibling::div[{0}]/div[2]/button","PREFERRED_TIME_WINDOWS");
+		public final Locator PREFERRED_TIME_WINDOWS_COUNT= new Locator("PREFERRED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'preferredWindowList')]//button","PREFERRED_TIME_WINDOWS_COUNT");
+
+		public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows (must qualify)')]/parent::div/following-sibling::div[{0}]/div[2]/button","SERVICE_RECOVERY_WINDOW");
+		public final Locator SERVICE_RECOVERY_WINDOW_COUNT= new Locator("SERVICE_RECOVERY_WINDOW_COUNT","//div[contains(@ng-repeat,'recoveryWindowList')]//button","SERVICE_RECOVERY_WINDOW_COUNT");
+
+				
 
 		
 		Map<String, List<String>> map =new LinkedHashMap<>();
@@ -5571,9 +5595,10 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 			list.add(getAction().getText(DIVISION.format(i))+getAction().getText(ITEM.format(i)) +"000");
 		}
 		getContext().put("adjustmentOption", list);
+		System.out.println("----"+getContext().get("adjustmentOption"));
 	}
 
-	public void verifyAdjustmentCapturedInInteractionsForCancelOrder(String adjust){
+	public void verifyAdjustmentCapturedInInteractions(String adjust, String note){
 		getAction().waitFor(5000);
 		Logger.log("Verify adjustment done on order are captured in Current Interaction", TestStepType.STEP);
 		System.out.println("----------------------------verifyAdjustmentCapturedInInteraction");
@@ -5585,7 +5610,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		Iterator<String> it = list.iterator();
 		String notes=null;
 		String historyNotes=null;
-		StringBuilder sb= new StringBuilder("Following Item(s) were cancelled : [");	
+		StringBuilder sb= new StringBuilder(note);	
 		while (it.hasNext()){
 			String item = (String) it.next();
 			System.out.println(item);
@@ -5618,7 +5643,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);
 		String historyNotes=(String) getContext().get("historyNotes");
-		SoftAssert.checkElementAndContinueOnFailure(CONTACT_HISTORY_NOTES_CANCEL_ORDER.format(historyNotes),historyNotes , CheckLocatorFor.isPresent);
+		SoftAssert.checkElementAndContinueOnFailure(CONTACT_HISTORY_NOTES.format(historyNotes),historyNotes , CheckLocatorFor.isPresent);
 	}
 
 	/**
@@ -5651,6 +5676,100 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		getAction().waitFor(2000);
 		return this;
 	}
+	
+	public OrderDetailsPage verifyupdateScimCode(String orderType) {
+		getAction().waitFor(4000);
+		scrollDown();
+		if(orderType.equalsIgnoreCase("open")){
+			int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT);
+			System.out.println("-------- "+openMultiLineItem);
+			Logger.log("Order have "+openMultiLineItem+" Open"+" multiline item");
+			Logger.log("Item description before SCIM CODE updation", TestStepType.STEP);
+			for (int i = 1; i <= openMultiLineItem; i++) {
+				if (getAction().getText(SCIM_CODE.format(i)).equalsIgnoreCase(""))
+					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(i))+" has scim code "+getAction().getText(SCIM_CODE.format(i)).replaceFirst("", "not available"), true);
+				else
+					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(i), getAction().getText(ITEM_DESCRIPTION.format(i))+" has scim code "+getAction().getText(SCIM_CODE.format(i)), CheckLocatorFor.isVisible);
+			}
+			goToActionCenter();
+			AjaxCondition.forElementPresent(UPDATE_SCIM_CODE).waitForResponse();
+			getAction().scrollTo(UPDATE_SCIM_CODE);
+			getAction().click(UPDATE_SCIM_CODE);
+
+			for(int i=1;i<=openMultiLineItem;i++){
+				AjaxCondition.forElementPresent(CLICK_TO_UPDATE.format(i)).waitForResponse();
+				getAction().click(CLICK_TO_UPDATE.format(i));
+				AjaxCondition.forElementPresent(SCIM_CODE_COUNT).waitWithoutException(2000);
+				int rndCodeCategory = generateRandomNumberSelect(SCIM_CODE_COUNT);
+				AjaxCondition.forElementPresent(SCIM_CODE_SELECTION.format(i,rndCodeCategory)).waitForResponse(3000);
+
+				System.out.println(getAction().getText(SCIM_CODE_SELECTION.format(i,rndCodeCategory)));
+
+				getAction().click(SCIM_CODE_SELECTION.format(i,rndCodeCategory));
+				getAction().waitFor(2000);
+			}
+			getAction().waitFor(2000);
+			AjaxCondition.forElementPresent(UPDATE_SCIM_CODES).waitForResponse(2000);
+			getAction().click(UPDATE_SCIM_CODES);
+
+			getAction().waitFor(3000);
+			if(getAction().isVisible(EARLIEST_AVAILABLE_DATE)){
+				System.out.println(getAction().getText(EARLIEST_AVAILABLE_DATE));
+				Logger.log("click on OK button",TestStepType.STEP);
+				getAction().click(OK_BUTTON_ON_POPUP);}
+			getAction().waitFor(3000);
+			verifyOrderDetailsPageDisplayed();
+			Logger.log("Item description after SCIM CODE updation", TestStepType.STEP);
+			for (int i = 1; i <= openMultiLineItem; i++) {
+				if (getAction().getText(SCIM_CODE.format(i)).equalsIgnoreCase(""))
+					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(i))+" has "+getAction().getText(SCIM_CODE.format(i)).replaceFirst("", "no scim code"), true);
+				else
+					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(i),getAction().getText(ITEM_DESCRIPTION.format(i))+" has scim code updated to "+getAction().getText(SCIM_CODE.format(i)),CheckLocatorFor.isVisible);
+			}	
+		}
+
+		return this;
+
+	}
+	
+	public void recoveryServiceWindowVerification(){
+
+		Logger.log("Click on Reschedule button", TestStepType.STEP);
+		AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
+		getAction().scrollTo(RESCHEDULE_BUTTON);
+		getAction().click(RESCHEDULE_BUTTON);
+
+
+		Logger.log("Click on the entire order", TestStepType.STEP);
+		AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
+		getAction().click(CANCEL_ENTIRE_ORDER);
+		getAction().waitFor(3000);
+		scrollDown();
+		Logger.log("verify all the time windows", TestStepType.STEP);
+		int unrestrictedWindowCount=getAction().getElementCount(UNRESTRICTED_TIME_WINDOWS_COUNT);
+		Logger.log("Unrestricted Time Windows");
+		for (int i = 1; i <=unrestrictedWindowCount; i++) {
+			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(i));
+			SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_TIME_WINDOWS.format(i),getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
+		}
+		getAction().waitFor(3000);
+		int preferedWindowCount=getAction().getElementCount(PREFERRED_TIME_WINDOWS_COUNT);
+		Logger.log("Preferred Time Windows");
+		for (int i = 1; i <=preferedWindowCount; i++) {
+			AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(i));
+			SoftAssert.checkElementAndContinueOnFailure(PREFERRED_TIME_WINDOWS.format(i),getAction().getText(PREFERRED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
+		}
+		getAction().waitFor(3000);
+		int serviceRecoveryWindowCount=getAction().getElementCount(SERVICE_RECOVERY_WINDOW_COUNT);
+		Logger.log("Service Recovery Windows ");
+		for (int i = 1; i <=serviceRecoveryWindowCount; i++) {
+			AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(i));
+			SoftAssert.checkElementAndContinueOnFailure(SERVICE_RECOVERY_WINDOW.format(i),getAction().getText(SERVICE_RECOVERY_WINDOW.format(i)), CheckLocatorFor.isPresent);
+		}
+
+
+	}
+	
 }
 	
 

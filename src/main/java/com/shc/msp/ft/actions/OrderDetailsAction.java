@@ -604,7 +604,8 @@ public class OrderDetailsAction extends BaseAction {
 	}
 	public OrderDetailsAction verifyAdjustmentCapturedInInteractionsForCancelOrder(String adjust) {
 		Logger.log("Verify adjustment is updated in the current interaction for the cancel order",TestStepType.THEN);
-		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractionsForCancelOrder(adjust);
+		String note="Following Item(s) were cancelled : [";
+		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractions(adjust,note);
 		return this;
 	}
 	public OrderDetailsAction verifyPickupbuttonnotPresent() {
@@ -633,6 +634,26 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().clickSubmitButton();
 		return this;	
 	}
-	
+	public OrderDetailsAction verifyupdateScimCode(String orderType ) {
+		Logger.log("verify update scim code",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyupdateScimCode(orderType);
+		return this;
+
+	}
+
+	public OrderDetailsAction verifyAdjustmentCapturedInInteractionsForScimCode(String adjust) {
+		Logger.log("Verify adjustment is updated in the current interaction for the scim code updation",TestStepType.THEN);
+		String note= "Scim Code for the following Item(s) were Updated, DcNo: [";
+		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteractions(adjust,note);
+		return this;
+	}
+
+	public OrderDetailsAction recoveryServiceWindowVerification() {
+		Logger.log("verify recovery window service",TestStepType.THEN);
+		this.factory.orderdetailspage().recoveryServiceWindowVerification();
+		return this;
+
+	}
+
 		
 }

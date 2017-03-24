@@ -1598,7 +1598,104 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyDeliveryOSHNotes(list)
 		;
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification"}
+	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
+	public void Delivery_SCIM_Update_Captured_Notes_Verification(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);
+		System.out.println("OrderId:"+orderId);
+
+		As.guestUser.goToHomePage()
+
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyupdateScimCode("open")
 		
+		.addlogType(TestStepType.THEN)
+		.verifyLineItemDetail()
+		
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")
+		
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		
+		.addlogType(TestStepType.WHEN)
+		.wrapUpOrderWithoutContactDelivery()
+		
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyActionCapturedHistoryNotes();
+	
+	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Recovery_Service_Windows_Available_Open_Order_Verification"}
+	, description = "Verify all three recovery time window are available for open order", enabled = true)
+	public void Recovery_Service_Windows_Available_Open_Order_Verification(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String orderId= getProductToTest("Reschedule_Open_HD_Order",true);	
+		System.out.println("OrderId:"+orderId);
+
+		As.guestUser.goToHomePage()
+		
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		
+		.closeWarningPopupWindow()
+		
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		
+		.addlogType(TestStepType.WHEN)
+		.chooseOpenHDOrders()
+		
+		._OrderDetailsAction()
+		
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		
+		.addlogType(TestStepType.THEN)
+		.recoveryServiceWindowVerification();
+
+	}
+	
 }
 
 
