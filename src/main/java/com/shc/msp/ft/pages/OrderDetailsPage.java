@@ -1128,12 +1128,12 @@ public class OrderDetailsPage extends Page {
 			ArrayList<Double> shippingcharge = new ArrayList<Double>();
 			ArrayList<Double> deliverycharge = new ArrayList<Double>();
 			ArrayList<Double> installationcharge = new ArrayList<Double>();
-			String general_charge_sql = "select o.SHIPPING_AMT from ord o where o.site_gen_ord_id = ? and o.site_gen_ord_id REGEXP '^-?[0-9]+$'";
+			String general_charge_sql = "select o.SHIPPING_AMT from ord o where o.order_id  = ? and o.site_gen_ord_id REGEXP '^-?[0-9]+$'";
 			String delivery_charge_sql = "select oi.LIST_PRICE from ord o, ord_item oi where o.order_id = oi.order_id and "
 					+ "oi.ITEM_NM like 'HOME DELIVERY CHARGE' and LIST_PRICE > 0 and o.site_gen_ord_id = ? and o.site_gen_ord_id REGEXP '^-?[0-9]+$'";
 
 			String installation_sql = "select oi.ORDER_ITEM_TYP, oi.LIST_PRICE from ord o, ord_item oi where o.order_id = oi.order_id and oi.ITEM_NM like '%installation%' "
-					+ "and oi.LIST_PRICE > 0 and o.site_gen_ord_id = ? and o.site_gen_ord_id REGEXP '^-?[0-9]+$';";
+					+ "and oi.LIST_PRICE > 0 and o.order_id  = ? and o.site_gen_ord_id REGEXP '^-?[0-9]+$';";
 			try {
 				if(conn!=null){
 					st = conn.prepareStatement(general_charge_sql);
