@@ -599,8 +599,9 @@ public class OrderDetailsPage extends Page {
 		public final Locator VALUE= new Locator("VALUE","//tr[td[contains(text(),'Order Ship To Cutomer Name')]]/td[contains(text(),'{0}')]","VALUE");
 		public final Locator ORDER_SHIP_TO_CUSTOMER_NAME= new Locator("ORDER_SHIP_TO_CUSTOMER_NAME","//td[contains(text(),'{0}')] and //td[contains(text(),'{0}')]","VALUE");
 		public final Locator UPDATE_CONTACT_NOTES= new Locator("UPDATE_CONTACT_NOTES","//tbody[tr[td[contains(text(),'{0}')]/following-sibling::td[contains(text(),'{1}')]//following-sibling::td[contains(text(),'{2}')]]]","UPDATE_CONTACT_NOTES");
-		public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open') and @data-title-text='Dos Item Status']","DOS_ITEM_STATUS_COUNT");		public final Locator ITEM= new Locator("ITEM","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Item')]","ITEM");
-		public final Locator DIVISION= new Locator("DIVISION","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Division')]","DIVISION");
+		public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'{0}') and @data-title-text='Dos Item Status']","DOS_ITEM_STATUS_COUNT");		
+		public final Locator ITEM= new Locator("ITEM","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Item')]","ITEM");
+		public final Locator DIVISION= new Locator("DIVISION","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Division')]","DIVISION");
 
 		public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE= new Locator("","//td[contains(text(),'{0}')]","Order Contact history");
 		public final Locator Cancelled_HD_ORDERS = new Locator("", "//span[contains(text(),'Cancelled')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Cancelled HD orders ");
@@ -621,8 +622,8 @@ public class OrderDetailsPage extends Page {
 		//public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open')]","DOS_ITEM_STATUS_COUNT");
 		//public final Locator ITEM_DESCRIPTIONs= new Locator("ITEM_DESCRIPTIONs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
 		//public final Locator SCIM_CODEs= new Locator("SCIM_CODEs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
-		public final Locator ITEM_DESCRIPTION= new Locator("ITEM_DESCRIPTION","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
-		public final Locator SCIM_CODE= new Locator("SCIM_CODE","//tr[td[contains(text(),'Open')]][{0}]/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
+		public final Locator ITEM_DESCRIPTION= new Locator("ITEM_DESCRIPTION","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
+		public final Locator SCIM_CODE= new Locator("SCIM_CODE","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
 		public final Locator CLICK_TO_UPDATE= new Locator("CLICK_TO_UPDATE","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]","CLICK_TO_UPDATE");
 		public final Locator SCIM_CODE_COUNT= new Locator("SCIM_CODE_COUNT","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[1]//td[9]/select/option","SCIM_CODE_COUNT");
 		public final Locator SCIM_CODE_SELECTION= new Locator("SCIM_CODE_SELECTION","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]/select/option[{1}]","SCIM_CODE_SELECTION");
@@ -5583,19 +5584,19 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Name",originalName,updatedName),"original value and updated value " , CheckLocatorFor.isPresent);*/
 
 	}
-	public void verifyLineItemDetail(){
+	public void verifyLineItemDetail(String orderType){
 		getAction().waitFor(5000);
 		scrollDown();
 		List<String> list = new ArrayList<String>();
 		
-		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT);
-		System.out.println("-------- "+openMultiLineItem);
-		Logger.log("Order have "+openMultiLineItem+" Open"+" multiline item");
+		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
+		System.out.println("-------------------------------------------- "+openMultiLineItem);
+		Logger.log("Order have "+openMultiLineItem+" multiline item");
 		for (int i = 1; i <= openMultiLineItem; i++) {
-			list.add(getAction().getText(DIVISION.format(i))+getAction().getText(ITEM.format(i)) +"000");
+			list.add(getAction().getText(DIVISION.format(orderType,i))+getAction().getText(ITEM.format(orderType,i)) +"000");
 		}
 		getContext().put("adjustmentOption", list);
-		System.out.println("----"+getContext().get("adjustmentOption"));
+		System.out.println("---------------------------------------------"+getContext().get("adjustmentOption"));
 	}
 
 	public void verifyAdjustmentCapturedInInteractions(String adjust, String note){
@@ -5604,7 +5605,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		System.out.println("----------------------------verifyAdjustmentCapturedInInteraction");
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
 		getAction().click(ORDER_CONTACT_HISTORY);
-		getAction().waitFor(3000);
+		getAction().waitFor(5000);
 		@SuppressWarnings("unchecked")
 		List <String> list = (List<String>) getContext().get("adjustmentOption");
 		Iterator<String> it = list.iterator();
@@ -5680,16 +5681,19 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 	public OrderDetailsPage verifyupdateScimCode(String orderType) {
 		getAction().waitFor(4000);
 		scrollDown();
-		if(orderType.equalsIgnoreCase("open")){
-			int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT);
-			System.out.println("-------- "+openMultiLineItem);
-			Logger.log("Order have "+openMultiLineItem+" Open"+" multiline item");
+	//	if(orderType.equalsIgnoreCase("open")){
+			getAction().waitFor(4000);
+			int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
+			System.out.println("----------------------------------------------------------------xpath"+DOS_ITEM_STATUS_COUNT.format(orderType).getValue());
+			System.out.println("-----------------------------------------------------------"+openMultiLineItem);
+			Logger.log("Order have "+openMultiLineItem+""+ orderType+""+" multiline item");
 			Logger.log("Item description before SCIM CODE updation", TestStepType.STEP);
 			for (int i = 1; i <= openMultiLineItem; i++) {
-				if (getAction().getText(SCIM_CODE.format(i)).equalsIgnoreCase(""))
-					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(i))+" has scim code "+getAction().getText(SCIM_CODE.format(i)).replaceFirst("", "not available"), true);
+				System.out.println("----------------------------------------------------------------xpath"+SCIM_CODE.format(orderType,i).getValue());
+				if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
+					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "not available"), true);
 				else
-					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(i), getAction().getText(ITEM_DESCRIPTION.format(i))+" has scim code "+getAction().getText(SCIM_CODE.format(i)), CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(orderType,i), getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code "+getAction().getText(SCIM_CODE.format(orderType,i)), CheckLocatorFor.isVisible);
 			}
 			goToActionCenter();
 			AjaxCondition.forElementPresent(UPDATE_SCIM_CODE).waitForResponse();
@@ -5702,31 +5706,31 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 				AjaxCondition.forElementPresent(SCIM_CODE_COUNT).waitWithoutException(2000);
 				int rndCodeCategory = generateRandomNumberSelect(SCIM_CODE_COUNT);
 				AjaxCondition.forElementPresent(SCIM_CODE_SELECTION.format(i,rndCodeCategory)).waitForResponse(3000);
-
+				getAction().waitFor(5000);
 				System.out.println(getAction().getText(SCIM_CODE_SELECTION.format(i,rndCodeCategory)));
 
 				getAction().click(SCIM_CODE_SELECTION.format(i,rndCodeCategory));
-				getAction().waitFor(2000);
+				getAction().waitFor(4000);
 			}
-			getAction().waitFor(2000);
+			getAction().waitFor(5000);
 			AjaxCondition.forElementPresent(UPDATE_SCIM_CODES).waitForResponse(2000);
 			getAction().click(UPDATE_SCIM_CODES);
 
 			getAction().waitFor(3000);
 			if(getAction().isVisible(EARLIEST_AVAILABLE_DATE)){
-				System.out.println(getAction().getText(EARLIEST_AVAILABLE_DATE));
+				System.out.println("--------------------------------------------------"+getAction().getText(EARLIEST_AVAILABLE_DATE));
 				Logger.log("click on OK button",TestStepType.STEP);
 				getAction().click(OK_BUTTON_ON_POPUP);}
 			getAction().waitFor(3000);
 			verifyOrderDetailsPageDisplayed();
 			Logger.log("Item description after SCIM CODE updation", TestStepType.STEP);
 			for (int i = 1; i <= openMultiLineItem; i++) {
-				if (getAction().getText(SCIM_CODE.format(i)).equalsIgnoreCase(""))
-					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(i))+" has "+getAction().getText(SCIM_CODE.format(i)).replaceFirst("", "no scim code"), true);
+				if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
+					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "no scim code"), true);
 				else
-					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(i),getAction().getText(ITEM_DESCRIPTION.format(i))+" has scim code updated to "+getAction().getText(SCIM_CODE.format(i)),CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(orderType,i),getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code updated to "+getAction().getText(SCIM_CODE.format(orderType,i)),CheckLocatorFor.isVisible);
 			}	
-		}
+	//	}
 
 		return this;
 

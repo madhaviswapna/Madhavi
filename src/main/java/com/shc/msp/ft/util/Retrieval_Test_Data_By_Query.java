@@ -100,6 +100,7 @@ public class Retrieval_Test_Data_By_Query {
 	public static String ready_for_Pickup_Email_store_exception_SCNO = null;
 	public static String ready_for_Pickup_Email_status_exception_ID = null;
 	public static String ready_for_Pickup_Email_status_exception_SCNO = null;
+	public static String contactcustomer_eligible_commercial_orderID = null;
 
 
     
@@ -1943,6 +1944,7 @@ public class Retrieval_Test_Data_By_Query {
 	static String Sql_Installation_Info_Eligible = null;
 	static String Sql_Gift_Card_Info_Eligible = null;
 	static String Sql_General_Order = null;
+	static String Sql_Commercail_Order = null;
 	public static String layaway_contract_details_fetch= null;
 	public static String Vendor_details_fetch= null;
 	public static String hasDiscount_OrderID = null;
@@ -2213,31 +2215,7 @@ public static void return_Tracking_Information_OrderID() throws Exception{
 	try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 	}
 
-public static void installation_Information_OrderID() throws Exception{
-	
-	Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
-	Sql_Installation_Info_Eligible = "select o.SITE_GEN_ORD_ID, oi.item_id from ord o, ord_item oi where o.order_id = oi.order_id "
-			+ "and oi.ITEM_NM like '%installation%' and oi.LIST_PRICE > 0 and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
-			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
-			+ "and o.last_updated_ts > '2015-04-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' limit 1;";
 
-	try {
-		
-		st = conn.prepareStatement(Sql_Installation_Info_Eligible);
-		Reporter.log("SQL Query: "+Sql_Installation_Info_Eligible);
-		st.execute();
-		rs = st.getResultSet();
-		while(rs.next()){
-			hasInstallationInfo_OrderID = rs.getString("site_gen_ord_id");
-			System.out.println("OrderID has Installation Information: "+hasInstallationInfo_OrderID);
-			hasInstallationInfo_SKU = rs.getString("item_id");
-			System.out.println("OrderID has Installation Information: "+hasInstallationInfo_SKU);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
-	}
 
 public static void giftCard_Information_OrderID() throws Exception{
 	
@@ -2344,6 +2322,54 @@ public static void vendor_details_fetch() throws Exception{
 			}
 		
 	}
+	
+	public static void installation_Information_OrderID() throws Exception{
+		
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		Sql_Installation_Info_Eligible = "select o.SITE_GEN_ORD_ID, oi.item_id from ord o, ord_item oi where o.order_id = oi.order_id "
+				+ "and oi.ITEM_NM like '%installation%' and oi.LIST_PRICE > 0 and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
+				+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
+				+ "and o.last_updated_ts > '2015-04-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' limit 1;";
+
+		try {
+			
+			st = conn.prepareStatement(Sql_Installation_Info_Eligible);
+			Reporter.log("SQL Query: "+Sql_Installation_Info_Eligible);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				hasInstallationInfo_OrderID = rs.getString("site_gen_ord_id");
+				System.out.println("OrderID has Installation Information: "+hasInstallationInfo_OrderID);
+				hasInstallationInfo_SKU = rs.getString("item_id");
+				System.out.println("OrderID has Installation Information: "+hasInstallationInfo_SKU);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		}
+	
+	public void contactCustomer_commercialOrder() throws Exception{
+		
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		Sql_Commercail_Order = "select ORDER_ID from ord o where  o.site_id = 10198  and o.ORDER_STS_CD='PRO' order by last_updated_ts desc limit 1";
+
+		try {
+			
+			st = conn.prepareStatement(Sql_Commercail_Order);
+			Reporter.log("SQL Query: "+Sql_Commercail_Order);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				contactcustomer_eligible_commercial_orderID = rs.getString("ORDER_ID").toString();
+				System.out.println("OrderID has Installation Information: "+contactcustomer_eligible_commercial_orderID);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		}
+
 
 
 }

@@ -597,9 +597,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyActionCapturedInNotesForUpdateContact();
 		return this;
 	}
-	public OrderDetailsAction verifyLineItemDetail() {
+	public OrderDetailsAction verifyLineItemDetail(String orderType) {
 		Logger.log("Verify delivery line item detail",TestStepType.THEN);
-		this.factory.orderdetailspage().verifyLineItemDetail();
+		this.factory.orderdetailspage().verifyLineItemDetail(orderType);
 		return this;
 	}
 	public OrderDetailsAction verifyAdjustmentCapturedInInteractionsForCancelOrder(String adjust) {

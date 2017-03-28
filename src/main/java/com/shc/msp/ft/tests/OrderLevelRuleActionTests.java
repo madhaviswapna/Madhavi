@@ -493,7 +493,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 	 * 
 	 * 
 	 */
-	@Test(groups = {TestGroup.MSPP1Tests, "ostrder_Level_Sales_Tax_Adjustment_Eligible_for_Commercial_TWOrder"})	
+	@Test(groups = {TestGroup.MSPP1Tests, "order_Level_Sales_Tax_Adjument_Eligible_for_Commercial_TWOrder"})	
 	public void order_Level_Sales_Tax_Adjument_Eligible_for_Commercial_TWOrder() {
 		String OrderID = getProductToTest("MSPCommercialTWOrderForSaleTaxAdjustment");
 		LogFormatterAction.beginSetup();
@@ -559,6 +559,48 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
 		;
 	}
+	
+	@Test(dataProvider = "DP_ContactCustomer_CommercialOrder",groups = {TestGroup.MSPP0Tests,"order_Level_EmailToCustomer_CapturedInNotes_CommercialOrder"}
+	, description = "Verify Email to customer is captured in notes", enabled = true, priority=40)
+	public void order_Level_EmailToCustomer_CapturedInNotes_CommercialOrder(String data) {
+		System.out.println("------------------------------------------------test data"+data);
+		
+		String OrderID=data;
+	//	addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.WHEN)
+		.deleteCasesforOrderfromDB(OrderID)
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyOrderDetailsPageDisplayed()
+		.addlogType(TestStepType.THEN)
+		.verifyOptionVisible("Contact Customer")
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyEmailCapturedInInteraction()
+		.addlogType(TestStepType.THEN)
+		.verifyOrderWrapUp()
+		.addlogType(TestStepType.THEN)
+		.fillRFCForm()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyEmailCapturedInNotes()
+		;
+	}
 
 
 	/***********
@@ -575,7 +617,15 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		return (testData);
 
 	}
-
+	@DataProvider (name="DP_ContactCustomer_CommercialOrder",parallel=true)
+	public Object[][] DP_ContactCustomer_CommercialOrder_OrderID() throws Exception{
+		Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().contactCustomer_commercialOrder();
+		String OrderID[]={Retrieval_Test_Data_By_Query.contactcustomer_eligible_commercial_orderID};
+		System.out.println("----------------------------------------OrderID[]:"+OrderID[0]);
+		Object testData[][] = {OrderID};
+		System.out.println("----------------------------------------test data:OrderID[]:"+testData[0][0]);
+		return (testData);		
+	}
 
 	@DataProvider (name="DP_ST_Adjustment_NonEligible",parallel=true)
 	public Object[][] DP_ST_Adjustment_NonEligible_OrderID() throws Exception{

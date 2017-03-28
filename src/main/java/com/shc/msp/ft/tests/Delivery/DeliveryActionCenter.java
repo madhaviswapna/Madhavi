@@ -1535,7 +1535,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyLineItemDetail()
+		.verifyLineItemDetail("Open")
 		.cancelOrderDelivery("Whole order")
 		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
 		.addlogType(TestStepType.WHEN)
@@ -1629,10 +1629,10 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyupdateScimCode("open")
+		.verifyupdateScimCode("Open")
 		
 		.addlogType(TestStepType.THEN)
-		.verifyLineItemDetail()
+		.verifyLineItemDetail("Open")
 		
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")
@@ -1694,6 +1694,98 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.recoveryServiceWindowVerification();
 
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification"}
+	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
+	public void Delivery_SCIM_Update_Captured_Notes_Verification_ReleasedOrder(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);
+		System.out.println("--------------------------------------------------------------------OrderId:"+orderId);
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyupdateScimCode("Open")		
+		.addlogType(TestStepType.THEN)
+		.verifyLineItemDetail("Open")		
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")		
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()		
+		.addlogType(TestStepType.WHEN)
+		.wrapUpOrderWithoutContactDelivery()	
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyActionCapturedHistoryNotes();
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification"}
+	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
+	public void Delivery_SCIM_Update_Captured_Notes_Verification_PartiallyShippedOrder(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Reschedule_Released_HD_Order",true);
+		System.out.println("--------------------------------------------------------------------OrderId:"+orderId);
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyupdateScimCode("Released")		
+		.addlogType(TestStepType.THEN)
+		.verifyLineItemDetail("Released")		
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")		
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()		
+		.addlogType(TestStepType.WHEN)
+		.wrapUpOrderWithoutContactDelivery()	
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyActionCapturedHistoryNotes();
 	}
 	
 }
