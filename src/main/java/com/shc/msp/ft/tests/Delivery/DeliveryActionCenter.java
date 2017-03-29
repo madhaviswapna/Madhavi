@@ -330,7 +330,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Whole order");
+		.cancelOrderDelivery("Whole order","Open");
 
 	}  
 
@@ -356,8 +356,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Line item");
-
+		.cancelOrderDelivery("Line item","Open");
 	}  
 
 
@@ -385,7 +384,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Line item");
+		.cancelOrderDelivery("Line item","Open");
+
 
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -1512,7 +1512,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	} 
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+
+@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_Cancel_Order_Captured_Notes_Verification"}
 	, description = "Cancel the whole order and verify notes and interaction are captured", enabled = true)
 	public void Delivery_Cancel_Order_Captured_Notes_Verification(TestData data) throws Exception {
@@ -1536,7 +1537,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyLineItemDetail("Open")
-		.cancelOrderDelivery("Whole order")
+		.cancelOrderDelivery("Whole order","Open")
 		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
@@ -1659,7 +1660,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Recovery_Service_Windows_Available_Open_Order_Verification"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Recovery_Service_Windows_Available_Open_Order_Verification"}
 	, description = "Verify all three recovery time window are available for open order", enabled = true)
 	public void Recovery_Service_Windows_Available_Open_Order_Verification(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1787,7 +1788,73 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyActionCapturedHistoryNotes();
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Reschedule_Preferred_Service_Window_Verification_Open_Order"}
+	, description = "Verify a time window in order detail page from preferred time window", enabled = true)
+	public void Reschedule_Preferred_Service_Window_Verification_Open_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String orderId= getProductToTest("Reschedule_Open_HD_Order",true);	
+		System.out.println("orderId:"+orderId);
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rescheduleServiceWindowOrder("OPEN","ORDER");
+	}
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Recovery_Service_Windows_Available_Partially_Shipped_Order_Verification"}
+	, description = "Verify all three recovery time window are available for partially Shipped order", enabled = true)
+	public void Recovery_Service_Windows_Available_Partially_Shipped_Order_Verification(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+		System.out.println("OrderId:"+orderId);
+
+
+		As.guestUser.goToHomePage()
+		
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		
+		.closeWarningPopupWindow()
+		
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		
+		.addlogType(TestStepType.WHEN)
+		.choosePartiallyshippedHDOrders()
+		
+		._OrderDetailsAction()
+		
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		
+		.addlogType(TestStepType.THEN)
+		.recoveryServiceWindowVerification();
+
+	}
 }
 
 

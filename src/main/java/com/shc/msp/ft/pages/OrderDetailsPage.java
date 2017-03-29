@@ -639,6 +639,15 @@ public class OrderDetailsPage extends Page {
 		public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows (must qualify)')]/parent::div/following-sibling::div[{0}]/div[2]/button","SERVICE_RECOVERY_WINDOW");
 		public final Locator SERVICE_RECOVERY_WINDOW_COUNT= new Locator("SERVICE_RECOVERY_WINDOW_COUNT","//div[contains(@ng-repeat,'recoveryWindowList')]//button","SERVICE_RECOVERY_WINDOW_COUNT");
 
+		public final Locator ORIGINAL_TIME_WINDOW= new Locator("ORIGINAL_TIME_WINDOW","//strong[@info='time_window']//ancestor::div[@label='Time Window']/div/p/span","ORIGINAL_TIME_WINDOW");
+		public final Locator TIME_WINDOW_TYPE= new Locator("TIME_WINDOW_TYPE","//strong[text()='Time Window Type:']//ancestor::div[@label='Time Window Type']/div/p/span","TIME_WINDOW_TYPE");
+		public final Locator CURRENT_TIME_WINDOW= new Locator("CURRENT_TIME_WINDOW","//strong[contains(text(),'Current Time Window')]/parent::div[contains(text(),'{0}')]","CURRENT_TIME_WINDOW");
+		public final Locator CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","CONFIRMATION_TIME_WINDOW_POP_UP");
+		public final Locator MONTH_AND_YEAR_PICKER= new Locator("MONTH_AND_YEAR_PICKER","//button[contains(@id,'datepicker')]","MONTH_AND_YEAR_PICKER");
+		public final Locator SELECTED_DATE= new Locator("SELECTED_DATE","//strong[contains(text(),'Reschedule')]/ancestor::div[contains(@ng-if,'Reschedule Delivery')]/form/div[3]//div//div[3]/table/tbody/tr/td/button[contains(@class,'dt-selected')]","SELECTED_DATE");
+		public final Locator BLUE= new Locator("BLUE","//span[contains(text(),'Selected')]/preceding-sibling::button","BLUE");
+
+
 				
 
 		
@@ -4717,7 +4726,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 	}
 	}
 
-	public void cancelOrderDelivery(String orderType) {
+	public void cancelOrderDelivery(String orderType, String orderStatus ) {
 		Logger.log("Verify whether order can be cancelled", TestStepType.STEP);
 		AjaxCondition.forElementVisible(LINE_ITEM_NAME_NOT_CANCELLED).waitForResponse();
 		String itemToCancelName = getAction().getText(LINE_ITEM_NAME_NOT_CANCELLED);
@@ -4766,13 +4775,21 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		if (orderType.equalsIgnoreCase("Whole order")) {
 			AjaxCondition.forElementVisible(COMPLETE_CANCEL_VERIFY).waitForResponse();
 			Logger.log("Verified that Order status is Cancelled", TestStepType.VERIFICATION_PASSED);
+			
+			if (orderStatus.equalsIgnoreCase("Released")){
+			AjaxCondition.forElementVisible(PEND_CODE).waitForResponse();
+			String pendCode=getAction().getText(PEND_CODE);
+			System.out.println("pend 2 -------------------"+pendCode);
+			highlight(PEND_CODE);
+			PageAssert.verifyEqual(pendCode, "TBC");}
+			else
 			AjaxCondition.forElementVisible(ORDER_STATUS_CANCELLED).waitForResponse();
 
 			int lineItem = getAction().getElementCount(LINE_ITEM_COUNT);
 			for (int i = 1; i <= lineItem; i++) {
 				AjaxCondition.forElementVisible(LINE_ITEM_TEXT.format(i)).waitForResponse();
 				if(!getAction().getText(LINE_ITEM_TEXT.format(i)).contains("Released")){//For released items only after batch job runs, the status is shown as cancelled
-					PageAssert.textPresentIn(LINE_ITEM_TEXT.format(i), "Cancelled");
+					PageAssert.textPresentIn(LINE_ITEM_TEXT.format(i), "Released");
 				}
 				Logger.log("Verified that Line item no:" + i + " is cancelled", TestStepType.VERIFICATION_PASSED);
 
@@ -5735,44 +5752,168 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		return this;
 
 	}
-	
-	public void recoveryServiceWindowVerification(){
+		public void recoveryServiceWindowVerification(){
 
-		Logger.log("Click on Reschedule button", TestStepType.STEP);
-		AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
-		getAction().scrollTo(RESCHEDULE_BUTTON);
-		getAction().click(RESCHEDULE_BUTTON);
+			if(getAction().isVisible(RESCHEDULE_BUTTON)){
+				Logger.log("Click on Reschedule button", TestStepType.STEP);
+				AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
+				getAction().scrollTo(RESCHEDULE_BUTTON);
+				getAction().click(RESCHEDULE_BUTTON);
 
 
-		Logger.log("Click on the entire order", TestStepType.STEP);
-		AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-		getAction().click(CANCEL_ENTIRE_ORDER);
-		getAction().waitFor(3000);
-		scrollDown();
-		Logger.log("verify all the time windows", TestStepType.STEP);
-		int unrestrictedWindowCount=getAction().getElementCount(UNRESTRICTED_TIME_WINDOWS_COUNT);
-		Logger.log("Unrestricted Time Windows");
-		for (int i = 1; i <=unrestrictedWindowCount; i++) {
-			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(i));
-			SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_TIME_WINDOWS.format(i),getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
-		}
-		getAction().waitFor(3000);
-		int preferedWindowCount=getAction().getElementCount(PREFERRED_TIME_WINDOWS_COUNT);
-		Logger.log("Preferred Time Windows");
-		for (int i = 1; i <=preferedWindowCount; i++) {
-			AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(i));
-			SoftAssert.checkElementAndContinueOnFailure(PREFERRED_TIME_WINDOWS.format(i),getAction().getText(PREFERRED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
-		}
-		getAction().waitFor(3000);
-		int serviceRecoveryWindowCount=getAction().getElementCount(SERVICE_RECOVERY_WINDOW_COUNT);
-		Logger.log("Service Recovery Windows ");
-		for (int i = 1; i <=serviceRecoveryWindowCount; i++) {
-			AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(i));
-			SoftAssert.checkElementAndContinueOnFailure(SERVICE_RECOVERY_WINDOW.format(i),getAction().getText(SERVICE_RECOVERY_WINDOW.format(i)), CheckLocatorFor.isPresent);
-		}
+				Logger.log("Click on the entire order", TestStepType.STEP);
+				AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
+				getAction().click(CANCEL_ENTIRE_ORDER);}
+
+			getAction().waitFor(3000);
+			getAction().scrollTo(PREFERRED_TIME_WINDOWS.format(1));
+			Logger.log("verify all the time windows", TestStepType.STEP);
+			int unrestrictedWindowCount=getAction().getElementCount(UNRESTRICTED_TIME_WINDOWS_COUNT);
+			Logger.log("Unrestricted Time Windows");
+			for (int i = 1; i <=unrestrictedWindowCount; i++) {
+				AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(i));
+				SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_TIME_WINDOWS.format(i),getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
+			}
+			getAction().waitFor(3000);
+			int preferedWindowCount=getAction().getElementCount(PREFERRED_TIME_WINDOWS_COUNT);
+			Logger.log("Preferred Time Windows");
+			for (int i = 1; i <=preferedWindowCount; i++) {
+				AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(i));
+				SoftAssert.checkElementAndContinueOnFailure(PREFERRED_TIME_WINDOWS.format(i),getAction().getText(PREFERRED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
+			}
+			getAction().waitFor(3000);
+			int serviceRecoveryWindowCount=getAction().getElementCount(SERVICE_RECOVERY_WINDOW_COUNT);
+			Logger.log("Service Recovery Windows ");
+			for (int i = 1; i <=serviceRecoveryWindowCount; i++) {
+				AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(i));
+				SoftAssert.checkElementAndContinueOnFailure(SERVICE_RECOVERY_WINDOW.format(i),getAction().getText(SERVICE_RECOVERY_WINDOW.format(i)), CheckLocatorFor.isPresent);
+			}
+
 
 
 	}
+		
+		public void rescheduleServiceWindowOrder(String type, String ordType) throws ParseException {
+			String orderWith;
+			Logger.log("Verify whether order can be rescheduled", TestStepType.STEP);
+
+			goToOrderDetail();
+			String currentDeliveryDate = getAction().getText(DELIVERY_DATE);
+			Logger.log("currentDeliveryDate is :"+currentDeliveryDate);
+			String originalTimeWindow= getAction().getText(ORIGINAL_TIME_WINDOW);
+			Logger.log("originalTimeWindow is :"+originalTimeWindow);
+			String timeWindowType=getAction().getText(TIME_WINDOW_TYPE);
+			Logger.log("timeWindowType is :"+timeWindowType);
+			String currentTimeWindow= originalTimeWindow+" ("+timeWindowType+")";
+			getContext().put("currentTimeWindow", currentTimeWindow);
+			System.out.println("currentTimeWindow:"+currentTimeWindow);
+
+			goToActionCenter();
+			AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
+			getAction().scrollTo(RESCHEDULE_BUTTON);
+			getAction().click(RESCHEDULE_BUTTON);
+
+			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
+			getAction().click(CANCEL_ENTIRE_ORDER);
+
+			AjaxCondition.forElementVisible(AVAILABLE_DATE_IN_CALANDER).waitForResponse();
+			Logger.log("Verified that calander is shown with available reschedule dates ", TestStepType.VERIFICATION_PASSED);
+			getAction().scrollTo(AVAILABLE_DATE_IN_CALANDER);
+			getAction().click(AVAILABLE_DATE_IN_CALANDER);
+			getAction().waitFor(3000);
+			//String color =getAction().driver.findElement(getAction().getWebElement(BLUE)).getCssValue("color");
+			String selectedDate=getAction().getText(SELECTED_DATE);
+			//System.out.println("color:"+color);
+			System.out.println("selectedDate:"+selectedDate);
+
+			String monthYear=getAction().getText(MONTH_AND_YEAR_PICKER);
+			String input= selectedDate+" "+monthYear;
+			SimpleDateFormat parser = new SimpleDateFormat("d MMM yyyy");
+			Date allDate = parser.parse(input);
+			SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
+			String formattedDate = formatter.format(allDate);
+			System.out.println(formattedDate);
+
+			getContext().put("selectedDate", selectedDate);
+
+
+			System.out.println(CURRENT_TIME_WINDOW.format(currentTimeWindow).getValue());
+			SoftAssert.checkElementAndContinueOnFailure(CURRENT_TIME_WINDOW.format(currentTimeWindow), "currentTimeWindow:"+currentTimeWindow, CheckLocatorFor.isPresent);
+
+			recoveryServiceWindowVerification();
+			getAction().waitFor(3000);
+			Logger.log("Selecting the Preferred Time Windows", TestStepType.STEP);
+			int rndCodeCategory = generateRandomNumberSelect(PREFERRED_TIME_WINDOWS_COUNT);
+			System.out.println("rndCodeCategory:"+rndCodeCategory);
+			Logger.log("Click on the  option #"+rndCodeCategory+" from Preferred Time Windows");
+			String updatedTimeWindow= getAction().getText(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
+			System.out.println("updatedTimeWindow:"+updatedTimeWindow);
+			getContext().put("updatedTimeWindow", updatedTimeWindow);
+			AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
+			getAction().click(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
+			SoftAssert.checkElementAndContinueOnFailure(CONFIRMATION_TIME_WINDOW_POP_UP, getAction().getText(CONFIRMATION_TIME_WINDOW_POP_UP), CheckLocatorFor.isVisible);
+			getAction().click(OK_BUTTON);
+
+
+
+			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
+
+
+			int reasonCodeCount = getAction().getElementCount(REASON_DROPDOWN_CANCEL_OPTIONS_COUNT);
+			if (reasonCodeCount == 0)
+				PageAssert.fail("Reason code drop down has no data to select");
+			else {
+				int ran = util.randomGenerator(reasonCodeCount);
+				if (ran == 0)
+					ran++;
+				Logger.log("Select one reason code from dropdown in random ", TestStepType.STEP);
+				String reasonName = getAction().getText(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran));
+				Logger.log("Select reason code " + reasonName, TestStepType.STEP);
+				AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran)).waitForResponse();
+				getAction().click(REASON_DROPDOWN_CANCEL);
+				getAction().waitFor(1000);
+				Logger.log("Select cancel reason code ", TestStepType.STEP);
+				getAction().click(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran));
+
+			}
+			AjaxCondition.forElementVisible(RESCHEDULE_SUBMIT).waitForResponse();
+			getAction().click(RESCHEDULE_SUBMIT);
+			AjaxCondition.forElementVisible(RESCHEDULE_VERIFY).waitForResponse();
+			AjaxCondition.forElementVisible(DELIVERY_DATE).waitForResponse();
+			AjaxCondition.forElementNotVisible(DELIVERY_DATE_TEXT.format(currentDeliveryDate)).waitForResponse();
+			getAction().waitFor(3000);
+			String[] updatedTimeWindowAndType=updatedTimeWindow.split("\\(");
+			String UpdatedTimeWindow=updatedTimeWindowAndType[0].trim();
+
+			String updatedTimeWindowType=updatedTimeWindowAndType[1].substring(0, updatedTimeWindowAndType[1].length()-1);
+			SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+UpdatedTimeWindow,getAction().getText(ORIGINAL_TIME_WINDOW).equalsIgnoreCase(UpdatedTimeWindow));
+			SoftAssert.checkConditionAndContinueOnFailure(updatedTimeWindowType,getAction().getText(TIME_WINDOW_TYPE).equalsIgnoreCase(updatedTimeWindowType));
+
+
+			String lDate = getAction().getText(DELIVERY_DATE);
+			String pend2 = getAction().getText(PEND_CODE);
+
+			if (type.equalsIgnoreCase("OPEN")) {
+				PageAssert.verifyEqual(pend2, "");
+			} else if (type.equalsIgnoreCase("RELEASED")) {
+				PageAssert.verifyEqual(pend2, "TBR");
+			} else {
+				PageAssert.verifyEqual(pend2, "");
+			}
+
+			//Logger.log("Verified that pend code before reshedule was: " + pend1 + " and pend code after reshedule is:" + pend2, TestStepType.VERIFICATION_PASSED);
+
+			SimpleDateFormat simpleDate = new SimpleDateFormat("mm/dd/yyyy");
+			Date date = simpleDate.parse(currentDeliveryDate);
+			System.out.println();
+			Date date2 = simpleDate.parse(lDate);
+			int comResult = date2.compareTo(date);
+			if (!(comResult > 0)) {
+				PageAssert.fail("Resheduled date is invalid");
+			}
+
+			Logger.log("Verified that delivery date is rescheduled to a later date. Date before reschedule:" + currentDeliveryDate + " Date after reschedule:" + lDate, TestStepType.VERIFICATION_PASSED);
+		}
 	
 }
 	
