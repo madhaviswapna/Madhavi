@@ -4779,7 +4779,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			if (orderStatus.equalsIgnoreCase("Released")){
 			AjaxCondition.forElementVisible(PEND_CODE).waitForResponse();
 			String pendCode=getAction().getText(PEND_CODE);
-			System.out.println("pend 2 -------------------"+pendCode);
+			System.out.println("pend code -------------------"+pendCode);
 			highlight(PEND_CODE);
 			PageAssert.verifyEqual(pendCode, "TBC");}
 			else
@@ -4788,10 +4788,12 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			int lineItem = getAction().getElementCount(LINE_ITEM_COUNT);
 			for (int i = 1; i <= lineItem; i++) {
 				AjaxCondition.forElementVisible(LINE_ITEM_TEXT.format(i)).waitForResponse();
-				if(!getAction().getText(LINE_ITEM_TEXT.format(i)).contains("Released")){//For released items only after batch job runs, the status is shown as cancelled
+				if(getAction().getText(LINE_ITEM_TEXT.format(i)).contains("Released")){//For released items only after batch job runs, the status is shown as cancelled
 					PageAssert.textPresentIn(LINE_ITEM_TEXT.format(i), "Released");
 				}
-				Logger.log("Verified that Line item no:" + i + " is cancelled", TestStepType.VERIFICATION_PASSED);
+				else
+					PageAssert.textPresentIn(LINE_ITEM_TEXT.format(i), "Cancelled");
+				//Logger.log("Verified that Line item no:" + i + " is cancelled", TestStepType.VERIFICATION_PASSED);
 
 			}
 		} else {
@@ -4814,6 +4816,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 				}
 			}
 		}
+
 	}
 	public void verifyTabsDelivery(String ordType){
 		getAction().waitFor(3000);
@@ -5602,12 +5605,14 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 
 	}
 	public void verifyLineItemDetail(String orderType){
-		getAction().waitFor(5000);
+		
 		scrollDown();
+		getAction().waitFor(3000);
 		List<String> list = new ArrayList<String>();
 		
 		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
 		System.out.println("-------------------------------------------- "+openMultiLineItem);
+		getAction().waitFor(2000);
 		Logger.log("Order have "+openMultiLineItem+" multiline item");
 		for (int i = 1; i <= openMultiLineItem; i++) {
 			list.add(getAction().getText(DIVISION.format(orderType,i))+getAction().getText(ITEM.format(orderType,i)) +"000");

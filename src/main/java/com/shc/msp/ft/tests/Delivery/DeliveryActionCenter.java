@@ -1886,6 +1886,46 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		
 	}
 	
+
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_Cancel_Order_Captured_Notes_Verification_Released_Order"}
+	, description = "Cancel the whole order and verify notes and interaction are captured for Released order", enabled = true)
+	public void Delivery_Cancel_Order_Captured_Notes_Verification_Released_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		
+		String orderId= getProductToTest("Released_HD_Line_Item",true);	
+		//System.out.println("orderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.chooseReleasedHDOrders()
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyLineItemDetail("Released")
+		.cancelOrderDelivery("Whole order","Released")
+		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedHistoryNotes();
+	}
 }
 
 
