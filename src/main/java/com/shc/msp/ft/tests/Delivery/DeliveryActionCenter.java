@@ -1855,6 +1855,37 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.recoveryServiceWindowVerification();
 
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Schedule_Follow_Up_PartiallyShipped_Order"}
+	, description = "Verify if an open HD order can be scheduled for follow up", enabled = true)
+	public void MSP_Delivery_Test_Schedule_Follow_Up_PartiallyShipped_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.scheduleFollowUp()
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: UPDATE PEND CODE")
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN);
+		
+	}
+	
 }
 
 
