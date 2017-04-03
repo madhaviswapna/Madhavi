@@ -70,7 +70,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByPhoneForDeliveryUser(phoneNumber)
+		.searchByALTPhoneForDeliveryUser(phoneNumber)
 
 		;
 	}
@@ -94,10 +94,12 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByPhoneForDeliveryUser(phoneNumber)
+		.searchBySOLDTOPhoneForDeliveryUser(phoneNumber)
 
 		;
 	}
+	
+	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Deliver_Test_search_phonenumber"}
@@ -118,7 +120,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByPhoneForDeliveryUser(phoneNumber)
+		.searchByCELLPhoneForDeliveryUser(phoneNumber)
 
 		;
 	}

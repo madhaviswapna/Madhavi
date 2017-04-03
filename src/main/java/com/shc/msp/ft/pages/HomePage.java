@@ -1590,7 +1590,60 @@ public class HomePage extends Page {
 		getAction().waitFor(2000);
 		return this;
 	}
-
+	public HomePage searchByALTPhoneForDeliveryUser(String phoneNumber) {
+		Logger.log("Search using Alternate Phone Number # : " + phoneNumber, TestStepType.STEP);
+		selectOrderTab();
+		// this.factory.homePage().closeWarningPopupWindow();
+		Logger.log("Search using Alternate Phone Number ", TestStepType.STEP);
+		Logger.log("Enter ALT Phone Number # : " +phoneNumber, TestStepType.DATA_CAPTURE);
+		AjaxCondition.forElementVisible(DELPHONENUMBER_SEARCH).waitForResponse();
+		getAction().click(DELPHONENUMBER_SEARCH);
+		getAction().type(DELPHONENUMBER_SEARCH, phoneNumber);
+		Logger.log("Click on Search Button", TestStepType.STEP);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(DELSEARCH_BUTTON).waitForResponse(3000);
+		getAction().focus(DELSEARCH_BUTTON);
+		getAction().click(DELSEARCH_BUTTON);
+		getAction().waitFor(2000);
+		return this;
+	}
+	
+	
+	public HomePage searchBySOLDTOPhoneForDeliveryUser(String phoneNumber) {
+		Logger.log("Search using SoldTo Phone Number # : " + phoneNumber, TestStepType.STEP);
+		selectOrderTab();
+		// this.factory.homePage().closeWarningPopupWindow();
+		Logger.log("Search using SoldTo Phone Number ", TestStepType.STEP);
+		Logger.log("Enter SoldTo Phone Number # : " +phoneNumber, TestStepType.DATA_CAPTURE);
+		AjaxCondition.forElementVisible(DELPHONENUMBER_SEARCH).waitForResponse();
+		getAction().click(DELPHONENUMBER_SEARCH);
+		getAction().type(DELPHONENUMBER_SEARCH, phoneNumber);
+		Logger.log("Click on Search Button", TestStepType.STEP);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(DELSEARCH_BUTTON).waitForResponse(3000);
+		getAction().focus(DELSEARCH_BUTTON);
+		getAction().click(DELSEARCH_BUTTON);
+		getAction().waitFor(2000);
+		return this;
+	}
+	
+	public HomePage searchByCELLPhoneForDeliveryUser(String phoneNumber) {
+		Logger.log("Search using CELLNO Phone Number # : " + phoneNumber, TestStepType.STEP);
+		selectOrderTab();
+		// this.factory.homePage().closeWarningPopupWindow();
+		Logger.log("Search using CELLNO Phone Number ", TestStepType.STEP);
+		Logger.log("Enter CELLNO Phone Number # : " +phoneNumber, TestStepType.DATA_CAPTURE);
+		AjaxCondition.forElementVisible(DELPHONENUMBER_SEARCH).waitForResponse();
+		getAction().click(DELPHONENUMBER_SEARCH);
+		getAction().type(DELPHONENUMBER_SEARCH, phoneNumber);
+		Logger.log("Click on Search Button", TestStepType.STEP);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(DELSEARCH_BUTTON).waitForResponse(3000);
+		getAction().focus(DELSEARCH_BUTTON);
+		getAction().click(DELSEARCH_BUTTON);
+		getAction().waitFor(2000);
+		return this;
+	}
 	/**
 	 * Click on the order tab in home page to search for orders
 	 * @return

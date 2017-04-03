@@ -313,9 +313,23 @@ public class NavigationAction extends BaseAction {
 		this.factory.homePage().verifySequenceOfDisplay();
 		return this;
 	}
+	public NavigationAction searchByALTPhoneForDeliveryUser(String phoneNumber) {
+		Logger.log("Search by phone number", TestUtils.TestStepType.WHEN);
+		this.factory.homePage().searchByALTPhoneForDeliveryUser(phoneNumber);
+		return this;
+	}
 	
+	public NavigationAction searchBySOLDTOPhoneForDeliveryUser(String phoneNumber) {
+		Logger.log("Search by phone number", TestUtils.TestStepType.WHEN);
+		this.factory.homePage().searchBySOLDTOPhoneForDeliveryUser(phoneNumber);
+		return this;
+	}
 	
-	
+	public NavigationAction searchByCELLPhoneForDeliveryUser(String phoneNumber) {
+		Logger.log("Search by phone number", TestUtils.TestStepType.WHEN);
+		this.factory.homePage().searchByCELLPhoneForDeliveryUser(phoneNumber);
+		return this;
+	}
 	public NavigationAction chooseOpenHDOrders() {
 		Logger.log("Choose open Home delivery order", TestUtils.TestStepType.GIVEN);
 		Logger.log("Choose open Home delivery order", TestUtils.TestStepType.WHEN);
