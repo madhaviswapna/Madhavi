@@ -842,6 +842,10 @@ public class OrderDetailsPage extends Page {
 		getAction().waitFor(2000);
 		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)) 	
 			Logger.log("Test Data is not valid");
+		else if (AjaxCondition.forElementVisible(DOS_ORDER_NO_LONGER_EXIST).waitWithoutException(5)) {
+			Logger.log("Order no longer exist in DOS system.");
+			System.out.println("------------------------------------ Order no longer exist in DOS system. ------------------------------------");
+		}
 		else
 		{
 			SoftAssert.checkElementAndContinueOnFailure(DOS_MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);

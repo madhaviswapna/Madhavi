@@ -121,9 +121,9 @@ public class HomePage extends Page {
 	public final Locator DOS_PHONE_FIELD = new Locator("DOS_PHONE_FIELD","//input[@name='P']", "DOS Phone Number Field");
 	public final Locator DOS_SALESCHECK_FIELD = new Locator("DOS_SALESCHECK_FIELD","//input[@name='S']", "Sales Check Number Field");
 	public final Locator DOS_DATEFROM_FIELD = new Locator("DOS_DATEFROM_FIELD", "//input[@id='deliveryDate']", "Delivery Date Field");
-	public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[3]//tr[2]//td[contains(@id,'datepicker')][1]","Selected DOS Data");
+	//public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[3]//tr[2]//td[contains(@id,'datepicker')][1]","Selected DOS Data");
 	//public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[2]//tr[5]//td[contains(@id,'datepicker')][1]","Selected From Data");
-
+	public final Locator SELECTED_DOS_DATE = new Locator("","((//table)[3]//span[contains(text(),'{0}') and @class='ng-binding'])","Selected DOS Data");
 
 	public final Locator FIRSTNAME_FIELD = new Locator("FIRSTNAME_FIELD", "//input[@name='firstName']", "First Name Field");
 	public final Locator LASTNAME_FIELD = new Locator("LASTNAME_FIELD", "//input[@name='lastName']", "Last Name Field");
@@ -996,12 +996,15 @@ public class HomePage extends Page {
 	public HomePage  searchDOSOrdersByDate(){
 		selectOrderTab();
 		getAction().waitFor(1000);
+		DateFormat df = new SimpleDateFormat("dd");
+	    Date dateobj = new Date();
+	    String todaysDate = df.format(dateobj);
 		Logger.log("Click on from date button " , TestStepType.SUBSTEP);
 		AjaxCondition.forElementVisible(DOS_DATEFROM_FIELD).waitForResponse();
 		getAction().click(DOS_DATEFROM_FIELD);
 		getAction().waitFor(1000);
-		AjaxCondition.forElementVisible(SELECTED_DOS_DATE).waitForResponse();
-		getAction().click(SELECTED_DOS_DATE);
+		AjaxCondition.forElementVisible(SELECTED_DOS_DATE.format(todaysDate)).waitForResponse();
+		getAction().click(SELECTED_DOS_DATE.format(todaysDate));
 		getAction().waitFor(1000);
 		Logger.log("Delivery Date Selected is "+ getAction().getValue(DOS_DATEFROM_FIELD), TestStepType.DATA_CAPTURE);
 		Logger.log("Click on Search Button", TestStepType.STEP);

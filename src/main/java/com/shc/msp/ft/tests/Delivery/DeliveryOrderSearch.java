@@ -229,7 +229,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.closeWarningPopupWindow()
 		.searchDOSOrdersByDate()
-		.selectOrderInMyRecentDeliveryInteractions(3)
+		.selectOrderInMyRecentDeliveryInteractions(1)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
