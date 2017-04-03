@@ -50,7 +50,79 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Deliver_Test_search_phonenumber"}
+	, description = "Search by phone number and verify results", enabled = true)
+	public void MSP_Delivery_Test_Search_ALTPhonenumber(TestData data) {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		//user.userName = "testdelivery0001";
+		//user.password = "TestPassword";
+		String phoneNumber = "3145550792";
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByPhoneForDeliveryUser(phoneNumber)
 
+		;
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Deliver_Test_search_phonenumber"}
+	, description = "Search by phone number and verify results", enabled = true)
+	public void MSP_Delivery_Test_Search_SOLDTOPhonenumber(TestData data) {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		//user.userName = "testdelivery0001";
+		//user.password = "TestPassword";
+		String phoneNumber ="3145554037";
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByPhoneForDeliveryUser(phoneNumber)
+
+		;
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Deliver_Test_search_phonenumber"}
+	, description = "Search by phone number and verify results", enabled = true)
+	public void MSP_Delivery_Test_Search_CELLPhonenumber(TestData data) {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		//user.userName = "testdelivery0001";
+		//user.password = "TestPassword";
+		String phoneNumber ="5735551621";
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByPhoneForDeliveryUser(phoneNumber)
+
+		;
+	}
+	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Sequence"}
 	, description = "Verify the sequence in which the orders appear on order search", enabled = true)
