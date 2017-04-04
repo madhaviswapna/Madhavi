@@ -358,7 +358,36 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.cancelOrderDelivery("Line item","Open");
 	}  
-
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,"TestGroup.MSPP0DeliveryTests","MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item"}
+	, description = "Verify if a line item for Partially Shipped order can be cancelled", enabled = true)
+	public void MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		//String orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true);	
+		
+		String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order",true).split(",");
+		String orderId=values[0];
+		String dc_no=values[1];
+		System.out.println("orderId:"+orderId+" "+dc_no);
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, dc_no)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.cancelOrderDelivery("Line item","Partially Shipped");
+	}  
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Cancel_Released_Line_Item"}

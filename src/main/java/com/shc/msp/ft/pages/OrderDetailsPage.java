@@ -4743,12 +4743,13 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
 			getAction().click(CANCEL_ENTIRE_ORDER);
 		} else {
+			String lineItemIndex = "1";
 			AjaxCondition.forElementVisible(CANCEL_LINE_ITEM).waitForResponse();
 			getAction().click(CANCEL_LINE_ITEM);
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
 			getAction().click(LINE_ITEM_ROW);
-			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
-			getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE));
+			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex)).waitForResponse();
+			getAction().type(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(lineItemIndex)));
 			AjaxCondition.forElementVisible(LINE_ITEM_CANCEL).waitForResponse();
 			getAction().waitFor(1000);
 			getAction().scrollTo(LINE_ITEM_CANCEL);
@@ -4804,18 +4805,19 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(COMPLETE_CANCEL_VERIFY_FOR_LINE_ITEM).waitForResponse();
 			AjaxCondition.forElementVisible(LINE_ITEM_TEXT.format(1)).waitForResponse();
 			if(!getAction().getText(LINE_ITEM_TEXT.format(1)).contains("Released")){ //For released items only after batch job runs, the status is shown as cancelled
+				System.out.println("Failing locator --------------------------   "+LINE_ITEM_NAME_STATUS.format(itemToCancelName,"Cancelled").getValue()+" ------------------");
+				System.out.println("cancelled item name    ||"+itemToCancelName+"||");
 				AjaxCondition.forElementVisible(LINE_ITEM_NAME_STATUS.format(itemToCancelName,"Cancelled")).waitForResponse();
 				PageAssert.textPresentIn(LINE_ITEM_NAME_STATUS.format(itemToCancelName,""), "Cancelled");
 			}
 			Logger.log("Verified that Line item is cancelled", TestStepType.VERIFICATION_PASSED);
-
 			if(getAction().getElementCount(LINE_ITEM_NAME_CANCELLED)==getAction().getElementCount(LINE_ITEM_COUNT)){
 				Logger.log("Verified that Order status is Cancelled", TestStepType.VERIFICATION_PASSED);
 				AjaxCondition.forElementVisible(ORDER_STATUS_CANCELLED).waitForResponse();
 			}else{
 				Logger.log("Verified that Order status is Open", TestStepType.VERIFICATION_PASSED);
 				AjaxCondition.forElementVisible(LINE_ITEM_TEXT.format(1)).waitForResponse();
-				if(!getAction().getText(LINE_ITEM_TEXT.format(1)).contains("Released")){//For released items only after batch job runs, the status is shown as cancelled
+				if(!getAction().getText(LINE_ITEM_TEXT.format(1)).contains("Released") && !orderStatus.equalsIgnoreCase("Partially Shipped")){//For released items only after batch job runs, the status is shown as cancelled
 					AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
 				}
 			}
