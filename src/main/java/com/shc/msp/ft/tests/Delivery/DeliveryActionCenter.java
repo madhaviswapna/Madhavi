@@ -360,7 +360,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}  
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,"TestGroup.MSPP0DeliveryTests","MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item"}
 	, description = "Verify if a line item for Partially Shipped order can be cancelled", enabled = true)
 	public void MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item(TestData data) throws Exception {
 		addCloneIDHostname(data);

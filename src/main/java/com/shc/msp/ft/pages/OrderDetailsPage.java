@@ -513,7 +513,8 @@ public class OrderDetailsPage extends Page {
 	public final Locator LINE_ITEM_COUNT= new Locator("","//td[contains(@data-title,'Dos Item Status')]","LINE ITEM COUNT");
 	public final Locator LINE_ITEM_TEXT= new Locator("","(//td[contains(@data-title,'Dos Item Status')])[{0}]","LINE_ITEM_TEXT");
 	public final Locator LINE_ITEM_NAME_STATUS= new Locator("","//td[contains(@data-title,'Description') and contains(text(),'{0}')]//ancestor::tr//td[contains(@data-title,'Dos Item Status') and contains(text(),'{1}')]","Line Item Name Status");
-	public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and not(contains(text(),'Cancelled'))]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
+	//public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and not(contains(text(),'Cancelled'))]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
+	public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","(//tr[@value='item'])[1]/td[2]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and contains(text(),'Cancelled')]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
 	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","(//tr[@value='item'])[1]","LINE ITEM ROW");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[6]","LINE ITEM ROW Quantity Available");
@@ -4732,8 +4733,9 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 
 	public void cancelOrderDelivery(String orderType, String orderStatus ) {
 		Logger.log("Verify whether order can be cancelled", TestStepType.STEP);
-		AjaxCondition.forElementVisible(LINE_ITEM_NAME_NOT_CANCELLED).waitForResponse();
-		String itemToCancelName = getAction().getText(LINE_ITEM_NAME_NOT_CANCELLED);
+		//AjaxCondition.forElementVisible(LINE_ITEM_NAME_NOT_CANCELLED).waitForResponse();
+		//String itemToCancelName = getAction().getText(LINE_ITEM_NAME_NOT_CANCELLED);
+		String itemToCancelName = "";
 		goToActionCenter();
 		AjaxCondition.forElementVisible(CANCEL_BUTTON).waitForResponse();
 		getAction().scrollTo(CANCEL_BUTTON);
@@ -4751,6 +4753,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex)).waitForResponse();
 			getAction().type(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(lineItemIndex)));
 			AjaxCondition.forElementVisible(LINE_ITEM_CANCEL).waitForResponse();
+			itemToCancelName =  getAction().getText(LINE_ITEM_NAME_NOT_CANCELLED);
 			getAction().waitFor(1000);
 			getAction().scrollTo(LINE_ITEM_CANCEL);
 			getAction().click(LINE_ITEM_CANCEL);
@@ -4805,8 +4808,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(COMPLETE_CANCEL_VERIFY_FOR_LINE_ITEM).waitForResponse();
 			AjaxCondition.forElementVisible(LINE_ITEM_TEXT.format(1)).waitForResponse();
 			if(!getAction().getText(LINE_ITEM_TEXT.format(1)).contains("Released")){ //For released items only after batch job runs, the status is shown as cancelled
-				System.out.println("Failing locator --------------------------   "+LINE_ITEM_NAME_STATUS.format(itemToCancelName,"Cancelled").getValue()+" ------------------");
-				System.out.println("cancelled item name    ||"+itemToCancelName+"||");
+
 				AjaxCondition.forElementVisible(LINE_ITEM_NAME_STATUS.format(itemToCancelName,"Cancelled")).waitForResponse();
 				PageAssert.textPresentIn(LINE_ITEM_NAME_STATUS.format(itemToCancelName,""), "Cancelled");
 			}
