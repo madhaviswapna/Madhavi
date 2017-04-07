@@ -622,8 +622,21 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
 		.rescheduleDeliveryOrder("PARTIALLY SHIPPED","ORDER")
+		.verifyAdjustmentCapturedInInteraction("Reschedule Delivery Date")
 		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
+		._OrderDetailsAction()
+		 .goToActionCenter()
+		 .wrapUpOrderWithoutContactDelivery()
+		 ._NavigationAction()
+		 .addlogType(TestStepType.WHEN)
+		 .searchByDOSSalesCheck(salescheck)
+		 .addlogType(TestStepType.WHEN)
+		 .selectOrderInMyRecentDeliveryInteractions(1)
+		 .closeWarningPopupWindow()
+		 ._OrderDetailsAction()
+		 .verifyActionCapturedInNotes("Reschedule Delivery Date")
+		 ;
 
 	}  
 

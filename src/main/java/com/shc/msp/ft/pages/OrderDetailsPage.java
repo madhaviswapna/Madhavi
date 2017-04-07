@@ -4434,7 +4434,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);
 		String type=(String) getContext().get("adjustmentOption");
-		System.out.println("locatro under trial "+ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type).getValue());
+		System.out.println("locator under trial "+ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type).getValue());
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type)).waitForResponse();
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
@@ -5111,7 +5111,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
 		getAction().scrollTo(RESCHEDULE_BUTTON);
 		getAction().click(RESCHEDULE_BUTTON);
-		
+		getContext().put("adjustmentOption", "");
 		orderWith = (String) getContext().get("orderWith");
 		if (orderWith==null){
 			orderWith="nothingSpecial";
