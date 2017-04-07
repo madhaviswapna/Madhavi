@@ -576,7 +576,21 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleDeliveryOrder("RELEASED","ORDER")
 		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
+		.verifyAdjustmentCapturedInInteraction("Reschedule Delivery Date")
+		._OrderDetailsAction()
+		 .goToActionCenter()
+		 .wrapUpOrderWithoutContactDelivery()
+		 ._NavigationAction()
+		 .addlogType(TestStepType.WHEN)
+		 .searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		 .addlogType(TestStepType.WHEN)
+		 .selectOrderInMyRecentDeliveryInteractions(1)
+		 .closeWarningPopupWindow()
+		 ._OrderDetailsAction()
+		 .verifyActionCapturedInNotes("Reschedule Delivery Date")
+		 ;
+
 
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -857,8 +871,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		//.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		.searchByDeliveryOrderId("876420","8934")
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		//.searchByDeliveryOrderId("876420","8934")
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
