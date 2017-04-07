@@ -647,7 +647,8 @@ public class OrderDetailsPage extends Page {
 		public final Locator MONTH_AND_YEAR_PICKER= new Locator("MONTH_AND_YEAR_PICKER","//button[contains(@id,'datepicker')]","MONTH_AND_YEAR_PICKER");
 		public final Locator SELECTED_DATE= new Locator("SELECTED_DATE","//strong[contains(text(),'Reschedule')]/ancestor::div[contains(@ng-if,'Reschedule Delivery')]/form/div[3]//div//div[3]/table/tbody/tr/td/button[contains(@class,'dt-selected')]","SELECTED_DATE");
 		public final Locator BLUE= new Locator("BLUE","//span[contains(text(),'Selected')]/preceding-sibling::button","BLUE");
-
+		public final Locator DELIVERY_REASON_DROPDOWN_OPTIONS= new Locator("DELIVERY_REASON_DROPDOWN_OPTIONS","//select[@name='reasonCode']/option[contain(text(),'{0}')]","DELIVERY_REASON_DROPDOWN_OPTIONS");
+		public final Locator WRAP_UP= new Locator("WRAP UP ORDER & CONTACT","//button[text()='WRAP UP']","WRAP UP ORDER & CONTACT");
 
 				
 
@@ -5927,7 +5928,43 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 
 			Logger.log("Verified that delivery date is rescheduled to a later date. Date before reschedule:" + currentDeliveryDate + " Date after reschedule:" + lDate, TestStepType.VERIFICATION_PASSED);
 		}
-	
+		public OrderDetailsPage verifyReasoncodeAndWrapup(){
+			 Logger.log("Click on Wrap Up button in Action Center");
+			 AjaxCondition.forElementVisible(WRAPUP_BUTTON).waitForResponse();
+			 getAction().scrollTo(WRAPUP_BUTTON);
+			 getAction().click(WRAPUP_BUTTON);
+			 getAction().waitFor(4000);
+			 
+			 int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
+			 Logger.log("Select option #"+rndCodeCategory+" in category select");
+			 AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
+			 getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
+			 
+			 int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
+			 
+			 System.out.println("-----------------------------------------------------------------------------"+DELIVERY_REASON_DROPDOWN_COUNT);
+			 Logger.log("Select option #"+rndCodeReason+" in category select");
+			 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
+			 
+			 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
+			//select[@ng-model='selected.reasonCode']/option[contains(text(),'{0}')]
+			 getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
+			 
+			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is")).waitWithoutException(3);
+			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is - gift, spouse")).waitWithoutException(3);
+			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order Cancelled")).waitWithoutException(3);
+			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order converted to Dock Pick-up with Installation")).waitWithoutException(3);
+			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("elivery Order referred to Loss Prevention")).waitWithoutException(3);
+			
+			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is - gift, spouse"),true);
+			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order Cancelled"),true);
+			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order converted to Dock Pick-up with Installation"),true);
+			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order referred to Loss Prevention"));
+			 getAction().click(WRAP_UP);
+			 getAction().waitFor(4000);
+			 return this;
+		
+		}
 }
 	
 

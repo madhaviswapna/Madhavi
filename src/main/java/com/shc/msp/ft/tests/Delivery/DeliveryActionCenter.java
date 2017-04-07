@@ -444,8 +444,21 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
 		.rescheduleDeliveryOrder("OPEN","ORDER")
+		.verifyAdjustmentCapturedInInteraction("Reschedule Delivery Date")
 		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
+		._OrderDetailsAction()
+		 .goToActionCenter()
+		 .wrapUpOrderWithoutContactDelivery()
+		 ._NavigationAction()
+		 .addlogType(TestStepType.WHEN)
+		 .searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		 .addlogType(TestStepType.WHEN)
+		 .selectOrderInMyRecentDeliveryInteractions(1)
+		 .closeWarningPopupWindow()
+		 ._OrderDetailsAction()
+		 .verifyActionCapturedInNotes("Reschedule Delivery Date")
+		 ;
 
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -839,11 +852,13 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
 		.login(user)
+		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Account Validation")
 		.addlogType(TestStepType.THEN)
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		//.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId("876420","8934")
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
@@ -853,10 +868,12 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.queueForFollowUp("Member receiving notifications for delivery not purchased")
 		.addlogType(TestStepType.WHEN)
 		._NavigationAction()
-		.verifyDeliveryOfflineagent();
-
+		.verifyDeliveryOfflineagent()
+		.selectCaseFromAssignedQueue()
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.verifyReasoncodeAndWrapup();
 	} 
-
 
 
 	/**

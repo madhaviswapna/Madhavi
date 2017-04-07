@@ -550,49 +550,79 @@ public class HomePage extends Page {
 		return this;
 	}
 
-	public HomePage verifydeliveryagent() {
+	public HomePage VerifyDeliveryAgent() {
+		getAction().waitFor(1000);
 		closeWarningPopupWindow();
-		Logger.log("Verify user role is 'DELIVERY AGENT'", TestStepType.STEP);
-		Logger.log("Click on view profile link", TestStepType.SUBSTEP);
+		Logger.log("Verify user is in 'Delivery agent' mode", TestStepType.STEP);
 		AjaxCondition.forElementVisible(VIEW_PROFILE_LINK).waitForResponse();
 		if(getAction().getText(VIEW_PROFILE_LINK).split("\\|")[1].trim().equals("DELIVERY AGENT")){
 			return this;
 		}
 		getAction().click(VIEW_PROFILE_LINK);
-		getAction().waitFor(3000);
-		Logger.log("Verify agent role is displayed", TestStepType.SUBSTEP);
-		AjaxCondition.forElementVisible(DELIVERY_AGENT_ACTIVE).waitWithoutException(10);
-		if (getSelectedOption(USER_ROLE).equals("DELIVERY AGENT")) {
-			Logger.log("User  is in 'DELIVERY AGENT' mode", TestStepType.VERIFICATION_STEP);
-			Logger.log("Click on close button in profile",TestStepType.SUBSTEP);
-			AjaxCondition.forElementVisible(CLOSE_PROFILE_MODAL).waitForResponse();
-			getAction().click(CLOSE_PROFILE_MODAL);
-		} else {
-			Logger.log("Currently user is in " + getSelectedOption(USER_ROLE), TestStepType.SUBSTEP);
-			getAction().selectByText(USER_ROLE, "ONLINE AGENT");
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(AGENT_ACTIVE_ROLE).waitWithoutException(10);
+		if (getAction().isVisible(AGENT_ACTIVE_ROLE) && getAction().isSelected(DELIVERYAGENT_INACTIVE)) {
 			getAction().waitFor(1000);
-			Logger.log("Switch role to online agent",TestStepType.SUBSTEP);
-			getAction().click(SAVE_CHANGES_BUTTON);
-			Logger.log("Accept role change confirmation in popup",TestStepType.SUBSTEP);
-			AjaxCondition.forElementVisible(SWITCH_ROLE_POPUP_PAGE).waitForResponse(10);
-			AjaxCondition.forElementVisible(OK_BUTTON).waitForResponse(5);
-			//getAction().waitFor(2000);
+			Logger.log("User  is in 'Delivery agent' mode", TestStepType.SUBSTEP);
+			AjaxCondition.forElementVisible(DELIVERYAGENT_INACTIVE).waitForResponse(10);
+			getAction().click(DELIVERYAGENT_INACTIVE);
+			getAction().waitFor(2000);
+			AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse(10);
+			Logger.log("Accepting role change confirmation", TestStepType.SUBSTEP);
+			getAction().waitFor(2000);
+			getAction().click(SAVE_BUTTON);
+			getAction().waitFor(1000);
+			AjaxCondition.forElementVisible(OK_BUTTON).waitForResponse(10);
+			getAction().click(OK_BUTTON);
+			Logger.log("Click on close button in profile",TestStepType.SUBSTEP);
+			getAction().waitFor(2000);
+			AjaxCondition.forElementVisible(CLOSE_PROFILE_MODAL).waitForResponse(10);
+			getAction().click(CLOSE_PROFILE_MODAL);
+
+		} else {
+			AjaxCondition.forElementVisible(USER_ROLE).waitForResponse();
+			Logger.log("Currently user is in " + getSelectedOption(USER_ROLE), TestStepType.SUBSTEP);
+			Logger.log("Changing to  'delivery agent' mode", TestStepType.SUBSTEP);
+			getAction().waitFor(1000);
+			getAction().click(DELIVERYAGENT_INACTIVE);
+			getAction().waitFor(2000);
+			AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse(10);
+			Logger.log("Accepting role change confirmation", TestStepType.SUBSTEP);
+			getAction().waitFor(2000);
+			getAction().click(SAVE_BUTTON);
+			getAction().waitFor(1000);
+			AjaxCondition.forElementVisible(OK_BUTTON).waitForResponse(10);
 			getAction().click(OK_BUTTON);
 			getAction().waitFor(1000);
+			AjaxCondition.forElementVisible(SWITCH_ROLE_POPUP).waitForResponse(10);
 			getAction().click(SWITCH_ROLE_POPUP);
-			getAction().waitFor(1000);
+			
+			// Close popup when not testing CTI
+			
+				if(AjaxCondition.forElementVisible(PHONE_ID).waitWithoutException(5)){
+					if (getAction().isElementPresent(PHONE_ID)) {
+						Logger.log("Click cancel on the PHONE ID popup", TestStepType.STEP);
+						verifyPhoneIdCancel();
+						TAB_NAME = new Locator("TAB_NAME", "//div[@class='layout horizontal start-justified center']//div[contains(text(),'{0}')]//parent::span/div[2]", "TAB_NAME");
+					}
+				}
+				
+			getAction().waitFor(3000);
+			
 			if(AjaxCondition.forElementVisible(VIEW_PROFILE_LINK).waitForResponse(30)){
 				getAction().click(VIEW_PROFILE_LINK);
-				if (getAction().isVisible(DELIVERY_AGENT_ACTIVE)) {
-					Logger.log("User  is changed to 'DELIVERY AGENT' mode", TestStepType.STEP);
+				getAction().waitFor(5000);
+				if (getAction().isSelected(DELIVERYAGENT_INACTIVE)) {
+					getAction().waitFor(1000);
+					Logger.log("User  is changed to 'Delivery agent' mode", TestStepType.STEP);
 				} else {
-					PageAssert.fail("User role was not changed to 'DELIVERY AGENT' mode");
+					PageAssert.fail("User is not in 'Delivery agent' mode");
 				}
-				getAction().click(SWITCH_ROLE_POPUP);
-				getAction().waitFor(1000);
 			}else{
 				PageAssert.fail("View Profile Link is not Visible");
 			}
+			getAction().click(SWITCH_ROLE_POPUP);
+			getAction().waitFor(1000);
 		}
 
 		return this;
@@ -812,71 +842,6 @@ public class HomePage extends Page {
 		
 		return this;
 		
-	}
-	public HomePage VerifyDeliveryAgent() {
-		getAction().waitFor(1000);
-		closeWarningPopupWindow();
-		Logger.log("Verify user is in 'Delivery agent' mode", TestStepType.STEP);
-		AjaxCondition.forElementVisible(VIEW_PROFILE_LINK).waitForResponse();
-		if(getAction().getText(VIEW_PROFILE_LINK).split("\\|")[1].trim().equals("DELIVERY AGENT")){
-			return this;
-		}
-		getAction().click(VIEW_PROFILE_LINK);
-		getAction().waitFor(2000);
-		AjaxCondition.forElementVisible(AGENT_ACTIVE_ROLE).waitWithoutException(10);
-		if (getAction().isVisible(AGENT_ACTIVE_ROLE) && getAction().isSelected(DELIVERYAGENT_INACTIVE)) {
-			getAction().waitFor(1000);
-			Logger.log("User  is in 'Delivery agent' mode", TestStepType.SUBSTEP);
-			AjaxCondition.forElementVisible(DELIVERYAGENT_INACTIVE).waitForResponse(10);
-			getAction().click(DELIVERYAGENT_INACTIVE);
-			getAction().waitFor(2000);
-			AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse(10);
-			Logger.log("Accepting role change confirmation", TestStepType.SUBSTEP);
-			getAction().waitFor(2000);
-			getAction().click(SAVE_BUTTON);
-			getAction().waitFor(1000);
-			AjaxCondition.forElementVisible(OK_BUTTON).waitForResponse(10);
-			getAction().click(OK_BUTTON);
-			Logger.log("Click on close button in profile",TestStepType.SUBSTEP);
-			getAction().waitFor(2000);
-			AjaxCondition.forElementVisible(CLOSE_PROFILE_MODAL).waitForResponse(10);
-			getAction().click(CLOSE_PROFILE_MODAL);
-
-		} else {
-			AjaxCondition.forElementVisible(USER_ROLE).waitForResponse();
-			Logger.log("Currently user is in " + getSelectedOption(USER_ROLE), TestStepType.SUBSTEP);
-			Logger.log("Changing to  'delivery agent' mode", TestStepType.SUBSTEP);
-			getAction().waitFor(1000);
-			getAction().click(DELIVERYAGENT_INACTIVE);
-			getAction().waitFor(2000);
-			AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse(10);
-			Logger.log("Accepting role change confirmation", TestStepType.SUBSTEP);
-			getAction().waitFor(2000);
-			getAction().click(SAVE_BUTTON);
-			getAction().waitFor(1000);
-			AjaxCondition.forElementVisible(OK_BUTTON).waitForResponse(10);
-			getAction().click(OK_BUTTON);
-			getAction().waitFor(1000);
-			AjaxCondition.forElementVisible(SWITCH_ROLE_POPUP).waitForResponse(10);
-			getAction().click(SWITCH_ROLE_POPUP);
-			getAction().waitFor(1000);
-			if(AjaxCondition.forElementVisible(VIEW_PROFILE_LINK).waitForResponse(30)){
-				getAction().click(VIEW_PROFILE_LINK);
-				getAction().waitFor(5000);
-				if (getAction().isSelected(DELIVERYAGENT_INACTIVE)) {
-					getAction().waitFor(1000);
-					Logger.log("User  is changed to 'Delivery agent' mode", TestStepType.STEP);
-				} else {
-					PageAssert.fail("User is not in 'Delivery agent' mode");
-				}
-			}else{
-				PageAssert.fail("View Profile Link is not Visible");
-			}
-			getAction().click(SWITCH_ROLE_POPUP);
-			getAction().waitFor(1000);
-		}
-
-		return this;
 	}
 
 	public HomePage VerifyDeliveryOfflineAgent() {

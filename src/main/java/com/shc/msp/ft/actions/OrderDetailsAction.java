@@ -659,7 +659,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType);
 		return this;
 	}
-
+	public OrderDetailsAction verifyReasoncodeAndWrapup(){
+		Logger.log("Wrapup Order and Contact", TestUtils.TestStepType.WHEN);
+		this.factory.orderdetailspage().verifyReasoncodeAndWrapup();
+		return this;
+	}
 
 		
 }
