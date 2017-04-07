@@ -37,7 +37,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		user.userName=UserPool.getDeliveryUser();
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
-		String phoneNumber ="8888888888";
+		String phoneNumber = getProductToTest("MSP_Delivery_Phone");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -61,7 +61,8 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		user.userName=UserPool.getDeliveryUser();
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
-		String phoneNumber = "3145550792";
+		//String phoneNumber = "3145550792";
+		String phoneNumber = getProductToTest("MSP_Delivery_Alternate_Phone");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -85,7 +86,8 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		user.userName=UserPool.getDeliveryUser();
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
-		String phoneNumber ="3145554037";
+		//String phoneNumber ="3145554037";
+		String phoneNumber = getProductToTest("MSP_Delivery_Sold_To_Phone");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -111,7 +113,8 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		user.userName=UserPool.getDeliveryUser();
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
-		String phoneNumber ="5735551621";
+		//String phoneNumber ="5735551621";
+		String phoneNumber = getProductToTest("MSP_Delivery_Cell_Phone");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -135,7 +138,8 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		//MongoDB.createUser(user.userName);
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
-		String phoneNumber ="6164503584";
+		//String phoneNumber ="6164503584";
+		String phoneNumber = getProductToTest("MSP_Delivery_Sequence_Phone");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
