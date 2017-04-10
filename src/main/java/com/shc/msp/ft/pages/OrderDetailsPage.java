@@ -4516,7 +4516,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(RERESERVE_ITEM.format(1)).waitForResponse();
 			getAction().click(RERESERVE_ITEM.format(1));
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
-			getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED));
+			getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
 			getAction().waitFor(3000);
 			num=1;
 		}
@@ -5543,9 +5543,15 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 	 getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
 	 
 	 int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
-	 Logger.log("Select option #"+rndCodeReason+" in category select");
-	 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
-	 getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
+	 	try{
+		 Logger.log("Select option #"+rndCodeReason+" in category select");
+		 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
+		 getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
+	 	}catch(Exception e){
+	 		Logger.log("Reason Code Dropdown empty. Proceeding with Wrapup without selecting any Reason Code");
+	 		e.printStackTrace();
+	 	}
+	 
 	 Logger.log("Select All in Items for contact");
 	 getAction().click(SELECT_ITEMS_FOR_CONTACT);
 	 Logger.log("Click WRAP UP & CONTINUE W/ CONTACT");

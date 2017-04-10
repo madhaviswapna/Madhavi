@@ -216,9 +216,9 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
-		ProductData order = getProductDataToTest("MSP_Delivery_Order");
+		ProductData order = getProductDataToTest("Reschedule_Open_HD_Order");
 		String dosorderID=order.getPartNumber().toString();
-		String dosunitID=order.getUnitNumber().toString();
+		String dosunitID=DcNumber.DC_NO;//order.getUnitNumber().toString();
 		String dosOrderInfo = dosorderID + "-" + dosunitID;
 
 		As.guestUser.goToHomePage()

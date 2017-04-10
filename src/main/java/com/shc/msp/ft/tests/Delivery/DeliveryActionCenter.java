@@ -125,14 +125,14 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible_Partially_Shipped_Orders"}
 	, description = "Verify whether rereserve button is present for partially HD shipped orders", enabled = true)
-	public void MSP_Delivery_Test_Rereserve_Eligible_Partially_Shipped_Orders(TestData data) throws ParseException {
+	public void MSP_Delivery_Test_Rereserve_Eligible_Partially_Shipped_Orders(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 
 		//String salescheck= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");
 
-		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -149,7 +149,21 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.verifyRereservebuttonPresent();
+		.rereserveItem("Partially Shipped","Line Item")
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RERESERVATION")
+		._OrderDetailsAction()
+		 .goToActionCenter()
+		 .wrapUpOrderWithoutContactDelivery()
+		 ._NavigationAction()
+		 .addlogType(TestStepType.WHEN)
+		 .searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		 .addlogType(TestStepType.WHEN)
+		 .selectOrderInMyRecentDeliveryInteractions(1)
+		 .closeWarningPopupWindow()
+		 ._OrderDetailsAction()
+		 .verifyActionCapturedInNotes("Re Reserve Delivery")
+		 ;
 
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
