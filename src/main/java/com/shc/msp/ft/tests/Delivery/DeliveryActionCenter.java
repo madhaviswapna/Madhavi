@@ -116,7 +116,10 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.verifyRereservebuttonPresent();
+		.verifyRereservebuttonPresent()
+		.rereserveItem("released","whole order")
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RERESERVATION");
 
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,

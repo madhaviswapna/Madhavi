@@ -518,6 +518,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator LINE_ITEM_NAME_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and contains(text(),'Cancelled')]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
 	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","(//tr[@value='item'])[1]","LINE ITEM ROW");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[6]","LINE ITEM ROW Quantity Available");
+	public final Locator LINE_ITEM_ROW_QUANTITY_ORDERED= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[10]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE= new Locator("","//input[@name='selectedQuantity']//ancestor::tr//td[8]","LINE ITEM ROW Quantity Available Even Exchange");
 	public final Locator LINE_ITEM_ROW_QUANTITY= new Locator("LINE_ITEM_ROW_QUANTITY","(//input[@name='selectedQuantity'])[{0}]","LINE ITEM ROW Quantity");
 	public final Locator LINE_ITEM_ROW_QUANTITY_COUNT= new Locator("LINE_ITEM_ROW_QUANTITY_COUNT","(//input[@name='selectedQuantity'])[{0}]","LINE ITEM ROW Quantity");
@@ -4502,20 +4503,20 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		int num=0;
 		if(order.equalsIgnoreCase("whole order")){
 			num=getAction().getVisibleElementCount(RERESERVE_ITEM_COUNT);
-		for(int i=1;i<=num;i++){
-			getAction().scrollTo(RERESERVE_ITEM.format(i));
-			AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
-			getAction().click(RERESERVE_ITEM.format(i));
-			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
-			getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(i)));
-			getAction().waitFor(3000);
-		}
+			for(int i=1;i<=num;i++){
+				getAction().scrollTo(RERESERVE_ITEM.format(i));
+				AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
+				getAction().click(RERESERVE_ITEM.format(i));
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
+				getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
+				getAction().waitFor(3000);
+			}
 		}
 		else{
 			AjaxCondition.forElementVisible(RERESERVE_ITEM.format(1)).waitForResponse();
 			getAction().click(RERESERVE_ITEM.format(1));
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
-			getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE));
+			getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED));
 			getAction().waitFor(3000);
 			num=1;
 		}
@@ -4542,7 +4543,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			getAction().waitFor(4000);
 			String newDosOrderNumber = getAction().getText(DOS_ORDER_SUMMARY_ORDER_NUMBER);
 			System.out.println("New order created    "+newDosOrderNumber+" Old order "+dosOrderNumber);
-			SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
+			SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for re reserve:-"+newDosOrderNumber);
 			Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
 			AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
 		}
