@@ -148,4 +148,41 @@ public class EvenExchange extends BaseTestsEx{
 					  .verifyEvenExchangeNotAllowed()
 					  ;
 			}
+			
+			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+		            groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Test_Even_Exchange_Open_Order"}
+		            , description = "Even Exchange for Open Order", enabled = true)
+		     	public void Test_Even_Exchange_Released_Order(TestData data) {
+					LogFormatterAction.beginSetup();
+		    		User user = new User(); 
+		    		user.userName=UserPool.getDeliveryUser();
+					String orderType = "Released";
+					//ProductData orderDetails= getProductDataToTest("Even_Exchange_Open_HD_Order");
+
+					String orderId= getProductToTest("Rereserve_Eligible_Released_Order",true);
+					
+					As.guestUser.goToHomePage()
+					._NavigationAction()
+					.addlogType(TestStepType.WHEN)
+					.login(user)
+					.addlogType(TestStepType.THEN)
+					.VerifyDeliveryAgent()
+					.closeWarningPopupWindow()
+					.addlogType(TestStepType.WHEN)
+					.searchByDeliveryOrderId("5000","8934")
+					
+			        .addlogType(TestStepType.WHEN)
+			        .chooseHDOrders(orderType)
+			        
+			        ._OrderDetailsAction()
+			        .addlogType(TestStepType.WHEN)
+			        .goToActionCenter()
+			        
+			        .addlogType(TestStepType.THEN)
+			        .verifyEvenExchangeEligibility(orderType)
+			        .verifyEvenExchangeEntireOrder()
+			        .goToDeliveryNotes()
+					.verifyDataInDeliveryNotes("OSH/MSO-WEB: PICK UP/EXCHANGE APP")
+					.verifyDataInDeliveryNotes("MSP NEW EXCHANGE ORDER");
+			}
 }

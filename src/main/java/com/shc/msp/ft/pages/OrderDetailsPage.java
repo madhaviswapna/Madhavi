@@ -5152,6 +5152,11 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(AVAILABLE_DATE_IN_CALANDER);
 		AjaxCondition.forElementVisible(AVAILABLE_TIME).waitForResponse();
 		getAction().click(AVAILABLE_TIME);
+		
+		//click on confirmation popup
+		if(AjaxCondition.forElementVisible(OK_BUTTON_ON_POPUP).waitForResponse(3000)){
+			getAction().click(OK_BUTTON_ON_POPUP);
+		}
 
 		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
 
