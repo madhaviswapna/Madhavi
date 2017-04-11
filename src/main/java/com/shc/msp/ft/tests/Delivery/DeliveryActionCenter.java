@@ -2016,6 +2016,64 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedHistoryNotes();
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_Offline_Agent_Role_Pickup_Eligible"}
+	, description = "Delivery_Offline_Agent_Role_Pickup_Eligible", enabled = true)
+	public void Delivery_Offline_Agent_Role_Pickup_Eligible(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		
+		String orderId= getProductToTest("Pickup_Eligible_Shipped_Order");
+		//System.out.println("orderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.changeAgentRole("DELIVERY OFFLINE AGENT", false)
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.verifyPickupbuttonPresent()
+		._NavigationAction()
+		.changeAgentRole("DELIVERY AGENT", false);
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_Offline_Agent_Role_Pickup_Eligible"}
+	, description = "Delivery_Offline_Agent_Role_Pickup_Eligible", enabled = true)
+	public void Delivery_MDO_Agent_Role_Pickup_Eligible(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		
+		String orderId= getProductToTest("Pickup_Eligible_Shipped_Order");
+		//System.out.println("orderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.changeAgentRole("DELIVERY MDO AGENT", false)//DELIVERY OFFLINE AGENT
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.verifyPickupbuttonPresent()
+		._NavigationAction()
+		.changeAgentRole("DELIVERY AGENT", false);
+	}
 }
 
 
