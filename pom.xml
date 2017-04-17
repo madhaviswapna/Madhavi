@@ -140,7 +140,7 @@ instance"
 		<dependency>
 			<groupId>com.shc.automation</groupId>
 			<artifactId>cars-dao-framework</artifactId>
-			<version>2.10.5</version>
+			<version>2.10.9</version>
 		</dependency>
 		<!-- <dependency>
 			<groupId>com.shc.automation</groupId>
