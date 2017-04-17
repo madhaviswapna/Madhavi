@@ -654,9 +654,9 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 
 	}
-	public OrderDetailsAction rescheduleServiceWindowOrder(String type, String ordType) throws ParseException {
+	public OrderDetailsAction rescheduleServiceWindowOrder(String type, String ordType,String windowType) throws ParseException {
 		Logger.log("verify recovery window service",TestStepType.THEN);
-		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType);
+		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType,windowType);
 		return this;
 	}
 	public OrderDetailsAction verifyReasoncodeAndWrapup(){

@@ -575,7 +575,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 
-		String orderId= getProductToTest("Reschedule_Released_HD_Order",true);	
+		String orderId= getProductToTest("Rereserve_Eligible_Released_Order",true);	
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -591,8 +591,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleDeliveryOrder("RELEASED","ORDER")
-		.goToDeliveryNotes()
+		.rescheduleServiceWindowOrder("Released", "","Service Recovery Windows");
+		
+		/*.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
 		.verifyAdjustmentCapturedInInteraction("Reschedule Delivery Date")
 		._OrderDetailsAction()
@@ -605,10 +606,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		 .selectOrderInMyRecentDeliveryInteractions(1)
 		 .closeWarningPopupWindow()
 		 ._OrderDetailsAction()
-		 .verifyActionCapturedInNotes("Reschedule Delivery Date")
+		 .verifyActionCapturedInNotes("Reschedule Delivery Date")*/
 		 ;
-
-
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_HD_Line_Item"}
@@ -1904,8 +1903,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleServiceWindowOrder("OPEN","ORDER");
+		.rescheduleServiceWindowOrder("OPEN","ORDER","Preferred Time Windows");
 	}
+	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Recovery_Service_Windows_Available_Partially_Shipped_Order_Verification"}
@@ -2018,15 +2018,14 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_Offline_Agent_Role_Pickup_Eligible"}
-	, description = "Delivery_Offline_Agent_Role_Pickup_Eligible", enabled = true)
-	public void Delivery_Offline_Agent_Role_Pickup_Eligible(TestData data) throws Exception {
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_HD_Order_Unrestricted_time_window"}
+	, description = "Verify if an order for released order can be rescheduled", enabled = true)
+	public void MSP_Delivery_Test_Reschedule_Released_HD_Order_Unrestricted_time_window(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		
-		String orderId= getProductToTest("Pickup_Eligible_Shipped_Order");
-		//System.out.println("orderId:"+orderId);
+
+		String orderId= getProductToTest("Rereserve_Eligible_Released_Order",true);	
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -2034,45 +2033,15 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
-		.changeAgentRole("DELIVERY OFFLINE AGENT", false)
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
-		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.goToActionCenter()
-		.verifyPickupbuttonPresent()
-		._NavigationAction()
-		.changeAgentRole("DELIVERY AGENT", false);
-	}
-	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_Offline_Agent_Role_Pickup_Eligible"}
-	, description = "Delivery_Offline_Agent_Role_Pickup_Eligible", enabled = true)
-	public void Delivery_MDO_Agent_Role_Pickup_Eligible(TestData data) throws Exception {
-		addCloneIDHostname(data);
-		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		
-		String orderId= getProductToTest("Pickup_Eligible_Shipped_Order");
-		//System.out.println("orderId:"+orderId);
-		As.guestUser.goToHomePage()
-		._NavigationAction()
-		.addlogType(TestStepType.WHEN)
-		.login(user)
 		.addlogType(TestStepType.THEN)
-		.VerifyDeliveryAgent()
-		.closeWarningPopupWindow()
-		.changeAgentRole("DELIVERY MDO AGENT", false)//DELIVERY OFFLINE AGENT
-		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		.selectOrderInMyRecentDeliveryInteractions(1)
-		.closeWarningPopupWindow()
-		._OrderDetailsAction()
-		.goToActionCenter()
-		.verifyPickupbuttonPresent()
-		._NavigationAction()
-		.changeAgentRole("DELIVERY AGENT", false);
+		.rescheduleServiceWindowOrder("Released", "","Unrestricted Time Window");
 	}
 }
 

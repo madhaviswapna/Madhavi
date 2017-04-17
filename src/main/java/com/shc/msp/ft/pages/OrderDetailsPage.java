@@ -573,52 +573,52 @@ public class OrderDetailsPage extends Page {
 	public final Locator NOT_A_SYW_MAX_MEMBER = new Locator("NOT_A_SYW_MAX_MEMBER","//div[@ng-controller='sywMaxCtrl']","NOT_A_SYW_MAX_MEMBER");
 	public final Locator REASON_DROPDOWN= new Locator("REASON_DROPDOWN","//select[@ng-model='selected.reasonCode']","REASON DROPDOWN");
 
-	 public final Locator CATEGORY_DROPDOWN_CODE_COUNT= new Locator("CATEGORY_DROPDOWN_CODE","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select/option","CATEGORY_DROPDOWN_CODE");
-	 public final Locator CATEGORY_DROPDOWN_CODE= new Locator("CATEGORY_DROPDOWN_CODE_COUNT","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select","CATEGORY_DROPDOWN_CODE_COUNT");
-	 public final Locator DELIVERY_REASON_DROPDOWN_COUNT= new Locator("DELIVERY_REASON_DROPDOWN","//select[@name='reasonCode']/option","DELIVERY_REASON_DROPDOWN");
-	 public final Locator DELIVERY_REASON_DROPDOWN= new Locator("DELIVERY_REASON_DROPDOWN_COUNT","//select[@name='reasonCode']","DELIVERY_REASON_DROPDOWN_COUNT");
-	 public final Locator WRAP_UP_NOTES= new Locator("WRAP_UP_NOTES","//strong[contains(text(),'Notes')]/parent::span/following-sibling::div//textarea","WRAP_UP_NOTES");
-	 public final Locator SELECT_ITEMS_FOR_CONTACT= new Locator("SELECT_ITEMS_FOR_CONTACT","//th[contains(text(),'Description')]/parent::tr//input","SELECT_ITEMS_FOR_CONTACT");
-	 public final Locator WRAP_UP_WITHOUT_CONTACT= new Locator("WRAP_UP_WITHOUT_CONTACT","//button[contains(text(),'WRAP UP & CONTINUE W/ CONTACT')]","WRAP_UP_WITHOUT_CONTACT");
-	 public final Locator WRAP_UP_ORDER_CONTACT= new Locator("WRAP UP ORDER & CONTACT","//button[contains(text(),'WRAP UP ORDER & CONTACT')]","WRAP UP ORDER & CONTACT");
-	 		
+	public final Locator CATEGORY_DROPDOWN_CODE_COUNT= new Locator("CATEGORY_DROPDOWN_CODE","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select/option","CATEGORY_DROPDOWN_CODE");
+	public final Locator CATEGORY_DROPDOWN_CODE= new Locator("CATEGORY_DROPDOWN_CODE_COUNT","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select","CATEGORY_DROPDOWN_CODE_COUNT");
+	public final Locator DELIVERY_REASON_DROPDOWN_COUNT= new Locator("DELIVERY_REASON_DROPDOWN","//select[@name='reasonCode']/option","DELIVERY_REASON_DROPDOWN");
+	public final Locator DELIVERY_REASON_DROPDOWN= new Locator("DELIVERY_REASON_DROPDOWN_COUNT","//select[@name='reasonCode']","DELIVERY_REASON_DROPDOWN_COUNT");
+	public final Locator WRAP_UP_NOTES= new Locator("WRAP_UP_NOTES","//strong[contains(text(),'Notes')]/parent::span/following-sibling::div//textarea","WRAP_UP_NOTES");
+	public final Locator SELECT_ITEMS_FOR_CONTACT= new Locator("SELECT_ITEMS_FOR_CONTACT","//th[contains(text(),'Description')]/parent::tr//input","SELECT_ITEMS_FOR_CONTACT");
+	public final Locator WRAP_UP_WITHOUT_CONTACT= new Locator("WRAP_UP_WITHOUT_CONTACT","//button[contains(text(),'WRAP UP & CONTINUE W/ CONTACT')]","WRAP_UP_WITHOUT_CONTACT");
+	public final Locator WRAP_UP_ORDER_CONTACT= new Locator("WRAP UP ORDER & CONTACT","//button[contains(text(),'WRAP UP ORDER & CONTACT')]","WRAP UP ORDER & CONTACT");
+
 	public final Locator CASE_EXISTS= new Locator("CASE_EXISTS"," //div[contains(text(),'Open Case')]","CASE_EXISTS");
 	public final Locator OK_BUTTON_ON_POPUP= new Locator("OK_BUTTON_ON_POPUP","//button[@id='modalclose']","OK_BUTTON_ON_POPUP");
 	public final Locator ACTION_CENTER_INSTALLATION_NOTES = new Locator("", "//div[contains(text(),'Note') and contains(text(),'installation')]", "Installation Service Notification");
-	
+
 	// Commmercial Order Popup
 	public final Locator COMMERCIAL_SALES_ORDER_POPUP_TEXT = new Locator("", "//div[contains(text(),'commercial sales')]", "COMMERCIAL_SALES_ORDER_POPUP_TEXT");
 	public final Locator COMMERCIAL_SALES_ORDER_POPUP_CONTINUE_BUTTON = new Locator("", "//button[contains(text(),'CONTINUE')]", "COMMERCIAL_SALES_ORDER_POPUP_CONTINUE_BUTTON");
-	
+
 
 	//update contact 
-		public final Locator SHOW_NAME_UPDATE= new Locator("SHOW_NAME_UPDATE","//td[contains(text(),'Update Delivery Contact Details')]/a[contains(text(),'Show Updates')]","SHOW_NAME_UPDATE");
-		public final Locator UPDATE_DELIVERY_ADDRESS= new Locator("UPDATE_DELIVERY_ADDRESS","//td[contains(text(),'Update Delivery Address')]/a[contains(text(),'Show Updates')]","UPDATE_DELIVERY_ADDRESS");
+	public final Locator SHOW_NAME_UPDATE= new Locator("SHOW_NAME_UPDATE","//td[contains(text(),'Update Delivery Contact Details')]/a[contains(text(),'Show Updates')]","SHOW_NAME_UPDATE");
+	public final Locator UPDATE_DELIVERY_ADDRESS= new Locator("UPDATE_DELIVERY_ADDRESS","//td[contains(text(),'Update Delivery Address')]/a[contains(text(),'Show Updates')]","UPDATE_DELIVERY_ADDRESS");
 
-		public final Locator CUSTOMER_NAME_FIELD= new Locator("CUSTOMER_NAME_FIELD","//td[contains(text(),'Order Ship To Cutomer Name')]","CUSTOMER_NAME_FIELD");
-		public final Locator ORIGINAL_NAME= new Locator("ORIGINAL_NAME","//td[contains(text(),'Order Ship To Cutomer Name')]/parent::tr/td[2]","ORIGINAL_NAME");
-		public final Locator UPDATED_NAME= new Locator("UPDATED_NAME","//td[contains(text(),'Order Ship To Cutomer Name')]/parent::tr/td[3]","UPDATED_NAME");
-		public final Locator VALUE= new Locator("VALUE","//tr[td[contains(text(),'Order Ship To Cutomer Name')]]/td[contains(text(),'{0}')]","VALUE");
-		public final Locator ORDER_SHIP_TO_CUSTOMER_NAME= new Locator("ORDER_SHIP_TO_CUSTOMER_NAME","//td[contains(text(),'{0}')] and //td[contains(text(),'{0}')]","VALUE");
-		public final Locator UPDATE_CONTACT_NOTES= new Locator("UPDATE_CONTACT_NOTES","//tbody[tr[td[contains(text(),'{0}')]/following-sibling::td[contains(text(),'{1}')]//following-sibling::td[contains(text(),'{2}')]]]","UPDATE_CONTACT_NOTES");
-		public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'{0}') and @data-title-text='Dos Item Status']","DOS_ITEM_STATUS_COUNT");		
-		public final Locator ITEM= new Locator("ITEM","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Item')]","ITEM");
-		public final Locator DIVISION= new Locator("DIVISION","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Division')]","DIVISION");
+	public final Locator CUSTOMER_NAME_FIELD= new Locator("CUSTOMER_NAME_FIELD","//td[contains(text(),'Order Ship To Cutomer Name')]","CUSTOMER_NAME_FIELD");
+	public final Locator ORIGINAL_NAME= new Locator("ORIGINAL_NAME","//td[contains(text(),'Order Ship To Cutomer Name')]/parent::tr/td[2]","ORIGINAL_NAME");
+	public final Locator UPDATED_NAME= new Locator("UPDATED_NAME","//td[contains(text(),'Order Ship To Cutomer Name')]/parent::tr/td[3]","UPDATED_NAME");
+	public final Locator VALUE= new Locator("VALUE","//tr[td[contains(text(),'Order Ship To Cutomer Name')]]/td[contains(text(),'{0}')]","VALUE");
+	public final Locator ORDER_SHIP_TO_CUSTOMER_NAME= new Locator("ORDER_SHIP_TO_CUSTOMER_NAME","//td[contains(text(),'{0}')] and //td[contains(text(),'{0}')]","VALUE");
+	public final Locator UPDATE_CONTACT_NOTES= new Locator("UPDATE_CONTACT_NOTES","//tbody[tr[td[contains(text(),'{0}')]/following-sibling::td[contains(text(),'{1}')]//following-sibling::td[contains(text(),'{2}')]]]","UPDATE_CONTACT_NOTES");
+	public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'{0}') and @data-title-text='Dos Item Status']","DOS_ITEM_STATUS_COUNT");		
+	public final Locator ITEM= new Locator("ITEM","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Item')]","ITEM");
+	public final Locator DIVISION= new Locator("DIVISION","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Division')]","DIVISION");
 
-		public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE= new Locator("","//td[contains(text(),'{0}')]","Order Contact history");
-		public final Locator Cancelled_HD_ORDERS = new Locator("", "//span[contains(text(),'Cancelled')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Cancelled HD orders ");
-		public final Locator CONTACT_HISTORY_NOTES = new Locator("CONTACT_HISTORY_NOTES", "//div[contains(text(),'{0}')]", "CONTACT_HISTORY_NOTES");
+	public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE= new Locator("","//td[contains(text(),'{0}')]","Order Contact history");
+	public final Locator Cancelled_HD_ORDERS = new Locator("", "//span[contains(text(),'Cancelled')]/parent::div/parent::div/parent::div/following-sibling::div[@class='row']//span[contains(text(),'Home Delivery')]", "Cancelled HD orders ");
+	public final Locator CONTACT_HISTORY_NOTES = new Locator("CONTACT_HISTORY_NOTES", "//div[contains(text(),'{0}')]", "CONTACT_HISTORY_NOTES");
 
-		
-		public final Locator newxpath = new Locator("","//td[contains(text(),'Contact Customer')]/..//a[contains(text(),'Bad Order')]/parent::div/following-sibling::div","");
 
-		//Error PopUp window
-		public final Locator ERROR_POPUP = new Locator("Error popup","//div[@class='modal-header dialog-header-error ng-scope ng-isolate-scope']","Error popup");
-		public final Locator ERROR_POPUP_CLOSE = new Locator("Error popup close","(//button[@id='modalclose'])","Error popup close");   
-		public final Locator WARNING_POPUP = new Locator("Warning popup","//h4[@class='modal-title text-info ng-binding']","Warning popup");
-		public final Locator WARNING_POPUP_CLOSE = new Locator("WARNING_POPUP close","//button[@id='modalclose']","WARNING_POPUP close");
+	public final Locator newxpath = new Locator("","//td[contains(text(),'Contact Customer')]/..//a[contains(text(),'Bad Order')]/parent::div/following-sibling::div","");
 
-		//scim code
+	//Error PopUp window
+	public final Locator ERROR_POPUP = new Locator("Error popup","//div[@class='modal-header dialog-header-error ng-scope ng-isolate-scope']","Error popup");
+	public final Locator ERROR_POPUP_CLOSE = new Locator("Error popup close","(//button[@id='modalclose'])","Error popup close");   
+	public final Locator WARNING_POPUP = new Locator("Warning popup","//h4[@class='modal-title text-info ng-binding']","Warning popup");
+	public final Locator WARNING_POPUP_CLOSE = new Locator("WARNING_POPUP close","//button[@id='modalclose']","WARNING_POPUP close");
+
+	//scim code
 		//public final Locator UPDATE_SCIM_CODE= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Code')]","UPDATE_SCIM_CODE");
 		//public final Locator UPDATE_SCIM_CODES= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Codes')]","UPDATE_SCIM_CODE");
 		//public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open')]","DOS_ITEM_STATUS_COUNT");
@@ -632,32 +632,50 @@ public class OrderDetailsPage extends Page {
 		public final Locator EARLIEST_AVAILABLE_DATE= new Locator("EARLIEST_AVAILABLE_DATE","//div[contains(text(),'earliest available date')]","EARLIEST_AVAILABLE_DATE");
 
 		//Recovery Service Windows
-		public final Locator UNRESTRICTED_TIME_WINDOWS= new Locator("UNRESTRICTED_TIME_WINDOWS","//strong[contains(text(),'Unrestricted Time Window')]/parent::div/following-sibling::div[{0}]/div[2]/button","UNRESTRICTED_TIME_WINDOWS");
+		public final Locator UNRESTRICTED_TIME_WINDOWS= new Locator("UNRESTRICTED_TIME_WINDOWS","//strong[contains(text(),'Unrestricted Time Window')]/parent::div/following-sibling::div[contains(@ng-repeat,'availableTimingForDate')][{0}]","UNRESTRICTED_TIME_WINDOWS");
 		public final Locator UNRESTRICTED_TIME_WINDOWS_COUNT= new Locator("UNRESTRICTED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'availableTimingForDate')]//button","UNRESTRICTED_TIME_WINDOWS_COUNT");
 
-		public final Locator PREFERRED_TIME_WINDOWS= new Locator("PREFERRED_TIME_WINDOWS","//strong[contains(text(),'Preferred Time Windows (must qualify)')]/parent::div/following-sibling::div[{0}]/div[2]/button","PREFERRED_TIME_WINDOWS");
+		public final Locator PREFERRED_TIME_WINDOWS= new Locator("PREFERRED_TIME_WINDOWS","//strong[contains(text(),'Preferred Time Windows (must qualify)')]/parent::div/following-sibling::div[contains(@ng-repeat,'preferredWindowList')][{0}]","PREFERRED_TIME_WINDOWS");
 		public final Locator PREFERRED_TIME_WINDOWS_COUNT= new Locator("PREFERRED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'preferredWindowList')]//button","PREFERRED_TIME_WINDOWS_COUNT");
 
-		public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows (must qualify)')]/parent::div/following-sibling::div[{0}]/div[2]/button","SERVICE_RECOVERY_WINDOW");
+		public final Locator PREFERRED_TIME_WINDOWS_NOT_AVAILABLE= new Locator("PREFERRED_TIME_WINDOWS_NOT_AVAILABLE","//div[contains(text(),'no preferred time windows available')]","PREFERRED_TIME_WINDOWS_NOT_AVAILABLE");
+
+		public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows (must qualify)')]/parent::div/following-sibling::div[contains(@ng-repeat,'recoveryWindowList')][{0}]","SERVICE_RECOVERY_WINDOW");
 		public final Locator SERVICE_RECOVERY_WINDOW_COUNT= new Locator("SERVICE_RECOVERY_WINDOW_COUNT","//div[contains(@ng-repeat,'recoveryWindowList')]//button","SERVICE_RECOVERY_WINDOW_COUNT");
 
 		public final Locator ORIGINAL_TIME_WINDOW= new Locator("ORIGINAL_TIME_WINDOW","//strong[@info='time_window']//ancestor::div[@label='Time Window']/div/p/span","ORIGINAL_TIME_WINDOW");
 		public final Locator TIME_WINDOW_TYPE= new Locator("TIME_WINDOW_TYPE","//strong[text()='Time Window Type:']//ancestor::div[@label='Time Window Type']/div/p/span","TIME_WINDOW_TYPE");
 		public final Locator CURRENT_TIME_WINDOW= new Locator("CURRENT_TIME_WINDOW","//strong[contains(text(),'Current Time Window')]/parent::div[contains(text(),'{0}')]","CURRENT_TIME_WINDOW");
-		public final Locator CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","CONFIRMATION_TIME_WINDOW_POP_UP");
+		public final Locator PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP");
+		public final Locator UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'Confirmation required')]","UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP");
+		public final Locator RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Recovery time window')]","RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP");
+		public final Locator RECOVERY_TIME_WINDOW_EXIST= new Locator("RECOVERY_TIME_WINDOW_EXIST","//div[contains(text(),'recovery time window exist')]","RECOVERY_TIME_WINDOW_EXIST");
+		
+		
+		
+		//public final Locator CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","CONFIRMATION_TIME_WINDOW_POP_UP");
+
 		public final Locator MONTH_AND_YEAR_PICKER= new Locator("MONTH_AND_YEAR_PICKER","//button[contains(@id,'datepicker')]","MONTH_AND_YEAR_PICKER");
 		public final Locator SELECTED_DATE= new Locator("SELECTED_DATE","//strong[contains(text(),'Reschedule')]/ancestor::div[contains(@ng-if,'Reschedule Delivery')]/form/div[3]//div//div[3]/table/tbody/tr/td/button[contains(@class,'dt-selected')]","SELECTED_DATE");
 		public final Locator BLUE= new Locator("BLUE","//span[contains(text(),'Selected')]/preceding-sibling::button","BLUE");
 		public final Locator DELIVERY_REASON_DROPDOWN_OPTIONS= new Locator("DELIVERY_REASON_DROPDOWN_OPTIONS","//select[@name='reasonCode']/option[contain(text(),'{0}')]","DELIVERY_REASON_DROPDOWN_OPTIONS");
 		public final Locator WRAP_UP= new Locator("WRAP UP ORDER & CONTACT","//button[text()='WRAP UP']","WRAP UP ORDER & CONTACT");
 
-				
+		public final Locator DAY_OF_DELIVERY_AGENT= new Locator("DAY_OF_DELIVERY_AGENT","//button[contains(text(),'{0}')]","DAY_OF_DELIVERY_AGENT");
+		public final Locator DAY_OF_DELIVERY_RETURN_CODES_COUNT= new Locator("DAY_OF_DELIVERY_RETURN_CODES_COUNT","select[name='returnCodeSelect']>option","DAY_OF_DELIVERY_RETURN_CODES_COUNT",TagAttributes.CSSSELECTOR);
+		public final Locator DAY_OF_DELIVERY_RETURN_CODES= new Locator("DAY_OF_DELIVERY_RETURN_CODES_COUNT","select[name='returnCodeSelect']>option[value='{0}']","DAY_OF_DELIVERY_RETURN_CODES",TagAttributes.CSSSELECTOR);
+		public final Locator ARRIVAL_TIME= new Locator("ARRIVAL_TIME","//label[contains(text(),'Arrival Time')]/following-sibling::table//tr[3]/td[3]/a","ARRIVAL_TIME");
+		public final Locator DEPARTURE_TIME= new Locator("DEPARTURE_TIME","//label[contains(text(),'Departure Time')]/following-sibling::table//tr[1]/td[3]/a","DEPARTURE_TIME");
+		public final Locator STATUS_UPDATE= new Locator("STATUS_UPDATE","//button[contains(text(),'Complete Status Update')]","STATUS_UPDATE");
+		public final Locator ORDER_ROUTE_STATUS= new Locator("ORDER_ROUTE_STATUS","//strong[contains(text(),'Route Status')]/parent::span/following-sibling::div/p","ORDER_ROUTE_STATUS");
+		public final Locator CONTINUE_TO_RESCHDEULE= new Locator("CONTINUE_TO_RESCHDEULE","//button[contains(text(),'Continue to Reschedule')]","CONTINUE_TO_RESCHDEULE");
 
-		
-		Map<String, List<String>> map =new LinkedHashMap<>();
 
-		
-	
+
+	Map<String, List<String>> map =new LinkedHashMap<>();
+
+
+
 	DecimalFormat formatter = new DecimalFormat("#,##0.00");
 	DecimalFormat df = new DecimalFormat("0.00");
 	Connection conn1 = null;
@@ -729,9 +747,9 @@ public class OrderDetailsPage extends Page {
 
 		return this;
 	}
-	
+
 	public OrderDetailsPage clickSYWMaxTabandVerify(String usertype){
-		
+
 		if(getAction().isVisible(SYW_MAX_TAB)){
 			clickOnOrderTabInODP(OrderTab.SYW_MAX);
 		}
@@ -747,7 +765,7 @@ public class OrderDetailsPage extends Page {
 		}
 		return this;
 	}
-	
+
 	public OrderDetailsPage verifyOrderDetailsPageDisplayed() {
 		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
@@ -763,7 +781,7 @@ public class OrderDetailsPage extends Page {
 		}	
 		return this;
 	}
-	
+
 	public OrderDetailsPage verifyEmpowermentGuidelinePopUp(){
 		Logger.log("Verify the Empower Guideline message is present in the Popup",TestStepType.STEP);
 		AjaxCondition.forElementVisible(ORDER_SUMMARY_EMPOWERMENT_GUIDELINE_POPUP).waitWithoutException(3);
@@ -774,7 +792,7 @@ public class OrderDetailsPage extends Page {
 		getAction().waitFor(1000);
 		return this;
 	}
-	
+
 	public OrderDetailsPage verifyMarketplaceItemPopUp(){
 		Logger.log("Verify the marketplace item message is present in the Popup",TestStepType.STEP);
 		AjaxCondition.forElementVisible(ORDER_SUMMARY_MARKETPLACE_ITEM_POPUP).waitWithoutException(3);
@@ -786,7 +804,7 @@ public class OrderDetailsPage extends Page {
 		getAction().waitFor(1000);
 		return this;
 	}
-	
+
 	public OrderDetailsPage verifyEmpowermentGuidelineStatusColor(String enabled){
 		Logger.log("Verify the Empower Guideline status color is shown",TestStepType.STEP);
 		AjaxCondition.forElementVisible(EMPOWERMENT_GUIDELINE_STATUS_COLOR).waitWithoutException(3);
@@ -802,9 +820,9 @@ public class OrderDetailsPage extends Page {
 			//System.out.println("Result  ----          color ------------"+empowermentNotificationStatusColor.equalsIgnoreCase("rgba(189, 195, 199, 1)"));
 		}
 		return this;
-		
+
 	}
-	
+
 	public OrderDetailsPage verifyOrderDetailsDescription(String itemcondition,String rowNumber) {
 		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
@@ -813,7 +831,7 @@ public class OrderDetailsPage extends Page {
 		else
 		{
 			SoftAssert.checkElementAndContinueOnFailure(MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
-			
+
 			String actualItemCondition=getAction().getText(DESCRIPTION_COL_NAME_TEXT.format(rowNumber));
 			if(actualItemCondition.contains(itemcondition)){
 				System.out.println("----------------------------------order level verification of item condition pass");
@@ -823,7 +841,7 @@ public class OrderDetailsPage extends Page {
 		}	
 		return this;
 	}
-	
+
 	public OrderDetailsPage verifyLayawayDetailsPageDisplayed() {
 		Logger.log("Verify if Layaway Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
@@ -855,7 +873,7 @@ public class OrderDetailsPage extends Page {
 			SoftAssert.checkElementAndContinueOnFailure(DOS_ORDER_NO_LONGER_EXIST, "Verify Order Exists", CheckLocatorFor.isNotVisible);
 
 			if(searchField=="dosorderId")
-			PageAssert.verifyEqual(searchVal, getAction().getText(DOS_ORDER_SUMMARY_ORDER_NUMBER));
+				PageAssert.verifyEqual(searchVal, getAction().getText(DOS_ORDER_SUMMARY_ORDER_NUMBER));
 
 			if (searchField=="Order") {
 				String[] str_array = searchVal.split("-");
@@ -998,7 +1016,7 @@ public class OrderDetailsPage extends Page {
 				getContext().put("originalWorkPhone",getAction().getValue(loc[i]));
 				System.out.println(getContext().get("originalWorkPhone"));
 				try{
-				data=getContext().get("originaWorkPhone").toString().equalsIgnoreCase(workPhone)?workPhone2:workPhone;	
+					data=getContext().get("originaWorkPhone").toString().equalsIgnoreCase(workPhone)?workPhone2:workPhone;	
 				}catch (NullPointerException e) {
 					data=workPhone;
 				}
@@ -1476,88 +1494,88 @@ public class OrderDetailsPage extends Page {
 	}
 	public OrderDetailsPage verifyEvenExchangeEntireOrder(){
 
-		  String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
-		  Logger.log("Click on Even Exchange Button",TestStepType.STEP);
-		  try{
-		   getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
-		   getAction().click(EVEN_EXCHANGE_BUTTON);
-		  }catch(Exception e){
-		   clickJ(EVEN_EXCHANGE_BUTTON);
-		  }
-		  getAction().waitFor(3000);
-		  Logger.log("Click on Line Item",TestStepType.STEP);
-		  int num=getAction().getVisibleElementCount(EVEN_EXCHANGE_ITEM_TABLE);
-		  for(int i=1;i<=num;i++){
-		   AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM.format(i)).waitForResponse(5);
-		   try {
-		    getAction().scrollTo(EVEN_EXCHANGE_ITEM.format(i));
-		    getAction().click(EVEN_EXCHANGE_ITEM.format(i));
-		   } catch (Exception e) {
-		    clickJ(EVEN_EXCHANGE_ITEM.format(i));
-		   }
+		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
+		Logger.log("Click on Even Exchange Button",TestStepType.STEP);
+		try{
+			getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
+			getAction().click(EVEN_EXCHANGE_BUTTON);
+		}catch(Exception e){
+			clickJ(EVEN_EXCHANGE_BUTTON);
+		}
+		getAction().waitFor(3000);
+		Logger.log("Click on Line Item",TestStepType.STEP);
+		int num=getAction().getVisibleElementCount(EVEN_EXCHANGE_ITEM_TABLE);
+		for(int i=1;i<=num;i++){
+			AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM.format(i)).waitForResponse(5);
+			try {
+				getAction().scrollTo(EVEN_EXCHANGE_ITEM.format(i));
+				getAction().click(EVEN_EXCHANGE_ITEM.format(i));
+			} catch (Exception e) {
+				clickJ(EVEN_EXCHANGE_ITEM.format(i));
+			}
 
-		   Logger.log("Select the Reason for Pickup",TestStepType.STEP);
-		   AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i)).waitForResponse(5);
-		   getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i), 3);
+			Logger.log("Select the Reason for Pickup",TestStepType.STEP);
+			AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i)).waitForResponse(5);
+			getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i), 3);
 
-		   Logger.log("Click on Continue",TestStepType.STEP);
-		   AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY_COUNT.format(i)).waitForResponse();
-		   getAction().type(LINE_ITEM_ROW_QUANTITY_COUNT.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
-		   getAction().waitFor(1000);
-		  }
-		  AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
-		  getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
-		  Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
-		  AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
-		  getAction().click(OFFER_CONSESSION_NO_BUTTON);
-		  Logger.log("Select the Category Code",TestStepType.STEP);
-		  for(int i=1;i<=num;i++){
-		   AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
-		   getAction().click(CATEGORY_CODE_DROPDOWN.format(i));
-		   getAction().waitFor(3000);
-		   AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
-		   getAction().click(CATEGORY_CODE_DROPDOWN_OPTION.format(i));
-		   getAction().waitFor(3000);
-		   AjaxCondition.forElementVisible(PICKUP_REASON_CODE_DROPDOWN.format(i)).waitForResponse();
-		   getAction().click(PICKUP_REASON_CODE_DROPDOWN.format(i));
-		   getAction().waitFor(3000);
-		   AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
-		   getAction().click(REASON_CODE_DROPDOWN_OPTION.format(i));
-		  }
-		  Logger.log("Click Create Order button",TestStepType.STEP);
-		  AjaxCondition.forElementVisible(EVEN_EXCHANGE_CREATE_ORDER_BUTTON).waitForResponse(5);
-		  getAction().click(EVEN_EXCHANGE_CREATE_ORDER_BUTTON);
-		  Logger.log("Verify the Success pop up is displayed",TestStepType.STEP);
-		  AjaxCondition.forElementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE).waitForResponse(10);
-		  PageAssert.elementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE);
-		  Logger.log("Click 'OK' on pop up",TestStepType.STEP);
-		  getAction().click(EVEN_EXCHANGE_SUCCESS_DIALOG_OK_BUTTON);
-		  getAction().waitFor(5000);
-		  String newDosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
-		  System.out.println("New order created    "+newDosOrderNumber+" Old order "+dosOrderNumber);
-		  SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
-		  Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
-		  AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
-		  return this;
-		 }
-	
+			Logger.log("Click on Continue",TestStepType.STEP);
+			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY_COUNT.format(i)).waitForResponse();
+			getAction().type(LINE_ITEM_ROW_QUANTITY_COUNT.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
+			getAction().waitFor(1000);
+		}
+		AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
+		getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
+		Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
+		AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
+		getAction().click(OFFER_CONSESSION_NO_BUTTON);
+		Logger.log("Select the Category Code",TestStepType.STEP);
+		for(int i=1;i<=num;i++){
+			AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
+			getAction().click(CATEGORY_CODE_DROPDOWN.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
+			getAction().click(CATEGORY_CODE_DROPDOWN_OPTION.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(PICKUP_REASON_CODE_DROPDOWN.format(i)).waitForResponse();
+			getAction().click(PICKUP_REASON_CODE_DROPDOWN.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
+			getAction().click(REASON_CODE_DROPDOWN_OPTION.format(i));
+		}
+		Logger.log("Click Create Order button",TestStepType.STEP);
+		AjaxCondition.forElementVisible(EVEN_EXCHANGE_CREATE_ORDER_BUTTON).waitForResponse(5);
+		getAction().click(EVEN_EXCHANGE_CREATE_ORDER_BUTTON);
+		Logger.log("Verify the Success pop up is displayed",TestStepType.STEP);
+		AjaxCondition.forElementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE).waitForResponse(10);
+		PageAssert.elementVisible(EVEN_EXCHANGE_SUCCESS_MESSAGE);
+		Logger.log("Click 'OK' on pop up",TestStepType.STEP);
+		getAction().click(EVEN_EXCHANGE_SUCCESS_DIALOG_OK_BUTTON);
+		getAction().waitFor(5000);
+		String newDosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
+		System.out.println("New order created    "+newDosOrderNumber+" Old order "+dosOrderNumber);
+		SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
+		Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
+		AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
+		return this;
+	}
+
 	public OrderDetailsPage verifyEvenExchangeNotAllowed(){
 
-		  String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
-		  Logger.log("Click on Even Exchange Button",TestStepType.STEP);
-		  try{
-		   getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
-		   getAction().click(EVEN_EXCHANGE_BUTTON);
-		  }catch(Exception e){
-		   clickJ(EVEN_EXCHANGE_BUTTON);
-		  }
-		  getAction().waitFor(3000);
-		  
-		  Logger.log("Verify None of the items are eligible for Even Exchange", TestStepType.STEP);
-		  PageAssert.elementVisible(EVEN_EXCHANGE_NO_ITEMS_ALLOWED);
-		  return this;
+		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
+		Logger.log("Click on Even Exchange Button",TestStepType.STEP);
+		try{
+			getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
+			getAction().click(EVEN_EXCHANGE_BUTTON);
+		}catch(Exception e){
+			clickJ(EVEN_EXCHANGE_BUTTON);
+		}
+		getAction().waitFor(3000);
+
+		Logger.log("Verify None of the items are eligible for Even Exchange", TestStepType.STEP);
+		PageAssert.elementVisible(EVEN_EXCHANGE_NO_ITEMS_ALLOWED);
+		return this;
 	}
-	
+
 	public OrderDetailsPage verifyEvenExchangeEligibility(String orderType){
 		if(orderType.equalsIgnoreCase("Open")){
 			Logger.log("Verify Even Exchange Button is not avalable in Action Center" , TestStepType.STEP);
@@ -1860,64 +1878,64 @@ public class OrderDetailsPage extends Page {
 		getAction().scrollTo(ORDER_SUMMARY_TITLE_TEXT);
 		String url=FrameworkProperties.SELENIUM_BASE_URL;
 		if(!url.contains("msp.prod.global")){
-		if(orderNumber!=null || store!=null || phurchaseTimeStamp!=null || orderStatus!=null 
-				|| orderSource!=null || assoc_ID!=null || loyaltyNumber!=null){
-			if(getAction().isVisible(ORDER_SUMMARY_TABLE)){
-				Logger.log("Verify Order Summary Table is Visible", TestStepType.STEP);
-				Logger.log("Verify Order Number", TestStepType.STEP);
-				PageAssert.textPresent(ORDER_SUMMARY_ORDER_NUMBER_TEXT, "Order Number");
-				PageAssert.verifyEqual(orderNumber, getAction().getText(ORDER_SUMMARY_ORDER_NUMBER));
+			if(orderNumber!=null || store!=null || phurchaseTimeStamp!=null || orderStatus!=null 
+					|| orderSource!=null || assoc_ID!=null || loyaltyNumber!=null){
+				if(getAction().isVisible(ORDER_SUMMARY_TABLE)){
+					Logger.log("Verify Order Summary Table is Visible", TestStepType.STEP);
+					Logger.log("Verify Order Number", TestStepType.STEP);
+					PageAssert.textPresent(ORDER_SUMMARY_ORDER_NUMBER_TEXT, "Order Number");
+					PageAssert.verifyEqual(orderNumber, getAction().getText(ORDER_SUMMARY_ORDER_NUMBER));
 
-				Logger.log("Verify Store Name in Order Summary", TestStepType.STEP);
-				PageAssert.textPresent(ORDER_SUMMARY_STORE_TEXT, "Store");
-				storeName = getStoreName(store);
-				PageAssert.verifyEqual(storeName, getAction().getText(ORDER_SUMMARY_STORE_NAME));
+					Logger.log("Verify Store Name in Order Summary", TestStepType.STEP);
+					PageAssert.textPresent(ORDER_SUMMARY_STORE_TEXT, "Store");
+					storeName = getStoreName(store);
+					PageAssert.verifyEqual(storeName, getAction().getText(ORDER_SUMMARY_STORE_NAME));
 
-				Logger.log("Verify Purchase Date Text is Present", TestStepType.STEP);
-				PageAssert.textPresent(ORDER_SUMMARY_PURCHASE_DATE_TEXT, "Purchase Date");
+					Logger.log("Verify Purchase Date Text is Present", TestStepType.STEP);
+					PageAssert.textPresent(ORDER_SUMMARY_PURCHASE_DATE_TEXT, "Purchase Date");
 
-				Logger.log("Verify Order Status Text is Present", TestStepType.STEP);
-				PageAssert.textPresent(ORDER_SUMMARY_ORDER_STATUS_TEXT, "Order Status");
+					Logger.log("Verify Order Status Text is Present", TestStepType.STEP);
+					PageAssert.textPresent(ORDER_SUMMARY_ORDER_STATUS_TEXT, "Order Status");
 
-				Logger.log("Verify Order Satus in Order Summary", TestStepType.STEP);
-				PageAssert.verifyEqual(orderStatus, getAction().getText(ORDER_SUMMARY_ORDER_STATUS));
+					Logger.log("Verify Order Satus in Order Summary", TestStepType.STEP);
+					PageAssert.verifyEqual(orderStatus, getAction().getText(ORDER_SUMMARY_ORDER_STATUS));
 
-				Logger.log("Verify 'Order Placed By' Text is Present", TestStepType.STEP);
-				PageAssert.textPresent(ORDER_SUMMARY_PLACED_BY_TEXT, "Order Placed By");
+					Logger.log("Verify 'Order Placed By' Text is Present", TestStepType.STEP);
+					PageAssert.textPresent(ORDER_SUMMARY_PLACED_BY_TEXT, "Order Placed By");
 
-				if(orderSource !=null && orderSource=="CCN"){
-					if(isNumberOfAsscoID(assoc_ID)){
-						String OrderPlacedBy = assoc_ID;
-						PageAssert.verifyEqual(OrderPlacedBy, getAction().getText(ORDER_SUMMARY_PLACED_BY));
-						Logger.log("Verify Order Placed By " +OrderPlacedBy +" in Order Summary", TestStepType.STEP);
+					if(orderSource !=null && orderSource=="CCN"){
+						if(isNumberOfAsscoID(assoc_ID)){
+							String OrderPlacedBy = assoc_ID;
+							PageAssert.verifyEqual(OrderPlacedBy, getAction().getText(ORDER_SUMMARY_PLACED_BY));
+							Logger.log("Verify Order Placed By " +OrderPlacedBy +" in Order Summary", TestStepType.STEP);
+						}
+					}else if(orderSource !=null && orderSource!="CCN"){
+						if(!isNumberOfAsscoID(assoc_ID)){
+							String OrderPlacedBy = "CUSTOMER";
+							PageAssert.verifyEqual(OrderPlacedBy, getAction().getText(ORDER_SUMMARY_PLACED_BY));
+							Logger.log("Verify Order Placed By " +OrderPlacedBy +" in Order Summary", TestStepType.STEP);
+						}
+					}else{
+						Logger.log("Order Placed By Orther Source", TestStepType.STEP);
 					}
-				}else if(orderSource !=null && orderSource!="CCN"){
-					if(!isNumberOfAsscoID(assoc_ID)){
-						String OrderPlacedBy = "CUSTOMER";
-						PageAssert.verifyEqual(OrderPlacedBy, getAction().getText(ORDER_SUMMARY_PLACED_BY));
-						Logger.log("Verify Order Placed By " +OrderPlacedBy +" in Order Summary", TestStepType.STEP);
-					}
+
+					if(loyaltyNumber==null){
+						Logger.log("Verify Loyalty# Not Present in Order Summary", TestStepType.STEP);
+						PageAssert.elementNotPresent(ORDER_SUMMARY_LOYALTY_NO_TEXT);
+						PageAssert.elementNotPresent(ORDER_SUMMARY_LOYALTY_NO);
+
+					}else{
+						Logger.log("Verify Loyalty# Text is Present", TestStepType.STEP);
+						PageAssert.textPresent(ORDER_SUMMARY_LOYALTY_NO_TEXT, "Loyalty #");
+						Logger.log("Verify Loyalty# in Order Summary", TestStepType.STEP);
+						PageAssert.verifyEqual(loyaltyNumber, getAction().getText(ORDER_SUMMARY_LOYALTY_NO));
+					}	            
 				}else{
-					Logger.log("Order Placed By Orther Source", TestStepType.STEP);
+					PageAssert.fail("Retrieval Data from Database failed");
 				}
-
-				if(loyaltyNumber==null){
-					Logger.log("Verify Loyalty# Not Present in Order Summary", TestStepType.STEP);
-					PageAssert.elementNotPresent(ORDER_SUMMARY_LOYALTY_NO_TEXT);
-					PageAssert.elementNotPresent(ORDER_SUMMARY_LOYALTY_NO);
-
-				}else{
-					Logger.log("Verify Loyalty# Text is Present", TestStepType.STEP);
-					PageAssert.textPresent(ORDER_SUMMARY_LOYALTY_NO_TEXT, "Loyalty #");
-					Logger.log("Verify Loyalty# in Order Summary", TestStepType.STEP);
-					PageAssert.verifyEqual(loyaltyNumber, getAction().getText(ORDER_SUMMARY_LOYALTY_NO));
-				}	            
 			}else{
-				PageAssert.fail("Retrieval Data from Database failed");
+				Logger.log("There are no order summary information in Database", TestStepType.STEP);
 			}
-		}else{
-			Logger.log("There are no order summary information in Database", TestStepType.STEP);
-		}
 		}
 		else{
 			AjaxCondition.forElementVisible(ORDER_SUMMARY_TABLE).waitForResponse();
@@ -1925,13 +1943,13 @@ public class OrderDetailsPage extends Page {
 			Logger.log("Verify Order Number", TestStepType.STEP);
 			PageAssert.textPresent(ORDER_SUMMARY_ORDER_NUMBER_TEXT, "Order Number");
 			SoftAssert.checkConditionAndContinueOnFailure("Verify Order Number should not be empty", 
-	    			!getAction().getText(ORDER_SUMMARY_ORDER_NUMBER).isEmpty());
+					!getAction().getText(ORDER_SUMMARY_ORDER_NUMBER).isEmpty());
 
 			Logger.log("Verify Store Name in Order Summary", TestStepType.STEP);
 			PageAssert.textPresent(ORDER_SUMMARY_STORE_TEXT, "Store");
 			SoftAssert.checkConditionAndContinueOnFailure("Verify Store Name should not be empty", 
-	    			!getAction().getText(ORDER_SUMMARY_STORE_NAME).isEmpty());
-	
+					!getAction().getText(ORDER_SUMMARY_STORE_NAME).isEmpty());
+
 
 			Logger.log("Verify Purchase Date Text is Present", TestStepType.STEP);
 			PageAssert.textPresent(ORDER_SUMMARY_PURCHASE_DATE_TEXT, "Purchase Date");
@@ -1941,8 +1959,8 @@ public class OrderDetailsPage extends Page {
 
 			Logger.log("Verify Order Satus in Order Summary", TestStepType.STEP);
 			SoftAssert.checkConditionAndContinueOnFailure("Verify Order Satus in Order Summary should not be empty", 
-	    			!getAction().getText(ORDER_SUMMARY_ORDER_STATUS).isEmpty());
-			
+					!getAction().getText(ORDER_SUMMARY_ORDER_STATUS).isEmpty());
+
 			Logger.log("Verify 'Order Placed By' Text is Present", TestStepType.STEP);
 			PageAssert.textPresent(ORDER_SUMMARY_PLACED_BY_TEXT, "Order Placed By");
 
@@ -4150,7 +4168,7 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(CURRENT_INTERACTION).waitForResponse();
 		setData("caseId", getMatchingTextGroup("# ([0-9]+) ", getAction().getText(CURRENT_INTERACTION).trim()));
 		Logger.log("Current Interaction Case Id - "+getDataString("caseId")+" stored", TestStepType.VERIFICATION_STEP);
-		
+
 	}
 	public void captureOrderIdFromODPage(){
 		AjaxCondition.forElementVisible(ORDER_ID).waitForResponse();
@@ -4219,7 +4237,7 @@ public class OrderDetailsPage extends Page {
 				queue="no queue since a case already exists in USPS queue for that order";
 			}
 			else{
-			SoftAssert.checkConditionAndContinueOnFailure("Verify USPS Queue selected to route", getAction().getText(SELECT_QUEUE_ONE_RESPONSE).trim().equals("USPS"));
+				SoftAssert.checkConditionAndContinueOnFailure("Verify USPS Queue selected to route", getAction().getText(SELECT_QUEUE_ONE_RESPONSE).trim().equals("USPS"));
 			}
 		}
 		SoftAssert.checkConditionAndContinueOnFailure("Verify Select Queue to route Text is Present", getAction().getText(SELECT_QUEUE_TO_ROUTE).equals("Select Queue to route"));
@@ -4243,8 +4261,8 @@ public class OrderDetailsPage extends Page {
 		getAction().waitFor(1000);
 		clickWrapOrderContact();
 	}
-public void verifyCloseCaseByWrapupOfflineAgent(){
-		
+	public void verifyCloseCaseByWrapupOfflineAgent(){
+
 		selectWrapUpTab();
 		if(getAction().isVisible(CATEGORY_DROPDOWN)&& getAction().isVisible(REASON_CODE_DROPDOWN)){
 			getAction().click(CATEGORY_DROPDOWN);
@@ -4258,7 +4276,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			Logger.log("Select 'NO Action Needed - General Question ' in Reason Code", TestStepType.STEP);
 
 		}
-				
+
 		getAction().type(ORDER_NOTES_TEXT_AREA, "Testing closing of case");
 		SoftAssert.checkElementAndContinueOnFailure(ORDER_NOTES_REQUIREDFIELD_SIGN, "Verify Order Notes Required Field Sign is Present", CheckLocatorFor.isPresent);
 		getAction().waitFor(1000);
@@ -4383,7 +4401,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(EMAIL_SUBMIT_BUTTON);
 		getAction().waitFor(8000);
 		getContext().put("selectedemailtemplatename", emailTemplateName);
-	//	AjaxCondition.forElementVisible(SUCCESS_OK_BUTTON).waitForResponse();
+		//	AjaxCondition.forElementVisible(SUCCESS_OK_BUTTON).waitForResponse();
 		//getAction().click(SUCCESS_OK_BUTTON);
 		//getAction().waitFor(3000);
 		closeWarningPopupWindow();
@@ -4396,30 +4414,30 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 		//if(!getAction().containsString(getAction().getText(EMAIL_TEMPLATE_NOTES), templatename)){
 		PageAssert.textPresent(EMAIL_TEMPLATE_NOTES.format("Contact Customer",emailTemplateName), emailTemplateName);
-		
+
 		AjaxCondition.forElementVisible(newxpath).waitForResponse();
-		
+
 		System.out.println("-------------------------------------------------------"+getAction().getText(newxpath));
 		String emailcontent="Subject: Sears.com Order # (XXXXXX)"
-+"Message:"
-+" Dear  ,"
-+" Thank you for shopping at Sears.  "
-+" We have received your online order for the (item). However, your order did not properly process. If you would like us to replace the order for you, please call 1-800-283-6940 and a customer service representative will be happy to assist you.   We apologize for any inconvenience this may cause you. "
-+" If you have any questions or concerns, please e-mail us at order@customerservice.sears.com or call us at 1-800-283-6940. "
-+" Loook for Great Ideas throughout the store and find Sears exclusive innovations from great brands like Sony, Kenmore, NordicTrack, Craftsman and Reebok. "
-+" Shop sears.com now to pick up great products for the season. "
-+" http://www.sears.com" 
-+"  Sincerely, "
-+" Sears Customer Care"
-+" order@customerservice.sears.com"
-+" 1-800-283-6940";
-		
+				+"Message:"
+				+" Dear  ,"
+				+" Thank you for shopping at Sears.  "
+				+" We have received your online order for the (item). However, your order did not properly process. If you would like us to replace the order for you, please call 1-800-283-6940 and a customer service representative will be happy to assist you.   We apologize for any inconvenience this may cause you. "
+				+" If you have any questions or concerns, please e-mail us at order@customerservice.sears.com or call us at 1-800-283-6940. "
+				+" Loook for Great Ideas throughout the store and find Sears exclusive innovations from great brands like Sony, Kenmore, NordicTrack, Craftsman and Reebok. "
+				+" Shop sears.com now to pick up great products for the season. "
+				+" http://www.sears.com" 
+				+"  Sincerely, "
+				+" Sears Customer Care"
+				+" order@customerservice.sears.com"
+				+" 1-800-283-6940";
+
 		emailcontent = emailcontent.replaceAll("[^a-zA-Z0-9]", ""); 
 		String actualEmailContentDisplayed=getAction().getText(newxpath);
 		actualEmailContentDisplayed = actualEmailContentDisplayed.replaceAll("[^a-zA-Z0-9]", ""); 
 		System.out.println("-------------------------------------actualemail: "+actualEmailContentDisplayed);
 		System.out.println("-------------------------------------mycontent  : "+emailcontent);
-		
+
 		SoftAssert.checkConditionAndContinueOnFailure("Verify the correct performance message is shown", actualEmailContentDisplayed.contains(emailcontent.trim()));
 		getAction().waitFor(3000);
 
@@ -4441,7 +4459,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
 	}
-	
+
 	public void verifyEmailCapturedInNotes(){
 		Logger.log("Verify Email sent to customer are captured in Notes", TestStepType.STEP);
 		getAction().waitFor(3000);
@@ -4473,7 +4491,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 
 		PageAssert.elementPresent(ORDER_CONTACT_HISTORY_NOTES_DELIVERY.format(action));
 	}
-	
+
 	public void verifyRereservebuttonPresent(){
 		Logger.log("Verify Rereserve button is present in action center", TestStepType.STEP);
 		getAction().waitFor(3000);
@@ -4486,40 +4504,40 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 
 	}
 	public void rereserveItem(String orderType,String order){
-		
+
 		if (orderType.equalsIgnoreCase("Shipped")||orderType.equalsIgnoreCase("Cancelled")){
-		PageAssert.elementNotVisible(RERESERVE_BUTTON);
-		Logger.log("Rereserve button is not available in Action Center" , TestStepType.VERIFICATION_PASSED);}
-			
+			PageAssert.elementNotVisible(RERESERVE_BUTTON);
+			Logger.log("Rereserve button is not available in Action Center" , TestStepType.VERIFICATION_PASSED);}
+
 		else{
-		Logger.log("Verify Rereserve button is present in action center", TestStepType.STEP);
-		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(RERESERVE_BUTTON).waitForResponse();
-		getAction().scrollTo(RERESERVE_BUTTON);
-		getAction().click(RERESERVE_BUTTON);
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(RERESERVE_ITEM_COUNT).waitForResponse();
-		int num=0;
-		if(order.equalsIgnoreCase("whole order")){
-			num=getAction().getVisibleElementCount(RERESERVE_ITEM_COUNT);
-			for(int i=1;i<=num;i++){
-				getAction().scrollTo(RERESERVE_ITEM.format(i));
-				AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
-				getAction().click(RERESERVE_ITEM.format(i));
-				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
-				getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
-				getAction().waitFor(3000);
-			}
-		}
-		else{
-			AjaxCondition.forElementVisible(RERESERVE_ITEM.format(1)).waitForResponse();
-			getAction().click(RERESERVE_ITEM.format(1));
-			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
-			getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
+			Logger.log("Verify Rereserve button is present in action center", TestStepType.STEP);
+			String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
 			getAction().waitFor(3000);
-			num=1;
-		}
+			AjaxCondition.forElementVisible(RERESERVE_BUTTON).waitForResponse();
+			getAction().scrollTo(RERESERVE_BUTTON);
+			getAction().click(RERESERVE_BUTTON);
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(RERESERVE_ITEM_COUNT).waitForResponse();
+			int num=0;
+			if(order.equalsIgnoreCase("whole order")){
+				num=getAction().getVisibleElementCount(RERESERVE_ITEM_COUNT);
+				for(int i=1;i<=num;i++){
+					getAction().scrollTo(RERESERVE_ITEM.format(i));
+					AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
+					getAction().click(RERESERVE_ITEM.format(i));
+					AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
+					getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
+					getAction().waitFor(3000);
+				}
+			}
+			else{
+				AjaxCondition.forElementVisible(RERESERVE_ITEM.format(1)).waitForResponse();
+				getAction().click(RERESERVE_ITEM.format(1));
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
+				getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
+				getAction().waitFor(3000);
+				num=1;
+			}
 			AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
 			getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
 			Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
@@ -4532,7 +4550,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 				getAction().waitFor(3000);
 				AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION_RERESERVE.format(i)).waitForResponse();
 				getAction().click(REASON_CODE_DROPDOWN_OPTION_RERESERVE.format(i));
-				}
+			}
 			Logger.log("Click Create Order button",TestStepType.STEP);
 			AjaxCondition.forElementVisible(RERESERVE_CREATE_ORDER_BUTTON).waitForResponse(5);
 			getAction().click(RERESERVE_CREATE_ORDER_BUTTON);
@@ -4631,18 +4649,18 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 		int num=getAction().getVisibleElementCount(SELECT_ITEM_NUMBER);
 		for(int i=num;i>0;i--){
-		AjaxCondition.forElementVisible(SELECT_ITEM.format(i)).waitForResponse();
-		getAction().click(SELECT_ITEM.format(i));
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
-		getAction().click(REASON_FOR_PICKUP_DROPDOWN);
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
-		getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
-		getAction().click(PICKUP_QUANTITY);
-		getAction().type(PICKUP_QUANTITY, "1");
+			AjaxCondition.forElementVisible(SELECT_ITEM.format(i)).waitForResponse();
+			getAction().click(SELECT_ITEM.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
+			getAction().click(REASON_FOR_PICKUP_DROPDOWN);
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
+			getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
+			getAction().click(PICKUP_QUANTITY);
+			getAction().type(PICKUP_QUANTITY, "1");
 		}
 		getAction().waitFor(3000);
 		getAction().scrollTo(CONTINUE_BUTTON);
@@ -4654,38 +4672,38 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		AjaxCondition.forElementVisible(CONCESSIONACCEPTED_NO).waitForResponse();
 		getAction().click(CONCESSIONACCEPTED_NO);
 		for(int i=1;i<=num;i++){
-		AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
-		getAction().click(CATEGORY_CODE_DROPDOWN.format(i));
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
-		getAction().click(CATEGORY_CODE_DROPDOWN_OPTION.format(i));
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(PICKUP_REASON_CODE_DROPDOWN.format(i)).waitForResponse();
-		getAction().click(PICKUP_REASON_CODE_DROPDOWN.format(i));
-		getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
-		getAction().click(REASON_CODE_DROPDOWN_OPTION.format(i));
+			AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
+			getAction().click(CATEGORY_CODE_DROPDOWN.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
+			getAction().click(CATEGORY_CODE_DROPDOWN_OPTION.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(PICKUP_REASON_CODE_DROPDOWN.format(i)).waitForResponse();
+			getAction().click(PICKUP_REASON_CODE_DROPDOWN.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION.format(i)).waitForResponse();
+			getAction().click(REASON_CODE_DROPDOWN_OPTION.format(i));
 		}
 		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CREATE_ORDER_BUTTON).waitForResponse();
 		getAction().click(CREATE_ORDER_BUTTON);
 		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(NEW_ORDER_CREATED_MSG).waitForResponse();
-	   if(!getAction().getText(NEW_ORDER_CREATED_MSG).contains("New order has been created. Close this notification to proceed to new order.")){
-		  PageAssert.fail("New order created sucess msg not shown");
-	   }
-	   else{
-		   Logger.log("Verified new order created sucess message ",TestStepType.VERIFICATION_PASSED);
-		   getAction().click(ORDERCREATED_OK_BUTTON);
-		   getAction().waitFor(4000);
-		   getAction().scrollTo(DOS_ORDER_STATUS);
-		   if(!getAction().getText(DOS_ORDER_STATUS).contains("Open")){
-			   PageAssert.fail("New open order is not visible");
-	   }
-		   else
-			   Logger.log("Verified new pickup order ",TestStepType.VERIFICATION_PASSED);	   
-	   }
-		
+		if(!getAction().getText(NEW_ORDER_CREATED_MSG).contains("New order has been created. Close this notification to proceed to new order.")){
+			PageAssert.fail("New order created sucess msg not shown");
+		}
+		else{
+			Logger.log("Verified new order created sucess message ",TestStepType.VERIFICATION_PASSED);
+			getAction().click(ORDERCREATED_OK_BUTTON);
+			getAction().waitFor(4000);
+			getAction().scrollTo(DOS_ORDER_STATUS);
+			if(!getAction().getText(DOS_ORDER_STATUS).contains("Open")){
+				PageAssert.fail("New open order is not visible");
+			}
+			else
+				Logger.log("Verified new pickup order ",TestStepType.VERIFICATION_PASSED);	   
+		}
+
 	}
 
 	public void goToActionCenter(){
@@ -4722,15 +4740,15 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		//System.out.println("----"+DELIVERY_NOTES_DATA.format(data).getValue());
 		getAction().scrollTo(DELIVERY_NOTES_DATA.format(data));
 		if(data.equalsIgnoreCase("MSP  ENTIRE ORDER HAS BEEN CANCELLED")){
-			
+
 			String cancelledOrderNotes="MSP ENTIRE ORDER HAS BEEN CANCELLED";
 			SoftAssert.checkConditionAndContinueOnFailure("verified DeliveryNotes has data:"+cancelledOrderNotes, getAction().getText(DELIVERY_NOTES_DATA.format(data)).contains(cancelledOrderNotes));
 			System.out.println(cancelledOrderNotes);
 		}
 		else{
-		AjaxCondition.forElementVisible(DELIVERY_NOTES_DATA.format(data)).waitForResponse();
-		SoftAssert.checkConditionAndContinueOnFailure("verified DeliveryNotes has data:"+data, getAction().getText(DELIVERY_NOTES_DATA.format(data)).contains(data));
-	}
+			AjaxCondition.forElementVisible(DELIVERY_NOTES_DATA.format(data)).waitForResponse();
+			SoftAssert.checkConditionAndContinueOnFailure("verified DeliveryNotes has data:"+data, getAction().getText(DELIVERY_NOTES_DATA.format(data)).contains(data));
+		}
 	}
 
 	public void cancelOrderDelivery(String orderType, String orderStatus ) {
@@ -4785,15 +4803,15 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		if (orderType.equalsIgnoreCase("Whole order")) {
 			AjaxCondition.forElementVisible(COMPLETE_CANCEL_VERIFY).waitForResponse();
 			Logger.log("Verified that Order status is Cancelled", TestStepType.VERIFICATION_PASSED);
-			
+
 			if (orderStatus.equalsIgnoreCase("Released")){
-			AjaxCondition.forElementVisible(PEND_CODE).waitForResponse();
-			String pendCode=getAction().getText(PEND_CODE);
-			System.out.println("pend code -------------------"+pendCode);
-			highlight(PEND_CODE);
-			PageAssert.verifyEqual(pendCode, "TBC");}
+				AjaxCondition.forElementVisible(PEND_CODE).waitForResponse();
+				String pendCode=getAction().getText(PEND_CODE);
+				System.out.println("pend code -------------------"+pendCode);
+				highlight(PEND_CODE);
+				PageAssert.verifyEqual(pendCode, "TBC");}
 			else
-			AjaxCondition.forElementVisible(ORDER_STATUS_CANCELLED).waitForResponse();
+				AjaxCondition.forElementVisible(ORDER_STATUS_CANCELLED).waitForResponse();
 
 			int lineItem = getAction().getElementCount(LINE_ITEM_COUNT);
 			for (int i = 1; i <= lineItem; i++) {
@@ -4832,107 +4850,107 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 		String tabArray[]={"Order Detail","Delivery Detail","Miscellaneous","Delivery Notes","Route Tracking","Action Center"};
 		for(int i=0;i<tabArray.length;i++){
-		AjaxCondition.forElementVisible(TAB_NAME.format(tabArray[i])).waitForResponse();
-		getAction().scrollTo(TAB_NAME.format(tabArray[i]));
-		getAction().click(TAB_NAME.format(tabArray[i]));
-		if(tabArray[i].equalsIgnoreCase("Order Detail")){
-			AjaxCondition.forElementVisible(DOS_ORDER_STATUS).waitForResponse();
-			if(!getAction().getText(DOS_ORDER_STATUS).equalsIgnoreCase(ordType)){
-				PageAssert.fail("Order status choosen and displayed is different. Order status choosen:"+ordType+" order status displayed:"+getAction().getText(DOS_ORDER_STATUS));
-			}
-			AjaxCondition.forElementVisible(DOS_ORDER_NUMBER).waitForResponse();
-			String dosOrderNumber=getAction().getText(DOS_ORDER_NUMBER);
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether dos order number not empty. Dos order number displayed:"+dosOrderNumber,!dosOrderNumber.isEmpty());
-			AjaxCondition.forElementVisible(DOS_UNIT_NUMBER).waitForResponse();
-			String dosUnitNumber=getAction().getText(DOS_UNIT_NUMBER);
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether dos unit number not empty. Dos unit number displayed:"+dosUnitNumber,!dosUnitNumber.isEmpty());
-			AjaxCondition.forElementVisible(SALESCHECK_LINK).waitForResponse();
-			String salescheckLink=getAction().getText(SALESCHECK_LINK);
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether salescheck Link not empty.sales checkLink displayed:"+salescheckLink,!salescheckLink.isEmpty());
-			AjaxCondition.forElementVisible(SALE_DATE).waitForResponse();
-			String saleDate=getAction().getText(SALE_DATE);
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether sale Date not empty.sale Date displayed:"+saleDate,!saleDate.isEmpty());
-			AjaxCondition.forElementVisible(DELIVERY_DATE_ORDER).waitForResponse();
-			String delDate=getAction().getText(DELIVERY_DATE_ORDER);
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether Delivery Date not empty.Delivery Date displayed:"+delDate,!delDate.isEmpty());
-			AjaxCondition.forElementVisible(SHIP_METHOD).waitForResponse();
-			String shipMethod=getAction().getText(SHIP_METHOD);
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether ship method not empty.ship method displayed:"+shipMethod,!shipMethod.isEmpty());
-			AjaxCondition.forElementVisible(TIME_WINDOW.format(1)).waitForResponse();
-			String timeWindow=getAction().getText(TIME_WINDOW.format(1));
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether time Window not empty.time Window displayed:"+timeWindow,!timeWindow.isEmpty());
-			SoftAssert.checkElementAndContinueOnFailure(ORDER_TABLE, "Verify whether order table not empty", CheckLocatorFor.isVisible);
-			
-		}
-		else if(tabArray[i].equalsIgnoreCase("Delivery Detail")){
-			AjaxCondition.forElementVisible(TIME_WINDOW.format(2)).waitForResponse();
-			String timeWindow=getAction().getText(TIME_WINDOW.format(2));
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether time Window not empty.Time Window displayed:"+timeWindow,!timeWindow.isEmpty());
-			AjaxCondition.forElementVisible(ORIGINAL_DELIVERY_DATE.format(1)).waitForResponse();
-			String origDelDate=getAction().getText(ORIGINAL_DELIVERY_DATE.format(1));
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether original delivery date not empty.original delivery Date displayed:"+origDelDate,!origDelDate.isEmpty());
-
-		}
-		else if(tabArray[i].equalsIgnoreCase("Miscellaneous")){
-			AjaxCondition.forElementVisible(ORIGINAL_DELIVERY_DATE.format(2)).waitForResponse();
-			String origDelDate=getAction().getText(ORIGINAL_DELIVERY_DATE.format(2));
-			SoftAssert.checkConditionAndContinueOnFailure("Verify whether original delivery date not empty.original delivery Date displayed:"+origDelDate,!origDelDate.isEmpty());
-		}
-		else if(tabArray[i].equalsIgnoreCase("Delivery Notes")){
-			SoftAssert.checkElementAndContinueOnFailure(DELIVERY_NOTE, "Verify whether delivery note text area is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(ADD_NOTE, "Verify whether add note button is visible", CheckLocatorFor.isVisible);
-
-		}
-		else if(tabArray[i].equalsIgnoreCase("Route Tracking")){
-			if(ordType.equalsIgnoreCase("open")){
-				SoftAssert.checkElementAndContinueOnFailure(ROUTE_STATUS_OPEN, "Verify whether route status text displayed", CheckLocatorFor.isVisible);
+			AjaxCondition.forElementVisible(TAB_NAME.format(tabArray[i])).waitForResponse();
+			getAction().scrollTo(TAB_NAME.format(tabArray[i]));
+			getAction().click(TAB_NAME.format(tabArray[i]));
+			if(tabArray[i].equalsIgnoreCase("Order Detail")){
+				AjaxCondition.forElementVisible(DOS_ORDER_STATUS).waitForResponse();
+				if(!getAction().getText(DOS_ORDER_STATUS).equalsIgnoreCase(ordType)){
+					PageAssert.fail("Order status choosen and displayed is different. Order status choosen:"+ordType+" order status displayed:"+getAction().getText(DOS_ORDER_STATUS));
+				}
+				AjaxCondition.forElementVisible(DOS_ORDER_NUMBER).waitForResponse();
+				String dosOrderNumber=getAction().getText(DOS_ORDER_NUMBER);
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether dos order number not empty. Dos order number displayed:"+dosOrderNumber,!dosOrderNumber.isEmpty());
+				AjaxCondition.forElementVisible(DOS_UNIT_NUMBER).waitForResponse();
+				String dosUnitNumber=getAction().getText(DOS_UNIT_NUMBER);
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether dos unit number not empty. Dos unit number displayed:"+dosUnitNumber,!dosUnitNumber.isEmpty());
+				AjaxCondition.forElementVisible(SALESCHECK_LINK).waitForResponse();
+				String salescheckLink=getAction().getText(SALESCHECK_LINK);
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether salescheck Link not empty.sales checkLink displayed:"+salescheckLink,!salescheckLink.isEmpty());
+				AjaxCondition.forElementVisible(SALE_DATE).waitForResponse();
+				String saleDate=getAction().getText(SALE_DATE);
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether sale Date not empty.sale Date displayed:"+saleDate,!saleDate.isEmpty());
+				AjaxCondition.forElementVisible(DELIVERY_DATE_ORDER).waitForResponse();
+				String delDate=getAction().getText(DELIVERY_DATE_ORDER);
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether Delivery Date not empty.Delivery Date displayed:"+delDate,!delDate.isEmpty());
+				AjaxCondition.forElementVisible(SHIP_METHOD).waitForResponse();
+				String shipMethod=getAction().getText(SHIP_METHOD);
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether ship method not empty.ship method displayed:"+shipMethod,!shipMethod.isEmpty());
+				AjaxCondition.forElementVisible(TIME_WINDOW.format(1)).waitForResponse();
+				String timeWindow=getAction().getText(TIME_WINDOW.format(1));
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether time Window not empty.time Window displayed:"+timeWindow,!timeWindow.isEmpty());
+				SoftAssert.checkElementAndContinueOnFailure(ORDER_TABLE, "Verify whether order table not empty", CheckLocatorFor.isVisible);
 
 			}
-			else{
-				SoftAssert.checkElementAndContinueOnFailure(ROUTE_STATUS, "Verify whether route status rows displayed", CheckLocatorFor.isVisible);
-			}
-			
-		}
-		else if(tabArray[i].equalsIgnoreCase("Action Center")){
-			if(ordType.equalsIgnoreCase("open")){
-				SoftAssert.checkElementAndContinueOnFailure(CANCEL_BUTTON, "Verify whether cancel button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(HOLD_FOR_DELIVERY, "Verify whether hold for future delivery button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(QUEUE_FOR_FOLLOW_UP, "Verify whether queue for followup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(RERESERVE_BUTTON, "Verify whether rereserve button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(UPDATE_SCIM_CODE, "Verify whether update scim code button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(WRAPUP_BUTTON, "Verify whether wrapup button displayed", CheckLocatorFor.isVisible);
+			else if(tabArray[i].equalsIgnoreCase("Delivery Detail")){
+				AjaxCondition.forElementVisible(TIME_WINDOW.format(2)).waitForResponse();
+				String timeWindow=getAction().getText(TIME_WINDOW.format(2));
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether time Window not empty.Time Window displayed:"+timeWindow,!timeWindow.isEmpty());
+				AjaxCondition.forElementVisible(ORIGINAL_DELIVERY_DATE.format(1)).waitForResponse();
+				String origDelDate=getAction().getText(ORIGINAL_DELIVERY_DATE.format(1));
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether original delivery date not empty.original delivery Date displayed:"+origDelDate,!origDelDate.isEmpty());
 
 			}
-			else if(ordType.equalsIgnoreCase("shipped")){
-				SoftAssert.checkElementAndContinueOnFailure(PICKUP_BUTTON, "Verify whether pickup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(EVEN_EXCHANGE_BUTTON, "Verify whether even exchange button displayed", CheckLocatorFor.isVisible);
-				
+			else if(tabArray[i].equalsIgnoreCase("Miscellaneous")){
+				AjaxCondition.forElementVisible(ORIGINAL_DELIVERY_DATE.format(2)).waitForResponse();
+				String origDelDate=getAction().getText(ORIGINAL_DELIVERY_DATE.format(2));
+				SoftAssert.checkConditionAndContinueOnFailure("Verify whether original delivery date not empty.original delivery Date displayed:"+origDelDate,!origDelDate.isEmpty());
 			}
-			else if(ordType.equalsIgnoreCase("released")){
-				SoftAssert.checkElementAndContinueOnFailure(CANCEL_BUTTON, "Verify whether cancel button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(HOLD_FOR_DELIVERY, "Verify whether hold for future delivery button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(QUEUE_FOR_FOLLOW_UP, "Verify whether queue for followup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(RERESERVE_BUTTON, "Verify whether rereserve button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(UPDATE_SCIM_CODE, "Verify whether update scim code button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(WRAPUP_BUTTON, "Verify whether wrapup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(PICKUP_BUTTON, "Verify whether pickup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(EVEN_EXCHANGE_BUTTON, "Verify whether even exchange button displayed", CheckLocatorFor.isVisible);
+			else if(tabArray[i].equalsIgnoreCase("Delivery Notes")){
+				SoftAssert.checkElementAndContinueOnFailure(DELIVERY_NOTE, "Verify whether delivery note text area is displayed", CheckLocatorFor.isVisible);
+				SoftAssert.checkElementAndContinueOnFailure(ADD_NOTE, "Verify whether add note button is visible", CheckLocatorFor.isVisible);
 
 			}
-			else if(ordType.equalsIgnoreCase("partially-shipped")){
-				SoftAssert.checkElementAndContinueOnFailure(CANCEL_BUTTON, "Verify whether cancel button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(HOLD_FOR_DELIVERY, "Verify whether hold for future delivery button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(QUEUE_FOR_FOLLOW_UP, "Verify whether queue for followup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(RERESERVE_BUTTON, "Verify whether rereserve button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(UPDATE_SCIM_CODE, "Verify whether update scim code button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(WRAPUP_BUTTON, "Verify whether wrapup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(PICKUP_BUTTON, "Verify whether pickup button displayed", CheckLocatorFor.isVisible);
-				SoftAssert.checkElementAndContinueOnFailure(EVEN_EXCHANGE_BUTTON, "Verify whether even exchange button displayed", CheckLocatorFor.isVisible);
+			else if(tabArray[i].equalsIgnoreCase("Route Tracking")){
+				if(ordType.equalsIgnoreCase("open")){
+					SoftAssert.checkElementAndContinueOnFailure(ROUTE_STATUS_OPEN, "Verify whether route status text displayed", CheckLocatorFor.isVisible);
+
+				}
+				else{
+					SoftAssert.checkElementAndContinueOnFailure(ROUTE_STATUS, "Verify whether route status rows displayed", CheckLocatorFor.isVisible);
+				}
+
+			}
+			else if(tabArray[i].equalsIgnoreCase("Action Center")){
+				if(ordType.equalsIgnoreCase("open")){
+					SoftAssert.checkElementAndContinueOnFailure(CANCEL_BUTTON, "Verify whether cancel button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(HOLD_FOR_DELIVERY, "Verify whether hold for future delivery button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(QUEUE_FOR_FOLLOW_UP, "Verify whether queue for followup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(RERESERVE_BUTTON, "Verify whether rereserve button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(UPDATE_SCIM_CODE, "Verify whether update scim code button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(WRAPUP_BUTTON, "Verify whether wrapup button displayed", CheckLocatorFor.isVisible);
+
+				}
+				else if(ordType.equalsIgnoreCase("shipped")){
+					SoftAssert.checkElementAndContinueOnFailure(PICKUP_BUTTON, "Verify whether pickup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(EVEN_EXCHANGE_BUTTON, "Verify whether even exchange button displayed", CheckLocatorFor.isVisible);
+
+				}
+				else if(ordType.equalsIgnoreCase("released")){
+					SoftAssert.checkElementAndContinueOnFailure(CANCEL_BUTTON, "Verify whether cancel button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(HOLD_FOR_DELIVERY, "Verify whether hold for future delivery button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(QUEUE_FOR_FOLLOW_UP, "Verify whether queue for followup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(RERESERVE_BUTTON, "Verify whether rereserve button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(UPDATE_SCIM_CODE, "Verify whether update scim code button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(WRAPUP_BUTTON, "Verify whether wrapup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(PICKUP_BUTTON, "Verify whether pickup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(EVEN_EXCHANGE_BUTTON, "Verify whether even exchange button displayed", CheckLocatorFor.isVisible);
+
+				}
+				else if(ordType.equalsIgnoreCase("partially-shipped")){
+					SoftAssert.checkElementAndContinueOnFailure(CANCEL_BUTTON, "Verify whether cancel button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(HOLD_FOR_DELIVERY, "Verify whether hold for future delivery button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(QUEUE_FOR_FOLLOW_UP, "Verify whether queue for followup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(RERESERVE_BUTTON, "Verify whether rereserve button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(UPDATE_SCIM_CODE, "Verify whether update scim code button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(WRAPUP_BUTTON, "Verify whether wrapup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(PICKUP_BUTTON, "Verify whether pickup button displayed", CheckLocatorFor.isVisible);
+					SoftAssert.checkElementAndContinueOnFailure(EVEN_EXCHANGE_BUTTON, "Verify whether even exchange button displayed", CheckLocatorFor.isVisible);
+				}
 			}
 		}
-		}
-		
-		
+
+
 	}
 
 	public void verifyAction(String action){
@@ -5019,8 +5037,8 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM.format("1")).waitForResponse(5);
 		}
 		if(!action.equalsIgnoreCase("wrapup")){
-		AjaxCondition.forElementVisible(SELECT_ANOTHER_ACTION).waitForResponse();
-		getAction().click(SELECT_ANOTHER_ACTION);
+			AjaxCondition.forElementVisible(SELECT_ANOTHER_ACTION).waitForResponse();
+			getAction().click(SELECT_ANOTHER_ACTION);
 		}
 
 	}
@@ -5124,7 +5142,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 			AjaxCondition.forElementPresent(ACTION_CENTER_INSTALLATION_NOTES).waitWithoutException(5);
 			PageAssert.textPresent(ACTION_CENTER_INSTALLATION_NOTES, "Note: This order includes installation service, please reschedule the installation service.");
 		}
-		
+
 		if (ordType.equalsIgnoreCase("ORDER")) {
 			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
 			getAction().click(CANCEL_ENTIRE_ORDER);
@@ -5152,11 +5170,6 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().click(AVAILABLE_DATE_IN_CALANDER);
 		AjaxCondition.forElementVisible(AVAILABLE_TIME).waitForResponse();
 		getAction().click(AVAILABLE_TIME);
-		
-		//click on confirmation popup
-		if(AjaxCondition.forElementVisible(OK_BUTTON_ON_POPUP).waitForResponse(3000)){
-			getAction().click(OK_BUTTON_ON_POPUP);
-		}
 
 		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
 
@@ -5214,7 +5227,7 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		String fDate=getAction().getText(DELIVERY_DATE);
 
 		String pend1=getAction().getText(PEND_CODE);
-		
+
 		String orderStatus = getAction().getText(ORDER_STATUS);
 		goToActionCenter();
 
@@ -5233,19 +5246,19 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(DELIVERY_DATE).waitForResponse();
 		String lDate=getAction().getText(DELIVERY_DATE);
-		
+
 		AjaxCondition.forElementVisible(PEND_CODE).waitForResponse();
 		String pend2=getAction().getText(PEND_CODE);
 		System.out.println("pend 2 -------------------"+pend2);
 		if(orderStatus.equalsIgnoreCase("Open")){
-			
+
 			PageAssert.verifyEqual(pend2, "DDH");
-			
+
 		}else if (orderStatus.equalsIgnoreCase("Released")) {
 			PageAssert.verifyEqual(pend2, "TBH");
-			
+
 		}
-		
+
 		Logger.log("Verified that pend code before reshedule was: "+pend1+" and pend code after reshedule is:"+pend2,TestStepType.VERIFICATION_PASSED);
 
 		String[] dateArray=lDate.split("/");
@@ -5277,46 +5290,46 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 		Logger.log("Order successfully routed to HD-Account validation queue",TestStepType.VERIFICATION_PASSED);	
 
 	}
-		public void queueForFollowUp(String reasonName){
-			Logger.log("Click on the queue for follow up button" , TestStepType.STEP);
-			AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
-			getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
-			getAction().click(QUEUE_FOR_FOLLOW_UP);
-			Logger.log("Click on the reason dropdown" , TestStepType.STEP);
-			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
-			getAction().click(REASON_DROPDOWN_CANCEL);
-			AjaxCondition.forElementVisible(SELECTED_OPTION_QUEUE.format(reasonName)).waitForResponse();
-			getAction().click(SELECTED_OPTION_QUEUE.format(reasonName));
-			getAction().waitFor(2000);
-			AjaxCondition.forElementVisible(QUEUE_NAME).waitForResponse();
-			String queue=getAction().getText(QUEUE_NAME);
-			getContext().put("queue", queue);
+	public void queueForFollowUp(String reasonName){
+		Logger.log("Click on the queue for follow up button" , TestStepType.STEP);
+		AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
+		getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
+		getAction().click(QUEUE_FOR_FOLLOW_UP);
+		Logger.log("Click on the reason dropdown" , TestStepType.STEP);
+		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
+		getAction().click(REASON_DROPDOWN_CANCEL);
+		AjaxCondition.forElementVisible(SELECTED_OPTION_QUEUE.format(reasonName)).waitForResponse();
+		getAction().click(SELECTED_OPTION_QUEUE.format(reasonName));
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(QUEUE_NAME).waitForResponse();
+		String queue=getAction().getText(QUEUE_NAME);
+		getContext().put("queue", queue);
 
-			if( getAction().isVisible(CASE_EXISTS)){
-				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(CASE_EXISTS), true);
-				Logger.log("click on OK button",TestStepType.STEP);
-				getAction().click(OK_BUTTON_ON_POPUP);
-				SoftAssert.checkConditionAndContinueOnFailure("Continue button is disable as case already exists ", (!getAction().findElement(CONTINUE_BUTTON).isEnabled()));}
+		if( getAction().isVisible(CASE_EXISTS)){
+			SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(CASE_EXISTS), true);
+			Logger.log("click on OK button",TestStepType.STEP);
+			getAction().click(OK_BUTTON_ON_POPUP);
+			SoftAssert.checkConditionAndContinueOnFailure("Continue button is disable as case already exists ", (!getAction().findElement(CONTINUE_BUTTON).isEnabled()));}
 
-			else{
-				SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is present", CheckLocatorFor.isPresent);
-				Logger.log("Click on the continue button" , TestStepType.STEP);
-				AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
-				getAction().click(CONTINUE_BUTTON);
-				AjaxCondition.forElementVisible(ADJUSTMENT_NOTES).waitForResponse();
-				getAction().type(ADJUSTMENT_NOTES, "Test");
-				AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_CHECKBOX).waitForResponse();
-				getAction().click(QUEUE_FOR_FOLLOW_UP_CHECKBOX);
-				Logger.log("Click on the wrap up button" , TestStepType.STEP);
-				AjaxCondition.forElementVisible(BUTTON_WRAP_ORDER).waitForResponse();
-				getAction().waitFor(3000);
-				getAction().click(BUTTON_WRAP_ORDER);
-				AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_VERIFY).waitForResponse();		
-				Logger.log("Order successfully routed to "+getContext().get("queue")+" "+TestStepType.VERIFICATION_PASSED);
-				getAction().click(OK_BUTTON_ON_POPUP);
-				getAction().waitFor(3000);
-			}
+		else{
+			SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is present", CheckLocatorFor.isPresent);
+			Logger.log("Click on the continue button" , TestStepType.STEP);
+			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+			getAction().click(CONTINUE_BUTTON);
+			AjaxCondition.forElementVisible(ADJUSTMENT_NOTES).waitForResponse();
+			getAction().type(ADJUSTMENT_NOTES, "Test");
+			AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_CHECKBOX).waitForResponse();
+			getAction().click(QUEUE_FOR_FOLLOW_UP_CHECKBOX);
+			Logger.log("Click on the wrap up button" , TestStepType.STEP);
+			AjaxCondition.forElementVisible(BUTTON_WRAP_ORDER).waitForResponse();
+			getAction().waitFor(3000);
+			getAction().click(BUTTON_WRAP_ORDER);
+			AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP_VERIFY).waitForResponse();		
+			Logger.log("Order successfully routed to "+getContext().get("queue")+" "+TestStepType.VERIFICATION_PASSED);
+			getAction().click(OK_BUTTON_ON_POPUP);
+			getAction().waitFor(3000);
 		}
+	}
 	public void verifyOrderPhoneNumber(String phoneNumber) {
 		Logger.log("Verify Call phone number matches with order phone number on Order details page "+phoneNumber ,TestStepType.VERIFICATION_PASSED);
 		AjaxCondition.forElementVisible(CUSTOMER_PHONE_NUMBER).waitForResponse();
@@ -5324,171 +5337,171 @@ public void verifyCloseCaseByWrapupOfflineAgent(){
 
 	}
 
-public void msatOnlineAgentOrderWrapupRFC() {
-	getAction().waitFor(2000);
-	Logger.log("Click on line item/sales check tab",TestStepType.STEP);
-	AjaxCondition.forElementVisible(WRAP_UP_TAB).waitForResponse();
-	getAction().click(WRAP_UP_TAB);
-	
-	//Click on Category
-	getAction().click(CATEGORY_DROPDOWN);
-	getAction().selectByVisibleText(CATEGORY_DROPDOWN, "General Inquiry");
-	Logger.log("Select General Inquiry Option in Category", TestStepType.VERIFICATION_PASSED);
+	public void msatOnlineAgentOrderWrapupRFC() {
+		getAction().waitFor(2000);
+		Logger.log("Click on line item/sales check tab",TestStepType.STEP);
+		AjaxCondition.forElementVisible(WRAP_UP_TAB).waitForResponse();
+		getAction().click(WRAP_UP_TAB);
 
-	getAction().click(REASON_CODE_DROPDOWN);
-	getAction().waitFor(1000);
-	
-	getAction().selectUsingIndex(REASON_CODE_DROPDOWN, 4);
-	
-	Logger.log("Select 'NO Action Needed - General Question' in Reason Code", TestStepType.STEP);
-	SoftAssert.checkConditionAndContinueOnFailure("Verify Not Applicable Text is Present", getAction().getText(SELECT_QUEUE_NO_RESPONSE).equals("Not Applicable"));
-	
-	getAction().type(ORDER_NOTES_TEXT_AREA, "No action was performed on the order other than opening and closing the order through automation script to monitor production environment.");
-	
-	check(SELECT_ITEM_FOR_WRAPUP);
-	clickWrapOrderContact();
-	
-	Logger.log("Click on Wrap Up Tab",TestStepType.STEP);
-	getAction().waitFor(1000);
-	
-	//Select Member in the RFC Form
-	getAction().click(RFC_WHO_CONTACTED);
-	getAction().selectByVisibleText(RFC_WHO_CONTACTED, "Member");
+		//Click on Category
+		getAction().click(CATEGORY_DROPDOWN);
+		getAction().selectByVisibleText(CATEGORY_DROPDOWN, "General Inquiry");
+		Logger.log("Select General Inquiry Option in Category", TestStepType.VERIFICATION_PASSED);
 
-	//Select "Order Status And Tracking" for "why did they contact us?"
-	getAction().click(RFC_WHY_CONTACTED);
-	getAction().selectByVisibleText(RFC_WHY_CONTACTED, "Order Status and Tracking");
+		getAction().click(REASON_CODE_DROPDOWN);
+		getAction().waitFor(1000);
 
-	
-	//Select "Order Status" for "Tell us more"
-	getAction().click(RFC_TELL_US_MORE);
-	getAction().selectByVisibleText(RFC_TELL_US_MORE, "Order Status");
-	
-	
-	//Select RFC Wrapup Reason 1
-	getAction().click(RFC_REASON1);
-	getAction().selectByVisibleText(RFC_REASON1, "Order status problem");
+		getAction().selectUsingIndex(REASON_CODE_DROPDOWN, 4);
 
-	//Edited Email Address
-	getAction().click(RFC_EDITED_EMAIL_ADDRESS);
-	getAction().type(RFC_EDITED_EMAIL_ADDRESS, "realtimemsat@Sharklasers.com");		
-	
-	//Radio button - Email address confirmation
-	getAction().click(RFC_RADIO_EDITED_EMAIL);
+		Logger.log("Select 'NO Action Needed - General Question' in Reason Code", TestStepType.STEP);
+		SoftAssert.checkConditionAndContinueOnFailure("Verify Not Applicable Text is Present", getAction().getText(SELECT_QUEUE_NO_RESPONSE).equals("Not Applicable"));
 
-	Logger.log("Click Wrap Up on RFC Form", TestStepType.STEP);
-	getAction().click(RFC_BUTTON_WRAPUP);
-	getAction().waitFor(3000);
-}
+		getAction().type(ORDER_NOTES_TEXT_AREA, "No action was performed on the order other than opening and closing the order through automation script to monitor production environment.");
+
+		check(SELECT_ITEM_FOR_WRAPUP);
+		clickWrapOrderContact();
+
+		Logger.log("Click on Wrap Up Tab",TestStepType.STEP);
+		getAction().waitFor(1000);
+
+		//Select Member in the RFC Form
+		getAction().click(RFC_WHO_CONTACTED);
+		getAction().selectByVisibleText(RFC_WHO_CONTACTED, "Member");
+
+		//Select "Order Status And Tracking" for "why did they contact us?"
+		getAction().click(RFC_WHY_CONTACTED);
+		getAction().selectByVisibleText(RFC_WHY_CONTACTED, "Order Status and Tracking");
 
 
-public void msatOnlineAgentGeneralInquiryWrapupRFC() {
-	getAction().waitFor(2000);
-	Logger.log("Guest Icon",TestStepType.STEP);
-	AjaxCondition.forElementVisible(RFC_GUEST_ICON).waitForResponse();
-	getAction().click(RFC_GUEST_ICON);
-	
-	//Click on User Icon
-	getAction().click(USER_ICON);
-	getAction().click(USER_ICON_RFC);
-	Logger.log("Select RCF from user icon", TestStepType.VERIFICATION_PASSED);
-		
-	//Select Member in the RFC Form
-	getAction().click(RFC_WHO_CONTACTED);
-	getAction().selectByVisibleText(RFC_WHO_CONTACTED, "Member");
-
-	//Select "Order Status And Tracking" for "why did they contact us?"
-	getAction().click(RFC_WHY_CONTACTED);
-	getAction().selectByVisibleText(RFC_WHY_CONTACTED, "Order Status and Tracking");
-
-	
-	//Select "Order Status" for "Tell us more"
-	getAction().click(RFC_TELL_US_MORE);
-	getAction().selectByVisibleText(RFC_TELL_US_MORE, "Order Status");
-	
-	
-	//Select RFC Wrapup Reason 1
-	getAction().click(RFC_REASON1);
-	getAction().selectByVisibleText(RFC_REASON1, "Order status problem");
-
-	//Edited Email Address
-	getAction().click(RFC_EDITED_EMAIL_ADDRESS);
-	getAction().type(RFC_EDITED_EMAIL_ADDRESS, "realtimemsat@Sharklasers.com");		
-	
-	//Radio button - Email address confirmation
-	getAction().click(RFC_RADIO_EDITED_EMAIL);
-
-	Logger.log("Click Wrap Up on RFC Form", TestStepType.STEP);
-	getAction().click(RFC_BUTTON_WRAPUP);
-	getAction().waitFor(3000);
-}
+		//Select "Order Status" for "Tell us more"
+		getAction().click(RFC_TELL_US_MORE);
+		getAction().selectByVisibleText(RFC_TELL_US_MORE, "Order Status");
 
 
-/**
- * Delivery Flow - Verification to assert that pended orders don't have the 'UPDATE' button
- */
-public OrderDetailsPage verifySuggestedAddressForAddressUpdates(String searchVal, String searchField) {
-	Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
-	getAction().waitFor(2000);
-	if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)) 	
-		Logger.log("Test Data is not valid");
-	else
-	{
-		SoftAssert.checkElementAndContinueOnFailure(DOS_ORDER_NO_LONGER_EXIST, "Verify Order Exists", CheckLocatorFor.isNotVisible);
-		
-		//Check if the Update button is enabled
-		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
-		if (getAction().findElement(UPDATE_BUTTON).isEnabled()) {
-			Logger.log("Update button is enabled.", TestStepType.VERIFICATION_PASSED);
-			getAction().click(UPDATE_BUTTON);
-		}
-		else {
-			PageAssert.fail("Update button is disabled");
-		}
-		
-		//DOS_ORDER_SUMMARY_ADDRESS1
-		AjaxCondition.forElementVisible(DOS_ORDER_SUMMARY_ADDRESS1).waitForResponse();
-		getAction().click(DOS_ORDER_SUMMARY_ADDRESS1);
-		String address1	= getAction().getText(DOS_ORDER_SUMMARY_ADDRESS1).toString();
-		String newaddress1 = "99999" + address1;
-		getAction().type(DOS_ORDER_SUMMARY_ADDRESS1, newaddress1);
-		//getAction().click(UPDATE_BUTTON);
-		AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse();
-		getAction().scrollTo(SAVE_BUTTON);
-		getAction().click(SAVE_BUTTON);
-		
+		//Select RFC Wrapup Reason 1
+		getAction().click(RFC_REASON1);
+		getAction().selectByVisibleText(RFC_REASON1, "Order status problem");
 
+		//Edited Email Address
+		getAction().click(RFC_EDITED_EMAIL_ADDRESS);
+		getAction().type(RFC_EDITED_EMAIL_ADDRESS, "realtimemsat@Sharklasers.com");		
 
-	}	
-	return this;
-}
+		//Radio button - Email address confirmation
+		getAction().click(RFC_RADIO_EDITED_EMAIL);
 
-public void OpenMsatEmail() {
-	getAction().waitFor(2000);
-	Logger.log("Guest Icon",TestStepType.STEP);
-	AjaxCondition.forElementVisible(RFC_GUEST_ICON).waitForResponse();
-	getAction().click(RFC_GUEST_ICON);
-	getAction().driver.get("https://mail.cognizant.com");
-}
-public OrderDetailsPage verifySywLinkDetailsPageDisplayed() {
-	Logger.log("Verify if syw Details Page is displayed", TestStepType.VERIFICATION_STEP);
-	getAction().waitFor(2000);
-	if(AjaxCondition.forElementVisible(SYW_NO_SEARCH_RESULTS_LABEL).waitWithoutException(1)){
-		Logger.log("Test Data is not valid");
-		System.out.println("--------------------------------------------no results");
+		Logger.log("Click Wrap Up on RFC Form", TestStepType.STEP);
+		getAction().click(RFC_BUTTON_WRAPUP);
+		getAction().waitFor(3000);
 	}
-		
-	else
-	{
-		System.out.println("--------------------pass");
-		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_LINKED_INFORMATION, "Verify syw Linked section is displayed", CheckLocatorFor.isVisible);
-		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_ADDRESS_INFORMATION, "Verify address Information section is displayed", CheckLocatorFor.isVisible);
-		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_EMAIL_INFORMATION, "Verify email Information is displayed", CheckLocatorFor.isVisible);
-		SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_CITY_INFORMATION, "Verify city Information is displayed", CheckLocatorFor.isVisible);
+
+
+	public void msatOnlineAgentGeneralInquiryWrapupRFC() {
+		getAction().waitFor(2000);
+		Logger.log("Guest Icon",TestStepType.STEP);
+		AjaxCondition.forElementVisible(RFC_GUEST_ICON).waitForResponse();
+		getAction().click(RFC_GUEST_ICON);
+
+		//Click on User Icon
+		getAction().click(USER_ICON);
+		getAction().click(USER_ICON_RFC);
+		Logger.log("Select RCF from user icon", TestStepType.VERIFICATION_PASSED);
+
+		//Select Member in the RFC Form
+		getAction().click(RFC_WHO_CONTACTED);
+		getAction().selectByVisibleText(RFC_WHO_CONTACTED, "Member");
+
+		//Select "Order Status And Tracking" for "why did they contact us?"
+		getAction().click(RFC_WHY_CONTACTED);
+		getAction().selectByVisibleText(RFC_WHY_CONTACTED, "Order Status and Tracking");
+
+
+		//Select "Order Status" for "Tell us more"
+		getAction().click(RFC_TELL_US_MORE);
+		getAction().selectByVisibleText(RFC_TELL_US_MORE, "Order Status");
+
+
+		//Select RFC Wrapup Reason 1
+		getAction().click(RFC_REASON1);
+		getAction().selectByVisibleText(RFC_REASON1, "Order status problem");
+
+		//Edited Email Address
+		getAction().click(RFC_EDITED_EMAIL_ADDRESS);
+		getAction().type(RFC_EDITED_EMAIL_ADDRESS, "realtimemsat@Sharklasers.com");		
+
+		//Radio button - Email address confirmation
+		getAction().click(RFC_RADIO_EDITED_EMAIL);
+
+		Logger.log("Click Wrap Up on RFC Form", TestStepType.STEP);
+		getAction().click(RFC_BUTTON_WRAPUP);
+		getAction().waitFor(3000);
 	}
-	return this;
-}
-/*public OrderDetailsPage verifyReasonCodePresence(String reasonName, boolean statusPresence){
+
+
+	/**
+	 * Delivery Flow - Verification to assert that pended orders don't have the 'UPDATE' button
+	 */
+	public OrderDetailsPage verifySuggestedAddressForAddressUpdates(String searchVal, String searchField) {
+		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
+		getAction().waitFor(2000);
+		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)) 	
+			Logger.log("Test Data is not valid");
+		else
+		{
+			SoftAssert.checkElementAndContinueOnFailure(DOS_ORDER_NO_LONGER_EXIST, "Verify Order Exists", CheckLocatorFor.isNotVisible);
+
+			//Check if the Update button is enabled
+			AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
+			if (getAction().findElement(UPDATE_BUTTON).isEnabled()) {
+				Logger.log("Update button is enabled.", TestStepType.VERIFICATION_PASSED);
+				getAction().click(UPDATE_BUTTON);
+			}
+			else {
+				PageAssert.fail("Update button is disabled");
+			}
+
+			//DOS_ORDER_SUMMARY_ADDRESS1
+			AjaxCondition.forElementVisible(DOS_ORDER_SUMMARY_ADDRESS1).waitForResponse();
+			getAction().click(DOS_ORDER_SUMMARY_ADDRESS1);
+			String address1	= getAction().getText(DOS_ORDER_SUMMARY_ADDRESS1).toString();
+			String newaddress1 = "99999" + address1;
+			getAction().type(DOS_ORDER_SUMMARY_ADDRESS1, newaddress1);
+			//getAction().click(UPDATE_BUTTON);
+			AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse();
+			getAction().scrollTo(SAVE_BUTTON);
+			getAction().click(SAVE_BUTTON);
+
+
+
+		}	
+		return this;
+	}
+
+	public void OpenMsatEmail() {
+		getAction().waitFor(2000);
+		Logger.log("Guest Icon",TestStepType.STEP);
+		AjaxCondition.forElementVisible(RFC_GUEST_ICON).waitForResponse();
+		getAction().click(RFC_GUEST_ICON);
+		getAction().driver.get("https://mail.cognizant.com");
+	}
+	public OrderDetailsPage verifySywLinkDetailsPageDisplayed() {
+		Logger.log("Verify if syw Details Page is displayed", TestStepType.VERIFICATION_STEP);
+		getAction().waitFor(2000);
+		if(AjaxCondition.forElementVisible(SYW_NO_SEARCH_RESULTS_LABEL).waitWithoutException(1)){
+			Logger.log("Test Data is not valid");
+			System.out.println("--------------------------------------------no results");
+		}
+
+		else
+		{
+			System.out.println("--------------------pass");
+			SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_LINKED_INFORMATION, "Verify syw Linked section is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_ADDRESS_INFORMATION, "Verify address Information section is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_EMAIL_INFORMATION, "Verify email Information is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(SYW_LINK_CITY_INFORMATION, "Verify city Information is displayed", CheckLocatorFor.isVisible);
+		}
+		return this;
+	}
+	/*public OrderDetailsPage verifyReasonCodePresence(String reasonName, boolean statusPresence){
 	Logger.log("Verify for reason code presence in queue for follow up", TestStepType.STEP);
 	AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
 	getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
@@ -5503,66 +5516,66 @@ public OrderDetailsPage verifySywLinkDetailsPageDisplayed() {
 	else
 		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is not present", CheckLocatorFor.isNotVisible);
 	return this;
-	
+
 }*/
-public OrderDetailsPage clickOnReasonDropdown(){
-	Logger.log("Click on the queue for folow up button", TestStepType.STEP);
-	AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
-	getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
-	getAction().click(QUEUE_FOR_FOLLOW_UP);
-	Logger.log("Click on the reasons dropdown", TestStepType.STEP);
-	AjaxCondition.forElementVisible(REASON_DROPDOWN).waitForResponse();
-	getAction().click(REASON_DROPDOWN);
-	getAction().waitFor(3000);
-	return this;
+	public OrderDetailsPage clickOnReasonDropdown(){
+		Logger.log("Click on the queue for folow up button", TestStepType.STEP);
+		AjaxCondition.forElementVisible(QUEUE_FOR_FOLLOW_UP).waitForResponse();
+		getAction().scrollTo(QUEUE_FOR_FOLLOW_UP);
+		getAction().click(QUEUE_FOR_FOLLOW_UP);
+		Logger.log("Click on the reasons dropdown", TestStepType.STEP);
+		AjaxCondition.forElementVisible(REASON_DROPDOWN).waitForResponse();
+		getAction().click(REASON_DROPDOWN);
+		getAction().waitFor(3000);
+		return this;
 
-}
-public OrderDetailsPage verifyReasonCodes(String reasonName, boolean statusPresence){
-	if(statusPresence){
-		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is present", CheckLocatorFor.isVisible);
 	}
-	else
-		SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is not present", CheckLocatorFor.isNotVisible);
-	return this;
-}
+	public OrderDetailsPage verifyReasonCodes(String reasonName, boolean statusPresence){
+		if(statusPresence){
+			SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is present", CheckLocatorFor.isVisible);
+		}
+		else
+			SoftAssert.checkElementAndContinueOnFailure(SELECTED_OPTION_QUEUE.format(reasonName), reasonName+" is not present", CheckLocatorFor.isNotVisible);
+		return this;
+	}
 
-public int generateRandomNumberSelect(Locator select){
-	System.out.println("Count for select"+getAction().getElementCount(select));
-	System.out.println("Conunt Locator "+select.getValue());
-	int randomCode=util.randomGenerator(getAction().getElementCount(select));
-	 if(randomCode<1){
-		 randomCode++;
-	 }
-	return randomCode;
-}
-public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
-	 Logger.log("Click on Wrap Up button in Action Center");
-	 AjaxCondition.forElementVisible(WRAPUP_BUTTON).waitForResponse();
-	 getAction().scrollTo(WRAPUP_BUTTON);
-	 getAction().click(WRAPUP_BUTTON);
-	 getAction().waitFor(4000);
-	 
-	 int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
-	 Logger.log("Select option #"+rndCodeCategory+" in category select");
-	 AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
-	 getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
-	 
-	 int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
-	 	try{
-		 Logger.log("Select option #"+rndCodeReason+" in category select");
-		 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
-		 getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
-	 	}catch(Exception e){
-	 		Logger.log("Reason Code Dropdown empty. Proceeding with Wrapup without selecting any Reason Code");
-	 		e.printStackTrace();
-	 	}
-	 
-	 Logger.log("Select All in Items for contact");
-	 getAction().click(SELECT_ITEMS_FOR_CONTACT);
-	 Logger.log("Click WRAP UP & CONTINUE W/ CONTACT");
-	 getAction().click(WRAP_UP_WITHOUT_CONTACT);
-	 getAction().waitFor(4000);
-	 return this;
+	public int generateRandomNumberSelect(Locator select){
+		System.out.println("Count for select"+getAction().getElementCount(select));
+		System.out.println("Conunt Locator "+select.getValue());
+		int randomCode=util.randomGenerator(getAction().getElementCount(select));
+		if(randomCode<1){
+			randomCode++;
+		}
+		return randomCode;
+	}
+	public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
+		Logger.log("Click on Wrap Up button in Action Center");
+		AjaxCondition.forElementVisible(WRAPUP_BUTTON).waitForResponse();
+		getAction().scrollTo(WRAPUP_BUTTON);
+		getAction().click(WRAPUP_BUTTON);
+		getAction().waitFor(4000);
+
+		int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
+		Logger.log("Select option #"+rndCodeCategory+" in category select");
+		AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
+		getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
+
+		int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
+		try{
+			Logger.log("Select option #"+rndCodeReason+" in category select");
+			AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
+			getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
+		}catch(Exception e){
+			Logger.log("Reason Code Dropdown empty. Proceeding with Wrapup without selecting any Reason Code");
+			e.printStackTrace();
+		}
+
+		Logger.log("Select All in Items for contact");
+		getAction().click(SELECT_ITEMS_FOR_CONTACT);
+		Logger.log("Click WRAP UP & CONTINUE W/ CONTACT");
+		getAction().click(WRAP_UP_WITHOUT_CONTACT);
+		getAction().waitFor(4000);
+		return this;
 
 	}
 	public OrderDetailsPage closeCommercialOrderNotificationPopUp(){
@@ -5572,7 +5585,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 			getAction().click(COMMERCIAL_SALES_ORDER_POPUP_CONTINUE_BUTTON);
 		}
 		return this;
-		
+
 	}
 	public void verifyCapturedInInteractionsforUpdateContact() {
 		getAction().waitFor(5000);
@@ -5583,9 +5596,9 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		getAction().waitFor(3000);
 		String[] type= {"Update Delivery Address","Update Delivery Contact Details"} ;
 		for(int i=0; i<type.length;i++)
-		SoftAssert.checkElementAndContinueOnFailure(ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE.format(type[i]), type[i]+" is present", CheckLocatorFor.isPresent);
+			SoftAssert.checkElementAndContinueOnFailure(ORDER_CONTACT_HISTORY_ADJUSTMENT_UPDATE.format(type[i]), type[i]+" is present", CheckLocatorFor.isPresent);
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
-		
+
 	}
 	public void verifyActionCapturedInNotesForUpdateContact(){
 		Logger.log("Verify adjustment done on order are captured in Notes", TestStepType.STEP);
@@ -5593,17 +5606,17 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);
-		
+
 		String originalName = (String) getContext().get("originalName");
 		String updatedName= (String) getContext().get("updatedName");
-		
-		
+
+
 		String originalHomePhone= (String) getContext().get("originalHomePhone");
 		String updatedHomePhone= (String) getContext().get("updatedHomePhone");
-		
+
 		String originalEmail= (String) getContext().get("originalEmail");
 		String updatedEmail= (String) getContext().get("updatedEmail");
-		
+
 		String orginalAddress= (String) getContext().get("orginalAddress");
 		String updatedAddress= (String) getContext().get("updatedAddress");
 		AjaxCondition.forElementPresent(UPDATE_DELIVERY_ADDRESS).waitForResponse(3000);
@@ -5620,17 +5633,17 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Name",originalName,updatedName),originalName+" has been updated to "+updatedName , CheckLocatorFor.isPresent);
 		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Home Phone",	 originalHomePhone,updatedHomePhone),originalHomePhone+" has been updated to "+updatedHomePhone , CheckLocatorFor.isPresent);
 		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Sold To Email Address",originalEmail,updatedEmail),originalEmail+" has been updated to "+updatedEmail, CheckLocatorFor.isPresent);
-//		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Address",originalName,updatedName),"original value and updated value " , CheckLocatorFor.isPresent);
+		//		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Address",originalName,updatedName),"original value and updated value " , CheckLocatorFor.isPresent);
 		/*SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Name",originalName,updatedName),"original value and updated value " , CheckLocatorFor.isPresent);
 		SoftAssert.checkElementAndContinueOnFailure(UPDATE_CONTACT_NOTES.format("Order Ship To Cutomer Name",originalName,updatedName),"original value and updated value " , CheckLocatorFor.isPresent);*/
 
 	}
 	public void verifyLineItemDetail(String orderType){
-		
+
 		scrollDown();
 		getAction().waitFor(3000);
 		List<String> list = new ArrayList<String>();
-		
+
 		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
 		System.out.println("-------------------------------------------- "+openMultiLineItem);
 		getAction().waitFor(2000);
@@ -5660,7 +5673,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 			System.out.println(item);
 			notes =sb.append(item+", ").toString();
 			if(notes.endsWith(", "))
-		historyNotes =notes.substring(0, notes.length()-2)+"]";
+				historyNotes =notes.substring(0, notes.length()-2)+"]";
 		}
 		System.out.println(historyNotes);
 		getContext().put("historyNotes", historyNotes);
@@ -5669,7 +5682,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
 	}
-	
+
 	public void verifyPickupbuttonnotPresent(){
 		Logger.log("Verify Pickup button is not present in action center", TestStepType.STEP);
 		getAction().waitFor(3000);
@@ -5679,7 +5692,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		else
 			Logger.log("Pickup button is not present ",TestStepType.VERIFICATION_PASSED);
 	}
-	
+
 	public void verifyActionCapturedHistoryNotes(){
 		Logger.log("Verify adjustment done on order are captured in History Notes", TestStepType.STEP);
 		getAction().waitFor(3000);
@@ -5695,7 +5708,7 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 	 * @return
 	 */
 	public OrderDetailsPage closeWarningPopupWindow() {
-		
+
 		getAction().waitFor(3000);
 		if(AjaxCondition.forElementVisible(ERROR_POPUP_CLOSE).waitWithoutException(1)){
 			Logger.log("Close Error Pop-up Window", TestStepType.SUBSTEP);
@@ -5720,135 +5733,178 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 		getAction().waitFor(2000);
 		return this;
 	}
-	
+
 	public OrderDetailsPage verifyupdateScimCode(String orderType) {
 		getAction().waitFor(4000);
 		scrollDown();
-	//	if(orderType.equalsIgnoreCase("open")){
-			getAction().waitFor(4000);
-			int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
-			System.out.println("----------------------------------------------------------------xpath"+DOS_ITEM_STATUS_COUNT.format(orderType).getValue());
-			System.out.println("-----------------------------------------------------------"+openMultiLineItem);
-			Logger.log("Order have "+openMultiLineItem+""+ orderType+""+" multiline item");
-			Logger.log("Item description before SCIM CODE updation", TestStepType.STEP);
-			for (int i = 1; i <= openMultiLineItem; i++) {
-				System.out.println("----------------------------------------------------------------xpath"+SCIM_CODE.format(orderType,i).getValue());
-				if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
-					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "not available"), true);
-				else
-					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(orderType,i), getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code "+getAction().getText(SCIM_CODE.format(orderType,i)), CheckLocatorFor.isVisible);
-			}
-			goToActionCenter();
-			AjaxCondition.forElementPresent(UPDATE_SCIM_CODE).waitForResponse();
-			getAction().scrollTo(UPDATE_SCIM_CODE);
-			getAction().click(UPDATE_SCIM_CODE);
+		//	if(orderType.equalsIgnoreCase("open")){
+		getAction().waitFor(4000);
+		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
+		System.out.println("----------------------------------------------------------------xpath"+DOS_ITEM_STATUS_COUNT.format(orderType).getValue());
+		System.out.println("-----------------------------------------------------------"+openMultiLineItem);
+		Logger.log("Order have "+openMultiLineItem+""+ orderType+""+" multiline item");
+		Logger.log("Item description before SCIM CODE updation", TestStepType.STEP);
+		for (int i = 1; i <= openMultiLineItem; i++) {
+			System.out.println("----------------------------------------------------------------xpath"+SCIM_CODE.format(orderType,i).getValue());
+			if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
+				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "not available"), true);
+			else
+				SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(orderType,i), getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code "+getAction().getText(SCIM_CODE.format(orderType,i)), CheckLocatorFor.isVisible);
+		}
+		goToActionCenter();
+		AjaxCondition.forElementPresent(UPDATE_SCIM_CODE).waitForResponse();
+		getAction().scrollTo(UPDATE_SCIM_CODE);
+		getAction().click(UPDATE_SCIM_CODE);
 
-			for(int i=1;i<=openMultiLineItem;i++){
-				AjaxCondition.forElementPresent(CLICK_TO_UPDATE.format(i)).waitForResponse();
-				getAction().click(CLICK_TO_UPDATE.format(i));
-				AjaxCondition.forElementPresent(SCIM_CODE_COUNT).waitWithoutException(2000);
-				int rndCodeCategory = generateRandomNumberSelect(SCIM_CODE_COUNT);
-				AjaxCondition.forElementPresent(SCIM_CODE_SELECTION.format(i,rndCodeCategory)).waitForResponse(3000);
-				getAction().waitFor(5000);
-				System.out.println(getAction().getText(SCIM_CODE_SELECTION.format(i,rndCodeCategory)));
-
-				getAction().click(SCIM_CODE_SELECTION.format(i,rndCodeCategory));
-				getAction().waitFor(4000);
-			}
+		for(int i=1;i<=openMultiLineItem;i++){
+			AjaxCondition.forElementPresent(CLICK_TO_UPDATE.format(i)).waitForResponse();
+			getAction().click(CLICK_TO_UPDATE.format(i));
+			AjaxCondition.forElementPresent(SCIM_CODE_COUNT).waitWithoutException(2000);
+			int rndCodeCategory = generateRandomNumberSelect(SCIM_CODE_COUNT);
+			AjaxCondition.forElementPresent(SCIM_CODE_SELECTION.format(i,rndCodeCategory)).waitForResponse(3000);
 			getAction().waitFor(5000);
-			AjaxCondition.forElementPresent(UPDATE_SCIM_CODES).waitForResponse(2000);
-			getAction().click(UPDATE_SCIM_CODES);
+			System.out.println(getAction().getText(SCIM_CODE_SELECTION.format(i,rndCodeCategory)));
 
-			getAction().waitFor(3000);
-			if(getAction().isVisible(EARLIEST_AVAILABLE_DATE)){
-				System.out.println("--------------------------------------------------"+getAction().getText(EARLIEST_AVAILABLE_DATE));
-				Logger.log("click on OK button",TestStepType.STEP);
-				getAction().click(OK_BUTTON_ON_POPUP);}
-			getAction().waitFor(3000);
-			verifyOrderDetailsPageDisplayed();
-			Logger.log("Item description after SCIM CODE updation", TestStepType.STEP);
-			for (int i = 1; i <= openMultiLineItem; i++) {
-				if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
-					SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "no scim code"), true);
-				else
-					SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(orderType,i),getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code updated to "+getAction().getText(SCIM_CODE.format(orderType,i)),CheckLocatorFor.isVisible);
-			}	
-	//	}
+			getAction().click(SCIM_CODE_SELECTION.format(i,rndCodeCategory));
+			getAction().waitFor(4000);
+		}
+		getAction().waitFor(5000);
+		AjaxCondition.forElementPresent(UPDATE_SCIM_CODES).waitForResponse(2000);
+		getAction().click(UPDATE_SCIM_CODES);
+
+		getAction().waitFor(3000);
+		if(getAction().isVisible(EARLIEST_AVAILABLE_DATE)){
+			System.out.println("--------------------------------------------------"+getAction().getText(EARLIEST_AVAILABLE_DATE));
+			Logger.log("click on OK button",TestStepType.STEP);
+			getAction().click(OK_BUTTON_ON_POPUP);}
+		getAction().waitFor(3000);
+		verifyOrderDetailsPageDisplayed();
+		Logger.log("Item description after SCIM CODE updation", TestStepType.STEP);
+		for (int i = 1; i <= openMultiLineItem; i++) {
+			if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
+				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "no scim code"), true);
+			else
+				SoftAssert.checkElementAndContinueOnFailure(SCIM_CODE.format(orderType,i),getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code updated to "+getAction().getText(SCIM_CODE.format(orderType,i)),CheckLocatorFor.isVisible);
+		}	
 
 		return this;
 
 	}
-		public void recoveryServiceWindowVerification(){
+	
 
-			if(getAction().isVisible(RESCHEDULE_BUTTON)){
-				Logger.log("Click on Reschedule button", TestStepType.STEP);
-				AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
-				getAction().scrollTo(RESCHEDULE_BUTTON);
-				getAction().click(RESCHEDULE_BUTTON);
+	public OrderDetailsPage verifyReasoncodeAndWrapup(){
+		Logger.log("Click on Wrap Up button in Action Center");
+		AjaxCondition.forElementVisible(WRAPUP_BUTTON).waitForResponse();
+		getAction().scrollTo(WRAPUP_BUTTON);
+		getAction().click(WRAPUP_BUTTON);
+		getAction().waitFor(4000);
 
+		int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
+		Logger.log("Select option #"+rndCodeCategory+" in category select");
+		AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
+		getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
 
-				Logger.log("Click on the entire order", TestStepType.STEP);
-				AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-				getAction().click(CANCEL_ENTIRE_ORDER);}
+		int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
 
-			getAction().waitFor(3000);
-			getAction().scrollTo(PREFERRED_TIME_WINDOWS.format(1));
-			Logger.log("verify all the time windows", TestStepType.STEP);
-			int unrestrictedWindowCount=getAction().getElementCount(UNRESTRICTED_TIME_WINDOWS_COUNT);
-			Logger.log("Unrestricted Time Windows");
-			for (int i = 1; i <=unrestrictedWindowCount; i++) {
-				AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(i));
-				SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_TIME_WINDOWS.format(i),getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
-			}
-			getAction().waitFor(3000);
-			int preferedWindowCount=getAction().getElementCount(PREFERRED_TIME_WINDOWS_COUNT);
-			Logger.log("Preferred Time Windows");
-			for (int i = 1; i <=preferedWindowCount; i++) {
-				AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(i));
-				SoftAssert.checkElementAndContinueOnFailure(PREFERRED_TIME_WINDOWS.format(i),getAction().getText(PREFERRED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
-			}
-			getAction().waitFor(3000);
-			int serviceRecoveryWindowCount=getAction().getElementCount(SERVICE_RECOVERY_WINDOW_COUNT);
-			Logger.log("Service Recovery Windows ");
-			for (int i = 1; i <=serviceRecoveryWindowCount; i++) {
-				AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(i));
-				SoftAssert.checkElementAndContinueOnFailure(SERVICE_RECOVERY_WINDOW.format(i),getAction().getText(SERVICE_RECOVERY_WINDOW.format(i)), CheckLocatorFor.isPresent);
-			}
+		System.out.println("-----------------------------------------------------------------------------"+DELIVERY_REASON_DROPDOWN_COUNT);
+		Logger.log("Select option #"+rndCodeReason+" in category select");
+		AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
 
+		AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
+		//select[@ng-model='selected.reasonCode']/option[contains(text(),'{0}')]
+		getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
 
+		AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is")).waitWithoutException(3);
+		AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is - gift, spouse")).waitWithoutException(3);
+		AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order Cancelled")).waitWithoutException(3);
+		AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order converted to Dock Pick-up with Installation")).waitWithoutException(3);
+		AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("elivery Order referred to Loss Prevention")).waitWithoutException(3);
+
+		//verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is - gift, spouse"),true);
+		//verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order Cancelled"),true);
+		//verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order converted to Dock Pick-up with Installation"),true);
+		//verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order referred to Loss Prevention"));
+		getAction().click(WRAP_UP);
+		getAction().waitFor(4000);
+		return this;
 
 	}
-		
-		public void rescheduleServiceWindowOrder(String type, String ordType) throws ParseException {
-			String orderWith;
-			Logger.log("Verify whether order can be rescheduled", TestStepType.STEP);
+	public void recoveryServiceWindowVerification(){
 
-			goToOrderDetail();
-			String currentDeliveryDate = getAction().getText(DELIVERY_DATE);
-			Logger.log("currentDeliveryDate is :"+currentDeliveryDate);
-			String originalTimeWindow= getAction().getText(ORIGINAL_TIME_WINDOW);
-			Logger.log("originalTimeWindow is :"+originalTimeWindow);
-			String timeWindowType=getAction().getText(TIME_WINDOW_TYPE);
-			Logger.log("timeWindowType is :"+timeWindowType);
-			String currentTimeWindow= originalTimeWindow+" ("+timeWindowType+")";
-			getContext().put("currentTimeWindow", currentTimeWindow);
-			System.out.println("currentTimeWindow:"+currentTimeWindow);
-
-			goToActionCenter();
+		if(getAction().isVisible(RESCHEDULE_BUTTON)){
+			Logger.log("Click on Reschedule button", TestStepType.STEP);
 			AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
 			getAction().scrollTo(RESCHEDULE_BUTTON);
 			getAction().click(RESCHEDULE_BUTTON);
 
-			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-			getAction().click(CANCEL_ENTIRE_ORDER);
 
-			AjaxCondition.forElementVisible(AVAILABLE_DATE_IN_CALANDER).waitForResponse();
-			Logger.log("Verified that calander is shown with available reschedule dates ", TestStepType.VERIFICATION_PASSED);
-			getAction().scrollTo(AVAILABLE_DATE_IN_CALANDER);
-			getAction().click(AVAILABLE_DATE_IN_CALANDER);
-			getAction().waitFor(3000);
-			//String color =getAction().driver.findElement(getAction().getWebElement(BLUE)).getCssValue("color");
-			String selectedDate=getAction().getText(SELECTED_DATE);
+			Logger.log("Click on the entire order", TestStepType.STEP);
+			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
+			getAction().click(CANCEL_ENTIRE_ORDER);}
+
+		getAction().waitFor(1000);
+		//getAction().scrollTo(SERVICE_RECOVERY_WINDOW.format(1));
+		Logger.log("verify all the time windows", TestStepType.STEP);
+		int unrestrictedWindowCount=getAction().getElementCount(UNRESTRICTED_TIME_WINDOWS_COUNT);
+		Logger.log("Unrestricted Time Windows");
+		for (int i = 1; i <=unrestrictedWindowCount; i++) {
+			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(i));
+			SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_TIME_WINDOWS.format(i),getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
+		}
+		getAction().waitFor(1000);
+
+		if(getAction().isElementPresent(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE))
+			SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE), true);
+		else{
+			int preferedWindowCount=getAction().getElementCount(PREFERRED_TIME_WINDOWS_COUNT);
+			Logger.log("Preferred Time Windows");
+			for (int i = 1; i <=preferedWindowCount; i++) {
+				AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(i));
+				SoftAssert.checkElementAndContinueOnFailure(PREFERRED_TIME_WINDOWS.format(i),getAction().getText(PREFERRED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);}
+		}
+		getAction().waitFor(1000);
+		int serviceRecoveryWindowCount=getAction().getElementCount(SERVICE_RECOVERY_WINDOW_COUNT);
+		Logger.log("Service Recovery Windows ");
+		for (int i = 1; i <=serviceRecoveryWindowCount; i++) {
+			AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(i));
+			SoftAssert.checkElementAndContinueOnFailure(SERVICE_RECOVERY_WINDOW.format(i),getAction().getText(SERVICE_RECOVERY_WINDOW.format(i)), CheckLocatorFor.isPresent);
+		}
+
+	}
+
+	public void rescheduleServiceWindowOrder(String type, String ordType,String windowType) throws ParseException {
+
+		String orderWith;
+		Logger.log("Verify whether order can be rescheduled", TestStepType.STEP);
+
+		goToOrderDetail();
+		String currentDeliveryDate = getAction().getText(DELIVERY_DATE);
+		Logger.log("currentDeliveryDate is :"+currentDeliveryDate);
+		String originalTimeWindow= getAction().getText(ORIGINAL_TIME_WINDOW);
+		Logger.log("originalTimeWindow is :"+originalTimeWindow);
+		String timeWindowType=getAction().getText(TIME_WINDOW_TYPE);
+		Logger.log("timeWindowType is :"+timeWindowType);
+		String currentTimeWindow= originalTimeWindow+" ("+timeWindowType+")";
+		getContext().put("currentTimeWindow", currentTimeWindow);
+		System.out.println("currentTimeWindow:"+currentTimeWindow);
+		String orderRouteStatus=getAction().getText(ORDER_ROUTE_STATUS);
+		System.out.println("orderRouteStatus==="+ orderRouteStatus);
+
+		goToActionCenter();
+		AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
+		getAction().scrollTo(RESCHEDULE_BUTTON);
+		getAction().click(RESCHEDULE_BUTTON);
+
+		AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
+		getAction().click(CANCEL_ENTIRE_ORDER);
+
+		AjaxCondition.forElementVisible(AVAILABLE_DATE_IN_CALANDER).waitForResponse();
+		Logger.log("Verified that calander is shown with available reschedule dates ", TestStepType.VERIFICATION_PASSED);
+		getAction().scrollTo(AVAILABLE_DATE_IN_CALANDER);
+		getAction().click(AVAILABLE_DATE_IN_CALANDER);
+		getAction().waitFor(3000);
+		//String color =getAction().driver.findElement(getAction().getWebElement(BLUE)).getCssValue("color");
+		/*String selectedDate=getAction().getText(SELECTED_DATE);
 			//System.out.println("color:"+color);
 			System.out.println("selectedDate:"+selectedDate);
 
@@ -5860,125 +5916,174 @@ public OrderDetailsPage wrapUpOrderWithoutContactDelivery(){
 			String formattedDate = formatter.format(allDate);
 			System.out.println(formattedDate);
 
-			getContext().put("selectedDate", selectedDate);
+			getContext().put("selectedDate", selectedDate);*/
 
+		System.out.println(CURRENT_TIME_WINDOW.format(currentTimeWindow).getValue());
+		SoftAssert.checkElementAndContinueOnFailure(CURRENT_TIME_WINDOW.format(currentTimeWindow), "currentTimeWindow:"+currentTimeWindow, CheckLocatorFor.isPresent);
 
-			System.out.println(CURRENT_TIME_WINDOW.format(currentTimeWindow).getValue());
-			SoftAssert.checkElementAndContinueOnFailure(CURRENT_TIME_WINDOW.format(currentTimeWindow), "currentTimeWindow:"+currentTimeWindow, CheckLocatorFor.isPresent);
-
-			recoveryServiceWindowVerification();
+		recoveryServiceWindowVerification();
+		getAction().waitFor(3000);
+		selectwindowType(windowType);
+		
+		if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
 			getAction().waitFor(3000);
-			Logger.log("Selecting the Preferred Time Windows", TestStepType.STEP);
-			int rndCodeCategory = generateRandomNumberSelect(PREFERRED_TIME_WINDOWS_COUNT);
+			verifyDayOfDelivery("Delivery Driver","Entire Order");}
+
+		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
+
+
+		int reasonCodeCount = getAction().getElementCount(REASON_DROPDOWN_CANCEL_OPTIONS_COUNT);
+		if (reasonCodeCount == 0)
+			PageAssert.fail("Reason code drop down has no data to select");
+		else {
+			int ran = util.randomGenerator(reasonCodeCount);
+			if (ran == 0)
+				ran++;
+			Logger.log("Select one reason code from dropdown in random ", TestStepType.STEP);
+			String reasonName = getAction().getText(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran));
+			Logger.log("Select reason code " + reasonName, TestStepType.STEP);
+			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran)).waitForResponse();
+			getAction().click(REASON_DROPDOWN_CANCEL);
+			getAction().waitFor(1000);
+			Logger.log("Select cancel reason code ", TestStepType.STEP);
+			getAction().click(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran));
+
+		}
+		AjaxCondition.forElementVisible(RESCHEDULE_SUBMIT).waitForResponse();
+		getAction().click(RESCHEDULE_SUBMIT);
+		AjaxCondition.forElementVisible(RESCHEDULE_VERIFY).waitForResponse();
+		AjaxCondition.forElementVisible(DELIVERY_DATE).waitForResponse();
+		AjaxCondition.forElementNotVisible(DELIVERY_DATE_TEXT.format(currentDeliveryDate)).waitForResponse();
+		getAction().waitFor(3000);
+		String updatedTimeWindow=(String) getContext().get("updatedTimeWindow");
+		String[] updatedTimeWindowAndType=updatedTimeWindow.split("\\(");
+		String UpdatedTimeWindow=updatedTimeWindowAndType[0].trim();
+
+		String updatedTimeWindowType=updatedTimeWindowAndType[1].substring(0, updatedTimeWindowAndType[1].length()-1);
+		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(ORIGINAL_TIME_WINDOW),getAction().getText(ORIGINAL_TIME_WINDOW).equalsIgnoreCase(UpdatedTimeWindow));
+		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(TIME_WINDOW_TYPE),getAction().getText(TIME_WINDOW_TYPE).equalsIgnoreCase(updatedTimeWindowType));
+
+
+		String lDate = getAction().getText(DELIVERY_DATE);
+		String pend2 = getAction().getText(PEND_CODE);
+
+		if (type.equalsIgnoreCase("OPEN")) {
+			PageAssert.verifyEqual(pend2, "");
+		} else if (type.equalsIgnoreCase("RELEASED")) {
+			PageAssert.verifyEqual(pend2, "TBR");
+		} else {
+			PageAssert.verifyEqual(pend2, "");
+		}
+
+		//Logger.log("Verified that pend code before reshedule was: " + pend1 + " and pend code after reshedule is:" + pend2, TestStepType.VERIFICATION_PASSED);
+
+		SimpleDateFormat simpleDate = new SimpleDateFormat("mm/dd/yyyy");
+		Date date = simpleDate.parse(currentDeliveryDate);
+		System.out.println();
+		Date date2 = simpleDate.parse(lDate);
+		int comResult = date2.compareTo(date);
+		if (!(comResult > 0)) {
+			PageAssert.fail("Resheduled date is invalid");
+		}
+
+		Logger.log("Verified that delivery date is rescheduled to a later date. Date before reschedule:" + currentDeliveryDate + " Date after reschedule:" + lDate, TestStepType.VERIFICATION_PASSED);
+	}
+public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
+		
+		Logger.log("Verify Day of Delivery Orders");
+		if (orderType.equalsIgnoreCase("Entire order")) {
+			AjaxCondition.forElementVisible(DAY_OF_DELIVERY_AGENT.format(agent));
+			getAction().click(DAY_OF_DELIVERY_AGENT.format(agent));
+			int rndCodeCategory = generateRandomNumberSelect(DAY_OF_DELIVERY_RETURN_CODES_COUNT);
+			if(rndCodeCategory==3||rndCodeCategory==7||rndCodeCategory==12||rndCodeCategory==13||rndCodeCategory==14){
+				AjaxCondition.forElementPresent(STATUS_UPDATE);
+				getAction().click(STATUS_UPDATE);
+				getAction().waitFor(2000);
+				if(agent.equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_RESCHDEULE);
+				getAction().click(CONTINUE_TO_RESCHDEULE);}}
+			else{
+				AjaxCondition.forElementVisible(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
+				getAction().click(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
+				AjaxCondition.forElementPresent(ARRIVAL_TIME);
+				getAction().click(ARRIVAL_TIME);
+				AjaxCondition.forElementPresent(DEPARTURE_TIME);
+				getAction().click(DEPARTURE_TIME);
+				AjaxCondition.forElementPresent(STATUS_UPDATE);
+				getAction().click(STATUS_UPDATE);
+				getAction().waitFor(2000);
+				if(agent.equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_RESCHDEULE);
+				    getAction().click(CONTINUE_TO_RESCHDEULE);}}}
+		getAction().waitFor(3000);
+		return this;
+	}
+	
+	public OrderDetailsPage selectwindowType(String windowType) {
+		Logger.log("Select the:"+windowType);
+		String updatedTimeWindow="";
+		if(windowType.equalsIgnoreCase("Unrestricted Time Window")){
+			Logger.log("Selecting the Unrestricted Time Windows", TestStepType.STEP);
+			int rndCodeCategory = generateRandomNumberSelect(UNRESTRICTED_TIME_WINDOWS_COUNT);
 			System.out.println("rndCodeCategory:"+rndCodeCategory);
-			Logger.log("Click on the  option #"+rndCodeCategory+" from Preferred Time Windows");
-			String updatedTimeWindow= getAction().getText(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
+			Logger.log("Click on the  option #"+rndCodeCategory+" from Unrestricted Time Windows");
+			updatedTimeWindow= getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
 			System.out.println("updatedTimeWindow:"+updatedTimeWindow);
 			getContext().put("updatedTimeWindow", updatedTimeWindow);
-			AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
-			getAction().click(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
-			SoftAssert.checkElementAndContinueOnFailure(CONFIRMATION_TIME_WINDOW_POP_UP, getAction().getText(CONFIRMATION_TIME_WINDOW_POP_UP), CheckLocatorFor.isVisible);
-			getAction().click(OK_BUTTON);
+			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory)).waitForResponse();
+			getAction().click(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
+			AjaxCondition.forElementVisible(UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP).waitForResponse();
+			SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP, getAction().getText(UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP), CheckLocatorFor.isVisible);
+			getAction().click(OK_BUTTON);}
+
+		if(windowType.equalsIgnoreCase("Preferred Time Windows")) {
+
+			if(getAction().isElementPresent(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE)){
+				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE), true);
+				Logger.log("selecting the Recovery Windows");
+				windowType="Service Recovery Windows";}
+
+			else{
+				Logger.log("Selecting the Preferred Time Windows", TestStepType.STEP);
+				int rndCodeCategory = generateRandomNumberSelect(PREFERRED_TIME_WINDOWS_COUNT);
+				System.out.println("rndCodeCategory:"+rndCodeCategory);
+				Logger.log("Click on the  option #"+rndCodeCategory+" from Preferred Time Windows");
+				updatedTimeWindow= getAction().getText(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
+				System.out.println("updatedTimeWindow:"+updatedTimeWindow);
+				getContext().put("updatedTimeWindow", updatedTimeWindow);
+				AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(rndCodeCategory)).waitForResponse();
+				getAction().click(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
+				AjaxCondition.forElementVisible(PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP).waitForResponse();
+				SoftAssert.checkElementAndContinueOnFailure(PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP, getAction().getText(PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP), CheckLocatorFor.isVisible);
+				getAction().click(OK_BUTTON);}}
 
 
-
-			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
-
-
-			int reasonCodeCount = getAction().getElementCount(REASON_DROPDOWN_CANCEL_OPTIONS_COUNT);
-			if (reasonCodeCount == 0)
-				PageAssert.fail("Reason code drop down has no data to select");
-			else {
-				int ran = util.randomGenerator(reasonCodeCount);
-				if (ran == 0)
-					ran++;
-				Logger.log("Select one reason code from dropdown in random ", TestStepType.STEP);
-				String reasonName = getAction().getText(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran));
-				Logger.log("Select reason code " + reasonName, TestStepType.STEP);
-				AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran)).waitForResponse();
-				getAction().click(REASON_DROPDOWN_CANCEL);
-				getAction().waitFor(1000);
-				Logger.log("Select cancel reason code ", TestStepType.STEP);
-				getAction().click(REASON_DROPDOWN_CANCEL_OPTIONS.format(ran));
-
-			}
-			AjaxCondition.forElementVisible(RESCHEDULE_SUBMIT).waitForResponse();
-			getAction().click(RESCHEDULE_SUBMIT);
-			AjaxCondition.forElementVisible(RESCHEDULE_VERIFY).waitForResponse();
-			AjaxCondition.forElementVisible(DELIVERY_DATE).waitForResponse();
-			AjaxCondition.forElementNotVisible(DELIVERY_DATE_TEXT.format(currentDeliveryDate)).waitForResponse();
-			getAction().waitFor(3000);
-			String[] updatedTimeWindowAndType=updatedTimeWindow.split("\\(");
-			String UpdatedTimeWindow=updatedTimeWindowAndType[0].trim();
-
-			String updatedTimeWindowType=updatedTimeWindowAndType[1].substring(0, updatedTimeWindowAndType[1].length()-1);
-			SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+UpdatedTimeWindow,getAction().getText(ORIGINAL_TIME_WINDOW).equalsIgnoreCase(UpdatedTimeWindow));
-			SoftAssert.checkConditionAndContinueOnFailure(updatedTimeWindowType,getAction().getText(TIME_WINDOW_TYPE).equalsIgnoreCase(updatedTimeWindowType));
+		if(windowType.equalsIgnoreCase("Service Recovery Windows")){
 
 
-			String lDate = getAction().getText(DELIVERY_DATE);
-			String pend2 = getAction().getText(PEND_CODE);
-
-			if (type.equalsIgnoreCase("OPEN")) {
-				PageAssert.verifyEqual(pend2, "");
-			} else if (type.equalsIgnoreCase("RELEASED")) {
-				PageAssert.verifyEqual(pend2, "TBR");
-			} else {
-				PageAssert.verifyEqual(pend2, "");
-			}
-
-			//Logger.log("Verified that pend code before reshedule was: " + pend1 + " and pend code after reshedule is:" + pend2, TestStepType.VERIFICATION_PASSED);
-
-			SimpleDateFormat simpleDate = new SimpleDateFormat("mm/dd/yyyy");
-			Date date = simpleDate.parse(currentDeliveryDate);
-			System.out.println();
-			Date date2 = simpleDate.parse(lDate);
-			int comResult = date2.compareTo(date);
-			if (!(comResult > 0)) {
-				PageAssert.fail("Resheduled date is invalid");
-			}
-
-			Logger.log("Verified that delivery date is rescheduled to a later date. Date before reschedule:" + currentDeliveryDate + " Date after reschedule:" + lDate, TestStepType.VERIFICATION_PASSED);
-		}
-		public OrderDetailsPage verifyReasoncodeAndWrapup(){
-			 Logger.log("Click on Wrap Up button in Action Center");
-			 AjaxCondition.forElementVisible(WRAPUP_BUTTON).waitForResponse();
-			 getAction().scrollTo(WRAPUP_BUTTON);
-			 getAction().click(WRAPUP_BUTTON);
-			 getAction().waitFor(4000);
-			 
-			 int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
-			 Logger.log("Select option #"+rndCodeCategory+" in category select");
-			 AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
-			 getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
-			 
-			 int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
-			 
-			 System.out.println("-----------------------------------------------------------------------------"+DELIVERY_REASON_DROPDOWN_COUNT);
-			 Logger.log("Select option #"+rndCodeReason+" in category select");
-			 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
-			 
-			 AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
-			//select[@ng-model='selected.reasonCode']/option[contains(text(),'{0}')]
-			 getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
-			 
-			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is")).waitWithoutException(3);
-			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is - gift, spouse")).waitWithoutException(3);
-			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order Cancelled")).waitWithoutException(3);
-			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order converted to Dock Pick-up with Installation")).waitWithoutException(3);
-			 AjaxCondition.forElementVisible(DELIVERY_REASON_DROPDOWN_OPTIONS.format("elivery Order referred to Loss Prevention")).waitWithoutException(3);
-			
-			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Confirmed As Is - gift, spouse"),true);
-			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order Cancelled"),true);
-			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order converted to Dock Pick-up with Installation"),true);
-			 //verifyReasonCodes(DELIVERY_REASON_DROPDOWN_OPTIONS.format("Delivery Order referred to Loss Prevention"));
-			 getAction().click(WRAP_UP);
-			 getAction().waitFor(4000);
-			 return this;
-		
-		}
-}
+			Logger.log("Selecting the Recovery Time Windows", TestStepType.STEP);
+			int rndCodeCategory = generateRandomNumberSelect(SERVICE_RECOVERY_WINDOW_COUNT);
+			System.out.println("rndCodeCategory:"+rndCodeCategory);
+			Logger.log("Click on the  option #"+rndCodeCategory+" from Recovery Time Windows");
+			updatedTimeWindow= getAction().getText(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory));
+			System.out.println("updatedTimeWindow:"+updatedTimeWindow);
+			getContext().put("updatedTimeWindow", updatedTimeWindow);
+			AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory)).waitForResponse();
+			getAction().click(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory));
+			if(getAction().isVisible(RECOVERY_TIME_WINDOW_EXIST))
+				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP), true);
+			else{
+				AjaxCondition.forElementVisible(RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP).waitForResponse(2000);
+				SoftAssert.checkElementAndContinueOnFailure(RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP, getAction().getText(RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP), CheckLocatorFor.isVisible);}
+			AjaxCondition.forElementPresent(OK_BUTTON);
+			getAction().click(OK_BUTTON);}
+		return this;
+	}
 	
+}
+
+	
+
 
 
 
