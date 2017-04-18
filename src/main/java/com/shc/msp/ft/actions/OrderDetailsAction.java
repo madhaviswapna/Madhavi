@@ -259,7 +259,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.emailTemplatePopUp().verifyEmailTemplatePopUp();
 		return this;	
 	}
-
+	public OrderDetailsAction contactMarketPlaceSeller() {
+		Logger.log("Verify Email template and send Email to marketplace seller.",TestStepType.THEN);
+		this.factory.emailTemplatePopUp().contactMarketPlaceSeller();
+		return this;	
+	}
 	public OrderDetailsAction releaseOrder() {
 		Logger.log("Agent should be able to release order",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyReleaseOrder();

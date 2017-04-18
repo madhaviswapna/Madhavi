@@ -437,7 +437,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator SUCCESS_OK_BUTTON = new Locator("","//button[text()='OK']","Sucess OK button");
 	public final Locator ORDER_CONTACT_HISTORY= new Locator("","//span[contains(text(),'Contact History')]","Order Contact history");
 	public final Locator ORDER_CONTACT_HISTORY_INTERACTION= new Locator("","(//tbody[@ng-repeat='caseEvent in caseModal.events']//tr//td[3])[1]","Order Contact history interaction");
-	public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT= new Locator("","//td[contains(text(),'{0}')]//parent::tr//td/div[contains(text(),'{1}')]","Order Contact history");
+	public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT= new Locator("","//td[contains(text(),'{0}')]//parent::tr//td/div[contains(.,'{1}')]","Order Contact history");
 	public final Locator ORDER_CONTACT_HISTORY_NOTES= new Locator("","//td[contains(text(),'{0}')]//ancestor::table[@class='table table-condensed']//tr[4]/td/div","Order Contact history NOTES");
 	public final Locator ORDER_CONTACT_HISTORY_NOTES_DELIVERY= new Locator("","//td[contains(text(),'{0}')]","Order Contact history NOTES");
 	

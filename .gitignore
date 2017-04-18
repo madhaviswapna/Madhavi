@@ -9,3 +9,4 @@ count.txt
 localAdData.txt
 testng.xml
 cachedTestData.txt
+build/*

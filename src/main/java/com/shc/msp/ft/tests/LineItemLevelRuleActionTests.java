@@ -364,8 +364,10 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		String sku = test_data[1];
        addCloneIDHostname(data);
         LogFormatterAction.beginSetup();
-        User user = new User(); user.userName=UserPool.getUser();
-         
+        User user = new User(); 
+        user.userName=UserPool.getUser();
+         /*user.userName="testonline0116";
+         user.password="TestPassword";*/
         As.guestUser.goToHomePage()
         	._NavigationAction()
         	.addlogType(TestStepType.WHEN)
@@ -383,7 +385,18 @@ public class LineItemLevelRuleActionTests extends BaseTests {
         	.addlogType(TestStepType.THEN)
         	.verifyOptionVisible("Contact Marketplace Seller")
         	.addlogType(TestStepType.THEN)
-        	.verifyEmailTemplatePopUp();    	
+        	.contactMarketPlaceSeller()
+        	.verifyAdjustmentCapturedInInteraction("Contact Marketplace Seller")
+        	.verifyOrderWrapUp()
+    		.addlogType(TestStepType.THEN)
+    		.fillRFCForm()
+    		._NavigationAction()
+    		.addlogType(TestStepType.WHEN)
+    		.searchByOrderId(OrderID)
+    		.closeWarningPopupWindow()
+    		._OrderDetailsAction()
+    		.verifyAdjustmentCapturedInNotes("Contact Marketplace Seller")
+        	;    	
  }
 	
 	

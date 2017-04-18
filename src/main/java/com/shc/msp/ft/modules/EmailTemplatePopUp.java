@@ -82,6 +82,7 @@ public class EmailTemplatePopUp extends Module{
 			String emailTemplateName=getAction().getText(EMAIL_TEMPLATE_DROPDOWN_OPTION.format(emailTemplateRandom));
 			Logger.log("Select "+emailTemplateName+" Email Template at Index No. "+emailTemplateRandom,TestStepType.STEP);
 			AjaxCondition.forElementVisible(EMAIL_TEMPLATE_DROPDOWN_OPTION.format(emailTemplateRandom)).waitForResponse();
+			getContext().put("adjustmentOption", emailTemplateName);
 			getAction().click(EMAIL_TEMPLATE_DROPDOWN_OPTION.format(emailTemplateRandom));
 			}
 			    	
@@ -103,4 +104,11 @@ public class EmailTemplatePopUp extends Module{
 		return this;
     }
     
+    public EmailTemplatePopUp contactMarketPlaceSeller(){
+    	verifyEmailTemplatePopUp();
+    	Logger.log("Click \"Submit\" Button",TestStepType.VERIFICATION_SUBSTEP);
+    	getAction().scrollTo(SUBMIT_BUTTON);
+    	getAction().click(SUBMIT_BUTTON);
+		return this;
+	}
 }
