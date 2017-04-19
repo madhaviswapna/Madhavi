@@ -75,7 +75,11 @@ public class LineItemDetailsAction extends BaseAction {
         this.factory.emailTemplatePopUp().verifyEmailTemplatePopUp();
         return this;	
 	}
-
+    public LineItemDetailsAction contactVendor() {
+    	Logger.log("Verify Email template and send Email to Vendor",TestStepType.THEN);
+        this.factory.emailTemplatePopUp().contactVendor();
+        return this;	
+	}
     public LineItemDetailsAction verifyStartAutomatedReturnEligible() {
     	Logger.log("Agent should be able to process Start Automated return action",TestStepType.THEN);
     	this.factory.orderdetailspage().verifyStartAutomatedReturnEligible();

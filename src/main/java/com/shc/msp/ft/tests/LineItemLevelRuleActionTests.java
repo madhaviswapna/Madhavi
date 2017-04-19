@@ -416,8 +416,8 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 			        addCloneIDHostname(data);
 
 	        LogFormatterAction.beginSetup();
-	        User user = new User(); user.userName=UserPool.getUser();
-	         
+	        User user = new User();user.userName=UserPool.getUser();
+	       
 	        As.guestUser.goToHomePage()
             	._NavigationAction()
             	.addlogType(TestStepType.WHEN)
@@ -435,7 +435,19 @@ public class LineItemLevelRuleActionTests extends BaseTests {
             	._LineItemDetailsAction()
             	.addlogType(TestStepType.THEN)
             	.verifyOptionVisible("Contact Vendor")
-            	.verifyEmailTemplatePopUp() ;
+            	.contactVendor()
+            	._OrderDetailsAction()
+            	.verifyAdjustmentCapturedInInteraction("Contact Vendor")
+            	.verifyOrderWrapUp()
+        		.addlogType(TestStepType.THEN)
+        		.fillRFCForm()
+        		._NavigationAction()
+        		.addlogType(TestStepType.WHEN)
+        		.searchByOrderId(orderId)
+        		.closeWarningPopupWindow()
+        		._OrderDetailsAction()
+        		.verifyAdjustmentCapturedInNotes("Contact Vendor")
+            	;
 	    }
 		
 		

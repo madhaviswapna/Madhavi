@@ -111,4 +111,12 @@ public class EmailTemplatePopUp extends Module{
     	getAction().click(SUBMIT_BUTTON);
 		return this;
 	}
+    
+    public EmailTemplatePopUp contactVendor(){
+    	verifyEmailTemplatePopUp();
+    	Logger.log("Click \"Submit\" Button",TestStepType.VERIFICATION_SUBSTEP);
+    	getAction().scrollTo(SUBMIT_BUTTON);
+    	getAction().click(SUBMIT_BUTTON);
+		return this;
+	}
 }
