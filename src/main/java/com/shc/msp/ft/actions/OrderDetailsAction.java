@@ -506,8 +506,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().rescheduleDeliveryOrder(type,ordType);
 		return this;
 	}
-	public OrderDetailsAction scheduleFollowUp() throws ParseException {
-		Logger.log("Reschedule delivery",TestStepType.THEN);
+
+public OrderDetailsAction scheduleFollowUp() throws ParseException {
+		Logger.log("Schedule for follow up",TestStepType.THEN);
 		this.factory.orderdetailspage().scheduleFollowUp();
 		return this;
 	}

@@ -249,7 +249,21 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .addlogType(TestStepType.THEN)
                 .verifyOptionIsVisible("Ready for Pickup Email")
                 .addlogType(TestStepType.THEN)
-                .verifyReadyPickupEmail() ;
+                .verifyReadyPickupEmail()
+                
+                ._OrderDetailsAction()
+                .addlogType(TestStepType.THEN)
+                .verifyAdjustmentCapturedInInteraction("Sales Check Ready for Pickup Email")
+             	.verifyOrderWrapUp()
+         		.addlogType(TestStepType.THEN)
+         		.fillRFCForm()
+  
+         		._NavigationAction()
+         		.addlogType(TestStepType.WHEN)
+         		.searchByOrderId(orderId)
+         		.closeWarningPopupWindow()
+         		._OrderDetailsAction()
+         		.verifyAdjustmentCapturedInNotes("Sales Check Ready for Pickup Email");
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,

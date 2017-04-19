@@ -670,7 +670,8 @@ public class OrderDetailsPage extends Page {
 		public final Locator ORDER_ROUTE_STATUS= new Locator("ORDER_ROUTE_STATUS","//strong[contains(text(),'Route Status')]/parent::span/following-sibling::div/p","ORDER_ROUTE_STATUS");
 		public final Locator CONTINUE_TO_RESCHDEULE= new Locator("CONTINUE_TO_RESCHDEULE","//button[contains(text(),'Continue to Reschedule')]","CONTINUE_TO_RESCHDEULE");
 
-
+		//RFP
+		public final Locator SUCCESS_MESSAGE_RFP = new Locator("","//div[contains(text(),'Ready for Pickup Email')]","Ready for Pickup Email Success Message");
 
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
@@ -1730,18 +1731,32 @@ public class OrderDetailsPage extends Page {
 
 		Logger.log("Assert that email in ready for pickup mail is same as customer email ID",TestStepType.VERIFICATION_STEP);
 		PageAssert.verifyEqual(getAction().getValue(READY_FOR_PICKUP_EMAIL), Email);
+		Logger.log("writing general email");
+		getAction().type(READY_FOR_PICKUP_EMAIL, "protest@automation.com");
+		
 
 		Logger.log("Enter E-mail notes in Ready for Pickup Email Pop-up Window", TestStepType.STEP);
-
+		String notes="Test Notes For Ready For Pickup Email";
 		AjaxCondition.forElementVisible(READY_FOR_PICKUP_EMAIL_NOTES).waitForResponse();
-		getAction().type(READY_FOR_PICKUP_EMAIL_NOTES, "Test Notes For Ready For Pickup Email");;
+		getAction().type(READY_FOR_PICKUP_EMAIL_NOTES, notes);
+		getContext().put("adjustmentOption", notes);
 
 		Logger.log("Verify Submit Button is Visible in Ready for Pickup Email Pop-up Window", TestStepType.STEP);
-		AjaxCondition.forElementVisible(READY_FOR_PICKUP_EMAIL_SUBMIT).waitForResponse(10);
-
+		AjaxCondition.forElementVisible(READY_FOR_PICKUP_EMAIL_SUBMIT).waitForResponse(3);
+		getAction().click(READY_FOR_PICKUP_EMAIL_SUBMIT);
+		
+		AjaxCondition.forElementVisible(SUCCESS_MESSAGE_RFP).waitForResponse(3000);
+		Logger.log("verifying success message");
+		String expSucessMsg="Send Ready for Pickup Email Action has been successfully processed";
+		SoftAssert.checkConditionAndContinueOnFailure("Send Ready for Pickup Email Action has been successfully processed", getAction().getText(SUCCESS_MESSAGE_RFP).equals(expSucessMsg));
+		getAction().click(OK_BUTTON);
+		
+		Logger.log("verifying contact history");
+		AjaxCondition.forElementPresent(OK_BUTTON).waitForResponse(3000);
 		return this;
 
 	}
+
 
 	public OrderDetailsPage closeMarketplaceWarningPopUp(){
 
