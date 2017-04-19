@@ -231,7 +231,7 @@ public class Search_Summary extends BaseTests {
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests}
-    , description = "Verify if a case can be searched and opened as offline agent.")
+    , description = "Verify if a case can be searched as offline agent.")
 
 	public void searchAndOpenCase(TestData data) throws Exception {
 		String orderId=Retrieval_Test_Data_By_Query.getOrder();
@@ -265,13 +265,7 @@ public class Search_Summary extends BaseTests {
 	        	.addlogType(TestStepType.WHEN)
 	        	.searchByCaseId()
 	        	.addlogType(TestStepType.THEN)
-	        	.verifyCaseDetails("CASE_UNASSIGNED","Case Search Results")
-	        	.addlogType(TestStepType.THEN)
-	        	.openCaseByOrderID()
-	        	._OrderDetailsAction()
-	        	.addlogType(TestStepType.THEN)
-	        	.verifyOrderDetailsPageDisplayed();
-	        	
+	        	.verifyCaseDetails("CASE_UNASSIGNED","Case Search Results");
 	        	
 	}
 	
@@ -333,8 +327,49 @@ public class Search_Summary extends BaseTests {
 
 
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests}
+    , description = "Verify if a case can be searched and opened as offline agent.")
 
-
+	public void caseValidation(TestData data) throws Exception {
+		String orderId=Retrieval_Test_Data_By_Query.getOrder();
+		
+	addCloneIDHostname(data);
+	LogFormatterAction.beginSetup();
+	User user = User.find("Onlineuser1");
+	As.guestUser.goToHomePage()
+				.addlogType(TestStepType.WHEN)
+	        	.login(user)
+	        	.addlogType(TestStepType.THEN)
+	        	.verifyonlineagent()
+	        	.addlogType(TestStepType.WHEN)
+	        	.deleteCasesforOrderfromDB(orderId)
+	        	.addlogType(TestStepType.WHEN)
+	        	.searchByOrderId(orderId)
+	        	.addlogType(TestStepType.WHEN)
+	        	.closeWarningPopupWindow()
+	        	._OrderDetailsAction()
+	        	.addlogType(TestStepType.THEN)
+	        	.verifyOrderDetailsPageDisplayed()
+	        	.addlogType(TestStepType.THEN)
+	        	.captureInteractionCaseId()
+	        	.addlogType(TestStepType.THEN)
+	        	.verifyCreateCaseByRouting()
+	        	.addlogType(TestStepType.THEN)
+	        	.fillRFCForm()
+	        	._NavigationAction()
+	        	.addlogType(TestStepType.THEN)
+	        	.verifyofflineagent()
+	        	.addlogType(TestStepType.WHEN)
+	        	.searchByCaseId()
+	        	.addlogType(TestStepType.THEN)
+	        	.verifyCaseDetails("CASE_UNASSIGNED","Case Search Results")
+	        	.addlogType(TestStepType.THEN)
+	        	.openCaseByOrderID()
+	        	._OrderDetailsAction()
+	        	.addlogType(TestStepType.THEN)
+	        	.verifyOrderDetailsPageDisplayed();
+	}
 	@DataProvider(name = "DP_SearchByOrderID", parallel = true)
 	public Object[][] DP_SearchByOrderID() throws Exception {
 		ArrayList<String> storeID = ExcelUtil.getExcelUtil().searchKeyWord("OrderSummary2", Constant.OrderSearch, Constant.StartColumn_StoreID, Constant.TotalCols_SearchByOrderID);

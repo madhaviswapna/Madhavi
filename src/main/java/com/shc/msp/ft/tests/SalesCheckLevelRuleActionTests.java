@@ -226,8 +226,8 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
             , description = "Verify ready for pickup mails", enabled = true, priority=53)
     public void sales_Check_Level_ReadyForPickupEmail_Option_Eligible(TestData data) {
 		
-		//String orderId=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup");
-		String orderId="840027665";
+		String orderId=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup");
+		//String orderId="840027665";
 		addCloneIDHostname(data);
         
       
