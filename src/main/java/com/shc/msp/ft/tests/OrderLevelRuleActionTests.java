@@ -262,12 +262,15 @@ public class OrderLevelRuleActionTests extends BaseTests{
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests"}
 	, description = "MSPReSendOrderConfirmation", enabled = true, priority=43)
-	public void order_Level_ReSendOrderConfirmation_Eligible(TestData data) {
+	public void order_Level_ReSendOrderConfirmation(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderEligibleForResendOrderConfirmation");
 		
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getUser();
+		User user = new User(); //user.userName=UserPool.getUser();
+		user.userName="testonline0116";
+        user.password="TestPassword";
+		
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
 		.login(user)
@@ -280,7 +283,18 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Re-Send Order Confirmation")
 		.addlogType(TestStepType.THEN)
-		.reSendOrderConfirmation();
+		.reSendOrderConfirmation()
+		.verifyAdjustmentCapturedInInteraction("Re-Send Order Confirmation")
+		.verifyOrderWrapUp()
+		.addlogType(TestStepType.THEN)
+		.fillRFCForm()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyAdjustmentCapturedInNotes("Re-Send Order Confirmation")
+		;
 
 	}
 

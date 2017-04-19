@@ -1606,9 +1606,11 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(RESEND_ORDER_CONFIRMATION_POPUP).waitForResponse();
 		Logger.log("Enter text in notes field" , TestStepType.SUBSTEP);  
 		AjaxCondition.forElementVisible(RESEND_ORDER_CONFIRMATION_POPUP_NOTES_TEXTFIELD ).waitForResponse();
-		getAction().type(RESEND_ORDER_CONFIRMATION_POPUP_NOTES_TEXTFIELD ,"MSP automation re-send order confirmation notes");		       
-		Logger.log("Verify Re-Send Order Confirmation 'Submit' button is visible" , TestStepType.STEP);;
+		getAction().type(RESEND_ORDER_CONFIRMATION_POPUP_NOTES_TEXTFIELD ,"MSP automation re-send order confirmation notes");
+		getContext().put("adjustmentOption", "MSP automation re-send order confirmation notes");
+		Logger.log("Click Re-Send Order Confirmation 'Submit' button" , TestStepType.STEP);;
 		AjaxCondition.forElementVisible(SUBMIT_BUTTON).waitForResponse();
+		getAction().click(SUBMIT_BUTTON);
 		return this;
 	}   
 
