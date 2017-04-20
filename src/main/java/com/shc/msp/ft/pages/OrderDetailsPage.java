@@ -673,6 +673,26 @@ public class OrderDetailsPage extends Page {
 		//RFP
 		public final Locator SUCCESS_MESSAGE_RFP = new Locator("","//div[contains(text(),'Ready for Pickup Email')]","Ready for Pickup Email Success Message");
 
+		//layaway
+		public final Locator LAYAWAY_CONTRACT_INFO=new Locator("","//legend[contains(text(),'Layaway Contract Information')]","LAYAWAY_CONTRACT_INFO");
+		public final Locator CONTRACT_ID = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[1]","CONTRACT_ID");
+		public final Locator CONTRACT_STATUS = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[2]","CONTRACT_STATUS");
+		public final Locator ORDER_NUMBER = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[3]","ORDER_NUMBER");
+		public final Locator ORDER_TOTAL = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[4]","ORDER_TOTAL");
+		public final Locator FULLFIMENT_TYPE = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[5]","FULLFIMENT_TYPE");
+		public final Locator PERCENTAGE_COMPLETED = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[6]","PERCENTAGE_COMPLETED");
+		public final Locator PAYMENT_INFO = new Locator("","//legend[contains(text(),'Payment Information')]","PAYMENT_INFO");
+		public final Locator MIN_PAYMENT_AMT = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[1]","MIN_PAYMENT_AMT");
+		public final Locator NEXT_PAYMENT_DATE = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[2]","NEXT_PAYMENT_DATE");
+		public final Locator UNPAID_AMT = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[3]","UNPAID_AMT");
+		public final Locator CONTRACT_TERMS_AND_CONDITION = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]","CONTRACT_TERMS_AND_CONDITION");
+		public final Locator CONTRACT_START_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[1]","CONTRACT_START_DATE");
+		public final Locator END_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[2]","END_DATE");
+		public final Locator WEEKS_OF_DURATION = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[3]","WEEKS_OF_DURATION");
+		public final Locator LAST_PAYMENT_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[4]","LAST_PAYMENT_DATE");
+		public final Locator FUTURE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[5]","FUTURE");
+		public final Locator DELIVERY_INFO = new Locator("","//legend[contains(text(),'Delivery Information')]/parent::fieldset","DELIVERY_INFO");
+		
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -850,9 +870,39 @@ public class OrderDetailsPage extends Page {
 			Logger.log("Test Data is not valid");
 		else
 		{
+			AjaxCondition.forElementPresent(MEMBERDETAILS_IN_ODP).waitForResponse(3);
 			SoftAssert.checkElementAndContinueOnFailure(MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(LAYAWAY_CONTRACT_INFORMATION, "Verify Layaway Contract Information section is displayed", CheckLocatorFor.isVisible);
+			
+			SoftAssert.checkElementAndContinueOnFailure(LAYAWAY_CONTRACT_INFO, "Verify Layaway Contract Information text is displayed", CheckLocatorFor.isVisible);
+			Logger.log("Check all the attribute of the Layaway Contract Information");
+			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_ID, "Verify Contract Id is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_STATUS, "Verify Contract status is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(ORDER_NUMBER, "Verify Order Number is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(ORDER_TOTAL, "Verify Order Total is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(FULLFIMENT_TYPE, "Verify Fulfillment Type is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(PERCENTAGE_COMPLETED, "Verify % Completed is displayed", CheckLocatorFor.isVisible);
+			
+			AjaxCondition.forElementPresent(PAYMENT_INFO).waitForResponse(2);
+			getAction().scrollTo(PAYMENT_INFO);
+			SoftAssert.checkElementAndContinueOnFailure(PAYMENT_INFO, "Verify Payment Information is displayed", CheckLocatorFor.isVisible);
+			Logger.log("Check all the attribute of the Payment information Contract Information");
+			SoftAssert.checkElementAndContinueOnFailure(MIN_PAYMENT_AMT, "Verify Min Payment Amt is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(NEXT_PAYMENT_DATE, "Verify Next Payment Date is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(UNPAID_AMT, "Verify Unpaid Amt is displayed", CheckLocatorFor.isVisible);
+
+			AjaxCondition.forElementPresent(CONTRACT_TERMS_AND_CONDITION).waitForResponse(2);
+			getAction().scrollTo(CONTRACT_TERMS_AND_CONDITION);
+			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_TERMS_AND_CONDITION, "Verify Contract Id is displayed", CheckLocatorFor.isVisible);
+			Logger.log("Check all the attribute of the Layaway Contract Information");
+			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_START_DATE, "Verify Contract Start Date is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(END_DATE, "Verify Contract End Date is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(WEEKS_OF_DURATION, "Verify Weeks of Duration is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(LAST_PAYMENT_DATE, "Verify Last Payment Date is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(FUTURE, "Verify Future is displayed", CheckLocatorFor.isVisible);
+			
 			SoftAssert.checkElementAndContinueOnFailure(LAYAWAY_INSTALLMENT_INFORMATION, "Verify Layaway Installment Information is displayed", CheckLocatorFor.isVisible);
+			SoftAssert.checkElementAndContinueOnFailure(DELIVERY_INFO, "Verify Delivery Info is displayed", CheckLocatorFor.isVisible);
+			
 		}
 		return this;
 	}
