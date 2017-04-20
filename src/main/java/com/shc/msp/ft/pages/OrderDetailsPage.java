@@ -1160,11 +1160,11 @@ public class OrderDetailsPage extends Page {
 
 
 		Logger.log("notes :" + "my note", TestStepType.DATA_CAPTURE);
-		getAction().type(CANCEL_ORDER_POP_UP_NOTES_TEXT_FIELD, "my note");
+		getAction().type(CANCEL_ORDER_POP_UP_NOTES_TEXT_FIELD, "This order is cancelled as a part of automated test.");
 		getAction().waitFor(2000);
-
+		getContext().put("adjustmentOption", "This order is cancelled as a part of automated test.");
 		AjaxCondition.forElementVisible(CANCEL_ORDER_POP_UP_SUBMIT_BUTTON).waitForResponse(10);
-
+		getAction().click(CANCEL_ORDER_POP_UP_SUBMIT_BUTTON);
 		return this;
 
 	}

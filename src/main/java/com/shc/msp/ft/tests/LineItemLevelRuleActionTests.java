@@ -96,12 +96,14 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	            , description = "Verify cancellation at line item level for eligible orders", enabled = true)
 	    public void line_Item_Level_Verify_Cancellation_Eligible(TestData data) {
     		String[] test_data = getProductToTest("ItemLevelCancellationEligible").split("\\|");
-    		String OrderID=test_data[0];
-    		String sku = test_data[1];
-        
+    		String OrderID="840093159";//test_data[0];
+    		String sku = "07120148000";//test_data[1];
+    		
 	       addCloneIDHostname(data);
 	        LogFormatterAction.beginSetup();
-	        User user = new User(); user.userName=UserPool.getUser();
+	        User user = new User();// user.userName=UserPool.getUser();
+	        user.userName="testonline0116";
+	         user.password="TestPassword";
 	        As.guestUser.goToHomePage()
                 ._NavigationAction()
                 .addlogType(TestStepType.WHEN)
@@ -119,7 +121,19 @@ public class LineItemLevelRuleActionTests extends BaseTests {
                 ._LineItemDetailsAction()
                 .addlogType(TestStepType.THEN)
                 .verifyOptionVisible("Cancellation - Line Item")
-                .cancelLineItem();
+                .cancelLineItem()
+                ._OrderDetailsAction()
+                .verifyAdjustmentCapturedInInteraction("Line Item Cancellation")
+            	.verifyOrderWrapUp()
+        		.addlogType(TestStepType.THEN)
+        		.fillRFCForm()
+        		._NavigationAction()
+        		.addlogType(TestStepType.WHEN)
+        		.searchByOrderId(OrderID)
+        		.closeWarningPopupWindow()
+        		._OrderDetailsAction()
+        		.verifyActionCapturedInNotes("Line Item Cancellation")
+            	;
 	 }
 	 
 	 
