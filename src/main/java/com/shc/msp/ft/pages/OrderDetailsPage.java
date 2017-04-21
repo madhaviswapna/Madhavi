@@ -1130,12 +1130,18 @@ public class OrderDetailsPage extends Page {
 
 
 		Logger.log("Enter notes :" + "my note", TestStepType.SUBSTEP);
-		getAction().type(CANCEL_ORDER_POP_UP_NOTES_TEXT_FIELD, "my note");
+		getAction().type(CANCEL_ORDER_POP_UP_NOTES_TEXT_FIELD, "This cancellation is performed by an automated test.");
 		getAction().waitFor(2000);
-
-		Logger.log("Verify submit button is visible", TestStepType.VERIFICATION_STEP);
+		getContext().put("adjustmentOption", "This cancellation is performed by an automated test.");
+		Logger.log("Verify the Submit button is present", TestStepType.VERIFICATION_STEP);
 		AjaxCondition.forElementVisible(CANCEL_ORDER_POP_UP_SUBMIT_BUTTON).waitForResponse(10);
-
+		/*try{
+			verifyTrialBalance();
+		}catch(Exception e){
+			e.printStackTrace();
+			Logger.log("No trial Balance popup present",TestStepType.STEP);
+		}*/
+		
 		return this;
 
 	}

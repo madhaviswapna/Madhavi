@@ -342,7 +342,19 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		._LineItemDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Update Expected Ship/Arrival Date")
-		.verifyUpdateExpectedShipArrivalDatePopUp();
+		.UpdateExpectedShipArrivalDate()
+       	._OrderDetailsAction()
+       	.verifyAdjustmentCapturedInInteraction("Update Expected Shipping Date")
+    	.verifyOrderWrapUp()
+		.addlogType(TestStepType.THEN)
+		.fillRFCForm()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByOrderId(orderId)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedInNotes("Update Expected Shipping Date")
+    	; 
 	}
 
 

@@ -113,6 +113,12 @@ public class LineItemDetailsAction extends BaseAction {
         return this;	
 	}
     
+    public LineItemDetailsAction UpdateExpectedShipArrivalDate() {
+    	Logger.log("Update expected ship arrival date", TestUtils.TestStepType.THEN);
+        this.factory.updateExpectedShipArrivalDatePopUp().UpdateExpectedShipArrivalDate();
+        return this;	
+	}
+    
     public LineItemDetailsAction verifyReturnTrackingInformationPopUp() {
     	Logger.log("Return tracking information popup should be displayed", TestUtils.TestStepType.THEN);
         this.factory.returnTrackingInformationPopUp().verifyReturnTrackingInformationPopUp();
