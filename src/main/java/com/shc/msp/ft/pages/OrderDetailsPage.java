@@ -1322,6 +1322,7 @@ public class OrderDetailsPage extends Page {
 			}else{
 				Logger.log("Shipping Adjustment is not available for this order",TestStepType.VERIFICATION_STEP);
 			}
+			try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 		}
 
 		else if (adjusttaxOption.equalsIgnoreCase("Sale Adjustment")) {
@@ -1367,7 +1368,7 @@ public class OrderDetailsPage extends Page {
 			PageAssert.fail("Tax adjustment is not applied");
 
 		}			
-		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		
 
 		return this;
 	}
