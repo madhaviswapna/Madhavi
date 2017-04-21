@@ -101,7 +101,7 @@ public class Retrieval_Test_Data_By_Query {
 	public static String ready_for_Pickup_Email_status_exception_ID = null;
 	public static String ready_for_Pickup_Email_status_exception_SCNO = null;
 	public static String contactcustomer_eligible_commercial_orderID = null;
-
+	public static String subOrderID = null;
 
     
     public synchronized void sales_Tax_Adjustment_Data() throws Exception{
@@ -2370,6 +2370,29 @@ public static void vendor_details_fetch() throws Exception{
 		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 		}
 
+	public void searchOrder_By_SubOrder() throws Exception{
+		
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		Sql_Commercail_Order = "select suborder_id from kmart_suborder where order_id IN (select o.order_id from ord o, ord_item oi, sales_check sc, ffm_method fm"
+								+" where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and"
+								+" oi.sales_check_id = sc.sales_check_id and o.site_gen_ord_id REGEXP '^-?[0-9]+$'  and fm.ffm_class_id='SPU' and   o.site_id = 30151 ) order by LAST_UPDATED_TS desc limit 1";
 
+		
+		System.out.println("------------------------------------+sql:"+Sql_Commercail_Order);
+		try {
+			
+			st = conn.prepareStatement(Sql_Commercail_Order);
+			Reporter.log("SQL Query: "+Sql_Commercail_Order);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				subOrderID = rs.getString("suborder_id").toString();
+				System.out.println("----------------------------------------------------suborder id "+subOrderID);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		}
 
 }

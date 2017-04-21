@@ -18,6 +18,7 @@ import com.shc.msp.ft.entities.As;
 import com.shc.msp.ft.entities.User;
 import com.shc.msp.ft.util.Constant;
 import com.shc.msp.ft.util.ExcelUtil;
+import com.shc.msp.ft.util.Retrieval_Test_Data_By_Query;
 import com.shc.msp.ft.util.TestGroup;
 import com.shc.msp.ft.util.UserPool;
 
@@ -174,15 +175,15 @@ public class OrderSearch extends BaseTests{
 	              .veryItemConditionInlineItemSummary(1,itemcondition); 
 		}
 		
-		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"MSP_Online_Order_Search_By_SubOrder"}
+		@Test(dataProvider = "DP_SearchBySubOrder",groups = {TestGroup.MSPP0Tests,"MSP_Online_Order_Search_By_SubOrder"}
 		, description = "Verify Order search using Suborder Number")
-		public void MSP_Online_Order_Search_By_SubOrder(TestData data) throws Exception {
+		public void MSP_Online_Order_Search_By_SubOrder(String data) throws Exception {
 			User user = new User();
 			user.userName = UserPool.getUser();
 			
 			// Below line has to be substituted with the getproducttotest() statements			
-			String subOrderID = "1410092472"; 
-			
+			//String subOrderID = "1410092472"; 
+			String subOrderID=data;
 			As.guestUser.goToHomePage()
     		.addlogType(TestStepType.WHEN)
             .login(user)
@@ -223,8 +224,8 @@ public class OrderSearch extends BaseTests{
 		, description = "MSP_Online_Search_Layaway_By_Phone_Number")
 		public void MSP_Online_Search_Layaway_By_PhoneNumber(TestData data) throws Exception {
 			User user = new User();
-			//String phNumber= getProductToTest("MSP_Layaway_Phone_Number");
-			String phNumber= "9876543210";
+			String phNumber= getProductToTest("MSP_Layaway_Phone_Number");
+			//String phNumber= "9876543210";
 		
 			System.out.println("-----------------------------------------"+phNumber);
 			
@@ -723,6 +724,16 @@ public class OrderSearch extends BaseTests{
 			 
 		         return (testData);
 		 
+		}
+		
+		@DataProvider (name="DP_SearchBySubOrder",parallel=true)
+		public Object[][] DP_SearchBySubOrder() throws Exception{
+			Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().searchOrder_By_SubOrder();
+			String OrderID[]={Retrieval_Test_Data_By_Query.subOrderID};
+			System.out.println("----------------------------------------suborder[]:"+OrderID[0]);
+			Object testData[][] = {OrderID};
+			System.out.println("----------------------------------------test data:OrderID[]:"+testData[0][0]);
+			return (testData);		
 		}
 		
 }
