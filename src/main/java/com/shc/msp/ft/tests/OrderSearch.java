@@ -104,28 +104,28 @@ public class OrderSearch extends BaseTests{
         , description = "Verify search by order id", enabled = true, priority=1)
 		public void MSP_Online_Agent_Search_By_OrderNumber(String orderId,String agentID) throws Exception {
 			
-			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
-			addCloneIDHostname(data);
+			
+			User user = new User();
+			user.userName = UserPool.getUser();
+			
+			Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().searchOrder_By_OrderID();
+			String OrderID=Retrieval_Test_Data_By_Query.orderID;
 		
-			ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+			
+			
+			/*TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+			addCloneIDHostname(data);*/
+		
+			//ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
 			
 		    LogFormatterAction.beginSetup();
-		
-		    User user = new User();
-		    if(url.contains("msp.prod.global")){
-		    	user.userName = agentID;
-		    	user.password = Constant.OnlinePasswordProd;
-		    }else{
-		    	user.userName = agentID;
-		    	user.password = Constant.OnlinePassword;
-		    }
 		     
 		    As.guestUser.goToHomePage()
 		    		.addlogType(TestStepType.WHEN)
 		            .login(user)
 		            .closeWarningPopupWindow()
 		            .addlogType(TestStepType.WHEN)
-		            .searchByOrderId(orderId)
+		            .searchByOrderId(OrderID)
 		            ._OrderDetailsAction()
 		            .addlogType(TestStepType.THEN)
 		            .verifyOrderDetailsPageDisplayed();

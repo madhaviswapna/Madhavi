@@ -102,6 +102,7 @@ public class Retrieval_Test_Data_By_Query {
 	public static String ready_for_Pickup_Email_status_exception_SCNO = null;
 	public static String contactcustomer_eligible_commercial_orderID = null;
 	public static String subOrderID = null;
+	public static String orderID = null;
 
     
     public synchronized void sales_Tax_Adjustment_Data() throws Exception{
@@ -2388,6 +2389,28 @@ public static void vendor_details_fetch() throws Exception{
 			while(rs.next()){
 				subOrderID = rs.getString("suborder_id").toString();
 				System.out.println("----------------------------------------------------suborder id "+subOrderID);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		}
+public void searchOrder_By_OrderID() throws Exception{
+		
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		Sql_Commercail_Order = "select order_id from ord where  site_id='40153' order by LAST_UPDATED_TS desc limit 1";
+
+		
+		System.out.println("------------------------------------+sql:"+Sql_Commercail_Order);
+		try {
+			
+			st = conn.prepareStatement(Sql_Commercail_Order);
+			Reporter.log("SQL Query: "+Sql_Commercail_Order);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				orderID = rs.getString("order_id").toString();
+				System.out.println("----------------------------------------------------suborder id "+orderID);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
