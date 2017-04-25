@@ -1135,13 +1135,15 @@ public class OrderDetailsPage extends Page {
 		getContext().put("adjustmentOption", "This cancellation is performed by an automated test.");
 		Logger.log("Verify the Submit button is present", TestStepType.VERIFICATION_STEP);
 		AjaxCondition.forElementVisible(CANCEL_ORDER_POP_UP_SUBMIT_BUTTON).waitForResponse(10);
-		/*try{
+		
+		try{
+			Logger.log("Clicking the Submit Button",TestStepType.STEP);
 			verifyTrialBalance();
 		}catch(Exception e){
 			e.printStackTrace();
-			Logger.log("No trial Balance popup present",TestStepType.STEP);
-		}*/
-		
+			Logger.log("No trial Balance popup present, Proceeding further.",TestStepType.STEP);
+			System.out.println("--------- No trial Balance popup present -------------");
+		}		
 		return this;
 
 	}
@@ -1676,7 +1678,7 @@ public class OrderDetailsPage extends Page {
 		getAction().click(SUBMIT_BUTTON);
 		getAction().waitFor(2000);
 		Logger.log("Verify Trail Balance Popup" , TestStepType.STEP);
-		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP).waitForResponse();
+		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP).waitForResponse(5);
 		Logger.log("Verify trail balance payment type", TestStepType.STEP);
 		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP_PAYMENTTYPE).waitForResponse();
 		Logger.log("Verify trail balance popup message", TestStepType.STEP);

@@ -170,13 +170,12 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
             , description = "Verify cancellation at salescheck level", enabled = true, priority=51)
     public void sales_Check_Level_Cancellation_Eligible(TestData data) {
 		
-		String OrderID="840103706";//getProductToTest("MSP_OL_OrderEligibleForCancellationAtSalescheck");
+		String OrderID=getProductToTest("MSP_OL_OrderEligibleForCancellationAtSalescheck");
         addCloneIDHostname(data);
         LogFormatterAction.beginSetup();
       
-        User user = new User(); //user.userName=UserPool.getUser();
-        user.userName="testonline0116";
-        user.password="TestPassword";
+        User user = new User(); user.userName=UserPool.getUser();
+        
         As.guestUser.goToHomePage()
         		.addlogType(TestStepType.WHEN)
                 .login(user)
@@ -193,7 +192,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .verifyOptionIsVisible("Cancellation - Sales Check")
                 .addlogType(TestStepType.THEN)
                 .cancelSalesCheck()
-                /*._OrderDetailsAction()
+                ._OrderDetailsAction()
 		        .verifyAdjustmentCapturedInInteraction("Sales Check Cancellation")
 		    	.verifyOrderWrapUp()
 				.addlogType(TestStepType.THEN)
@@ -203,7 +202,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 				.searchByOrderId(OrderID)
 				.closeWarningPopupWindow()
 				._OrderDetailsAction()
-				.verifyActionCapturedInNotes("Sales Check Cancellation")*/
+				.verifyActionCapturedInNotes("Sales Check Cancellation")
 		    	; 
        	}
 
