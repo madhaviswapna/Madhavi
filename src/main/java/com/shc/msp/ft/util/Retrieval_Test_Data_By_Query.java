@@ -1880,7 +1880,7 @@ public class Retrieval_Test_Data_By_Query {
 		System.out.println(lineItem_ffmExpt);
 		System.out.println(lineItem_storeExpt);
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
-		Sql_LineItem_Start_Automated_Return_Eligible="select o.site_gen_ord_id, oi.order_item_id, oi.ITEM_ID, oi.ITEM_NM, sc.sales_check_number, oi.REQUESTED_SHIP_DATE, oi.PROMISED_AVAILABLE_TIME, "
+		/*Sql_LineItem_Start_Automated_Return_Eligible="select o.site_gen_ord_id, oi.order_item_id, oi.ITEM_ID, oi.ITEM_NM, sc.sales_check_number, oi.REQUESTED_SHIP_DATE, oi.PROMISED_AVAILABLE_TIME, "
 				+ "sc.sales_check_number, cci.phone_1, o.order_id, oi.QUANTITY, fm.ffm_class_id, o.order_sts_cd, oi.order_item_sts_cd, sc.SALES_CHECK_STS_CD,  o.site_id, "
 				+ "o.PLACEMENT_TS from ord o, ord_item oi, sales_check sc, ffm_method fm, customer_contact_info cci "
 				+ "where o.order_id = oi.order_id and o.billing_address_id = cci.address_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and "
@@ -1889,8 +1889,16 @@ public class Retrieval_Test_Data_By_Query {
 				+ "from ord o, ord_item oi, sales_check sc, ffm_method fm, customer_contact_info cci where o.order_id = oi.order_id and o.billing_address_id = cci.address_id "
 				+ "and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and oi.SALES_CHECK_ID = sc.SALES_CHECK_ID and oi.order_item_sts_cd in ('SHP') "
 				+ "and fm.ffm_class_id in ('TW','VD','HFM','SFS') and o.placement_ts > DATE_SUB(CURDATE(),INTERVAL 15 DAY) "
-				+ "and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and oi.ITEM_NM REGEXP '.*WARRANTY.*') order by o.placement_ts asc limit 1"; 
-
+				+ "and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and oi.ITEM_NM REGEXP '.*WARRANTY.*') order by o.placement_ts asc limit 1"; */
+		
+		Sql_LineItem_Start_Automated_Return_Eligible=	"select o.site_gen_ord_id, oi.order_item_id, oi.ITEM_ID, oi.ITEM_NM, sc.sales_check_number, oi.REQUESTED_SHIP_DATE, oi.PROMISED_AVAILABLE_TIME, "
+						+ "sc.sales_check_number, cci.phone_1, o.order_id, oi.QUANTITY, fm.ffm_class_id, o.order_sts_cd, oi.order_item_sts_cd, sc.SALES_CHECK_STS_CD,  o.site_id, o.PLACEMENT_TS  "
+						+ "from ord o, ord_item oi, sales_check sc, ffm_method fm, customer_contact_info cci  "
+						+ "where o.order_id = oi.order_id and o.billing_address_id = cci.address_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id "
+						+ "and oi.SALES_CHECK_ID = sc.SALES_CHECK_ID   and oi.order_item_sts_cd in ('SHP') "
+						+ "and fm.ffm_class_id in ('TW') and o.placement_ts > DATE_SUB(CURDATE(),INTERVAL 15 DAY)   "
+						+ "and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and oi.ITEM_ID REGEXP '^-?[0-9]+W[0-9]+$'  order by o.placement_ts asc limit 1;";
+		
 		Sql_LineItem_Start_Automated_Return_Status_Expt = "select o.site_gen_ord_id, oi.order_item_id, oi.ITEM_ID, oi.ITEM_NM, sc.sales_check_number, oi.REQUESTED_SHIP_DATE, oi.PROMISED_AVAILABLE_TIME, "
 				+ "sc.sales_check_number, cci.phone_1, o.order_id, oi.QUANTITY, fm.ffm_class_id, o.order_sts_cd, oi.order_item_sts_cd, sc.SALES_CHECK_STS_CD,  o.site_id, "
 				+ "o.PLACEMENT_TS from ord o, ord_item oi, sales_check sc, ffm_method fm, customer_contact_info cci "
