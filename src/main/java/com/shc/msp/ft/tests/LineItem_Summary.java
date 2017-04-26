@@ -179,6 +179,7 @@ public class LineItem_Summary extends BaseTests {
 	public void lineItemGiftCardInfoVerify(String orderID, String sku) throws Exception{
 			addCloneIDHostname(data);
 	        LogFormatterAction.beginSetup();
+	        System.out.println(orderID+"--////--"+sku);
 	        User user = new User(); user.userName=UserPool.getUser();
 	        As.guestUser.goToHomePage()
 	                ._NavigationAction()

@@ -2232,9 +2232,10 @@ public static void giftCard_Information_OrderID() throws Exception{
 	Sql_Gift_Card_Info_Eligible = "select o.site_gen_ord_id,oi.item_id from ord o, ord_item oi, giftcard_order_item goi "
 			+ "where o.order_id = oi.order_id and oi.order_item_id = goi.order_item_id and oi.item_nm like '%Gift Card%' "
 			+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
-			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
-			+ "and o.last_updated_ts > '2015-04-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' order by o.last_updated_ts desc limit 1;";
-
+			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
+			+ "and o.last_updated_ts > DATE_SUB(CURDATE(),INTERVAL 30 DAY) order by o.last_updated_ts desc limit 1;";
+	
+	System.out.println();System.out.println("Query for giftCard_Information_OrderID "+Sql_Gift_Card_Info_Eligible);System.out.println();
 	try {
 		
 		st = conn.prepareStatement(Sql_Gift_Card_Info_Eligible);

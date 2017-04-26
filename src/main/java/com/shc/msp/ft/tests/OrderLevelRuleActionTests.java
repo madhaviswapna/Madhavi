@@ -260,17 +260,17 @@ public class OrderLevelRuleActionTests extends BaseTests{
 
 	}
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests","order_Level_ReSendOrderConfirmation"}
 	, description = "MSPReSendOrderConfirmation", enabled = true, priority=43)
 	public void order_Level_ReSendOrderConfirmation(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderEligibleForResendOrderConfirmation");
 		
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
-		User user = new User(); //user.userName=UserPool.getUser();
-		user.userName="testonline0116";
+		User user = new User(); user.userName=UserPool.getUser();
+		/*user.userName="testonline0116";
         user.password="TestPassword";
-		
+		*/
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
 		.login(user)
