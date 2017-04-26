@@ -278,23 +278,25 @@ public class OrderSearch extends BaseTests{
 	                .verifyOrderDetailsPageDisplayed();
 	    	
 	    }
-	 
-		
+
 	
-		@Test(dataProvider = "DP_SearchBySalesCheckNo",	groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderBySalesCheckNOTests"}
+		@Test(dataProvider = "DP_SearchByOrderID",	groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderBySalesCheckNOTests"}
 	            , description = "Verify search by salescheck", enabled = true, priority=3)
 	
-	    public void MSP_Online_Agent_Search_SalesCheck(String salesCheck,String agentID,String store) throws Exception {
+	    public void MSP_Online_Agent_Search_SalesCheck(String salesCheck,String store) throws Exception {
 			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 			addCloneIDHostname(data);
 	
-    		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
-    	
+    		//ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+    		
+    		Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().searchOrder_By_OrderID();
+			String salescheckID=Retrieval_Test_Data_By_Query.salescheckID;
+    		
+    		
 	        LogFormatterAction.beginSetup();
-
+	        
 	        User user = new User();
-	        user.userName = agentID;
-	        user.password = Constant.OnlinePassword;
+			user.userName = UserPool.getUser();
   
 	        As.guestUser.goToHomePage()
 	        		.addlogType(TestStepType.WHEN)
@@ -303,15 +305,11 @@ public class OrderSearch extends BaseTests{
 	                .verifyonlineagent()
 	                .closeWarningPopupWindow()
 	                .addlogType(TestStepType.WHEN)
-	                .searchBySalesCheck(salesCheck,store)
+	                .searchBySalesCheck(salescheckID,"40153")
 	                ._OrderDetailsAction()
 	                .addlogType(TestStepType.THEN)
 		            .verifyOrderDetailsPageDisplayed();
 	    }
-		/*Sarika Patil ,22/2/2017 -- changed the test data 
-		 * ,earlier the test data was taken from XL sheet and the test data did not fetch any results ,
-			so changed it to take the test data from OHM,created the keyword MSP_OnlineAgent_Phone_Number in OHM*/
-		
 	    
 		@Test(dataProvider = "DP_SearchByPhone", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByPhoneNOTests"}
 	            , description = "Verify agent search by phone number", enabled = true, priority=4)
@@ -354,6 +352,9 @@ public class OrderSearch extends BaseTests{
 			addCloneIDHostname(data);
 		    	
 	    	ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+	    	
+	    	//String phoneNumber=getProductToTest("MSP_OnlineAgent_EmailID");
+	    	String email1=getSearchTermToTest("MSP_OnlineAgent_EmailID");
 	 
 	        LogFormatterAction.beginSetup();
 
@@ -367,7 +368,7 @@ public class OrderSearch extends BaseTests{
 	                .addlogType(TestStepType.THEN)
 	                .verifyonlineagent()
 	                .closeWarningPopupWindow()
-	                .searchByEmail(email)
+	                .searchByEmail(email1)
 	                .addlogType(TestStepType.WHEN)
 	                .selectOrderInMyRecentInteractions_SearchByEmail(1)
 	                ._OrderDetailsAction()
@@ -375,7 +376,13 @@ public class OrderSearch extends BaseTests{
 	                .verifyOrderDetailsPageDisplayed() ;
 	    	
 	    }
-	    @Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "Verify_MSP_Online_SYWMax_ActiveUser"}
+	    private void getSeachTearm() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "Verify_MSP_Online_SYWMax_ActiveUser"}
 	    , description = "Verify search by order id", enabled = true, priority=1)
 	  
 		public void Verify_MSP_Online_SYWMax_ActiveUser(String orderId,String agentID) throws Exception {

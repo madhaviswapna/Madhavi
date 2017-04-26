@@ -103,6 +103,7 @@ public class Retrieval_Test_Data_By_Query {
 	public static String contactcustomer_eligible_commercial_orderID = null;
 	public static String subOrderID = null;
 	public static String orderID = null;
+	public static String salescheckID = null;
 
     
     public synchronized void sales_Tax_Adjustment_Data() throws Exception{
@@ -2407,7 +2408,7 @@ public static void vendor_details_fetch() throws Exception{
 public void searchOrder_By_OrderID() throws Exception{
 		
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
-		Sql_Commercail_Order = "select order_id from ord where  site_id='40153' order by LAST_UPDATED_TS desc limit 1";
+		Sql_Commercail_Order = "select * from ord o,ord_item oi, sales_check sc where oi. site_id='40153' and o.order_id=oi.order_id and o.order_id = sc.order_id and oi.ORDER_ITEM_STS_CD in ('CNF') order by o. LAST_UPDATED_TS desc limit 1";
 
 		
 		System.out.println("------------------------------------+sql:"+Sql_Commercail_Order);
@@ -2418,7 +2419,8 @@ public void searchOrder_By_OrderID() throws Exception{
 			st.execute();
 			rs = st.getResultSet();
 			while(rs.next()){
-				orderID = rs.getString("order_id").toString();
+				orderID = rs.getString("o.order_id").toString();
+				salescheckID=rs.getString("sc.SALES_CHECK_NUMBER").toString();
 				System.out.println("----------------------------------------------------suborder id "+orderID);
 				}
 			} catch (SQLException e) {

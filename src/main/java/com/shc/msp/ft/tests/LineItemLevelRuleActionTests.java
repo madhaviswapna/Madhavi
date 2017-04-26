@@ -79,6 +79,8 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevel_SaleAdjustmentInEligibleData").split("\\|");
 		String orderId=test_data[0];
 		String sku = test_data[1];
+		
+		
 		addCloneIDHostname(data);
 
 		LogFormatterAction.beginSetup();
