@@ -525,6 +525,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.verifyOptionVisible("Sales Tax Adjustment")
 		.taxadjustment("Sales Tax Adjustment",0.01,OrderID)
 		.verifyTrialBalance()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Sales Tax Adjustment")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -534,6 +535,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.searchByOrderId(OrderID)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInNotes("Sales Tax Adjustment")
 		;
 	}
@@ -561,6 +563,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.taxadjustment("Shipping Adjustment",0.001,OrderID)
 		//.verifyTrialBalance()
 		.clickSubmitButton()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Shipping Adjustment")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -570,6 +573,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.searchByOrderId(OrderID)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInNotes("Shipping Adjustment")
 		;
 	}

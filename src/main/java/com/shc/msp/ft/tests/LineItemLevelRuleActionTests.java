@@ -66,6 +66,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.searchByOrderId(orderId)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInNotes("Sale Adjustment");
 
 
@@ -138,6 +139,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.verifyOptionVisible("Cancellation - Line Item")
 		.cancelLineItem()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Line Item Cancellation")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -147,6 +149,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.searchByOrderId(OrderID)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyActionCapturedInNotes("Line Item Cancellation")
 		;
 	}
@@ -346,6 +349,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.verifyOptionVisible("Update Expected Ship/Arrival Date")
 		.UpdateExpectedShipArrivalDate()
        	._OrderDetailsAction()
+       	.addlogType(TestStepType.THEN)
        	.verifyAdjustmentCapturedInInteraction("Update Expected Shipping Date")
     	.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -355,6 +359,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.searchByOrderId(orderId)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyActionCapturedInNotes("Update Expected Shipping Date")
     	; 
 	}
@@ -427,6 +432,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.verifyOptionVisible("Contact Marketplace Seller")
 		.addlogType(TestStepType.THEN)
 		.contactMarketPlaceSeller()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Contact Marketplace Seller")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -436,6 +442,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.searchByOrderId(OrderID)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInNotes("Contact Marketplace Seller")
 		;    	
 	}
@@ -478,6 +485,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.verifyOptionVisible("Contact Vendor")
 		.contactVendor()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Contact Vendor")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -487,6 +495,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.searchByOrderId(orderId)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInNotes("Contact Vendor")
 		;
 	}
@@ -798,6 +807,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.addlogType(TestStepType.GIVEN)
 		.taxadjustment("Sale Adjustment",0.1,orderId)
 		.verifyTrialBalance()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Sale Adjustment")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -807,6 +817,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.searchByOrderId(orderId)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInNotes("Sale Adjustment")
 		;
 	}
