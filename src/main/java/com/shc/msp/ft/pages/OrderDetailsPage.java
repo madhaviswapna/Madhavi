@@ -790,8 +790,10 @@ public class OrderDetailsPage extends Page {
 	public OrderDetailsPage verifyOrderDetailsPageDisplayed() {
 		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
-		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)) 	
+		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)){ 	
 			Logger.log("Test Data is not valid");
+			PageAssert.fail("Invalid Test Data / Order Not searchable in MSP");
+		}	
 		else
 		{
 			SoftAssert.checkElementAndContinueOnFailure(MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
