@@ -1823,11 +1823,11 @@ public class Retrieval_Test_Data_By_Query {
 		System.out.println(lineItem_storeExpt);
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 		Sql_LineItem_Return_Item_Eligible = "SELECT o.SITE_GEN_ORD_ID,oi.item_id FROM ORD O,ORD_ITEM OI,SALES_CHECK SC,FFM_METHOD FFM, payment p,payment_instruction pi,pmt_method pm "
-				+ "WHERE O.ORDER_SERVICE_ORGINATING_SERVER in ('qa.ecom.sears.com') AND O.ORDER_ID=OI.ORDER_ID  AND SC.ORDER_ID=O.ORDER_ID "
+				+ "WHERE O.ORDER_ID=OI.ORDER_ID  AND SC.ORDER_ID=O.ORDER_ID "
 				+ "AND SC.SALES_CHECK_ID=OI.SALES_CHECK_ID and FFM.FFM_METHOD_id=OI.FFM_METHOD_id and pi.PAYMENT_METHOD_ID=pm.payment_method_id "
 				+ "and p.PAY_INSTRUCTION_ID=pi.PAY_INSTRUCTION_ID and sc.sales_check_id=p.sales_check_id and o.ORDER_ID=pi.order_ID "
-				+ "AND OI.ORDER_ITEM_STS_CD IN ('SHP') and FFM.FFM_CLASS_ID in('VD','TW','SFS','HFM') AND o.SITE_ID not in ("+lineItem_storeExpt+") "
-				+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id like '9%'  and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
+				+ "AND OI.ORDER_ITEM_STS_CD IN ('SHP') and pm.payment_method_ds not in ('GiftCard') and FFM.FFM_CLASS_ID in('VD','TW','SFS','HFM') AND o.SITE_ID not in ("+lineItem_storeExpt+") "
+				+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST','')and so_line_number=1 and o.site_gen_ord_id like '8%'  and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
 				+ "and o.last_updated_ts > DATE_SUB(CURDATE(),INTERVAL 180 DAY) limit 1";
 		
 		Sql_LineItem_Return_Item_Status_Expt = "SELECT o.SITE_GEN_ORD_ID,oi.item_id FROM ORD O,ORD_ITEM OI,SALES_CHECK SC,FFM_METHOD FFM, payment p,payment_instruction pi,pmt_method pm "

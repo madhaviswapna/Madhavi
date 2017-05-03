@@ -184,38 +184,57 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	}
 
 	//Return Item
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
-	, description = "Verify return functionality at line item level for eligible items", enabled = true)
-	public void line_Item_Level_Verify_Return_Item_Eligible(TestData data) {
-		//	String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnEligible").split("\\|");
-		String[] test_data ="940220064|02252449000".split("\\|");
+		@Test(dataProvider = "DP_Return_Item_Eligible_orderID",groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
+		 , description = "Verify return functionality at line item level for eligible items", enabled = true)
+		 public void line_Item_Level_Verify_Return_Item_Eligible(String orderId, String sku) {
+			 //	String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnEligible").split("\\|");
+			 //		// String[] test_data ="940220064|02252449000".split("\\|");
+			 //		 	
+			 // 			String orderId=test_data[0];
+			 // 			String sku = test_data[1];
+			 addCloneIDHostname(data);
+			 LogFormatterAction.beginSetup();
+			 User user = new User(); user.userName=UserPool.getUser();
+			 As.guestUser.goToHomePage()
+			 ._NavigationAction()
+			 .addlogType(TestStepType.WHEN)
+			 .login(user)
+			 .addlogType(TestStepType.THEN)
+			 .verifyonlineagent()
+			 .addlogType(TestStepType.WHEN)
+			 .searchByOrderId(orderId)
+			 .closeWarningPopupWindow()
+			 ._OrderDetailsAction()
+			 .addlogType(TestStepType.THEN)
+			 .verifyOrderDetailsPageDisplayed()
+			 .addlogType(TestStepType.GIVEN)
+			 .clickOnSkuNumberUnderLineItemTab(sku)
+			 ._LineItemDetailsAction()
+			 .addlogType(TestStepType.THEN)
+			 .verifyOptionVisible("Return Item")
+			 .addlogType(TestStepType.THEN)
+			 .fillReturnItemPopUp(1)
+			 .verifyTrialBalance()
+			 
+			 .addlogType(TestStepType.THEN)
+		     .verifyReturnSuccess(sku)
+		     
+			 ._OrderDetailsAction()
+			 .addlogType(TestStepType.THEN)
+			 
+			 .verifyAdjustmentCapturedInInteraction("Return Line Item")
+			 .verifyOrderWrapUp()
+			 .addlogType(TestStepType.THEN)
+			 .fillRFCForm()
 
-		String orderId=test_data[0];
-		String sku = test_data[1];
-		addCloneIDHostname(data);
-		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getUser();
-		As.guestUser.goToHomePage()
-		._NavigationAction()
-		.addlogType(TestStepType.WHEN)
-		.login(user)
-		.addlogType(TestStepType.THEN)
-		.verifyonlineagent()
-		.addlogType(TestStepType.WHEN)
-		.searchByOrderId(orderId)
-		.closeWarningPopupWindow()
-		._OrderDetailsAction()
-		.addlogType(TestStepType.THEN)
-		.verifyOrderDetailsPageDisplayed()
-		.addlogType(TestStepType.GIVEN)
-		.clickOnSkuNumberUnderLineItemTab(sku)
-		._LineItemDetailsAction()
-		.addlogType(TestStepType.THEN)
-		.verifyOptionVisible("Return Item")
-		.addlogType(TestStepType.THEN)
-		.fillReturnItemPopUp(1);
-	}
+			 ._NavigationAction()
+			 .addlogType(TestStepType.WHEN)
+			 .searchByOrderId(orderId)
+			 .closeWarningPopupWindow()
+			 ._OrderDetailsAction()
+			 .verifyAdjustmentCapturedInNotes("Return Line Item");
+
+		 }
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests"}

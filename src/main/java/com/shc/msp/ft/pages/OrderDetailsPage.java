@@ -215,7 +215,7 @@ public class OrderDetailsPage extends Page {
 	public static final Locator RETURN_QUANTITY= new Locator("RETURN QUANTITY", "//input[@name='returnQuantity']", "Return quantity");
 	//trial balance 
 	public static final Locator TRIAL_BALANCE_POPUP= new Locator("Trail balance popup", "(//div[@class='modal-content'])[2]", "Trail balance popup");
-	public static final Locator TRIAL_BALANCE_POPUP_PAYMENTTYPE= new Locator("Trail balance popup payment", "//td[contains(text(),'Cash') or contains(text(),'Credit Card')]", "Trail balance popup payment");
+	public static final Locator TRIAL_BALANCE_POPUP_PAYMENTTYPE= new Locator("Trail balance popup payment", "//td[contains(text(),'Cash') or contains(text(),'Credit Card') or contains(text(),'PayPalUC') or contains(text(),'PinDebit')]", "Trail balance popup payment");
 	public static final Locator TRIAL_BALANCE_POPUP_CANCEL_BUTTON= new Locator("Trail balance popup cancel button",  "(//button[contains(text(),'Cancel')])[2]" , "Trail balance popup cancel button");
 	public static final Locator TRIAL_BALANCE_POPUP_SUBMIT_BUTTON= new Locator("Trail balance popup submit button",  "(//button[contains(text(),'Submit')])[2]" , "Trail balance popup submit button");
 	public static final Locator TRIAL_BALANCE_POPUP_MESSAGE= new Locator("Trail balance popup message",  "//font[contains(text(),'Credit Amount(s) include')]"  , "Trail balance message");
@@ -693,6 +693,13 @@ public class OrderDetailsPage extends Page {
 		public final Locator FUTURE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[5]","FUTURE");
 		public final Locator DELIVERY_INFO = new Locator("","//legend[contains(text(),'Delivery Information')]/parent::fieldset","DELIVERY_INFO");
 		
+		//return
+		public final Locator RETURNED_STATUS = new Locator("","//td[@data-title-text='SKU']//a[contains(text(),'{0}')]/ancestor::tr/td[contains(text(),'Returned')]","RETURNED_STATUS");
+		public final Locator RETURN_SUCCESS_MESSAGE = new Locator("","//div[contains(text(),'Return Item Action')]","RETURN_SUCCESS_MESSAGE");
+		public final Locator SHIPPED_STATUS = new Locator("","//td[@data-title-text='SKU']//a[contains(text(),'{0}')]/ancestor::tr/td[contains(text(),'Shipped')]","SHIPPED_STATUS");
+		public final Locator QUANTITY = new Locator("","//div[contains(text(),'Qty')]/ancestor::thead/following-sibling::tbody/tr[2]/td[@data-title-text='Qty']","QUANTITY");
+
+
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -1413,12 +1420,12 @@ public class OrderDetailsPage extends Page {
 				getAction().click(RETURN_ITEM_RESON_CODE.format(ran));
 				getAction().waitFor(3000);
 				AjaxCondition.forElementVisible(ADJUSTMENT_NOTES).waitForResponse();
-				getAction().type(ADJUSTMENT_NOTES,resonName);				
+				getAction().type(ADJUSTMENT_NOTES,resonName);
+				getContext().put("adjustmentOption", resonName);
 			}
 
 			Logger.log("Click on Submit Button",TestStepType.STEP);
 			AjaxCondition.forElementVisible(SUBMIT_BUTTON).waitForResponse();
-			getAction().click(SUBMIT_BUTTON);
 		}
 		return this;
 
@@ -1680,7 +1687,7 @@ public class OrderDetailsPage extends Page {
 		getAction().click(SUBMIT_BUTTON);
 		getAction().waitFor(2000);
 		Logger.log("Verify Trail Balance Popup" , TestStepType.STEP);
-		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP).waitForResponse(5);
+		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP).waitForResponse();
 		Logger.log("Verify trail balance payment type", TestStepType.STEP);
 		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP_PAYMENTTYPE).waitForResponse();
 		Logger.log("Verify trail balance popup message", TestStepType.STEP);
@@ -1690,10 +1697,11 @@ public class OrderDetailsPage extends Page {
 		Logger.log("Verify trail balance submit button", TestStepType.STEP);
 		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP_SUBMIT_BUTTON).waitForResponse();
 		getAction().click(TRIAL_BALANCE_POPUP_SUBMIT_BUTTON);
-		getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(TRIAL_BALANCE_OK).waitForResponse(3000);
 		getAction().click(TRIAL_BALANCE_OK);
 		return this;
 	}   
+
 
 	public OrderDetailsPage   saleAdjustmentLineitem(String adjusttaxOption, Double amount){
 		Logger.log("Verify Sale adjustment for a line item",TestStepType.VERIFICATION_STEP);
@@ -6156,6 +6164,27 @@ public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
 			AjaxCondition.forElementPresent(OK_BUTTON);
 			getAction().click(OK_BUTTON);}
 		return this;
+	}
+
+	public OrderDetailsPage verifyReturnSuccess(String sku){
+		Logger.log("verify the status message ");
+		getAction().waitFor(2000);
+		getAction().click(ORDER_SUMMARY_TAB);
+		getAction().click(LINE_ITEM_SALES_CHECKS_TAB);
+
+		if((Integer.parseInt(getAction().getText(QUANTITY)))>1){
+			AjaxCondition.forElementVisible(SHIPPED_STATUS.format(sku)).waitForResponse(2000);
+			highlight(SHIPPED_STATUS.format(sku));
+			SoftAssert.checkElementAndContinueOnFailure(SHIPPED_STATUS.format(sku), "status: "+getAction().getText(SHIPPED_STATUS.format(sku)), CheckLocatorFor.isVisible);
+			Logger.log("The status is Shipped",TestStepType.VERIFICATION_PASSED);
+		}
+		else {
+			AjaxCondition.forElementVisible(RETURNED_STATUS.format(sku)).waitForResponse(3000);
+			highlight(RETURNED_STATUS.format(sku));
+			SoftAssert.checkElementAndContinueOnFailure(RETURNED_STATUS.format(sku), "status: "+getAction().getText(RETURNED_STATUS.format(sku)), CheckLocatorFor.isVisible);
+			Logger.log("The status has been changed to Returned",TestStepType.VERIFICATION_PASSED);}
+		return null;
+
 	}
 	
 }

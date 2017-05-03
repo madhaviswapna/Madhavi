@@ -272,6 +272,11 @@ public class LineItemDetailsAction extends BaseAction {
 		Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().Line_Item_Start_Automated_Return_Data();
 		return this;
 	}
+	public LineItemDetailsAction verifyReturnSuccess(String sku) {
+    	Logger.log("status check when return happens", TestUtils.TestStepType.THEN);
+    	  this.factory.orderdetailspage().verifyReturnSuccess(sku);
+        return this;
+	}
 	
 	
 	
