@@ -236,6 +236,9 @@ public class HomePage extends Page {
 	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//*[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
 	public final Locator PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS = new Locator("", "//*[contains(text(),'{0}')]/parent::*/preceding-sibling::img","PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS");
 	
+	 public final Locator OE_ERROR = new Locator("", "//div[contains(text(),'MSP OE')]", "OE_ERROR");
+	 public final Locator CLOSE_ERROR = new Locator("", "//button[contains(text(),'Close')]", "CLOSE_ERROR");
+	
 	public void maximizeWindow() {
 		getAction().driver.manage().window().maximize();
 	}
@@ -281,7 +284,14 @@ public class HomePage extends Page {
 		}
 		invalidLoginCount =1;
 		
-		// Close popup when not testing CTI
+		//Temporary code for MSP OE ERROR
+		  if(getAction().isVisible(OE_ERROR) && (!FrameworkProperties.SELENIUM_BASE_URL.contains("msp.prod.global.s.com"))){
+			  System.out.println("Closing the MSP OE Error");
+			  getAction().click(CLOSE_ERROR);
+		  }
+		  getAction().waitFor(3000);
+		
+			  // Close popup when not testing CTI
 		if (!FrameworkProperties.getProperty("cti", "false").equalsIgnoreCase("true")) {
 			AjaxCondition.forElementVisible(PHONE_ID).waitWithoutException(5);
 			if (getAction().isElementPresent(PHONE_ID)) {
