@@ -2122,10 +2122,6 @@ public class HomePage extends Page {
 		getAction().click(PHONE_ID_CANCEL_BUTTON);
 		
 		
-		//this is temp code as we are getting error when we login with automation test users, need to be removed once the issue is resolved
-		if(getAction().isElementPresent(PHONE_ID_CANCEL_BUTTON))
-			getAction().click(PHONE_ID_CANCEL_BUTTON);
-		
 		Logger.log("Verify Phone Status is Not Connected" ,TestStepType.VERIFICATION_PASSED);
 		AjaxCondition.forElementNotVisible(PHONE_ID).waitForResponse();
 		AjaxCondition.forElementVisible(PHONE_ID_NOT_CONNECTED).waitForResponse();
