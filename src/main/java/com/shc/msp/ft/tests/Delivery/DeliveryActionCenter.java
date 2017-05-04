@@ -1734,7 +1734,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")
 		
-		.addlogType(TestStepType.WHEN)
+/*		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		
 		.addlogType(TestStepType.WHEN)
@@ -1752,7 +1752,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyActionCapturedHistoryNotes();
+		.verifyActionCapturedHistoryNotes()*/;
 	
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
