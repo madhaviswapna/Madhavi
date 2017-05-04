@@ -344,10 +344,12 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.selectOrderInMyRecentDeliveryInteractions(1)
-		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed("dosorderId", orderId)
+		.addlogType(TestStepType.THEN)
 		.cancelOrderDelivery("Whole order","Open","");
+
 
 	}  
 

@@ -970,6 +970,9 @@ public class OrderDetailsPage extends Page {
 				}
 			}
 		}	
+		String orderRouteStatus=getAction().getText(ORDER_ROUTE_STATUS);
+		getContext().put("orderRouteStatus", orderRouteStatus);
+		System.out.println("orderRouteStatus----"+orderRouteStatus+"****");
 		return this;
 	}
 
