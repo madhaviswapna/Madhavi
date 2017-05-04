@@ -486,9 +486,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyPickupbuttonPresent();
 		return this;
 	}
-	public OrderDetailsAction cancelOrderDelivery(String type, String orderStatus) {
+	public OrderDetailsAction cancelOrderDelivery(String type, String orderStatus,String agent) {
 		Logger.log("Cancel order",TestStepType.THEN);
-		this.factory.orderdetailspage().cancelOrderDelivery(type,orderStatus);
+		this.factory.orderdetailspage().cancelOrderDelivery(type,orderStatus, agent);
 		return this;
 	}
 	public OrderDetailsAction verifyAction(String type) {
@@ -659,16 +659,15 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		return this;
 
 	}
-	public OrderDetailsAction rescheduleServiceWindowOrder(String type, String ordType,String windowType) throws ParseException {
-		Logger.log("verify recovery window service",TestStepType.THEN);
-		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType,windowType);
-		return this;
-	}
 	public OrderDetailsAction verifyReasoncodeAndWrapup(){
 		Logger.log("Wrapup Order and Contact", TestUtils.TestStepType.WHEN);
 		this.factory.orderdetailspage().verifyReasoncodeAndWrapup();
 		return this;
 	}
-
+	public OrderDetailsAction rescheduleServiceWindowOrder(String type, String ordType,String windowType,String agent) throws ParseException {
+		Logger.log("verify recovery window service",TestStepType.THEN);
+		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType,windowType,agent);
+		return this;
+	}
 		
 }

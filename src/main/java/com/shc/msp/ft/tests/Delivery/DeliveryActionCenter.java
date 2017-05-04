@@ -347,9 +347,10 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Whole order","Open");
+		.cancelOrderDelivery("Whole order","Open","");
 
 	}  
+
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Cancel_Open_Line_Item"}
@@ -373,7 +374,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Line item","Open");
+		.cancelOrderDelivery("Line item","Open","");
 	}  
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -403,7 +404,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Line item","Partially Shipped");
+		.cancelOrderDelivery("Line item","Partially Shipped","");
 	}  
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -430,7 +431,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Line item","Open");
+		.cancelOrderDelivery("Line item","Open","");
 
 
 	}  
@@ -486,7 +487,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 
-		String orderId= getProductToTest("Cancel_Eligible_Line_Item",true);	
+		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);	
 
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -503,11 +504,13 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleDeliveryOrder("OPEN","Line Item")
-		.goToDeliveryNotes()
-		.verifyDataInDeliveryNotes("OSH/MSO-WEB: PARTIAL RELEASE");
+		.rescheduleServiceWindowOrder("Open", "Line Item","Service Recovery Windows","");
+		/*.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: PARTIAL RELEASE")*/;
 
 	} 
+
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Open_Dock_Pickup_Order"}
 	, description = "Verify if an order for open dock pickup order can be rescheduled", enabled = true)
@@ -591,7 +594,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleServiceWindowOrder("Released", "","Service Recovery Windows");
+		.rescheduleServiceWindowOrder("Released", "","Service Recovery Windows","");
 		
 		/*.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
@@ -1602,7 +1605,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	} 
 	
 
-@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_Cancel_Order_Captured_Notes_Verification"}
 	, description = "Cancel the whole order and verify notes and interaction are captured", enabled = true)
 	public void Delivery_Cancel_Order_Captured_Notes_Verification(TestData data) throws Exception {
@@ -1626,7 +1629,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyLineItemDetail("Open")
-		.cancelOrderDelivery("Whole order","Open")
+		.cancelOrderDelivery("Whole order","Open","")
 		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
@@ -1903,9 +1906,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleServiceWindowOrder("OPEN","ORDER","Preferred Time Windows");
+		.rescheduleServiceWindowOrder("OPEN","ORDER","Preferred Time Windows","");
 	}
-	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Recovery_Service_Windows_Available_Partially_Shipped_Order_Verification"}
@@ -1986,7 +1988,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		
-		String orderId= getProductToTest("Released_HD_Line_Item",true);	
+		String orderId= getProductToTest("Reschedule_Released_HD_Order",true);	
 		//System.out.println("orderId:"+orderId);
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -1996,20 +1998,22 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId("514230", DcNumber.DC_NO)
+		
+		.addlogType(TestStepType.GIVEN)
 		.chooseReleasedHDOrders()
-		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyLineItemDetail("Released")
-		.cancelOrderDelivery("Whole order","Released")
+		.addlogType(TestStepType.THEN)
+		.cancelOrderDelivery("Whole order","Released","Delivery Driver")
 		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.wrapUpOrderWithoutContactDelivery()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId("514230", DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.closeWarningPopupWindow()
@@ -2041,7 +2045,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleServiceWindowOrder("Released", "","Unrestricted Time Window");
+		.rescheduleServiceWindowOrder("Released", "","Unrestricted Time Window","Delivery Driver");
 	}
 }
 

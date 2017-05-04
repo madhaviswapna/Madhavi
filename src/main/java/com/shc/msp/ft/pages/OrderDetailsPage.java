@@ -86,7 +86,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator AGENT_NOTES_IN_ODP = new Locator("AGENT_NOTES_IN_ODP", "//div[@class='notes col-md-2 flex-container-column']/div", "Agent Notes in ODP");
 	public final Locator LAYAWAY_CONTRACT_INFORMATION = new Locator("LAYAWAY_CONTRACT_INFOMRMATION", "//legend[contains(text(),'Layaway Contract Information')]/ancestor::fieldset", "Layaway Contract Information");
 	public final Locator LAYAWAY_INSTALLMENT_INFORMATION = new Locator("LAYAWAY_INSTALLMENT_INFOMRMATION", "//legend[contains(text(),'Paid Installment Information')]/ancestor::fieldset", "Layaway Installment Information");
-	
+
 	public final Locator CUSTOMER_NAME = new Locator("CUSTOMER NAME", "//div[@id='demoGraphicPanel']//div[@class='col-md-2']//span[contains(@class,'customer-name')]","Customer Name");
 	public final Locator CUSTOMER_ADDRESS =	new Locator("CUSTOMER ADDRESS", "//div[@id='demoGraphicPanel']//div[@class='col-md-2']//span[@ng-if='customerAddress']","Customer Address");
 	public final Locator CUSTOMER_PHONE_TITLE = new Locator("CUSTOMER PHONE TITLE", "//div[@id='demoGraphicPanel']//div[@class='col-md-2'][2]//strong","Customer Phone Title");
@@ -130,7 +130,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator REASON_CODE_TEXT = new Locator("REASON CODE TEXT","//label[text()='Reason Code']","Reason Code Text");
 	public final Locator REASON_CODE_DROPDOWN = new Locator("REASON CODE DROPDOWN","//select[@id='reasonCode']","Reason Code Dropdown");
 	public final Locator CASE_CREATED = new Locator("Case already created message","//div[contains(text(),'Order has open case in this queue already, please add notes and close interaction.')]","Case already created message");
-	
+
 	public final Locator REASON_CODE_OPTION = new Locator("","(//select[@id='reasonCode']//option)[{0}]","Reason Code Option");
 	public final Locator GUIDED_EXPERIENCE_TEXT = new Locator("GUIDED EXPERIENCE TEXT","//label[text()='Guided Experience']","Guided Experience Text");
 	public final Locator GUIDED_EXPERIENCE_DROPDOWN = new Locator("GUIDED EXPERIENCE DROPDOWN","//select[@id='guidedExperience']","Guided Experience Dropdown");
@@ -148,7 +148,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator ROUTE_BUTTON = new Locator ("ROUTE_BUTTON","//button[contains(text(),'Route')]","ROUTE Button");
 	public final Locator USER_ICON = new Locator ("USER_ICON","//div[@id='guestDisplay']/div[1]","User Icon");
 	public final Locator USER_ICON_RFC = new Locator ("USER_ICON_RFC","//*[@id='placeHolder']/div/a[3]","User Icon RFC");
-	
+
 	public final Locator UPDATE_BUTTON = new Locator ("UPDATE_BUTTON","//button[contains(text(),'Update')]","UPDATE BUTTON");
 	public final Locator SAVE_BUTTON = new Locator ("SAVE_BUTTON","//button[@ng-click='saveModifiedAddress()']","SAVE BUTTON");
 	public final Locator SUGGESTED_ADDRESS = new Locator ("SUGGESTED_ADDRESS","(//div[@value='address'])[1]","SUGGESTED ADDRESS");
@@ -176,7 +176,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator DOS_ORDER_SUMMARY_CELL_PHONE = new Locator("DOS_ORDER SUMMARY CELL PHONE","//*[contains(text(),'Cell Phone')]//ancestor::div[contains(@class,'form-group')]//div[@class='col-md-6']//*[not(*)]","DOS Order Summary Cell Phone");
 	public final Locator DOS_ORDER_SUMMARY_PEND_CODE = new Locator("DOS_ORDER SUMMARY PEND CODE","//*[contains(text(),'Pend Code')]//ancestor::div[contains(@class,'form-group')]//div[@class='col-md-6']//*[not(*)]","DOS Order Summary Pend Code");
 	public final Locator DOS_ORDER_SUMMARY_ADDRESS1 = new Locator("DOS_ORDER SUMMARY ADDRESS1","//*[contains(text(),'Address Line 1')]//ancestor::div[contains(@class,'form-group')]//div[@class='col-md-6']//*[not(*)]","DOS Order Summary Address1");
-	
+
 	//adjustment locaters 
 	public final Locator ADJUSTMENT_AMOUNT = new Locator("Addjustment amount ", "//input[@name='saletaxajustamt']", "Addjustment amount text box");
 	public final Locator ADJUSTMENT_AMOUNT_SHIP = new Locator("Addjustment amount ", "//input[@class='form-control ng-pristine ng-invalid ng-invalid-required']", "Addjustment amount text box");
@@ -282,7 +282,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_SUMMARY_MARKETPLACE_ITEM_POPUP = new Locator("", "(//div[@class='modal-content'])[last()]", "Marketplace item Guideline popup");
 	public final Locator WARNING_POPUP_OK_BUTTON = new Locator("", "(//button[@id='modalclose'])[last()]", "Warning popup Ok button");
 	public final Locator EMPOWERMENT_GUIDELINE_STATUS_COLOR = new Locator("", "//strong[contains(text(),'Empowerment Guideline')]/parent::span/following-sibling::span", "Empower Guideline popup status color");
-	
+
 	//Order Summary Order Charge
 	public final Locator ORDER_CHARGES_TITLE_TEXT = new Locator("ORDER CHARGES TITLE TEXT","//legend[text()='Order Charges']","Order Charges Title Text");
 	public final Locator ORDER_CHARGES_TABLE = new Locator("ORDER CHARGES TABLE","//legend[text()='Order Charges']//following-sibling::div//table","Order Charges Table");
@@ -348,9 +348,9 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_DETAILS_TABLE_CONTENT = new Locator("ORDER DETAILS TABLE CONTENT","//table[@ng-table='lineItemTableParams']//tbody","Order Details Table Content");
 	public final Locator STATUS_COL_NAME = new Locator("STATUS COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[1]","Order Details Status Column Name");
 	public final Locator DESCRIPTION_COL_NAME = new Locator("DESCRIPTION COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[2]","Order Details Description Column Name");
-	
+
 	public final Locator DESCRIPTION_COL_NAME_TEXT = new Locator("DESCRIPTION_COL_NAME_TEXT","(//table[@ng-table='lineItemTableParams']/tbody//td[@data-title-text='Description']/div)[{0}]","Order Details Description Column text");
-	
+
 	public final Locator SKU_COL_NAME = new Locator("SKU COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[3]","Order Details SKU Column Name");
 	public final Locator QTY_COL_NAME = new Locator("QTY COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[4]","Order Details Quantity Column Name");
 	public final Locator PRICE_COL_NAME = new Locator("PRICE COL NAME","(//table[@ng-table='lineItemTableParams']//thead//tr//th)[5]","Order Details Price Column Name");
@@ -440,7 +440,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_CONTACT_HISTORY_ADJUSTMENT= new Locator("","//td[contains(text(),'{0}')]//parent::tr//td/div[contains(.,'{1}')]","Order Contact history");
 	public final Locator ORDER_CONTACT_HISTORY_NOTES= new Locator("","//td[contains(text(),'{0}')]//ancestor::table[@class='table table-condensed']//tr[4]/td/div","Order Contact history NOTES");
 	public final Locator ORDER_CONTACT_HISTORY_NOTES_DELIVERY= new Locator("","//td[contains(text(),'{0}')]","Order Contact history NOTES");
-	
+
 	//public final Locator EMAIL_TEMPLATE_NOTES= new Locator("","//div[@class='ng-isolate-scope']//a","Email Template in interaction");
 	public final Locator EMAIL_TEMPLATE_NOTES= new Locator("","//td[contains(text(),'{0}')]//parent::tr//a[contains(text(),'{1}')]","Email Template in interaction");
 	public final Locator ACTION_DROPDOWN= new Locator("","//select[@id='summaryAction']","Action  dropdown");
@@ -492,7 +492,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator ROUTE_STATUS_OPEN= new Locator("ROUTE_STATUS_OPEN","//div[contains(@ng-hide,'routeDetails.status.')]/span","ROUTE_STATUS_OPEN");
 	public final Locator ROUTE_STATUS= new Locator("ROUTE_STATUS","//tr[@ng-repeat='stop in routeDetails.routeInfo.stopsInfo']","ROUTE_STATUS");
 
-	
+
 
 	public final Locator CANCEL_BUTTON= new Locator("CANCEL_BUTTON","//button[contains(text(),'Cancel Order')]","CANCEL BUTTON");
 	public final Locator TAB_NAME= new Locator("TAB_NAME","//a[contains(text(),'{0}')]","TAB_NAME");
@@ -503,9 +503,9 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_STATUS= new Locator("ORDER_STATUS","//div[@label='DOS Order Status']//div/p/span","ORDER STATUS");
 	public final Locator ORDER_STATUS_CANCELLED= new Locator("ORDER_STATUS_CANCELLED","//div[@label='DOS Order Status']//div/p/span[contains(text(),'Cancelled')]","ORDER STATUS Cancelled");
 	public final Locator ORDER_STATUS_OPEN= new Locator("","//div[@label='DOS Order Status']//div/p/span[contains(text(),'Open')]","ORDER STATUS Open");
-	public final Locator CANCEL_ENTIRE_ORDER= new Locator("CANCEL_ENTIRE_ORDER","//button[contains(text(),'Entire Order')]","CANCEL ENTIRE ORDER BUTTON");
+	public final Locator ENTIRE_ORDER= new Locator("CANCEL_ENTIRE_ORDER","//button[contains(text(),'Entire Order')]","CANCEL ENTIRE ORDER BUTTON");
 	public final Locator SELECT_ANOTHER_ACTION= new Locator("SELECT_ANOTHER_ACTION","//a[contains(text(),' < Select another action ')]","SELECT_ANOTHER_ACTION");
-	public final Locator CANCEL_LINE_ITEM= new Locator("CANCEL_LINE_ITEM","//button[contains(text(),'Select Items Only')]","CANCEL LINE ITEM BUTTON");
+	public final Locator LINE_ITEM= new Locator("CANCEL_LINE_ITEM","//button[contains(text(),'Select Items Only')]","CANCEL LINE ITEM BUTTON");
 	public final Locator REASON_DROPDOWN_CANCEL= new Locator("REASON_DROPDOWN_CANCEL","//select[@ng-model='selected.reasonCode']","REASON DROPDOWN FOR CANCEL ");
 	public final Locator BACK_TO_ORDER= new Locator("BACK_TO_ORDER","//button[contains(text(),'Back to Order ')]","BACK_TO_ORDER ");
 	public final Locator REASON_DROPDOWN_CANCEL_OPTIONS_COUNT= new Locator("REASON_DROPDOWN_CANCEL_OPTIONS","//select[@ng-model='selected.reasonCode']/option","OPTION IN REASON DROPDOWN FOR CANCEL");
@@ -567,7 +567,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator SYW_LINK_EMAIL_INFORMATION = new Locator("SYW_LINK_EMAIL_INFORMATION", "//*[contains(@ng-repeat,'member in memberData.member')]//div[contains(text(),'Email')]", "SYW_LINK_EMAIL_INFORMATION");
 	public final Locator SYW_LINK_CITY_INFORMATION = new Locator("SYW_LINK_CITY_INFORMATION", "//*[contains(@ng-repeat,'member in memberData.member')]//div[contains(text(),'City')]", "SYW_LINK_CITY_INFORMATION");
 	public final Locator SYW_NO_SEARCH_RESULTS_LABEL = new Locator("", "//span[contains(text(),'No records found for this search criteria')]", "SYW_NO_SEARCH_RESULTS_LABEL");
-	
+
 	public final Locator AUDIT_TRAIL_DETAIL_PAGE = new Locator("AUDIT_TRAIL_Detail","//div[@ng-controller='auditTrailCtrl']","AUDIT TRAIL Detail");
 	public final Locator SYW_MAX_DETAIL_PAGE = new Locator("SYW_MAX_Detail","//div[@ng-controller='sywMaxCtrl']//div/p","SYW MAX Detail");
 	public final Locator NOT_A_SYW_MAX_MEMBER = new Locator("NOT_A_SYW_MAX_MEMBER","//div[@ng-controller='sywMaxCtrl']","NOT_A_SYW_MAX_MEMBER");
@@ -619,86 +619,88 @@ public class OrderDetailsPage extends Page {
 	public final Locator WARNING_POPUP_CLOSE = new Locator("WARNING_POPUP close","//button[@id='modalclose']","WARNING_POPUP close");
 
 	//scim code
-		//public final Locator UPDATE_SCIM_CODE= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Code')]","UPDATE_SCIM_CODE");
-		//public final Locator UPDATE_SCIM_CODES= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Codes')]","UPDATE_SCIM_CODE");
-		//public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open')]","DOS_ITEM_STATUS_COUNT");
-		//public final Locator ITEM_DESCRIPTIONs= new Locator("ITEM_DESCRIPTIONs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
-		//public final Locator SCIM_CODEs= new Locator("SCIM_CODEs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
-		public final Locator ITEM_DESCRIPTION= new Locator("ITEM_DESCRIPTION","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
-		public final Locator SCIM_CODE= new Locator("SCIM_CODE","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
-		public final Locator CLICK_TO_UPDATE= new Locator("CLICK_TO_UPDATE","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]","CLICK_TO_UPDATE");
-		public final Locator SCIM_CODE_COUNT= new Locator("SCIM_CODE_COUNT","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[1]//td[9]/select/option","SCIM_CODE_COUNT");
-		public final Locator SCIM_CODE_SELECTION= new Locator("SCIM_CODE_SELECTION","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]/select/option[{1}]","SCIM_CODE_SELECTION");
-		public final Locator EARLIEST_AVAILABLE_DATE= new Locator("EARLIEST_AVAILABLE_DATE","//div[contains(text(),'earliest available date')]","EARLIEST_AVAILABLE_DATE");
+	//public final Locator UPDATE_SCIM_CODE= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Code')]","UPDATE_SCIM_CODE");
+	//public final Locator UPDATE_SCIM_CODES= new Locator("UPDATE_SCIM_CODE","//button[contains(text(),'Update SCIM Codes')]","UPDATE_SCIM_CODE");
+	//public final Locator DOS_ITEM_STATUS_COUNT= new Locator("DOS_ITEM_STATUS_COUNT","//td[contains(text(),'Open')]","DOS_ITEM_STATUS_COUNT");
+	//public final Locator ITEM_DESCRIPTIONs= new Locator("ITEM_DESCRIPTIONs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
+	//public final Locator SCIM_CODEs= new Locator("SCIM_CODEs","//td[contains(text(),'Open')]/parent::tr/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
+	public final Locator ITEM_DESCRIPTION= new Locator("ITEM_DESCRIPTION","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Description')]","ITEM_DESCRIPTION");
+	public final Locator SCIM_CODE= new Locator("SCIM_CODE","//tr[td[contains(text(),'{0}')]][{1}]/td[contains(@data-title,'Deluxe (SCIM)')]","SCIM_CODE");
+	public final Locator CLICK_TO_UPDATE= new Locator("CLICK_TO_UPDATE","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]","CLICK_TO_UPDATE");
+	public final Locator SCIM_CODE_COUNT= new Locator("SCIM_CODE_COUNT","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[1]//td[9]/select/option","SCIM_CODE_COUNT");
+	public final Locator SCIM_CODE_SELECTION= new Locator("SCIM_CODE_SELECTION","//th[contains(text(),'SCIM Code')]/ancestor::table/tbody[{0}]//td[9]/select/option[{1}]","SCIM_CODE_SELECTION");
+	public final Locator EARLIEST_AVAILABLE_DATE= new Locator("EARLIEST_AVAILABLE_DATE","//div[contains(text(),'earliest available date')]","EARLIEST_AVAILABLE_DATE");
 
-		//Recovery Service Windows
-		public final Locator UNRESTRICTED_TIME_WINDOWS= new Locator("UNRESTRICTED_TIME_WINDOWS","//strong[contains(text(),'Unrestricted Time Window')]/parent::div/following-sibling::div[contains(@ng-repeat,'availableTimingForDate')][{0}]","UNRESTRICTED_TIME_WINDOWS");
-		public final Locator UNRESTRICTED_TIME_WINDOWS_COUNT= new Locator("UNRESTRICTED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'availableTimingForDate')]//button","UNRESTRICTED_TIME_WINDOWS_COUNT");
+	//Recovery Service Windows
+	public final Locator UNRESTRICTED_TIME_WINDOWS= new Locator("UNRESTRICTED_TIME_WINDOWS","//strong[contains(text(),'Unrestricted Time Window')]/parent::div/following-sibling::div[contains(@ng-repeat,'availableTimingForDate')][{0}]","UNRESTRICTED_TIME_WINDOWS");
+	public final Locator UNRESTRICTED_TIME_WINDOWS_COUNT= new Locator("UNRESTRICTED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'availableTimingForDate')]//button","UNRESTRICTED_TIME_WINDOWS_COUNT");
 
-		public final Locator PREFERRED_TIME_WINDOWS= new Locator("PREFERRED_TIME_WINDOWS","//strong[contains(text(),'Preferred Time Windows (must qualify)')]/parent::div/following-sibling::div[contains(@ng-repeat,'preferredWindowList')][{0}]","PREFERRED_TIME_WINDOWS");
-		public final Locator PREFERRED_TIME_WINDOWS_COUNT= new Locator("PREFERRED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'preferredWindowList')]//button","PREFERRED_TIME_WINDOWS_COUNT");
+	public final Locator PREFERRED_TIME_WINDOWS= new Locator("PREFERRED_TIME_WINDOWS","//strong[contains(text(),'Preferred Time Windows (must qualify)')]/parent::div/following-sibling::div[contains(@ng-repeat,'preferredWindowList')][{0}]","PREFERRED_TIME_WINDOWS");
+	public final Locator PREFERRED_TIME_WINDOWS_COUNT= new Locator("PREFERRED_TIME_WINDOWS_COUNT","//div[contains(@ng-repeat,'preferredWindowList')]//button","PREFERRED_TIME_WINDOWS_COUNT");
 
-		public final Locator PREFERRED_TIME_WINDOWS_NOT_AVAILABLE= new Locator("PREFERRED_TIME_WINDOWS_NOT_AVAILABLE","//div[contains(text(),'no preferred time windows available')]","PREFERRED_TIME_WINDOWS_NOT_AVAILABLE");
+	public final Locator PREFERRED_TIME_WINDOWS_NOT_AVAILABLE= new Locator("PREFERRED_TIME_WINDOWS_NOT_AVAILABLE","//div[contains(text(),'no preferred time windows available')]","PREFERRED_TIME_WINDOWS_NOT_AVAILABLE");
 
-		public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows (must qualify)')]/parent::div/following-sibling::div[contains(@ng-repeat,'recoveryWindowList')][{0}]","SERVICE_RECOVERY_WINDOW");
-		public final Locator SERVICE_RECOVERY_WINDOW_COUNT= new Locator("SERVICE_RECOVERY_WINDOW_COUNT","//div[contains(@ng-repeat,'recoveryWindowList')]//button","SERVICE_RECOVERY_WINDOW_COUNT");
+	public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows (must qualify)')]/parent::div/following-sibling::div[contains(@ng-repeat,'recoveryWindowList')][{0}]","SERVICE_RECOVERY_WINDOW");
+	public final Locator SERVICE_RECOVERY_WINDOW_COUNT= new Locator("SERVICE_RECOVERY_WINDOW_COUNT","//div[contains(@ng-repeat,'recoveryWindowList')]//button","SERVICE_RECOVERY_WINDOW_COUNT");
 
-		public final Locator ORIGINAL_TIME_WINDOW= new Locator("ORIGINAL_TIME_WINDOW","//strong[@info='time_window']//ancestor::div[@label='Time Window']/div/p/span","ORIGINAL_TIME_WINDOW");
-		public final Locator TIME_WINDOW_TYPE= new Locator("TIME_WINDOW_TYPE","//strong[text()='Time Window Type:']//ancestor::div[@label='Time Window Type']/div/p/span","TIME_WINDOW_TYPE");
-		public final Locator CURRENT_TIME_WINDOW= new Locator("CURRENT_TIME_WINDOW","//strong[contains(text(),'Current Time Window')]/parent::div[contains(text(),'{0}')]","CURRENT_TIME_WINDOW");
-		public final Locator PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP");
-		public final Locator UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'Confirmation required')]","UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP");
-		public final Locator RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Recovery time window')]","RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP");
-		public final Locator RECOVERY_TIME_WINDOW_EXIST= new Locator("RECOVERY_TIME_WINDOW_EXIST","//div[contains(text(),'recovery time window exist')]","RECOVERY_TIME_WINDOW_EXIST");
-		
-		
-		
-		//public final Locator CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","CONFIRMATION_TIME_WINDOW_POP_UP");
+	public final Locator ORIGINAL_TIME_WINDOW= new Locator("ORIGINAL_TIME_WINDOW","//strong[@info='time_window']//ancestor::div[@label='Time Window']/div/p/span","ORIGINAL_TIME_WINDOW");
+	public final Locator TIME_WINDOW_TYPE= new Locator("TIME_WINDOW_TYPE","//strong[text()='Time Window Type:']//ancestor::div[@label='Time Window Type']/div/p/span","TIME_WINDOW_TYPE");
+	public final Locator CURRENT_TIME_WINDOW= new Locator("CURRENT_TIME_WINDOW","//strong[contains(text(),'Current Time Window')]/parent::div[contains(text(),'{0}')]","CURRENT_TIME_WINDOW");
+	public final Locator PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","PREFERRED_CONFIRMATION_TIME_WINDOW_POP_UP");
+	public final Locator UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'Confirmation required')]","UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP");
+	public final Locator RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Recovery time window')]","RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP");
+	public final Locator RECOVERY_TIME_WINDOW_EXIST= new Locator("RECOVERY_TIME_WINDOW_EXIST","//div[contains(text(),'recovery time window exist')]","RECOVERY_TIME_WINDOW_EXIST");
 
-		public final Locator MONTH_AND_YEAR_PICKER= new Locator("MONTH_AND_YEAR_PICKER","//button[contains(@id,'datepicker')]","MONTH_AND_YEAR_PICKER");
-		public final Locator SELECTED_DATE= new Locator("SELECTED_DATE","//strong[contains(text(),'Reschedule')]/ancestor::div[contains(@ng-if,'Reschedule Delivery')]/form/div[3]//div//div[3]/table/tbody/tr/td/button[contains(@class,'dt-selected')]","SELECTED_DATE");
-		public final Locator BLUE= new Locator("BLUE","//span[contains(text(),'Selected')]/preceding-sibling::button","BLUE");
-		public final Locator DELIVERY_REASON_DROPDOWN_OPTIONS= new Locator("DELIVERY_REASON_DROPDOWN_OPTIONS","//select[@name='reasonCode']/option[contain(text(),'{0}')]","DELIVERY_REASON_DROPDOWN_OPTIONS");
-		public final Locator WRAP_UP= new Locator("WRAP UP ORDER & CONTACT","//button[text()='WRAP UP']","WRAP UP ORDER & CONTACT");
 
-		public final Locator DAY_OF_DELIVERY_AGENT= new Locator("DAY_OF_DELIVERY_AGENT","//button[contains(text(),'{0}')]","DAY_OF_DELIVERY_AGENT");
-		public final Locator DAY_OF_DELIVERY_RETURN_CODES_COUNT= new Locator("DAY_OF_DELIVERY_RETURN_CODES_COUNT","select[name='returnCodeSelect']>option","DAY_OF_DELIVERY_RETURN_CODES_COUNT",TagAttributes.CSSSELECTOR);
-		public final Locator DAY_OF_DELIVERY_RETURN_CODES= new Locator("DAY_OF_DELIVERY_RETURN_CODES_COUNT","select[name='returnCodeSelect']>option[value='{0}']","DAY_OF_DELIVERY_RETURN_CODES",TagAttributes.CSSSELECTOR);
-		public final Locator ARRIVAL_TIME= new Locator("ARRIVAL_TIME","//label[contains(text(),'Arrival Time')]/following-sibling::table//tr[3]/td[3]/a","ARRIVAL_TIME");
-		public final Locator DEPARTURE_TIME= new Locator("DEPARTURE_TIME","//label[contains(text(),'Departure Time')]/following-sibling::table//tr[1]/td[3]/a","DEPARTURE_TIME");
-		public final Locator STATUS_UPDATE= new Locator("STATUS_UPDATE","//button[contains(text(),'Complete Status Update')]","STATUS_UPDATE");
-		public final Locator ORDER_ROUTE_STATUS= new Locator("ORDER_ROUTE_STATUS","//strong[contains(text(),'Route Status')]/parent::span/following-sibling::div/p","ORDER_ROUTE_STATUS");
-		public final Locator CONTINUE_TO_RESCHDEULE= new Locator("CONTINUE_TO_RESCHDEULE","//button[contains(text(),'Continue to Reschedule')]","CONTINUE_TO_RESCHDEULE");
 
-		//RFP
-		public final Locator SUCCESS_MESSAGE_RFP = new Locator("","//div[contains(text(),'Ready for Pickup Email')]","Ready for Pickup Email Success Message");
+	//public final Locator CONFIRMATION_TIME_WINDOW_POP_UP= new Locator("CONFIRMATION_TIME_WINDOW_POP_UP","//div[contains(text(),'selected Preferred time window')]","CONFIRMATION_TIME_WINDOW_POP_UP");
 
-		//layaway
-		public final Locator LAYAWAY_CONTRACT_INFO=new Locator("","//legend[contains(text(),'Layaway Contract Information')]","LAYAWAY_CONTRACT_INFO");
-		public final Locator CONTRACT_ID = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[1]","CONTRACT_ID");
-		public final Locator CONTRACT_STATUS = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[2]","CONTRACT_STATUS");
-		public final Locator ORDER_NUMBER = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[3]","ORDER_NUMBER");
-		public final Locator ORDER_TOTAL = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[4]","ORDER_TOTAL");
-		public final Locator FULLFIMENT_TYPE = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[5]","FULLFIMENT_TYPE");
-		public final Locator PERCENTAGE_COMPLETED = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[6]","PERCENTAGE_COMPLETED");
-		public final Locator PAYMENT_INFO = new Locator("","//legend[contains(text(),'Payment Information')]","PAYMENT_INFO");
-		public final Locator MIN_PAYMENT_AMT = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[1]","MIN_PAYMENT_AMT");
-		public final Locator NEXT_PAYMENT_DATE = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[2]","NEXT_PAYMENT_DATE");
-		public final Locator UNPAID_AMT = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[3]","UNPAID_AMT");
-		public final Locator CONTRACT_TERMS_AND_CONDITION = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]","CONTRACT_TERMS_AND_CONDITION");
-		public final Locator CONTRACT_START_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[1]","CONTRACT_START_DATE");
-		public final Locator END_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[2]","END_DATE");
-		public final Locator WEEKS_OF_DURATION = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[3]","WEEKS_OF_DURATION");
-		public final Locator LAST_PAYMENT_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[4]","LAST_PAYMENT_DATE");
-		public final Locator FUTURE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[5]","FUTURE");
-		public final Locator DELIVERY_INFO = new Locator("","//legend[contains(text(),'Delivery Information')]/parent::fieldset","DELIVERY_INFO");
-		
-		//return
-		public final Locator RETURNED_STATUS = new Locator("","//td[@data-title-text='SKU']//a[contains(text(),'{0}')]/ancestor::tr/td[contains(text(),'Returned')]","RETURNED_STATUS");
-		public final Locator RETURN_SUCCESS_MESSAGE = new Locator("","//div[contains(text(),'Return Item Action')]","RETURN_SUCCESS_MESSAGE");
-		public final Locator SHIPPED_STATUS = new Locator("","//td[@data-title-text='SKU']//a[contains(text(),'{0}')]/ancestor::tr/td[contains(text(),'Shipped')]","SHIPPED_STATUS");
-		public final Locator QUANTITY = new Locator("","//div[contains(text(),'Qty')]/ancestor::thead/following-sibling::tbody/tr[2]/td[@data-title-text='Qty']","QUANTITY");
+	public final Locator MONTH_AND_YEAR_PICKER= new Locator("MONTH_AND_YEAR_PICKER","//button[contains(@id,'datepicker')]","MONTH_AND_YEAR_PICKER");
+	public final Locator SELECTED_DATE= new Locator("SELECTED_DATE","//strong[contains(text(),'Reschedule')]/ancestor::div[contains(@ng-if,'Reschedule Delivery')]/form/div[3]//div//div[3]/table/tbody/tr/td/button[contains(@class,'dt-selected')]","SELECTED_DATE");
+	public final Locator BLUE= new Locator("BLUE","//span[contains(text(),'Selected')]/preceding-sibling::button","BLUE");
+	public final Locator DELIVERY_REASON_DROPDOWN_OPTIONS= new Locator("DELIVERY_REASON_DROPDOWN_OPTIONS","//select[@name='reasonCode']/option[contain(text(),'{0}')]","DELIVERY_REASON_DROPDOWN_OPTIONS");
+	public final Locator WRAP_UP= new Locator("WRAP UP ORDER & CONTACT","//button[text()='WRAP UP']","WRAP UP ORDER & CONTACT");
 
+	public final Locator DAY_OF_DELIVERY_AGENT= new Locator("DAY_OF_DELIVERY_AGENT","//button[contains(text(),'{0}')]","DAY_OF_DELIVERY_AGENT");
+	public final Locator DAY_OF_DELIVERY_RETURN_CODES_COUNT= new Locator("DAY_OF_DELIVERY_RETURN_CODES_COUNT","select[name='returnCodeSelect']>option","DAY_OF_DELIVERY_RETURN_CODES_COUNT",TagAttributes.CSSSELECTOR);
+	public final Locator DAY_OF_DELIVERY_RETURN_CODES= new Locator("DAY_OF_DELIVERY_RETURN_CODES_COUNT","select[name='returnCodeSelect']>option[value='{0}']","DAY_OF_DELIVERY_RETURN_CODES",TagAttributes.CSSSELECTOR);
+	public final Locator ARRIVAL_TIME= new Locator("ARRIVAL_TIME","//label[contains(text(),'Arrival Time')]/following-sibling::table//tr[3]/td[3]/a","ARRIVAL_TIME");
+	public final Locator DEPARTURE_TIME= new Locator("DEPARTURE_TIME","//label[contains(text(),'Departure Time')]/following-sibling::table//tr[1]/td[3]/a","DEPARTURE_TIME");
+	public final Locator STATUS_UPDATE= new Locator("STATUS_UPDATE","//button[contains(text(),'Complete Status Update')]","STATUS_UPDATE");
+	public final Locator ORDER_ROUTE_STATUS= new Locator("ORDER_ROUTE_STATUS","//strong[contains(text(),'Route Status')]/parent::span/following-sibling::div/p","ORDER_ROUTE_STATUS");
+	public final Locator CONTINUE_TO_RESCHDEULE= new Locator("CONTINUE_TO_RESCHDEULE","//button[contains(text(),'Continue to Reschedule')]","CONTINUE_TO_RESCHDEULE");
+
+	//RFP
+	public final Locator SUCCESS_MESSAGE_RFP = new Locator("","//div[contains(text(),'Ready for Pickup Email')]","Ready for Pickup Email Success Message");
+
+	//layaway
+	public final Locator LAYAWAY_CONTRACT_INFO=new Locator("","//legend[contains(text(),'Layaway Contract Information')]","LAYAWAY_CONTRACT_INFO");
+	public final Locator CONTRACT_ID = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[1]","CONTRACT_ID");
+	public final Locator CONTRACT_STATUS = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[2]","CONTRACT_STATUS");
+	public final Locator ORDER_NUMBER = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[3]","ORDER_NUMBER");
+	public final Locator ORDER_TOTAL = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[4]","ORDER_TOTAL");
+	public final Locator FULLFIMENT_TYPE = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[5]","FULLFIMENT_TYPE");
+	public final Locator PERCENTAGE_COMPLETED = new Locator("","//legend[contains(text(),'Layaway Contract Information')]/following-sibling::form/div[6]","PERCENTAGE_COMPLETED");
+	public final Locator PAYMENT_INFO = new Locator("","//legend[contains(text(),'Payment Information')]","PAYMENT_INFO");
+	public final Locator MIN_PAYMENT_AMT = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[1]","MIN_PAYMENT_AMT");
+	public final Locator NEXT_PAYMENT_DATE = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[2]","NEXT_PAYMENT_DATE");
+	public final Locator UNPAID_AMT = new Locator("","//legend[contains(text(),'Payment Information')]/following-sibling::div[3]","UNPAID_AMT");
+	public final Locator CONTRACT_TERMS_AND_CONDITION = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]","CONTRACT_TERMS_AND_CONDITION");
+	public final Locator CONTRACT_START_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[1]","CONTRACT_START_DATE");
+	public final Locator END_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[2]","END_DATE");
+	public final Locator WEEKS_OF_DURATION = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[3]","WEEKS_OF_DURATION");
+	public final Locator LAST_PAYMENT_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[4]","LAST_PAYMENT_DATE");
+	public final Locator FUTURE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[5]","FUTURE");
+	public final Locator DELIVERY_INFO = new Locator("","//legend[contains(text(),'Delivery Information')]/parent::fieldset","DELIVERY_INFO");
+
+	//return
+	public final Locator RETURNED_STATUS = new Locator("","//td[@data-title-text='SKU']//a[contains(text(),'{0}')]/ancestor::tr/td[contains(text(),'Returned')]","RETURNED_STATUS");
+	public final Locator RETURN_SUCCESS_MESSAGE = new Locator("","//div[contains(text(),'Return Item Action')]","RETURN_SUCCESS_MESSAGE");
+	public final Locator SHIPPED_STATUS = new Locator("","//td[@data-title-text='SKU']//a[contains(text(),'{0}')]/ancestor::tr/td[contains(text(),'Shipped')]","SHIPPED_STATUS");
+	public final Locator QUANTITY = new Locator("","//div[contains(text(),'Qty')]/ancestor::thead/following-sibling::tbody/tr[2]/td[@data-title-text='Qty']","QUANTITY");
+
+	//DOD return
+	public final Locator CONTINUE_TO_CANCEL_ORDER= new Locator("CONTINUE_TO_CANCEL_ORDER","//button[contains(text(),'Continue to Cancel Order')]","CONTINUE_TO_CANCEL_ORDER");
 
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
@@ -797,10 +799,8 @@ public class OrderDetailsPage extends Page {
 	public OrderDetailsPage verifyOrderDetailsPageDisplayed() {
 		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
-		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)){ 	
+		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)) 	
 			Logger.log("Test Data is not valid");
-			PageAssert.fail("Invalid Test Data / Order Not searchable in MSP");
-		}	
 		else
 		{
 			SoftAssert.checkElementAndContinueOnFailure(MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
@@ -881,7 +881,7 @@ public class OrderDetailsPage extends Page {
 		{
 			AjaxCondition.forElementPresent(MEMBERDETAILS_IN_ODP).waitForResponse(3);
 			SoftAssert.checkElementAndContinueOnFailure(MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
-			
+
 			SoftAssert.checkElementAndContinueOnFailure(LAYAWAY_CONTRACT_INFO, "Verify Layaway Contract Information text is displayed", CheckLocatorFor.isVisible);
 			Logger.log("Check all the attribute of the Layaway Contract Information");
 			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_ID, "Verify Contract Id is displayed", CheckLocatorFor.isVisible);
@@ -890,7 +890,7 @@ public class OrderDetailsPage extends Page {
 			SoftAssert.checkElementAndContinueOnFailure(ORDER_TOTAL, "Verify Order Total is displayed", CheckLocatorFor.isVisible);
 			SoftAssert.checkElementAndContinueOnFailure(FULLFIMENT_TYPE, "Verify Fulfillment Type is displayed", CheckLocatorFor.isVisible);
 			SoftAssert.checkElementAndContinueOnFailure(PERCENTAGE_COMPLETED, "Verify % Completed is displayed", CheckLocatorFor.isVisible);
-			
+
 			AjaxCondition.forElementPresent(PAYMENT_INFO).waitForResponse(2);
 			getAction().scrollTo(PAYMENT_INFO);
 			SoftAssert.checkElementAndContinueOnFailure(PAYMENT_INFO, "Verify Payment Information is displayed", CheckLocatorFor.isVisible);
@@ -908,10 +908,10 @@ public class OrderDetailsPage extends Page {
 			SoftAssert.checkElementAndContinueOnFailure(WEEKS_OF_DURATION, "Verify Weeks of Duration is displayed", CheckLocatorFor.isVisible);
 			SoftAssert.checkElementAndContinueOnFailure(LAST_PAYMENT_DATE, "Verify Last Payment Date is displayed", CheckLocatorFor.isVisible);
 			SoftAssert.checkElementAndContinueOnFailure(FUTURE, "Verify Future is displayed", CheckLocatorFor.isVisible);
-			
+
 			SoftAssert.checkElementAndContinueOnFailure(LAYAWAY_INSTALLMENT_INFORMATION, "Verify Layaway Installment Information is displayed", CheckLocatorFor.isVisible);
 			SoftAssert.checkElementAndContinueOnFailure(DELIVERY_INFO, "Verify Delivery Info is displayed", CheckLocatorFor.isVisible);
-			
+
 		}
 		return this;
 	}
@@ -1144,7 +1144,7 @@ public class OrderDetailsPage extends Page {
 		getContext().put("adjustmentOption", "This cancellation is performed by an automated test.");
 		Logger.log("Verify the Submit button is present", TestStepType.VERIFICATION_STEP);
 		AjaxCondition.forElementVisible(CANCEL_ORDER_POP_UP_SUBMIT_BUTTON).waitForResponse(10);
-		
+
 		try{
 			Logger.log("Clicking the Submit Button",TestStepType.STEP);
 			verifyTrialBalance();
@@ -1385,7 +1385,7 @@ public class OrderDetailsPage extends Page {
 			PageAssert.fail("Tax adjustment is not applied");
 
 		}			
-		
+
 
 		return this;
 	}
@@ -1804,7 +1804,7 @@ public class OrderDetailsPage extends Page {
 		PageAssert.verifyEqual(getAction().getValue(READY_FOR_PICKUP_EMAIL), Email);
 		Logger.log("writing general email");
 		getAction().type(READY_FOR_PICKUP_EMAIL, "protest@automation.com");
-		
+
 
 		Logger.log("Enter E-mail notes in Ready for Pickup Email Pop-up Window", TestStepType.STEP);
 		String notes="Test Notes For Ready For Pickup Email";
@@ -1815,13 +1815,13 @@ public class OrderDetailsPage extends Page {
 		Logger.log("Verify Submit Button is Visible in Ready for Pickup Email Pop-up Window", TestStepType.STEP);
 		AjaxCondition.forElementVisible(READY_FOR_PICKUP_EMAIL_SUBMIT).waitForResponse(3);
 		getAction().click(READY_FOR_PICKUP_EMAIL_SUBMIT);
-		
+
 		AjaxCondition.forElementVisible(SUCCESS_MESSAGE_RFP).waitForResponse(3000);
 		Logger.log("verifying success message");
 		String expSucessMsg="Send Ready for Pickup Email Action has been successfully processed";
 		SoftAssert.checkConditionAndContinueOnFailure("Send Ready for Pickup Email Action has been successfully processed", getAction().getText(SUCCESS_MESSAGE_RFP).equals(expSucessMsg));
 		getAction().click(OK_BUTTON);
-		
+
 		Logger.log("verifying contact history");
 		AjaxCondition.forElementPresent(OK_BUTTON).waitForResponse(3000);
 		return this;
@@ -4837,7 +4837,10 @@ public class OrderDetailsPage extends Page {
 		}
 	}
 
-	public void cancelOrderDelivery(String orderType, String orderStatus ) {
+	public void cancelOrderDelivery(String orderType, String orderStatus,String agent ) {
+
+
+		String orderRouteStatus =(String) getContext().get("orderRouteStatus");
 		Logger.log("Verify whether order can be cancelled", TestStepType.STEP);
 		//AjaxCondition.forElementVisible(LINE_ITEM_NAME_NOT_CANCELLED).waitForResponse();
 		//String itemToCancelName = getAction().getText(LINE_ITEM_NAME_NOT_CANCELLED);
@@ -4848,12 +4851,19 @@ public class OrderDetailsPage extends Page {
 		getAction().click(CANCEL_BUTTON);
 
 		if (orderType.equalsIgnoreCase("Whole order")) {
-			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-			getAction().click(CANCEL_ENTIRE_ORDER);
-		} else {
+			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
+			getAction().click(ENTIRE_ORDER);
+			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+				getAction().waitFor(3000);
+				verifyDayOfDelivery(agent,"Entire Order");
+				AjaxCondition.forElementVisible(CONTINUE_TO_CANCEL_ORDER).waitForResponse(3000);
+				if(agent.equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_CANCEL_ORDER);
+					getAction().click(CONTINUE_TO_CANCEL_ORDER);}}} 
+		else {
 			String lineItemIndex = "1";
-			AjaxCondition.forElementVisible(CANCEL_LINE_ITEM).waitForResponse();
-			getAction().click(CANCEL_LINE_ITEM);
+			AjaxCondition.forElementVisible(LINE_ITEM).waitForResponse();
+			getAction().click(LINE_ITEM);
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
 			getAction().click(LINE_ITEM_ROW);
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex)).waitForResponse();
@@ -5036,7 +5046,6 @@ public class OrderDetailsPage extends Page {
 			}
 		}
 
-
 	}
 
 	public void verifyAction(String action){
@@ -5047,8 +5056,8 @@ public class OrderDetailsPage extends Page {
 			getAction().scrollTo(CANCEL_BUTTON);
 			getAction().click(CANCEL_BUTTON);
 			closeCommercialOrderNotificationPopUp();
-			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-			getAction().click(CANCEL_ENTIRE_ORDER);
+			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
+			getAction().click(ENTIRE_ORDER);
 			AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
 			AjaxCondition.forElementVisible(BACK_TO_ORDER).waitForResponse();
 			getAction().click(BACK_TO_ORDER);
@@ -5102,8 +5111,8 @@ public class OrderDetailsPage extends Page {
 			AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
 			getAction().scrollTo(RESCHEDULE_BUTTON);
 			getAction().click(RESCHEDULE_BUTTON);	
-			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-			getAction().click(CANCEL_ENTIRE_ORDER);
+			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
+			getAction().click(ENTIRE_ORDER);
 			AjaxCondition.forElementVisible(AVAILABLE_DATE_IN_CALANDER).waitForResponse();
 
 		}
@@ -5129,7 +5138,6 @@ public class OrderDetailsPage extends Page {
 
 	}
 
-
 	public void rescheduleDeliveryOrder(String type) throws ParseException{
 		Logger.log("Verify whether order can be rescheduled", TestStepType.STEP);
 
@@ -5143,8 +5151,8 @@ public class OrderDetailsPage extends Page {
 		getAction().click(RESCHEDULE_BUTTON);
 
 
-		AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-		getAction().click(CANCEL_ENTIRE_ORDER);
+		AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
+		getAction().click(ENTIRE_ORDER);
 		AjaxCondition.forElementVisible(AVAILABLE_DATE_IN_CALANDER).waitForResponse();
 		Logger.log("Verified that calander is shown with available reschedule dates ",TestStepType.VERIFICATION_PASSED);
 		getAction().scrollTo(AVAILABLE_DATE_IN_CALANDER);
@@ -5230,11 +5238,11 @@ public class OrderDetailsPage extends Page {
 		}
 
 		if (ordType.equalsIgnoreCase("ORDER")) {
-			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-			getAction().click(CANCEL_ENTIRE_ORDER);
+			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
+			getAction().click(ENTIRE_ORDER);
 		} else {
-			AjaxCondition.forElementVisible(CANCEL_LINE_ITEM).waitForResponse();
-			getAction().click(CANCEL_LINE_ITEM);
+			AjaxCondition.forElementVisible(LINE_ITEM).waitForResponse();
+			getAction().click(LINE_ITEM);
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
 			getAction().click(LINE_ITEM_ROW);
 			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
@@ -5641,20 +5649,21 @@ public class OrderDetailsPage extends Page {
 		getAction().click(WRAPUP_BUTTON);
 		getAction().waitFor(4000);
 
-		int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
-		Logger.log("Select option #"+rndCodeCategory+" in category select");
-		AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
-		getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
+		//int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
+		//System.out.println("rndCodeCategory-----"+rndCodeCategory);
+		Logger.log("Select option "+"HD-General Inquiry"+" in category dropdown",TestStepType.STEP);
+		AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(7));
+		getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, 7);
 
-		int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
-		try{
-			Logger.log("Select option #"+rndCodeReason+" in category select");
-			AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
-			getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, rndCodeReason);
-		}catch(Exception e){
+		//int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
+		//	Logger.log("Select option #"+rndCodeReason+" in category select");
+		Logger.log("Select option "+"Gift Card Inquiry"+" in Reason dropdown",TestStepType.STEP);
+		AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(1));
+		getAction().selectUsingIndex(DELIVERY_REASON_DROPDOWN, 1);
+		/*}catch(Exception e){
 			Logger.log("Reason Code Dropdown empty. Proceeding with Wrapup without selecting any Reason Code");
 			e.printStackTrace();
-		}
+		}*/
 
 		Logger.log("Select All in Items for contact");
 		getAction().click(SELECT_ITEMS_FOR_CONTACT);
@@ -5664,6 +5673,7 @@ public class OrderDetailsPage extends Page {
 		return this;
 
 	}
+
 	public OrderDetailsPage closeCommercialOrderNotificationPopUp(){
 		Logger.log("Close the Commercial Sales Order Pop Up if present",TestStepType.STEP);
 		if (AjaxCondition.forElementVisible(COMMERCIAL_SALES_ORDER_POPUP_TEXT).waitWithoutException(3))
@@ -5729,7 +5739,10 @@ public class OrderDetailsPage extends Page {
 		scrollDown();
 		getAction().waitFor(3000);
 		List<String> list = new ArrayList<String>();
-
+		
+		AjaxCondition.forElementPresent(ORDER_ROUTE_STATUS).waitForResponse(3000);
+		String orderRouteStatus=getAction().getText(ORDER_ROUTE_STATUS);
+		System.out.println("orderRouteStatus==="+ orderRouteStatus);
 		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
 		System.out.println("-------------------------------------------- "+openMultiLineItem);
 		getAction().waitFor(2000);
@@ -5738,6 +5751,8 @@ public class OrderDetailsPage extends Page {
 			list.add(getAction().getText(DIVISION.format(orderType,i))+getAction().getText(ITEM.format(orderType,i)) +"000");
 		}
 		getContext().put("adjustmentOption", list);
+		getContext().put("orderRouteStatus", orderRouteStatus);
+		
 		System.out.println("---------------------------------------------"+getContext().get("adjustmentOption"));
 	}
 
@@ -5876,7 +5891,7 @@ public class OrderDetailsPage extends Page {
 		return this;
 
 	}
-	
+
 
 	public OrderDetailsPage verifyReasoncodeAndWrapup(){
 		Logger.log("Click on Wrap Up button in Action Center");
@@ -5922,35 +5937,32 @@ public class OrderDetailsPage extends Page {
 			AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
 			getAction().scrollTo(RESCHEDULE_BUTTON);
 			getAction().click(RESCHEDULE_BUTTON);
-
-
 			Logger.log("Click on the entire order", TestStepType.STEP);
-			AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-			getAction().click(CANCEL_ENTIRE_ORDER);}
+			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
+			getAction().click(ENTIRE_ORDER);}
 
 		getAction().waitFor(1000);
 		//getAction().scrollTo(SERVICE_RECOVERY_WINDOW.format(1));
-		Logger.log("verify all the time windows", TestStepType.STEP);
+		Logger.log("verify all the time windows available", TestStepType.STEP);
 		int unrestrictedWindowCount=getAction().getElementCount(UNRESTRICTED_TIME_WINDOWS_COUNT);
-		Logger.log("Unrestricted Time Windows");
+		Logger.log("Unrestricted Time Windows available is/are",TestStepType.SUBSTEP);
 		for (int i = 1; i <=unrestrictedWindowCount; i++) {
 			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(i));
 			SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_TIME_WINDOWS.format(i),getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);
 		}
 		getAction().waitFor(1000);
-
 		if(getAction().isElementPresent(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE))
 			SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE), true);
 		else{
 			int preferedWindowCount=getAction().getElementCount(PREFERRED_TIME_WINDOWS_COUNT);
-			Logger.log("Preferred Time Windows");
+			Logger.log("Preferred Time Windows available are",TestStepType.SUBSTEP);
 			for (int i = 1; i <=preferedWindowCount; i++) {
 				AjaxCondition.forElementPresent(PREFERRED_TIME_WINDOWS.format(i));
 				SoftAssert.checkElementAndContinueOnFailure(PREFERRED_TIME_WINDOWS.format(i),getAction().getText(PREFERRED_TIME_WINDOWS.format(i)), CheckLocatorFor.isPresent);}
 		}
 		getAction().waitFor(1000);
 		int serviceRecoveryWindowCount=getAction().getElementCount(SERVICE_RECOVERY_WINDOW_COUNT);
-		Logger.log("Service Recovery Windows ");
+		Logger.log("Service Recovery Windows available are", TestStepType.SUBSTEP);
 		for (int i = 1; i <=serviceRecoveryWindowCount; i++) {
 			AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(i));
 			SoftAssert.checkElementAndContinueOnFailure(SERVICE_RECOVERY_WINDOW.format(i),getAction().getText(SERVICE_RECOVERY_WINDOW.format(i)), CheckLocatorFor.isPresent);
@@ -5958,34 +5970,55 @@ public class OrderDetailsPage extends Page {
 
 	}
 
-	public void rescheduleServiceWindowOrder(String type, String ordType,String windowType) throws ParseException {
+	public void rescheduleServiceWindowOrder(String type, String ordType,String windowType,String agent ) throws ParseException {
 
 		String orderWith;
 		Logger.log("Verify whether order can be rescheduled", TestStepType.STEP);
 
 		goToOrderDetail();
 		String currentDeliveryDate = getAction().getText(DELIVERY_DATE);
-		Logger.log("currentDeliveryDate is :"+currentDeliveryDate);
+		Logger.log("CurrentDeliveryDate is :"+currentDeliveryDate,TestStepType.SUBSTEP);
 		String originalTimeWindow= getAction().getText(ORIGINAL_TIME_WINDOW);
-		Logger.log("originalTimeWindow is :"+originalTimeWindow);
+		Logger.log("CurrentTimeWindow is :"+originalTimeWindow,TestStepType.SUBSTEP);
 		String timeWindowType=getAction().getText(TIME_WINDOW_TYPE);
-		Logger.log("timeWindowType is :"+timeWindowType);
+		Logger.log("TimeWindowType is :"+timeWindowType,TestStepType.SUBSTEP);
 		String currentTimeWindow= originalTimeWindow+" ("+timeWindowType+")";
 		getContext().put("currentTimeWindow", currentTimeWindow);
 		System.out.println("currentTimeWindow:"+currentTimeWindow);
 		String orderRouteStatus=getAction().getText(ORDER_ROUTE_STATUS);
-		System.out.println("orderRouteStatus==="+ orderRouteStatus);
-
+		getContext().put("route status", orderRouteStatus);
 		goToActionCenter();
+		Logger.log("Click on the Reschedule Delivery button", TestStepType.STEP);
 		AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
 		getAction().scrollTo(RESCHEDULE_BUTTON);
 		getAction().click(RESCHEDULE_BUTTON);
-
-		AjaxCondition.forElementVisible(CANCEL_ENTIRE_ORDER).waitForResponse();
-		getAction().click(CANCEL_ENTIRE_ORDER);
-
+		
+		if (ordType.equalsIgnoreCase("ENTIRE ORDER")) {
+			Logger.log("Click on the Entire Order button", TestStepType.STEP);
+			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
+			getAction().click(ENTIRE_ORDER);
+		} else {
+			AjaxCondition.forElementVisible(LINE_ITEM).waitForResponse();
+			getAction().click(LINE_ITEM);
+			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
+			getAction().click(LINE_ITEM_ROW);
+			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+			getAction().scrollTo(CONTINUE_BUTTON);
+			getAction().waitFor(2000);
+			getAction().click(CONTINUE_BUTTON);
+			AjaxCondition.forElementVisible(CREATE_NEW_ORDER).waitForResponse();
+			getAction().click(CREATE_NEW_ORDER);
+			AjaxCondition.forElementVisible(RESCHEDULE_LINE_ITEM_VERIFY).waitForResponse();
+			AjaxCondition.forElementVisible(SUCCESS_OK_BUTTON).waitForResponse();
+			getAction().click(SUCCESS_OK_BUTTON);
+			ordType = "ENTIRE ORDER";
+			rescheduleServiceWindowOrder(type,ordType,windowType,agent);
+			return;
+		}
+		
 		AjaxCondition.forElementVisible(AVAILABLE_DATE_IN_CALANDER).waitForResponse();
 		Logger.log("Verified that calander is shown with available reschedule dates ", TestStepType.VERIFICATION_PASSED);
+		Logger.log("Click on the Available Date",TestStepType.SUBSTEP);
 		getAction().scrollTo(AVAILABLE_DATE_IN_CALANDER);
 		getAction().click(AVAILABLE_DATE_IN_CALANDER);
 		getAction().waitFor(3000);
@@ -6003,17 +6036,22 @@ public class OrderDetailsPage extends Page {
 			System.out.println(formattedDate);
 
 			getContext().put("selectedDate", selectedDate);*/
-
+		
 		System.out.println(CURRENT_TIME_WINDOW.format(currentTimeWindow).getValue());
 		SoftAssert.checkElementAndContinueOnFailure(CURRENT_TIME_WINDOW.format(currentTimeWindow), "currentTimeWindow:"+currentTimeWindow, CheckLocatorFor.isPresent);
 
 		recoveryServiceWindowVerification();
 		getAction().waitFor(3000);
-		selectwindowType(windowType);
+		selectwindowType(windowType,agent);
+
 		
 		if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+			if(windowType.equalsIgnoreCase("Preferred Time Windows")||windowType.equalsIgnoreCase("Service Recovery Windows")){
 			getAction().waitFor(3000);
-			verifyDayOfDelivery("Delivery Driver","Entire Order");}
+			verifyDayOfDelivery(agent,"Entire Order");
+			if(agent.equalsIgnoreCase("Delivery Driver")){
+				AjaxCondition.forElementVisible(CONTINUE_TO_RESCHDEULE);
+				getAction().click(CONTINUE_TO_RESCHDEULE);}}}
 
 		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
 
@@ -6043,11 +6081,12 @@ public class OrderDetailsPage extends Page {
 		getAction().waitFor(3000);
 		String updatedTimeWindow=(String) getContext().get("updatedTimeWindow");
 		String[] updatedTimeWindowAndType=updatedTimeWindow.split("\\(");
-		String UpdatedTimeWindow=updatedTimeWindowAndType[0].trim();
-
-		String updatedTimeWindowType=updatedTimeWindowAndType[1].substring(0, updatedTimeWindowAndType[1].length()-1);
-		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(ORIGINAL_TIME_WINDOW),getAction().getText(ORIGINAL_TIME_WINDOW).equalsIgnoreCase(UpdatedTimeWindow));
-		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(TIME_WINDOW_TYPE),getAction().getText(TIME_WINDOW_TYPE).equalsIgnoreCase(updatedTimeWindowType));
+		String newTime=updatedTimeWindowAndType[0].trim().replace("-", "to");
+		System.out.println("newTime: "+newTime);
+		String newTimeWindowType=updatedTimeWindowAndType[1].substring(0, updatedTimeWindowAndType[1].length()-1);
+		
+		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(ORIGINAL_TIME_WINDOW),getAction().getText(ORIGINAL_TIME_WINDOW).equalsIgnoreCase(newTime));
+		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(TIME_WINDOW_TYPE),getAction().getText(TIME_WINDOW_TYPE).equalsIgnoreCase(newTimeWindowType));
 
 
 		String lDate = getAction().getText(DELIVERY_DATE);
@@ -6060,7 +6099,7 @@ public class OrderDetailsPage extends Page {
 		} else {
 			PageAssert.verifyEqual(pend2, "");
 		}
-
+		
 		//Logger.log("Verified that pend code before reshedule was: " + pend1 + " and pend code after reshedule is:" + pend2, TestStepType.VERIFICATION_PASSED);
 
 		SimpleDateFormat simpleDate = new SimpleDateFormat("mm/dd/yyyy");
@@ -6074,53 +6113,54 @@ public class OrderDetailsPage extends Page {
 
 		Logger.log("Verified that delivery date is rescheduled to a later date. Date before reschedule:" + currentDeliveryDate + " Date after reschedule:" + lDate, TestStepType.VERIFICATION_PASSED);
 	}
-public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
-		
+	public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
+
 		Logger.log("Verify Day of Delivery Orders");
 		if (orderType.equalsIgnoreCase("Entire order")) {
 			AjaxCondition.forElementVisible(DAY_OF_DELIVERY_AGENT.format(agent));
 			getAction().click(DAY_OF_DELIVERY_AGENT.format(agent));
 			int rndCodeCategory = generateRandomNumberSelect(DAY_OF_DELIVERY_RETURN_CODES_COUNT);
+			AjaxCondition.forElementVisible(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
+			getAction().click(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
 			if(rndCodeCategory==3||rndCodeCategory==7||rndCodeCategory==12||rndCodeCategory==13||rndCodeCategory==14){
-				AjaxCondition.forElementPresent(STATUS_UPDATE);
-				getAction().click(STATUS_UPDATE);
-				getAction().waitFor(2000);
-				if(agent.equalsIgnoreCase("Delivery Driver")){
-					AjaxCondition.forElementVisible(CONTINUE_TO_RESCHDEULE);
-				getAction().click(CONTINUE_TO_RESCHDEULE);}}
+				AjaxCondition.forElementVisible(STATUS_UPDATE).waitForResponse(3000);
+				getAction().click(STATUS_UPDATE);}
+				
 			else{
-				AjaxCondition.forElementVisible(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
-				getAction().click(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
-				AjaxCondition.forElementPresent(ARRIVAL_TIME);
+				AjaxCondition.forElementPresent(ARRIVAL_TIME).waitForResponse(3000);
 				getAction().click(ARRIVAL_TIME);
-				AjaxCondition.forElementPresent(DEPARTURE_TIME);
+				AjaxCondition.forElementPresent(DEPARTURE_TIME).waitForResponse(3000);
 				getAction().click(DEPARTURE_TIME);
-				AjaxCondition.forElementPresent(STATUS_UPDATE);
+				AjaxCondition.forElementVisible(STATUS_UPDATE).waitForResponse(3000);
 				getAction().click(STATUS_UPDATE);
-				getAction().waitFor(2000);
-				if(agent.equalsIgnoreCase("Delivery Driver")){
-					AjaxCondition.forElementVisible(CONTINUE_TO_RESCHDEULE);
-				    getAction().click(CONTINUE_TO_RESCHDEULE);}}}
-		getAction().waitFor(3000);
+				}}
 		return this;
 	}
-	
-	public OrderDetailsPage selectwindowType(String windowType) {
-		Logger.log("Select the:"+windowType);
+
+	public OrderDetailsPage selectwindowType(String windowType,String agent) {
+		Logger.log("Select the:"+windowType,TestStepType.STEP);
 		String updatedTimeWindow="";
 		if(windowType.equalsIgnoreCase("Unrestricted Time Window")){
-			Logger.log("Selecting the Unrestricted Time Windows", TestStepType.STEP);
+			Logger.log("Click on Unrestricted Time Windows", TestStepType.SUBSTEP);
 			int rndCodeCategory = generateRandomNumberSelect(UNRESTRICTED_TIME_WINDOWS_COUNT);
 			System.out.println("rndCodeCategory:"+rndCodeCategory);
-			Logger.log("Click on the  option #"+rndCodeCategory+" from Unrestricted Time Windows");
 			updatedTimeWindow= getAction().getText(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
+			Logger.log("Selecting the "+updatedTimeWindow+" from the Unrestricted time window",TestStepType.SUBSTEP);
 			System.out.println("updatedTimeWindow:"+updatedTimeWindow);
 			getContext().put("updatedTimeWindow", updatedTimeWindow);
 			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory)).waitForResponse();
 			getAction().click(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
+			String orderRouteStatus =(String) getContext().get("route status");
+			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+				getAction().waitFor(3000);
+				verifyDayOfDelivery(agent,"Entire Order");
+				if(agent.equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_RESCHDEULE).waitForResponse(2000);
+					getAction().click(CONTINUE_TO_RESCHDEULE);}}
+			else{
 			AjaxCondition.forElementVisible(UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP).waitForResponse();
 			SoftAssert.checkElementAndContinueOnFailure(UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP, getAction().getText(UNRESTRICTED_CONFIRMATION_TIME_WINDOW_POP_UP), CheckLocatorFor.isVisible);
-			getAction().click(OK_BUTTON);}
+			getAction().click(OK_BUTTON);}}
 
 		if(windowType.equalsIgnoreCase("Preferred Time Windows")) {
 
@@ -6154,7 +6194,7 @@ public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
 			updatedTimeWindow= getAction().getText(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory));
 			System.out.println("updatedTimeWindow:"+updatedTimeWindow);
 			getContext().put("updatedTimeWindow", updatedTimeWindow);
-			AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory)).waitForResponse();
+			AjaxCondition.forElementPresent(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory)).waitForResponse(3000);
 			getAction().click(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory));
 			if(getAction().isVisible(RECOVERY_TIME_WINDOW_EXIST))
 				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(RECOVERY_CONFIRMATION_TIME_WINDOW_POP_UP), true);
@@ -6164,6 +6204,8 @@ public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
 			AjaxCondition.forElementPresent(OK_BUTTON);
 			getAction().click(OK_BUTTON);}
 		return this;
+
+
 	}
 
 	public OrderDetailsPage verifyReturnSuccess(String sku){
@@ -6186,10 +6228,10 @@ public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
 		return null;
 
 	}
-	
+
 }
 
-	
+
 
 
 
