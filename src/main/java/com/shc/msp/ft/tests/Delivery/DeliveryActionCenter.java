@@ -1790,14 +1790,15 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification_ReleasedOrder"}
 	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
 	public void Delivery_SCIM_Update_Captured_Notes_Verification_ReleasedOrder(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); 
 		user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);
+		//String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);
+		String orderId= getProductToTest("Rereserve_Eligible_Released_Order",true);	
 		System.out.println("--------------------------------------------------------------------OrderId:"+orderId);
 		
 		As.guestUser.goToHomePage()
@@ -1814,16 +1815,16 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyupdateScimCode("Open")		
+		.verifyupdateScimCode("Released")		
 		.addlogType(TestStepType.THEN)
-		.verifyLineItemDetail("Open")		
+		.verifyLineItemDetail("Released")		
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")		
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()		
 		.addlogType(TestStepType.WHEN)
-		.wrapUpOrderWithoutContactDelivery()	
-		._NavigationAction()
+		.wrapUpOrderWithoutContactDelivery();
+		/*._NavigationAction()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
@@ -1832,7 +1833,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyActionCapturedHistoryNotes();
+		.verifyActionCapturedHistoryNotes();*/
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
