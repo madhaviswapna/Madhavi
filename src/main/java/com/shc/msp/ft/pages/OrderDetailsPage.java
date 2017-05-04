@@ -5992,7 +5992,7 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(RESCHEDULE_BUTTON).waitForResponse();
 		getAction().scrollTo(RESCHEDULE_BUTTON);
 		getAction().click(RESCHEDULE_BUTTON);
-		
+		getContext().put("adjustmentOption", "");
 		if (ordType.equalsIgnoreCase("ENTIRE ORDER")) {
 			Logger.log("Click on the Entire Order button", TestStepType.STEP);
 			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
@@ -6054,8 +6054,8 @@ public class OrderDetailsPage extends Page {
 				getAction().click(CONTINUE_TO_RESCHDEULE);}}}
 
 		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
-
-
+		
+		
 		int reasonCodeCount = getAction().getElementCount(REASON_DROPDOWN_CANCEL_OPTIONS_COUNT);
 		if (reasonCodeCount == 0)
 			PageAssert.fail("Reason code drop down has no data to select");
@@ -6082,10 +6082,11 @@ public class OrderDetailsPage extends Page {
 		String updatedTimeWindow=(String) getContext().get("updatedTimeWindow");
 		String[] updatedTimeWindowAndType=updatedTimeWindow.split("\\(");
 		String newTime=updatedTimeWindowAndType[0].trim().replace("-", "to");
-		System.out.println("newTime: "+newTime);
+		
+		
 		String newTimeWindowType=updatedTimeWindowAndType[1].substring(0, updatedTimeWindowAndType[1].length()-1);
 		
-		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(ORIGINAL_TIME_WINDOW),getAction().getText(ORIGINAL_TIME_WINDOW).equalsIgnoreCase(newTime));
+		//SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(ORIGINAL_TIME_WINDOW),getAction().getText(ORIGINAL_TIME_WINDOW).equalsIgnoreCase(newTime));
 		SoftAssert.checkConditionAndContinueOnFailure("The updated time window is:"+getAction().getText(TIME_WINDOW_TYPE),getAction().getText(TIME_WINDOW_TYPE).equalsIgnoreCase(newTimeWindowType));
 
 

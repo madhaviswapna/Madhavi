@@ -444,7 +444,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 
 		String orderId= getProductToTest("Reschedule_Open_HD_Order",true);	
-		System.out.println("salescheck:"+orderId);
+		//System.out.println("salescheck:"+orderId);
 
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -461,14 +461,17 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleDeliveryOrder("OPEN","ORDER")
+		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Preferred Time Windows","")
+		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Reschedule Delivery Date")
+		.addlogType(TestStepType.THEN)
 		.goToDeliveryNotes()
+		.addlogType(TestStepType.THEN)
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
 		._OrderDetailsAction()
 		 .goToActionCenter()
-		 .wrapUpOrderWithoutContactDelivery()
-		 ._NavigationAction()
+		 .wrapUpOrderWithoutContactDelivery();
+		/* ._NavigationAction()
 		 .addlogType(TestStepType.WHEN)
 		 .searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		 .addlogType(TestStepType.WHEN)
@@ -476,7 +479,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		 .closeWarningPopupWindow()
 		 ._OrderDetailsAction()
 		 .verifyActionCapturedInNotes("Reschedule Delivery Date")
-		 ;
+		 ;*/
 
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -513,7 +516,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Open_Dock_Pickup_Order"}
-	, description = "Verify if an order for open dock pickup order can be rescheduled", enabled = true)
+	, description = "Verify if an order for open dock pickup order can be rescheduled", enabled = false)
 	public void MSP_Delivery_Test_Reschedule_Open_Dock_Pickup_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -535,7 +538,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleDeliveryOrder("OPEN","ORDER")
+		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Preferred Time Windows","")
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("RESCHEDULED");
 
@@ -594,7 +597,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleServiceWindowOrder("Released", "","Service Recovery Windows","");
+		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Service Recovery Windows","");
 		
 		/*.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
@@ -667,21 +670,21 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleDeliveryOrder("PARTIALLY SHIPPED","ORDER")
+		.rescheduleServiceWindowOrder("Open", "ENTIRE ORDER","Unrestricted Time Window","")
 		.verifyAdjustmentCapturedInInteraction("Reschedule Delivery Date")
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
 		._OrderDetailsAction()
 		 .goToActionCenter()
 		 .wrapUpOrderWithoutContactDelivery()
-		 ._NavigationAction()
+		 /*._NavigationAction()
 		 .addlogType(TestStepType.WHEN)
 		 .searchByDOSSalesCheck(salescheck)
 		 .addlogType(TestStepType.WHEN)
 		 .selectOrderInMyRecentDeliveryInteractions(1)
 		 .closeWarningPopupWindow()
 		 ._OrderDetailsAction()
-		 .verifyActionCapturedInNotes("Reschedule Delivery Date")
+		 .verifyActionCapturedInNotes("Reschedule Delivery Date")*/
 		 ;
 
 	}  
@@ -716,7 +719,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleDeliveryOrder("PARTIALLY SHIPPED","Line Item")
+		.rescheduleServiceWindowOrder("Open", "LINE ITEM","Unrestricted Time Window","")
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: PARTIAL RELEASE");
 
@@ -891,7 +894,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		//.searchByDeliveryOrderId("876420","8934")
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
@@ -1999,7 +2001,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId("514230", DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		
 		.addlogType(TestStepType.GIVEN)
 		.chooseReleasedHDOrders()
@@ -2014,7 +2016,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.wrapUpOrderWithoutContactDelivery()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId("514230", DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.closeWarningPopupWindow()
@@ -2046,7 +2048,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rescheduleServiceWindowOrder("Released", "","Unrestricted Time Window","Delivery Driver");
+		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Unrestricted Time Window","Delivery Driver");
 	}
 }
 
