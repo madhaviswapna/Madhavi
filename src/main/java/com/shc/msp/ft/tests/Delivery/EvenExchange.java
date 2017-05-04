@@ -150,7 +150,7 @@ public class EvenExchange extends BaseTestsEx{
 			}
 			
 			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-		            groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Test_Even_Exchange_Open_Order"}
+		            groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Test_Even_Exchange_Released_Order"}
 		            , description = "Even Exchange for Open Order", enabled = true)
 		     	public void Test_Even_Exchange_Released_Order(TestData data) throws Exception {
 					LogFormatterAction.beginSetup();
