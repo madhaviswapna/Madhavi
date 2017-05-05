@@ -701,7 +701,24 @@ public class OrderDetailsPage extends Page {
 
 	//DOD return
 	public final Locator CONTINUE_TO_CANCEL_ORDER= new Locator("CONTINUE_TO_CANCEL_ORDER","//button[contains(text(),'Continue to Cancel Order')]","CONTINUE_TO_CANCEL_ORDER");
+	
+	//pick up mattress and exception
+	public final Locator MATTRESS_TEXT= new Locator("MATTRESS_TEXT","//div[contains(text(),'bed frame, mattress, mattress foundation')]","MATTRESS_TEXT");
+	public final Locator MATTRESS_DROPDOWN= new Locator("MATTRESS_DROPDOWN","//div[contains(text(),'bed frame, mattress, mattress foundation')]/following-sibling::select","MATTRESS_DROPDOWN");
+	public final Locator MATRESS_DROPDOWN_TEXT= new Locator("MATRESS_DROPDOWN_TEXT","//div[contains(text(),'bed frame, mattress, mattress foundation')]/following-sibling::select/option[contains(text(),'Adjustable Bed Frame')]","MATRESS_DROPDOWN_TEXT");
+	public final Locator RETURN_POLICY= new Locator("RETURN_POLICY","//div[contains(text(),'authorization from an Approver')]","RETURN_POLICY");
+	public final Locator CLAIM_NUMBER_ENTRY= new Locator("CLAIM_NUMBER_ENTRY","//h3[contains(text(),'Claim Number Entry')]","CLAIM_NUMBER_ENTRY");
+	public final Locator CLAIM_NUMBER= new Locator("CLAIM_NUMBER","//label[contains(text(),'Claim Number')]/following-sibling::input","CLAIM_NUMBER");
+	public final Locator SUBMIT= new Locator("SUBMIT","//button[contains(text(),'Submit')]","SUBMIT");
+	public final Locator PICK_UP_EXCEPTION= new Locator("PICK_UP_EXCEPTION","//h3[contains(text(),'Pick-Up Exception')]","PICK_UP_EXCEPTION");
+	public final Locator EXCEPTION_USERNAME= new Locator("EXCEPTION_USERNAME","//label[contains(text(),'Username')]/following-sibling::input","EXCEPTION_USERNAME");
+	public final Locator EXCEPTION_PASSWORD= new Locator("EXCEPTION_PASSWORD","//label[contains(text(),'Password')]/following-sibling::input","EXCEPTION_PASSWORD");
+	public final Locator REASON_EXCEPTION= new Locator("REASON_EXCEPTION","//label[contains(text(),'Reason for exception')]/following-sibling::textarea","REASON_EXCEPTION");
+	//public final Locator CONTINUE_TO_CANCEL_ORDER= new Locator("CONTINUE_TO_CANCEL_ORDER","//label[contains(text(),'Password')]/following-sibling::input","CONTINUE_TO_CANCEL_ORDER");
 
+
+
+	
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -4688,6 +4705,21 @@ public class OrderDetailsPage extends Page {
 		getAction().scrollTo(CONTINUE_BUTTON);
 		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
 		getAction().click(CONTINUE_BUTTON);
+		if(getAction().isVisible(MATTRESS_TEXT)){
+			getAction().click(MATTRESS_DROPDOWN);
+			AjaxCondition.forElementPresent(MATRESS_DROPDOWN_TEXT).waitForResponse(2000);
+			getAction().click(MATRESS_DROPDOWN_TEXT);
+			getAction().click(CONTINUE_BUTTON);}
+		getAction().waitFor(2000);
+		if(getAction().isVisible(RETURN_POLICY)){
+			Logger.log(getAction().getText(RETURN_POLICY),TestStepType.STEP);
+			getAction().click(CONTINUE_BUTTON);
+			AjaxCondition.forElementVisible(PICK_UP_EXCEPTION).waitForResponse(2000);
+			getAction().type(EXCEPTION_USERNAME, "testdelivery0121");
+			getAction().type(EXCEPTION_PASSWORD, "TestPassword");
+			getAction().type(REASON_EXCEPTION, "this is an automated test");
+			getAction().click(SUBMIT);
+		}
 		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CONCESSION_YES).waitForResponse();
 		getAction().click(CONCESSION_YES);

@@ -153,17 +153,17 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RERESERVATION")
 		._OrderDetailsAction()
-		 .goToActionCenter()
-		 .wrapUpOrderWithoutContactDelivery()
-		 ._NavigationAction()
-		 .addlogType(TestStepType.WHEN)
-		 .searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		 .addlogType(TestStepType.WHEN)
-		 .selectOrderInMyRecentDeliveryInteractions(1)
-		 .closeWarningPopupWindow()
-		 ._OrderDetailsAction()
-		 .verifyActionCapturedInNotes("Re Reserve Delivery")
-		 ;
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedInNotes("Re Reserve Delivery")
+		;
 
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -197,7 +197,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 
-
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Eligible_Partially_shipped_Order"}
@@ -205,9 +204,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	public void MSP_Delivery_Test_Pickup_Eligible_Partially_shipped_HD_Order (TestData data) throws ParseException {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		//String salescheck= getProductToTest("Pickup_Eligible_Partially_shipped_Order");
-
+		User user = new User(); user.userName="testdelivery0121";
 		String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order",true).split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
@@ -378,7 +375,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.cancelOrderDelivery("Line item","Open","");
 	}  
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item"}
 	, description = "Verify if a line item for Partially Shipped order can be cancelled", enabled = true)
@@ -387,12 +384,12 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		//String orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true);	
-		
+
 		String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order",true).split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -471,8 +468,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
 		._OrderDetailsAction()
-		 .goToActionCenter()
-		 .wrapUpOrderWithoutContactDelivery();
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery();
 		/* ._NavigationAction()
 		 .addlogType(TestStepType.WHEN)
 		 .searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
@@ -600,7 +597,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
 		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Service Recovery Windows","");
-		
+
 		/*.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
 		.verifyAdjustmentCapturedInInteraction("Reschedule Delivery Date")
@@ -615,7 +612,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		 .closeWarningPopupWindow()
 		 ._OrderDetailsAction()
 		 .verifyActionCapturedInNotes("Reschedule Delivery Date")*/
-		 ;
+		;
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_HD_Line_Item"}
@@ -677,9 +674,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD")
 		._OrderDetailsAction()
-		 .goToActionCenter()
-		 .wrapUpOrderWithoutContactDelivery()
-		 /*._NavigationAction()
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+		/*._NavigationAction()
 		 .addlogType(TestStepType.WHEN)
 		 .searchByDOSSalesCheck(salescheck)
 		 .addlogType(TestStepType.WHEN)
@@ -687,7 +684,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		 .closeWarningPopupWindow()
 		 ._OrderDetailsAction()
 		 .verifyActionCapturedInNotes("Reschedule Delivery Date")*/
-		 ;
+		;
 
 	}  
 
@@ -1477,7 +1474,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.rereserveItem("shipped","")
 		;
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_Reschedule_Open_Installation_HD_Order"}
 	, description = "MSP_Delivery_Test_Reschedule_Open_Installation_HD_Order", enabled = true)
@@ -1514,9 +1511,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		
+
 		String orderId= getProductToTest("Reschedule_Open_KitHeader_Order");	
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -1535,7 +1532,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RESCHED ORD");
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Contact_Delivery"}
 	, description = "Update the contact details and verify notes and interaction are captured", enabled = true)
@@ -1578,7 +1575,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyActionCapturedInNotesForUpdateContact()		;
 
 	}  
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Contact_Delivery"}
 	, description = "Update the contact details and verify notes and interaction are captured", enabled = true)
@@ -1607,7 +1604,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyPickupbuttonnotPresent();
 
 	} 
-	
+
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_Cancel_Order_Captured_Notes_Verification"}
@@ -1616,7 +1613,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		
+
 		String orderId= getProductToTest("Cancel_Eligible_Order",true);	
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
@@ -1647,7 +1644,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedHistoryNotes();
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_Rereserve_Order_Captured_Notes_Verification"}
 	, description = "Re-reserve whole order and verify Delivery notes", enabled = true)
@@ -1660,7 +1657,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		list.add("MSP USER"+": "+user.userName);
 		list.add("OSH/MSO-WEB: RERESERVATION");
 		list.add("MSP USER"+": "+user.userName);
-		
+
 		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);	
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
@@ -1727,33 +1724,33 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyupdateScimCode("Open")
-		
+
 		.addlogType(TestStepType.THEN)
 		.verifyLineItemDetail("Open")
-		
+
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")
-		
-/*		.addlogType(TestStepType.WHEN)
+
+		/*		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
-		
+
 		.addlogType(TestStepType.WHEN)
 		.wrapUpOrderWithoutContactDelivery()
-		
+
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		
+
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 
 		.addlogType(TestStepType.WHEN)
 		.closeWarningPopupWindow()
-		
+
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyActionCapturedHistoryNotes()*/;
-	
+
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Recovery_Service_Windows_Available_Open_Order_Verification"}
@@ -1767,32 +1764,32 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		System.out.println("OrderId:"+orderId);
 
 		As.guestUser.goToHomePage()
-		
+
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
 		.login(user)
-		
+
 		.addlogType(TestStepType.THEN)
 		.VerifyDeliveryAgent()
-		
+
 		.closeWarningPopupWindow()
-		
+
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		
+
 		.addlogType(TestStepType.WHEN)
 		.chooseOpenHDOrders()
-		
+
 		._OrderDetailsAction()
-		
+
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
-		
+
 		.addlogType(TestStepType.THEN)
 		.recoveryServiceWindowVerification();
 
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification_ReleasedOrder"}
 	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
@@ -1804,7 +1801,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		//String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);
 		String orderId= getProductToTest("Rereserve_Eligible_Released_Order",true);	
 		System.out.println("--------------------------------------------------------------------OrderId:"+orderId);
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -1839,7 +1836,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyActionCapturedHistoryNotes();*/
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification"}
 	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
@@ -1850,7 +1847,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		user.userName=UserPool.getDeliveryUser();
 		String orderId= getProductToTest("Reschedule_Released_HD_Order",true);
 		System.out.println("--------------------------------------------------------------------OrderId:"+orderId);
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -1913,7 +1910,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleServiceWindowOrder("OPEN","ORDER","Preferred Time Windows","");
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Recovery_Service_Windows_Available_Partially_Shipped_Order_Verification"}
 	, description = "Verify all three recovery time window are available for partially Shipped order", enabled = true)
@@ -1927,27 +1924,27 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 		As.guestUser.goToHomePage()
-		
+
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
 		.login(user)
-		
+
 		.addlogType(TestStepType.THEN)
 		.VerifyDeliveryAgent()
-		
+
 		.closeWarningPopupWindow()
-		
+
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		
+
 		.addlogType(TestStepType.WHEN)
 		.choosePartiallyshippedHDOrders()
-		
+
 		._OrderDetailsAction()
-		
+
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
-		
+
 		.addlogType(TestStepType.THEN)
 		.recoveryServiceWindowVerification();
 
@@ -1980,11 +1977,11 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: UPDATE PEND CODE")
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN);
-		
-	}
-	
 
-	
+	}
+
+
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_Cancel_Order_Captured_Notes_Verification_Released_Order"}
 	, description = "Cancel the whole order and verify notes and interaction are captured for Released order", enabled = true)
@@ -1992,7 +1989,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		
+
 		String orderId= getProductToTest("Reschedule_Released_HD_Order",true);	
 		//System.out.println("orderId:"+orderId);
 		As.guestUser.goToHomePage()
@@ -2004,7 +2001,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		
+
 		.addlogType(TestStepType.GIVEN)
 		.chooseReleasedHDOrders()
 		._OrderDetailsAction()
@@ -2025,7 +2022,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedHistoryNotes();
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_HD_Order_Unrestricted_time_window"}
 	, description = "Verify if an order for released order can be rescheduled", enabled = true)
