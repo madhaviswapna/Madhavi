@@ -15,7 +15,7 @@ import com.shc.msp.ft.util.TestGroup;
 import com.shc.msp.ft.util.UserPool;
 
 public class SalesCheckLevelRuleActionTests extends BaseTests{
-
+	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,  
 			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
@@ -165,12 +165,10 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
        
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+	@Test(dataProvider = "DP_Cancel_Sales_Check_Eligible",groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
             , description = "Verify cancellation at salescheck level", enabled = true, priority=51)
-    public void sales_Check_Level_Cancellation_Eligible(TestData data) {
-		
-		String OrderID=getProductToTest("MSP_OL_OrderEligibleForCancellationAtSalescheck");
+    public void sales_Check_Level_Cancellation_Eligible(String OrderID,String SalesCheck) {		
+		//
         addCloneIDHostname(data);
         LogFormatterAction.beginSetup();
       
@@ -186,7 +184,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .closeWarningPopupWindow()
                 ._OrderDetailsAction()
                 .addlogType(TestStepType.WHEN)
-                .clickOnSalesCheckNumberUnderSalesCheckTab(1)
+                .clickOnSalesCheckNumberUnderSalesCheckTab(SalesCheck)
                 ._SalesCheckDetailsAction()
                 .addlogType(TestStepType.THEN)
                 .verifyOptionIsVisible("Cancellation - Sales Check")
@@ -422,7 +420,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .verifyOptionIsNotVisible("Cancellation - Sales Check");
  
 	}
-	
+		
 	@DataProvider (name="DP_Release_Sales_Check_Eligible")
     public Object[][] DP_Release_SalesCheck_Eligible_OrderID() throws Exception{
 		 Retrieval_Test_Data_By_Query.release_Sales_Check_Data();
@@ -497,7 +495,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 		 testData[0][1]= scNO[0];
 	         return (testData);
 			}
-	@DataProvider (name="DP_Cancellation_Eligible")
+	@DataProvider (name="DP_Cancel_Sales_Check_Eligible")
     public Object[][] DP_Cancellation_Eligible_OrderID() throws Exception{
 
 		 Retrieval_Test_Data_By_Query.cancle_Sales_Check_Data();

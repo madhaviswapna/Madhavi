@@ -889,7 +889,7 @@ public class Retrieval_Test_Data_By_Query {
 					+ "and NOT (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r2+") AND o.site_id in ("+cancel_sc_status_store_check_store_r2+")) "
 					+ "and NOT (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r3+") AND o.site_id in ("+cancel_sc_status_store_check_store_r3+")) "
 					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmstatus_ffm+") "
-					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmexp30+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' LIMIT 1";
+					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmexp30+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') and o.site_gen_ord_id like '8%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > DATE_SUB(CURDATE(),INTERVAL 90 DAY) limit 1";
 	
 			Sql_SC_Cancellation_Store_Exp = "select o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id "
@@ -897,7 +897,7 @@ public class Retrieval_Test_Data_By_Query {
 					+ "and NOT (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r2+") AND o.site_id in ("+cancel_sc_status_store_check_store_r2+")) "
 					+ "and NOT (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r3+") AND o.site_id in ("+cancel_sc_status_store_check_store_r3+")) "
 					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmstatus_ffm+") "
-					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmexp30+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' LIMIT 1";
+					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmexp30+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') and o.site_gen_ord_id like '8%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' LIMIT 1";
 			
 			Sql_SC_Cancellation_StatusStore_Exp = "select o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id "
@@ -905,7 +905,7 @@ public class Retrieval_Test_Data_By_Query {
 					+ "and (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r2+") AND o.site_id in ("+cancel_sc_status_store_check_store_r2+")) "
 					+ "and (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r3+") AND o.site_id in ("+cancel_sc_status_store_check_store_r3+")) "
 					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmstatus_ffm+") "
-					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmexp30+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' LIMIT 1";
+					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmexp30+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') and o.site_gen_ord_id like '8%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' LIMIT 1";
 
 			Sql_SC_Cancellation_ffmexp30 = "select o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm, ord_item_extn oie "
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and oi.ORDER_ITEM_ID = oie.ORDER_ITEM_ID and "
