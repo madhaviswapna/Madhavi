@@ -132,15 +132,14 @@ public class Search_Summary extends BaseTests {
 	        	;
 	        	
 	}
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests}
-    , description = "Verify if a case can be created by assigning it to a queue.")//, enabled = true,dependsOnMethods = { "MSP_Search_Tests" }
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests,"orderWrapUpCreateCaseByRoutingToQueue"}
+    , description = "Verify if a case can be created by assigning it to a queue.", enabled = true)
 
 	public void orderWrapUpCreateCaseByRoutingToQueue(TestData data) throws Exception {
 		String orderId=Retrieval_Test_Data_By_Query.getOrder();
 		
 	addCloneIDHostname(data);
 	LogFormatterAction.beginSetup();
-	//orderId="941243744";
 	User user = new User(); user.userName=UserPool.getUser();
 	As.guestUser.goToHomePage()
 				.addlogType(TestStepType.WHEN)
