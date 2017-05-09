@@ -25,10 +25,12 @@ public class EvenExchange extends BaseTestsEx{
 		    		user.userName=UserPool.getDeliveryUser();
 		    		String orderType = "Partially Shipped";
 		    		
-		    		String[] values= getProductToTest("Even_Exchange_Partially_Shipped_HD_Order",true).split(",");
+		    		/*String[] values= getProductToTest("Even_Exchange_Partially_Shipped_HD_Order",true).split(",");
 		    		String orderId=values[0];
 		    		String dc_no=values[1];
-		    		System.out.println("orderId:"+orderId+" "+dc_no);
+		    		System.out.println("orderId:"+orderId+" "+dc_no);*/
+		    		
+		    		String orderId= getProductToTest("Even_Exchange_Partially_Shipped");
 		    		
 		    		As.guestUser.goToHomePage()
 		    		._NavigationAction()
@@ -38,7 +40,7 @@ public class EvenExchange extends BaseTestsEx{
 		    		.VerifyDeliveryAgent()
 		    		.closeWarningPopupWindow()
 		    		.addlogType(TestStepType.WHEN)
-		    		.searchByDeliveryOrderId(orderId, dc_no)
+		    		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		    		
 			        .addlogType(TestStepType.WHEN)
 			        .chooseHDOrders(orderType)

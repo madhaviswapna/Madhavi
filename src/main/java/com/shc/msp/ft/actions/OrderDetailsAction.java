@@ -665,7 +665,7 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		return this;
 	}
 	public OrderDetailsAction rescheduleServiceWindowOrder(String type, String ordType,String windowType,String agent) throws ParseException {
-		Logger.log("verify recovery window service",TestStepType.THEN);
+		Logger.log("Reschdeule the delivery order",TestStepType.THEN);
 		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType,windowType,agent);
 		return this;
 	}

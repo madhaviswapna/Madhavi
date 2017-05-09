@@ -6034,16 +6034,20 @@ public class OrderDetailsPage extends Page {
 			getAction().click(ENTIRE_ORDER);
 		} else {
 			AjaxCondition.forElementVisible(LINE_ITEM).waitForResponse();
+			Logger.log("Click on the Line Item", TestStepType.STEP);
 			getAction().click(LINE_ITEM);
+			Logger.log("Select the Item on the row", TestStepType.SUBSTEP);
 			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
 			getAction().click(LINE_ITEM_ROW);
 			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
 			getAction().scrollTo(CONTINUE_BUTTON);
+			Logger.log("Click on the Continue button", TestStepType.SUBSTEP);
 			getAction().waitFor(2000);
 			getAction().click(CONTINUE_BUTTON);
 			AjaxCondition.forElementVisible(CREATE_NEW_ORDER).waitForResponse();
 			getAction().click(CREATE_NEW_ORDER);
 			AjaxCondition.forElementVisible(RESCHEDULE_LINE_ITEM_VERIFY).waitForResponse();
+			Logger.log("New order is created", TestStepType.SUBSTEP);
 			AjaxCondition.forElementVisible(SUCCESS_OK_BUTTON).waitForResponse();
 			getAction().click(SUCCESS_OK_BUTTON);
 			ordType = "ENTIRE ORDER";
@@ -6202,14 +6206,14 @@ public class OrderDetailsPage extends Page {
 
 			if(getAction().isElementPresent(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE)){
 				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(PREFERRED_TIME_WINDOWS_NOT_AVAILABLE), true);
-				Logger.log("selecting the Recovery Windows");
+				Logger.log("Selecting the Recovery Windows");
 				windowType="Service Recovery Windows";}
 
 			else{
-				Logger.log("Selecting the Preferred Time Windows", TestStepType.STEP);
+				Logger.log("Click on Preferred Time Windows", TestStepType.STEP);
 				int rndCodeCategory = generateRandomNumberSelect(PREFERRED_TIME_WINDOWS_COUNT);
 				System.out.println("rndCodeCategory:"+rndCodeCategory);
-				Logger.log("Click on the  option #"+rndCodeCategory+" from Preferred Time Windows");
+				Logger.log("Selecting the "+updatedTimeWindow+" from the Preferred Time window",TestStepType.SUBSTEP);
 				updatedTimeWindow= getAction().getText(PREFERRED_TIME_WINDOWS.format(rndCodeCategory));
 				System.out.println("updatedTimeWindow:"+updatedTimeWindow);
 				getContext().put("updatedTimeWindow", updatedTimeWindow);
@@ -6223,10 +6227,10 @@ public class OrderDetailsPage extends Page {
 		if(windowType.equalsIgnoreCase("Service Recovery Windows")){
 
 
-			Logger.log("Selecting the Recovery Time Windows", TestStepType.STEP);
+			Logger.log("Click on the Recovery Time Windows", TestStepType.STEP);
 			int rndCodeCategory = generateRandomNumberSelect(SERVICE_RECOVERY_WINDOW_COUNT);
 			System.out.println("rndCodeCategory:"+rndCodeCategory);
-			Logger.log("Click on the  option #"+rndCodeCategory+" from Recovery Time Windows");
+			Logger.log("Selecting the "+updatedTimeWindow+" from theRecovery Time Windows",TestStepType.SUBSTEP);
 			updatedTimeWindow= getAction().getText(SERVICE_RECOVERY_WINDOW.format(rndCodeCategory));
 			System.out.println("updatedTimeWindow:"+updatedTimeWindow);
 			getContext().put("updatedTimeWindow", updatedTimeWindow);

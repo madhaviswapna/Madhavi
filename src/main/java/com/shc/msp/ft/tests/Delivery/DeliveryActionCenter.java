@@ -132,7 +132,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		//String salescheck= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");
 
-		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
+	//	String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
+		String orderId= getProductToTest("Rereserve_Partially_Shipped_Order");
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -688,7 +689,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	}  
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+	/*@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Partially_Shipped_HD_Line_Item"}
 	, description = "Verify if a line item for partially shipped order can be cancelled", enabled = true)
 	public void MSP_Delivery_Test_Reschedule_Partially_Shipped_HD_Line_Item(TestData data) throws Exception {
@@ -723,7 +724,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: PARTIAL RELEASE");
 
 	}  
-
+*/
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Schedule_Follow_Up_Open_HD_Order"}
 	, description = "Verify if an open HD order can be scheduled for follow up", enabled = true)
@@ -1956,7 +1957,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");
+		String orderId= getProductToTest("Schedule_Follow_Up_Partially_Shipped");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
