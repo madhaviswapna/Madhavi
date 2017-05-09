@@ -374,7 +374,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");	
+		String orderId= getProductToTest("Partially_Shipped_DOD_Order");	
 		String dosOrderInfo = orderId + "-" + DcNumber.DC_NO;
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
