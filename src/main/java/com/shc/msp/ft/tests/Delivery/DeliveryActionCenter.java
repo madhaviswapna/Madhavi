@@ -340,7 +340,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.chooseOpenHDOrders()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifySearchedDOSOrderIsDisplayed("dosorderId", orderId)
@@ -369,7 +369,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.chooseOpenHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
@@ -426,7 +426,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.chooseReleasedHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
@@ -455,7 +455,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.chooseOpenHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.goToActionCenter()
@@ -501,7 +501,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.chooseOpenHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.goToActionCenter()
@@ -591,7 +591,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.chooseReleasedHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.goToActionCenter()
@@ -647,13 +647,13 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Partially_Shipped_HD_Order"}
-	, description = "Verify if an order for partially shipped order can be rescheduled", enabled = true)
+	, description = "Verify if an order for partially shipped order can be rescheduled", enabled = true, priority=1)
 	public void MSP_Delivery_Test_Reschedule_Partially_Shipped_HD_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 
-		String salescheck=  getProductToTest("Reschedule_Partially_Shipped_HD_Order");	
+		String dosorderId= getProductToTest("Partially_Shipped_Order");	
 
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -663,8 +663,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDOSSalesCheck(salescheck)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.searchByDeliveryOrderId(dosorderId, DcNumber.DC_NO)
+		.choosePartiallyshippedHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.goToActionCenter()
@@ -713,7 +713,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, dc_no)
 		.addlogType(TestStepType.WHEN)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.choosePartiallyshippedHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.goToActionCenter()
@@ -743,7 +743,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.addlogType(TestStepType.WHEN)
-		.selectOrderInMyRecentDeliveryInteractions(1)
+		.chooseOpenHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.goToActionCenter()

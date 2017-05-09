@@ -187,8 +187,9 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
-		String[] orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true).split(",");	
-
+		//String[] orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true).split(",");	
+		String dosorderId= getProductToTest("Partially_Shipped_Order");
+		
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -197,7 +198,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId[0],  orderId[1])
+		.searchByDeliveryOrderId(dosorderId, DcNumber.DC_NO)
 		.choosePartiallyshippedHDOrders()
 		._OrderDetailsAction()
 		.updateAndVerifyNameEmailNumber()
