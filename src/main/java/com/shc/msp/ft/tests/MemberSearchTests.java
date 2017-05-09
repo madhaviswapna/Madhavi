@@ -87,7 +87,7 @@ public class MemberSearchTests extends BaseTests{
 		User user = new User();
 		user.userName = UserPool.getUser();
 		String name = getSearchTermToTest("MSP_MemberSearch_By_FirstAndLastName");
-		String zipCode = "00000";
+		String zipCode = "";
 		
 		if(url.contains("msp.prod.global")){
 			user.userName = "testonline0507";
