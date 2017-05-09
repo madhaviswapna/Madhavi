@@ -206,11 +206,12 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName="testdelivery0121";
-		String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order",true).split(",");
+		/*String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order",true).split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
-		System.out.println("orderId:"+orderId+" "+dc_no);
-
+		System.out.println("orderId:"+orderId+" "+dc_no);*/
+		
+		String dosorderID= getProductToTest("Pickup_Partially_Shipped");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -219,7 +220,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, dc_no)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
 		.addlogType(TestStepType.GIVEN)
 		.choosePartiallyshippedHDOrders()
 		._OrderDetailsAction()
@@ -386,11 +387,13 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		//String orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true);	
 
-		String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order",true).split(",");
+		/*String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order",true).split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
-		System.out.println("orderId:"+orderId+" "+dc_no);
-
+		System.out.println("orderId:"+orderId+" "+dc_no);*/
+		
+		String orderId= getProductToTest("Cancel_Partially_Shipped",true);
+		
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -399,7 +402,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, dc_no)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
