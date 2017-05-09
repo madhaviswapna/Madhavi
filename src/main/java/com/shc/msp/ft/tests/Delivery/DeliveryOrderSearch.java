@@ -162,7 +162,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
-		String orderId= getProductToTest("Rereserve_Eligible_Open_Order",true);	
+		String orderId= getProductToTest("Even_Exchange_Open_HD_Order",true);	
 
 		As.guestUser.goToHomePage()
 		._NavigationAction()
