@@ -188,7 +188,13 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		//user.userName = "testdelivery0001";
 		//user.password = "TestPassword";
 		//String[] orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true).split(",");	
-		String dosorderId= getProductToTest("Partially_Shipped_Order");
+		//String dosorderId= getProductToTest("Partially_Shipped_Order");
+		
+		
+		String[] values= getProductToTest("Scheduleforfollowup_Eligible_Partially_Shipped_Order",true).split(",");
+		String orderId=values[0];
+		String dc_no=values[1];
+		System.out.println("orderId:"+orderId+" "+dc_no);
 		
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -198,7 +204,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(dosorderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId, dc_no)
 		.choosePartiallyshippedHDOrders()
 		._OrderDetailsAction()
 		.updateAndVerifyNameEmailNumber()

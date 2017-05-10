@@ -133,7 +133,14 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		//String salescheck= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");
 
 	//	String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
-		String orderId= getProductToTest("Rereserve_Partially_Shipped_Order");
+		//String orderId= getProductToTest("Rereserve_Partially_Shipped_Order");
+		
+		
+		String[] values= getProductToTest("Rereserve_Eligible_Partially_shipped_Order",true).split(",");
+		String orderId=values[0];
+		String dc_no=values[1];
+		System.out.println("orderId:"+orderId+" "+dc_no);
+		
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -143,7 +150,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId, dc_no)
 		.addlogType(TestStepType.GIVEN)
 		.choosePartiallyshippedHDOrders()
 		._OrderDetailsAction()
@@ -1966,7 +1973,13 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Schedule_Follow_Up_Partially_Shipped");
+		//String orderId= getProductToTest("Schedule_Follow_Up_Partially_Shipped");
+		
+		String[] values= getProductToTest("Scheduleforfollowup_Eligible_Partially_Shipped_Order",true).split(",");
+		String orderId=values[0];
+		String dc_no=values[1];
+		System.out.println("orderId:"+orderId+" "+dc_no);
+		
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -1975,7 +1988,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId, dc_no)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
