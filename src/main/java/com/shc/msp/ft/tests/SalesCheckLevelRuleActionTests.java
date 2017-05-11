@@ -165,9 +165,9 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
        
 	}
 	
-	@Test(dataProvider = "DP_Cancel_Sales_Check_Eligible",groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests","sales_Check_Level_Cancellation_Eligible"}
+	@Test(dataProvider = "DP_Cancel_Sales_Check_Eligible",groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests","sales_Check_Level_Cancellation_Captured_Notes_Interaction"}
             , description = "Verify cancellation at salescheck level", enabled = true, priority=51)
-    public void sales_Check_Level_Cancellation_Eligible(String OrderID,String SalesCheck) {		
+    public void sales_Check_Level_Cancellation_Captured_Notes_Interaction(String OrderID,String SalesCheck) {		
 		//
         addCloneIDHostname(data);
         LogFormatterAction.beginSetup();

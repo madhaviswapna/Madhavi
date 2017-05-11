@@ -883,14 +883,17 @@ public class Retrieval_Test_Data_By_Query {
 		
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 		
-			Sql_SC_Cancellation_Eligible = "select o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
-					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id "
-					+ "and sc.SALES_CHECK_STS_CD in ("+cancel_sc_eligible_status+") and o.site_id not in ("+cancel_sc_store_exp+") "
-					+ "and NOT (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r2+") AND o.site_id in ("+cancel_sc_status_store_check_store_r2+")) "
-					+ "and NOT (sc.SALES_CHECK_STS_CD in ("+cancel_sc_status_store_check_status_r3+") AND o.site_id in ("+cancel_sc_status_store_check_store_r3+")) "
-					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmstatus_ffm+") "
-					+ "and NOT fm.ffm_class_id in ("+cancel_sc_ffmexp30+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') and o.site_gen_ord_id like '8%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > DATE_SUB(CURDATE(),INTERVAL 90 DAY) limit 1";
-	
+			
+			Sql_SC_Cancellation_Eligible = "select DISTINCT o.site_gen_ord_id, sc.sales_check_number  from ord o, ord_item oi, sales_check sc, ffm_method fm "
+					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi. sales_check_id = sc.sales_check_id and oi.ffm_method_id = fm.ffm_method_id "
+					+ "and sc.SALES_CHECK_STS_CD in ('TRN') and NOT (sc.SALES_CHECK_STS_CD in ('FDC','RFP') AND o.site_id in ('10171')) "
+					+ "and NOT (sc.SALES_CHECK_STS_CD in ('NN','F','PRO') AND o.site_id in ('10151','10153','30151','30153','40153')) and NOT fm.ffm_class_id in ('KHD') "
+					+ "and NOT fm.ffm_class_id in ('TRYBUY','LAYAWAY','SFS','STS','LWY','XVRES','XDRES','XCRES','FBM') "
+					+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
+					+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','SPM','BAD','VDC') and o.site_gen_ord_id like '8%' "
+					+ "and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and sc.sales_check_number REGEXP '^-?[0-9]+$' and o.last_updated_ts > DATE_SUB(CURDATE(),INTERVAL 30 DAY) ORDER BY RAND() limit 1";
+					
+		
 			Sql_SC_Cancellation_Store_Exp = "select o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id "
 					+ "and sc.SALES_CHECK_STS_CD in ("+cancel_sc_eligible_status+") and o.site_id in ("+cancel_sc_store_exp+") "

@@ -429,7 +429,7 @@ public class NavigationAction extends BaseAction {
         return this;
     }
     public NavigationAction verifyCaseAssignedToQueue(String queue) {
-    	Logger.log("Verify case routed to queue "+queue, TestUtils.TestStepType.WHEN);
+    	Logger.log("Verify case routed to queue "+queue, TestUtils.TestStepType.THEN);
     	this.factory.homePage().verifyCaseAssignedToQueue(queue);
         return this;
     }
