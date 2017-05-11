@@ -470,7 +470,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	 * Verify if email can be sent to Vendor on the Line Item Level
 	 * */
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, //dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests, "line_Item_Level_Verify_Contact_Vendor_Eligible"}
 	, description = "Verify if Email can be sent to the Vendor from the Line Item Detail Page", enabled = true)
 	public void  line_Item_Level_Verify_Contact_Vendor_Eligible(TestData data) {
 
