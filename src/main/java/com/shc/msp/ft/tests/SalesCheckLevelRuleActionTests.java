@@ -199,6 +199,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 				.addlogType(TestStepType.WHEN)
 				.searchByOrderId(OrderID)
 				.closeWarningPopupWindow()
+				.addlogType(TestStepType.THEN)
 				._OrderDetailsAction()
 				.verifyActionCapturedInNotes("Sales Check Cancellation")
 		    	; 
