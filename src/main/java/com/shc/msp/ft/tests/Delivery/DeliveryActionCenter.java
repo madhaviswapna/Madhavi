@@ -165,7 +165,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.wrapUpOrderWithoutContactDelivery()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId, dc_no)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.closeWarningPopupWindow()
