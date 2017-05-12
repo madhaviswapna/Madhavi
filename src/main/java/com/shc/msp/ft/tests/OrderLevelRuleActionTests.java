@@ -16,8 +16,9 @@ import com.shc.msp.ft.util.Retrieval_Test_Data_By_Query;
 import com.shc.msp.ft.util.TestGroup;
 import com.shc.msp.ft.util.UserPool;
 
-public class OrderLevelRuleActionTests extends BaseTests{
-
+public class OrderLevelRuleActionTests extends BaseTestsEx{
+	
+	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests","order_Level_Sales_Tax_Adjustment_Eligible"}
@@ -366,10 +367,10 @@ public class OrderLevelRuleActionTests extends BaseTests{
 	}
 
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Sales_Tax_Adjustment_CapturedNotesInteraction"}
+	@Test(dataProvider = "DP_ST_Adjustment_Eligible",groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Sales_Tax_Adjustment_CapturedNotesInteraction"}
 	, description = "Verify sale adjustment at order level", enabled = true, priority=34)	
-	public void Order_Level_Sales_Tax_Adjustment_CapturedNotesInteraction(TestData data) {
-		String OrderID = getProductToTest("SaleAdjustmentOrder");
+	public void Order_Level_Sales_Tax_Adjustment_CapturedNotesInteraction(String  OrderID) {
+		//String OrderID = getProductToTest("SaleAdjustmentOrder");
 		
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -387,7 +388,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Sales Tax Adjustment")
 		.taxadjustment("Sales Tax Adjustment",0.1,OrderID)
-		.verifyTrialBalance()
+		.verifyTrialBalanceIfPresent()
 		.verifyAdjustmentCapturedInInteraction("Sales Tax Adjustment")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
@@ -396,6 +397,7 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		.addlogType(TestStepType.WHEN)
 		.searchByOrderId(OrderID)
 		.closeWarningPopupWindow()
+		.addlogType(TestStepType.THEN)
 		._OrderDetailsAction()
 		.verifyAdjustmentCapturedInNotes("Sales Tax Adjustment")
 		;
@@ -633,7 +635,6 @@ public class OrderLevelRuleActionTests extends BaseTests{
 		String OrderID[]={Retrieval_Test_Data_By_Query.adj_eligible_orderID};
 		Object testData[][] = {OrderID};
 		return (testData);
-
 	}
 	@DataProvider (name="DP_ContactCustomer_CommercialOrder",parallel=true)
 	public Object[][] DP_ContactCustomer_CommercialOrder_OrderID() throws Exception{

@@ -1704,10 +1704,11 @@ public class OrderDetailsPage extends Page {
 
 	public OrderDetailsPage verifyTrialBalance() {
 		getAction().waitFor(1000);
+		Logger.log("Click Submit Button" , TestStepType.STEP);
 		getAction().click(SUBMIT_BUTTON);
 		getAction().waitFor(2000);
 		Logger.log("Verify Trail Balance Popup" , TestStepType.STEP);
-		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP).waitForResponse();
+		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP).waitForResponse(5);
 		Logger.log("Verify trail balance payment type", TestStepType.STEP);
 		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP_PAYMENTTYPE).waitForResponse();
 		Logger.log("Verify trail balance popup message", TestStepType.STEP);

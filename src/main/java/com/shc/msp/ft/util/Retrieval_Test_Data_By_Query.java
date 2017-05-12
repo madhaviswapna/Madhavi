@@ -114,12 +114,18 @@ public class Retrieval_Test_Data_By_Query {
 		
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 		
-			Sql_ST_Adj_Eligible = "select distinct o.site_gen_ord_id AS Adj_Eligible_OrderID from ord o, ord_item oi, ffm_method fm where "+ 
+			/*Sql_ST_Adj_Eligible = "select distinct o.site_gen_ord_id AS Adj_Eligible_OrderID from ord o, ord_item oi, ffm_method fm where "+ 
 					"o.order_id = oi.order_id and oi.ffm_method_id = fm.ffm_method_id and o.order_sts_cd in ( 'CMP','CNF','D','C','EDT','E','H','I','G','PRO','SUB','B','WAP','z' ) "+ 
 			"and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST')  "+
 			"and o.SITE_ID not in ('30153') and fm.ffm_class_id not in ( 'TRYBUY','PARTSDIRECT','TRYBUY','PARTSDIRECT','PARTSDIRECT','TRYBUY','PARTSDIRECT' ) "+ 
-			"and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-16 01:01:01' and o.last_updated_ts < '2016-05-15 01:01:01' limit 1";
-	
+			"and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-16 01:01:01' and o.last_updated_ts < '2016-05-15 01:01:01' limit 1";*/
+					
+			Sql_ST_Adj_Eligible ="select distinct o.site_gen_ord_id AS order_id from ord o, ord_item oi, ffm_method fm where o.order_id = oi.order_id "
+					+ "and oi.ffm_method_id = fm.ffm_method_id and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','WAP','SHP','RET','SUB') "
+					+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','BAD') and o.order_sts_cd in ('CNF','D','C','EDT','E','H','I','G','PRO','B','WAP','z') "
+					+ "and o.SITE_ID not in (30153) and fm.ffm_class_id  in ('TW') and o.ORDER_ID=o.SITE_GEN_ORD_ID and oi.so_line_number=1 "
+					+ "and o.placement_ts > DATE_SUB(CURDATE(),INTERVAL 30 DAY) ORDER BY RAND() limit 1";
+			
 			Sql_ST_Adj_Store = "select distinct o.site_gen_ord_id AS Adj_Store_Expt_OrderID from ord o, ord_item oi, ffm_method fm "
 					+ "where o.order_id = oi.order_id and oi.ffm_method_id = fm.ffm_method_id and o.order_sts_cd "
 					+ "in ("+stadj_eligible_status+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') "
@@ -150,7 +156,7 @@ public class Retrieval_Test_Data_By_Query {
 		rs = st.getResultSet();
 		while(rs.next()){
 		int k = 0;
-	adj_eligible_orderID = rs.getString("Adj_Eligible_OrderID");
+	adj_eligible_orderID = rs.getString("order_id");
 				System.out.println("eligible status: "+adj_eligible_orderID);
 		result.put(k++, new Object[] {adj_eligible_orderID});
 		//ExcelUtil.setCellData("OrderLevel", result, k+1, 0);

@@ -249,6 +249,18 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyTrialBalance();
 		return this;	
 	}
+	
+	public OrderDetailsAction verifyTrialBalanceIfPresent() {
+		
+		try {
+			this.factory.orderdetailspage().verifyTrialBalance();
+			Logger.log("Verify Trial balance if available", TestUtils.TestStepType.THEN);
+		} catch (Exception e) {
+			Logger.log("Trial balance Not Present, proceeding further", TestUtils.TestStepType.THEN);
+			e.printStackTrace();
+		}
+		return this;	
+	}
 	public OrderDetailsAction selectAction(String actionName) {
 		Logger.log("Agent selects "+actionName+" - action in summary page",TestStepType.WHEN);
 		this.factory.actionDropdown().selectAction(SelectPage.SUMMARY_PAGE, actionName);
