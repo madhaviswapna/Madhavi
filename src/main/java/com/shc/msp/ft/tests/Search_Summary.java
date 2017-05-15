@@ -277,6 +277,12 @@ public class Search_Summary extends BaseTests {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = User.find("Onlineuser1");
+		
+		String username=user.userName;
+		//need to put this code
+		//db.getCollection('cssCases').find({$and:[{"owner.username":"spatil9"},{"status" : "CASE_WORKING"},{"caseType" : "DELIVERY"}]})
+		
+		//to delete all the cases for the user 
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
 		.login(user)
@@ -284,6 +290,7 @@ public class Search_Summary extends BaseTests {
 		.verifyonlineagent()
 		.addlogType(TestStepType.WHEN)
 		.deleteCasesforOrderfromDB(orderId)
+		.deleteAssignedCasesforUserfromDB(username)
 		.addlogType(TestStepType.WHEN)
 		.searchByOrderId(orderId)
 		.addlogType(TestStepType.WHEN)

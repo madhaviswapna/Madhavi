@@ -479,6 +479,13 @@ public class NavigationAction extends BaseAction {
     	MongoDB.deleteCasesforOrderfromDB(orderId);
     	return this;
     }
+    public NavigationAction deleteAssignedCasesforUserfromDB(String userID) {
+    	Logger.log("Delete all the case which are in case working status for the user", TestUtils.TestStepType.WHEN);
+    	MongoDB.deleteAssignedCasesforUserfromDB(userID);
+    	return this;
+    }
+    
+    
 
 	public NavigationAction callAPIForScreenPop(String pv7, String pv8, String agentLDAPID) {
 		Logger.log("Call API for Screen Pop", TestUtils.TestStepType.WHEN);

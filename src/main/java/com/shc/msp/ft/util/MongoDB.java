@@ -37,6 +37,24 @@ public class MongoDB {
 		return true;
 	}
 	
+	public static synchronized boolean deleteAssignedCasesforUserfromDB(String userID) {
+		try {
+			System.out.println("----------------------------------------------------------------inside deleteAssignedCasesforUserfromDB");
+			
+			//{$and:[{"owner.username":"spatil9"},{"status" : "CASE_WORKING"},{"caseType" : "DELIVERY"}]}
+			BasicDBObject searchQuery = new BasicDBObject("owner.username",userID).
+					 append("status", "CASE_WORKING");
+			
+			System.out.println("-----------------------------------------------query:"+searchQuery.toString());
+			MongoDB.getDB().getCollection("cssCases").remove(searchQuery);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	public static synchronized boolean deleteCasesforOrderfromDB(String jsonPath,String orderId) {
 		try {
 			BasicDBObject searchQuery = new BasicDBObject();
