@@ -4378,7 +4378,7 @@ public class OrderDetailsPage extends Page {
 
 			getAction().click(REASON_CODE_DROPDOWN);
 			getAction().waitFor(1000);
-			getAction().selectByVisibleText(REASON_CODE_DROPDOWN, "NO Action Needed - General Question ");
+			getAction().selectByVisibleText(REASON_CODE_DROPDOWN, "NO Action Needed - General Question");
 			getAction().waitFor(1000);
 			Logger.log("Select 'NO Action Needed - General Question ' in Reason Code", TestStepType.STEP);
 

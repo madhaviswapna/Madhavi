@@ -268,7 +268,7 @@ public class Search_Summary extends BaseTests {
 	        	
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP0Tests,"Offline_Agent_Assign_From_Queue"}
 	, description = "Verify if a case can be selected from assigned queue by an offline agent and wrapped up.")
 
 	public void Offline_Agent_Assign_From_Queue(TestData data) throws Exception {
