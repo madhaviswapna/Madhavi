@@ -264,6 +264,11 @@ public class OrderSearch extends BaseTests{
 	        user.userName = agentID;
 	        user.password = Constant.OnlinePassword;
 	        
+	        String name=getSearchTermToTest("MSP_MemberSearch_By_FirstAndLastName");
+	        String[] arr=name.split(" ");
+	        firstName=arr[0];
+	        lastName=arr[1];
+	        
 	        As.guestUser.goToHomePage()
 	        	.addlogType(TestStepType.WHEN)
 	                .login(user)
