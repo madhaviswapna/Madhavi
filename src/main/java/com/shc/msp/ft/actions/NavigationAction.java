@@ -484,9 +484,6 @@ public class NavigationAction extends BaseAction {
     	MongoDB.deleteAssignedCasesforUserfromDB(userID);
     	return this;
     }
-    
-    
-
 	public NavigationAction callAPIForScreenPop(String pv7, String pv8, String agentLDAPID) {
 		Logger.log("Call API for Screen Pop", TestUtils.TestStepType.WHEN);
     	ScreenPopAPIRequest.call(pv7,pv8,agentLDAPID);
