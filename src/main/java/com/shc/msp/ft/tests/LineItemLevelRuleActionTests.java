@@ -47,11 +47,11 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.addlogType(TestStepType.THEN)
 		.verifylineitemdetails()
 		.verifyOptionVisible("Sale Adjustment")
-		.addlogType(TestStepType.GIVEN)
-		//TODO logger needs to be corrected
+		.addlogType(TestStepType.THEN)
 		.taxadjustment("Sale Adjustment",0.1,orderId)
-		.verifyTrialBalance()
-
+		.addlogType(TestStepType.THEN)
+		.verifyTrialBalanceIfPresent()
+		
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Sale Adjustment")
 		.verifyOrderWrapUp()
