@@ -894,7 +894,7 @@ public class Retrieval_Test_Data_By_Query {
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi. sales_check_id = sc.sales_check_id and oi.ffm_method_id = fm.ffm_method_id "
 					+ "and sc.SALES_CHECK_STS_CD in ('TRN') and NOT (sc.SALES_CHECK_STS_CD in ('FDC','RFP') AND o.site_id in ('10171')) "
 					+ "and NOT (sc.SALES_CHECK_STS_CD in ('NN','F','PRO') AND o.site_id in ('10151','10153','30151','30153','40153')) and NOT fm.ffm_class_id in ('KHD') "
-					+ "and NOT fm.ffm_class_id in ('TRYBUY','LAYAWAY','SFS','STS','LWY','XVRES','XDRES','XCRES','FBM') "
+					+ "and NOT fm.ffm_class_id in ('TRYBUY','LAYAWAY','SFS','STS','LWY','XVRES','XDRES','XCRES','FBM','VD') "
 					+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
 					+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','SPM','BAD','VDC') and o.site_gen_ord_id like '8%' "
 					+ "and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and sc.sales_check_number REGEXP '^-?[0-9]+$' and o.last_updated_ts > DATE_SUB(CURDATE(),INTERVAL 30 DAY) ORDER BY RAND() limit 1";
