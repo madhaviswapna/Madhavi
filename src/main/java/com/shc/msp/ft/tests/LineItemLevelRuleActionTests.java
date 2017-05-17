@@ -153,7 +153,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test
-	(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests"},
+	(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Cancellation_NonEligible", "MSPLineItemLevelRuleActionTests"},
 	description = "Verify ineligible items cannot be cancelled", enabled = true)
 	public void  line_Item_Level_Verify_Cancellation_NonEligible(TestData data) {
 
