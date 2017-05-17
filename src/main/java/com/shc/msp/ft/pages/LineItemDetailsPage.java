@@ -1101,12 +1101,12 @@ public class LineItemDetailsPage extends Page {
 						 giftCardNumber = cardNO.get(i);
 					 }
 					 if(from.get(i)==null){
-						 fromWhere = "";
+						 fromWhere = " ";
 					 }else{
 						 fromWhere = from.get(i);
 					 }
 					 if(to.get(i)==null){
-						 toWhere = "";
+						 toWhere = " ";
 					 }else{
 						 toWhere = to.get(i);
 					 }
@@ -1129,6 +1129,7 @@ public class LineItemDetailsPage extends Page {
 			    	 PageAssert.verifyEqual(giftCardNumber, giftcardinfo_table_columns.get(1).getText());
 			    	 
 			    	 Logger.log("Verify Gift Card Information From is "+ fromWhere +" in Database and "+giftcardinfo_table_columns.get(2).getText()+" is displayed", TestStepType.STEP);
+			    	 System.out.println("fromWhere|"+fromWhere+"|-----------|"+giftcardinfo_table_columns.get(2).getText()+"|------");
 			    	 PageAssert.verifyEqual(fromWhere, giftcardinfo_table_columns.get(2).getText());
 			    	 
 			    	 Logger.log("Verify Gift Card Information To is "+ toWhere +" in Database and "+giftcardinfo_table_columns.get(3).getText()+" is displayed", TestStepType.STEP);
