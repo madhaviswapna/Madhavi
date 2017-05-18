@@ -174,7 +174,7 @@ public class LineItem_Summary extends BaseTests {
 
 	}
 
-	@Test(dataProvider = "DP_Gift_Card_Information",groups = {TestGroup.MSPLineItemSummary, "MSPLineItemGiftCardInfoTests","lineItemGiftCardInfoVerify"}
+	@Test(dataProvider = "DP_Gift_Card_Information",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemGiftCardInfoTests","lineItemGiftCardInfoVerify"}
     , description = "Verify all relevant details are displayed for a Gift Card order", enabled = true, priority =31)
 	public void lineItemGiftCardInfoVerify(String orderID, String sku) throws Exception{
 			addCloneIDHostname(data);
