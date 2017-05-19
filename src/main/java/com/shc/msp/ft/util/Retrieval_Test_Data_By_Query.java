@@ -1300,12 +1300,15 @@ public class Retrieval_Test_Data_By_Query {
 		System.out.println(lineItem_store_Exception);
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 		
-			Sql_contact_Marketplace_Seller_Eligible = "SELECT o.SITE_GEN_ORD_ID, oi.order_item_id, oi.item_id FROM ORD O,ORD_ITEM OI,SALES_CHECK SC,FFM_METHOD FFM, payment p,payment_instruction pi,pmt_method pm "
+			/*Sql_contact_Marketplace_Seller_Eligible = "SELECT o.SITE_GEN_ORD_ID, oi.order_item_id, oi.item_id FROM ORD O,ORD_ITEM OI,SALES_CHECK SC,FFM_METHOD FFM, payment p,payment_instruction pi,pmt_method pm "
 					+ " WHERE O.ORDER_SERVICE_ORGINATING_SERVER in ('qa.ecom.sears.com') and O.RECORD_INSERT_TS >'2015-05-25 19:08:58' AND O.ORDER_ID=OI.ORDER_ID  "
 					+ "AND SC.ORDER_ID=O.ORDER_ID  AND SC.SALES_CHECK_ID=OI.SALES_CHECK_ID and FFM.FFM_METHOD_id=OI.FFM_METHOD_id and pi.PAYMENT_METHOD_ID=pm.payment_method_id "
 					+ "and p.PAY_INSTRUCTION_ID=pi.PAY_INSTRUCTION_ID and sc.sales_check_id=p.sales_check_id and o.ORDER_ID=pi.order_ID and FFM.FFM_CLASS_ID in('FBM') "
 					+ "AND OI.ORDER_ITEM_STS_CD IN ('SHP','PRO') " 
-					+  " order by O.RECORD_INSERT_TS desc LIMIT 1 ";
+					+  " order by O.RECORD_INSERT_TS desc LIMIT 1 ";*/
+			Sql_contact_Marketplace_Seller_Eligible = "Select distinct order_id, item_id  from ord_item where LAST_UPDATED_TS > DATE_SUB(CURDATE(),INTERVAL 30 DAY) "
+					+ "in (select ffm_method_id from Ffm_method where FFM_CLASS_ID='FBM') and SITE_ID in ('40154') and ITEM_ID like '%SPM%' and order_id like '8%' "
+					+ "order by rand() limit 1;";
 										
 /*					"select o.site_gen_ord_id, oi.ORDER_ITEM_ID from ord o, ord_item oi, sales_check sc, ffm_method fm "
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id "
@@ -1331,8 +1334,8 @@ public class Retrieval_Test_Data_By_Query {
 			st.execute();
 			rs = st.getResultSet();
 			while(rs.next()){
-				lineitem_market_place_seller_eligible_orderID = rs.getString("site_gen_ord_id");
-				market_place_seller_eligible_item_number = rs.getString("order_item_id");
+				lineitem_market_place_seller_eligible_orderID = rs.getString("order_id");
+				market_place_seller_eligible_item_number = rs.getString("item_id");
 				System.out.println("Marketplace Seller Eligible: "+lineitem_market_place_seller_eligible_orderID);
 				System.out.println("Marketplace Seller Eligible item number: "+market_place_seller_eligible_item_number);
 				}

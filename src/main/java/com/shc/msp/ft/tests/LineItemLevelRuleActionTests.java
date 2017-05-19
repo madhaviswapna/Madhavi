@@ -417,12 +417,16 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	 * Verify if email can be sent to Marketplace Seller on the Line Item Level
 	 * */	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Contact_MarketplaceSeller_Eligible"}
 	, description = "Verify if email can be send to the Marketplace Seller from the Line Item Detail Page", enabled = true)
-	public void line_Item_Level_Verify_Contact_MarketplaceSeller_Eligible(TestData data) {
-		String[] test_data = getProductToTest("MSP_OL_ItemLevelContactMPSellerEligible").split("\\|");
+	public void line_Item_Level_Verify_Contact_MarketplaceSeller_Eligible(TestData data) throws Exception {
+		/*String[] test_data = getProductToTest("MSP_OL_ItemLevelContactMPSellerEligible").split("\\|");
 		String OrderID=test_data[0];
-		String sku = test_data[1];
+		String sku = test_data[1];*/
+		Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().contact_Marketplace_Seller_Data();
+		String OrderID=Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().lineitem_market_place_seller_eligible_orderID;
+		String sku=Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().market_place_seller_eligible_item_number;//market_place_seller_eligible_sku;
+		System.out.println("------------------"+OrderID+"------------"+sku);
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); 

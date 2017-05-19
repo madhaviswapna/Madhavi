@@ -63,7 +63,7 @@ public class EmailTemplatePopUp extends Module{
 			AjaxCondition.forElementVisible(STORE_DROPDOWN_OPTION.format(0)).waitForResponse();
 			getAction().click(STORE_DROPDOWN_OPTION.format(0));
 			}
-    	
+			getAction().waitFor(3000);
     	Logger.log("Verify if \"Email Template\" dropdown is visible",TestStepType.VERIFICATION_SUBSTEP);
     	AjaxCondition.forElementVisible(EMAIL_TEMPLATE_DROPDOWN).waitForResponse();
     	getAction().click(EMAIL_TEMPLATE_DROPDOWN);
@@ -100,7 +100,7 @@ public class EmailTemplatePopUp extends Module{
     	
     	Logger.log("Verify if \"Submit\" Button is Visible",TestStepType.VERIFICATION_SUBSTEP);
     	AjaxCondition.forElementVisible(SUBMIT_BUTTON).waitForResponse();
-   
+    	getAction().waitFor(2000);
 		return this;
     }
     
