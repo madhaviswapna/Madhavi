@@ -1053,7 +1053,7 @@ public class HomePage extends Page {
 
 	public HomePage searchByOrderId(String orderId) {
 		setData("orderId", orderId);
-		getAction().waitFor(2000);
+		getAction().waitFor(4000);
 		Logger.log("Search using order id ", TestStepType.STEP);
 		if( !AjaxCondition.forElementVisible(ORDER_NUMBER_FIELD).waitWithoutException(1)){
 			Logger.log("Click on order tab", TestStepType.STEP);
