@@ -104,14 +104,13 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	}
 
 	//Cancellation - Line Item 
-	@Test
-	(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-	groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Captured_Notes_Interaction"}
+	
+	@Test(dataProvider = "DP_CancelOrder_Eligible",groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Captured_Notes_Interaction"}
 	, description = "Verify cancellation at line item level for eligible orders", enabled = true)
-	public void line_Item_Level_Verify_Cancellation_Captured_Notes_Interaction(TestData data) {
-		String[] test_data = getProductToTest("ItemLevelCancellationEligible").split("\\|");
-		String OrderID=test_data[0];
-		String sku = test_data[1];
+	public void line_Item_Level_Verify_Cancellation_Captured_Notes_Interaction(String orderId, String sku) {
+		//String[] test_data = getProductToTest("ItemLevelCancellationEligible").split("\\|");
+		//String OrderID=test_data[0];
+		//String sku = test_data[1];
 
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -124,7 +123,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.addlogType(TestStepType.THEN)
 		.verifyonlineagent()
 		.addlogType(TestStepType.WHEN)
-		.searchByOrderId(OrderID)
+		.searchByOrderId(orderId)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
@@ -143,7 +142,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.fillRFCForm()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
-		.searchByOrderId(OrderID)
+		.searchByOrderId(orderId)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)

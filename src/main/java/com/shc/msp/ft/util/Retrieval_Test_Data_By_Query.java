@@ -1614,29 +1614,32 @@ public class Retrieval_Test_Data_By_Query {
 		String lineItem_eligible_status = ExcelUtil.getExcelUtil().getCellData(Constant.Row_CancellationLineItem, Constant.Col_ItemEligibleStatus).replaceAll("\"", "'");
 		System.out.println(lineItem_eligible_status);
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
-		Sql_LineItem_Cancellation_Eligible = "SELECT o.SITE_GEN_ORD_ID, oi.item_id FROM ORD O,ORD_ITEM OI,SALES_CHECK SC,FFM_METHOD FFM, payment p,payment_instruction pi,pmt_method pm "
-				+ "WHERE O.ORDER_SERVICE_ORGINATING_SERVER in ('qa.ecom.sears.com') AND O.ORDER_ID=OI.ORDER_ID  AND SC.ORDER_ID=O.ORDER_ID "
-				+ "AND SC.SALES_CHECK_ID=OI.SALES_CHECK_ID and FFM.FFM_METHOD_id=OI.FFM_METHOD_id and pi.PAYMENT_METHOD_ID=pm.payment_method_id "
+		Sql_LineItem_Cancellation_Eligible = "SELECT o.order_id as order_id, oi.item_id FROM ORD O,ORD_ITEM OI,SALES_CHECK SC,FFM_METHOD FFM, payment p,"
+				+"payment_instruction pi,pmt_method pm WHERE O.ORDER_ID=OI.ORDER_ID AND SC.ORDER_ID=O.ORDER_ID AND "
+				+ "SC.SALES_CHECK_ID=OI.SALES_CHECK_ID and FFM.FFM_METHOD_id=OI.FFM_METHOD_id and pi.PAYMENT_METHOD_ID=pm.payment_method_id and o.SITE_ID not in (10171)"
 				+ "and p.PAY_INSTRUCTION_ID=pi.PAY_INSTRUCTION_ID and sc.sales_check_id=p.sales_check_id and o.ORDER_ID=pi.order_ID "
-				+ "and FFM.FFM_CLASS_ID in('VD') AND OI.ORDER_ITEM_STS_CD IN ('TRN') and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST','') "
-				+ "and o.last_updated_ts < '2015-06-15 01:01:01' limit 1";
+				+ "and FFM.FFM_CLASS_ID NOT in('VD','SFS') AND OI.ORDER_ITEM_STS_CD IN ('TRN') "
+				+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
+				+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.order_id like '8%' and oi.item_id REGEXP '^-?[0-9]+$' "
+				+ "and o.last_updated_ts < DATE_SUB(CURDATE(),INTERVAL 30 DAY) ORDER BY RAND() limit 1";
 		
 		Sql_LineItem_Cancellation_Status_Expt = "SELECT o.SITE_GEN_ORD_ID,oi.item_id FROM ORD O,ORD_ITEM OI,SALES_CHECK SC,FFM_METHOD FFM, payment p,"
 				+ "payment_instruction pi,pmt_method pm WHERE O.ORDER_SERVICE_ORGINATING_SERVER in ('qa.ecom.sears.com') AND O.ORDER_ID=OI.ORDER_ID "
-				+ "AND SC.ORDER_ID=O.ORDER_ID  AND SC.SALES_CHECK_ID=OI.SALES_CHECK_ID and FFM.FFM_METHOD_id=OI.FFM_METHOD_id and "
-				+ "pi.PAYMENT_METHOD_ID=pm.payment_method_id and p.PAY_INSTRUCTION_ID=pi.PAY_INSTRUCTION_ID and sc.sales_check_id=p.sales_check_id "
+				+ "AND SC.ORDER_ID=O.ORDER_ID  AND SC.SALES_CHECK_ID=OI.SALES_CHECK_ID and FFM.FFM_METHOD_id=OI.FFM_METHOD_id and o.SITE_ID not in (10171)"
+				+ "and pi.PAYMENT_METHOD_ID=pm.payment_method_id and p.PAY_INSTRUCTION_ID=pi.PAY_INSTRUCTION_ID and sc.sales_check_id=p.sales_check_id "
 				+ "and o.ORDER_ID=pi.order_ID and FFM.FFM_CLASS_ID in('VD') AND OI.ORDER_ITEM_STS_CD  Not IN ("+lineItem_eligible_status+") and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and "
-				+ "oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id like '9%'  and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
-				+ "and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-06-15 01:01:01' limit 1";
+				+ "oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id like '8%'  and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
+				+ "and o.last_updated_ts < DATE_SUB(CURDATE(),INTERVAL 30 DAY) ORDER BY RAND() limit 1";
 				
 		try {
 			
 			st = conn.prepareStatement(Sql_LineItem_Cancellation_Eligible);
+			System.out.println("-------------------------------------------------"+Sql_LineItem_Cancellation_Eligible);
 			Reporter.log("SQL Query: "+Sql_LineItem_Cancellation_Eligible);
 			st.execute();
 			rs = st.getResultSet();
 			while(rs.next()){
-				lineitem_Cancellation_Eligible_orderID = rs.getString("site_gen_ord_id");
+				lineitem_Cancellation_Eligible_orderID = rs.getString("order_id");
 				System.out.println("Line Item Cancellation Eligible Order ID: "+lineitem_Cancellation_Eligible_orderID);
 				lineitem_Cancellation_Eligible_SKU = rs.getString("item_id");
 				System.out.println("Line Item Cancellation Eligible SKU: "+lineitem_Cancellation_Eligible_SKU);
