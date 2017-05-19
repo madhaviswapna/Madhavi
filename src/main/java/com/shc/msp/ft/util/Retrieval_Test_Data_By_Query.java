@@ -104,6 +104,9 @@ public class Retrieval_Test_Data_By_Query {
 	public static String subOrderID = null;
 	public static String orderID = null;
 	public static String salescheckID = null;
+	public static String FBM_orderId=null;
+	
+	
 
     
     public synchronized void sales_Tax_Adjustment_Data() throws Exception{
@@ -1166,7 +1169,8 @@ public class Retrieval_Test_Data_By_Query {
 	public static String lineitem_Start_Automated_Return_Eligible_SKU = null;
 	public static String lineitem_Start_Automated_Return_StatusExpt_orderID = null;
 	public static String lineitem_Start_Automated_Return_StatusExpt_SKU = null;
-
+	public static String FBM_lineitem_SKU= null;
+	
 	public static ThreadLocal<Retrieval_Test_Data_By_Query> thread = new ThreadLocal<Retrieval_Test_Data_By_Query>() {
 		protected Retrieval_Test_Data_By_Query initialValue() {
 			return new Retrieval_Test_Data_By_Query();
@@ -1970,6 +1974,7 @@ public class Retrieval_Test_Data_By_Query {
 	static String Sql_Gift_Card_Info_Eligible = null;
 	static String Sql_General_Order = null;
 	static String Sql_Commercail_Order = null;
+	static String Sql_FBM_Order = null;
 	public static String layaway_contract_details_fetch= null;
 	public static String Vendor_details_fetch= null;
 	public static String hasDiscount_OrderID = null;
@@ -2449,4 +2454,29 @@ public void searchOrder_By_OrderID() throws Exception{
 		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 		}
 
+public void fbm_line_item_cancellation_not_eligible() throws Exception{
+		
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		Sql_FBM_Order = "Select distinct order_id,item_id from ord_item where ffm_method_id in ( select ffm_method_id from Ffm_method where FFM_CLASS_ID='FBM')"
+						+" and SITE_ID in ('40154') and ITEM_ID like '%SPM%' and so_line_number=1"
+						+" order by LAST_UPDATED_TS desc limit 1";
+		
+		System.out.println("------------------------------------+sql:"+Sql_FBM_Order);
+		try {
+			
+			st = conn.prepareStatement(Sql_FBM_Order);
+			Reporter.log("SQL Query: "+Sql_FBM_Order);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				FBM_orderId = rs.getString("order_id").toString();
+				System.out.println("----------------------------------------------------order id "+FBM_orderId);
+				FBM_lineitem_SKU=rs.getString("item_id").toString();
+				System.out.println("----------------------------------------------------sku "+FBM_lineitem_SKU);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		}
 }

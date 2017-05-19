@@ -1470,7 +1470,8 @@ public class OrderDetailsPage extends Page {
 	}
 
 	public OrderDetailsPage clickOnSkuNumberUnderLineItemTab(String sku){
-		getAction().waitFor(2000);
+		//getAction().waitFor(2000);
+		AjaxCondition.forElementPresent(LINE_ITEM_SALES_CHECKS_TAB).waitForResponse(3000);
 		getAction().click(LINE_ITEM_SALES_CHECKS_TAB);
 
 		Logger.log("Click on SKU Number "+sku+" under the Line Item Tab",TestStepType.STEP);

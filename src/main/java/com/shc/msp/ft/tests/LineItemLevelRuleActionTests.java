@@ -848,13 +848,13 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	 */
 
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+	@Test(dataProvider = "DP_FBM_Line_Item_Cancellation_NonEligible_orderID",
 			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_NoCancellation_FBM"}
 	, description = "Verify cancellation at line item level for eligible orders", enabled = true)
-	public void line_Item_Level_Verify_NoCancellation_FBM(TestData data) {
-		String[] test_data = getProductToTest("ItemLevelFBMCancellation").split(",");
+	public void line_Item_Level_Verify_NoCancellation_FBM(String orderId, String sku) {
+		/*String[] test_data = getProductToTest("ItemLevelFBMCancellation").split(",");
 		String OrderID=test_data[0];
-		String sku = test_data[1];
+		String sku = test_data[1];*/
 
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -866,7 +866,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		.addlogType(TestStepType.THEN)
 		.verifyonlineagent()
 		.addlogType(TestStepType.WHEN)
-		.searchByOrderId(OrderID)
+		.searchByOrderId(orderId)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
@@ -1205,6 +1205,17 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		testData[0][1]= sku[0];
 		return (testData);
 	} 
+	
+	@DataProvider (name="DP_FBM_Line_Item_Cancellation_NonEligible_orderID")
+	public Object[][] DP_FBM_Line_Item_Cancellation_NonEligible_orderID() throws Exception{
+		Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().fbm_line_item_cancellation_not_eligible();
+		String OrderID[]={Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().FBM_orderId};
+		String sku[]={Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().FBM_lineitem_SKU};
+		Object[][] testData = new Object[1][2];
+		testData[0][0]= OrderID[0];
+		testData[0][1]= sku[0];
+		return (testData);
+	}
 
 	@AfterMethod
 	public void tearDown(){
