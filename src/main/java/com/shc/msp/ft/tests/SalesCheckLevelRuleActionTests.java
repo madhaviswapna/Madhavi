@@ -233,7 +233,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests","sales_Check_Level_ReadyForPickupEmail_Option_Eligible"}
             , description = "Verify ready for pickup mails", enabled = true, priority=53)
     public void sales_Check_Level_ReadyForPickupEmail_Option_Eligible(TestData data) {
 		
