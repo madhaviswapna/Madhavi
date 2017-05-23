@@ -939,10 +939,11 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
-
-		ProductData order = getProductDataToTest("MSP_Delivery_Pended_Order");
-		String dosorderID=order.getPartNumber().toString();
-		String dosunitID=order.getUnitNumber().toString();
+		
+		String[] arr= getProductToTest("Pended_Open_Order",true).split(",");
+		//ProductData order = getProductDataToTest("Pended_Open_Order");
+		String dosorderID=arr[0];
+		String dosunitID=arr[1];
 
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
@@ -2112,6 +2113,44 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyActionCapturedInNotes("Cancel Delivery Order");
 
 
+	}  
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Cancel_Open_Line_Item"}
+	, description = "Verify if a line item for open order can be cancelled", enabled = true)
+	public void MSP_Delivery_Test_Cancel_Open_Line_Item_VerifyContactHistory(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Cancel_Eligible_Line_Item",true);	
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.chooseOpenHDOrders()
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.cancelOrderDelivery("Line item","Open","")
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: ITEM CANCEL")
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedInNotes("Cancel Delivery Item");
 	}  
 }
 
