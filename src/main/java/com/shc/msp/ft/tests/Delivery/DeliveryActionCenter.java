@@ -1711,9 +1711,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		;
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Open_Order"}
 	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
-	public void Delivery_SCIM_Update_Captured_Notes_Verification(TestData data) throws Exception {
+	public void Delivery_SCIM_Update_Open_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); 
@@ -2152,6 +2152,79 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedInNotes("Cancel Delivery Item");
 	}  
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification_Open_Order"}
+	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
+	public void Delivery_SCIM_Update_Captured_Notes_Verification_Open_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		System.out.println();
+		List<String> list= new ArrayList<String>();
+		list.add("SCIM HANDLE CODE CHANGED");
+		list.add("MSP USER"+": "+user.userName);
+		list.add("OSH/MSO-WEB: SCIM HANDLE CODE UPD");
+
+		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);
+		System.out.println("OrderId:"+orderId);
+
+		As.guestUser.goToHomePage()
+
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyupdateScimCode("Open")
+
+		.addlogType(TestStepType.THEN)
+		.verifyLineItemDetail("Open")
+
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")
+
+		.addlogType(TestStepType.WHEN)
+		.goToDeliveryNotes()
+
+		.addlogType(TestStepType.THEN)
+		.verifyDeliveryOSHNotes(list)
+
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+
+		.addlogType(TestStepType.WHEN)
+		.wrapUpOrderWithoutContactDelivery()
+
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyActionCapturedHistoryNotes();
+
+	}
 }
 
 

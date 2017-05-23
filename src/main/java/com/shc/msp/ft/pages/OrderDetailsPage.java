@@ -5897,16 +5897,16 @@ public class OrderDetailsPage extends Page {
 		for(int i=1;i<=openMultiLineItem;i++){
 			AjaxCondition.forElementPresent(CLICK_TO_UPDATE.format(i)).waitForResponse();
 			getAction().click(CLICK_TO_UPDATE.format(i));
-			AjaxCondition.forElementPresent(SCIM_CODE_COUNT).waitWithoutException(2000);
+			AjaxCondition.forElementPresent(SCIM_CODE_COUNT).waitForResponse();
 			int rndCodeCategory = generateRandomNumberSelect(SCIM_CODE_COUNT);
-			AjaxCondition.forElementPresent(SCIM_CODE_SELECTION.format(i,rndCodeCategory)).waitForResponse(3000);
-			getAction().waitFor(5000);
+			AjaxCondition.forElementPresent(SCIM_CODE_SELECTION.format(i,rndCodeCategory)).waitForResponse();
+			//getAction().waitFor(5000);
 			System.out.println(getAction().getText(SCIM_CODE_SELECTION.format(i,rndCodeCategory)));
 
 			getAction().click(SCIM_CODE_SELECTION.format(i,rndCodeCategory));
-			getAction().waitFor(4000);
+			getAction().waitFor(3000);
 		}
-		getAction().waitFor(5000);
+		//getAction().waitFor(5000);
 		AjaxCondition.forElementPresent(UPDATE_SCIM_CODES).waitForResponse(2000);
 		getAction().click(UPDATE_SCIM_CODES);
 
