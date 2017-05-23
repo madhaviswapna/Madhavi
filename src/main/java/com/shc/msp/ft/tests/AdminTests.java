@@ -54,7 +54,7 @@ public class AdminTests extends BaseTests {
 
 	@Test(dataProvider = "DP_Vendor_Details",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSuperAdminTest,"Search_vendor_SuperAdmin"}, description = "Admin searches vendor details by vendorid")
 	public void Search_Vendor_SuperAdmin(String VendorID)throws Exception {
-
+		VendorID=getProductToTest("MSP_Vendor_ID");
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 		LogFormatterAction.beginSetup();
 		User user = User.find("Onlineuser1");
