@@ -2,6 +2,8 @@ package com.shc.msp.ft.tests.Delivery;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -179,6 +181,54 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}  
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Address_Captured_Notes_Interaction_Open_Order"}
+	, description = "MSP_Delivery_Update_Address_Captured_Notes_Interaction_Open_Order", enabled = true)
+	public void MSP_Delivery_Update_Address_Captured_Notes_Interaction_Open_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Even_Exchange_Open_HD_Order",true);	
+		
+		String [] interaction = {"Update Delivery Address","Update Delivery Contact Details"};
+		String [] dosNotes = {"UPDATED CONTACT INFO","UPDATED DELIVERY ADDRESS"};
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId,  DcNumber.DC_NO)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.updateAndVerifyNameEmailNumber()
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteraction(Arrays.asList(interaction))
+		.addlogType(TestStepType.THEN)
+		.goToDeliveryNotes()
+		.verifyDeliveryOSHNotes(Arrays.asList(dosNotes))
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.WHEN)
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyActionCapturedInNotesForUpdateContact()
+		;
+	} 
+	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder"}
 	, description = "Update the phone number, address line, name and email and verify whether updated", enabled = true)
 	public void MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder(TestData data) throws Exception {

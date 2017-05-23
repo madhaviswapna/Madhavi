@@ -1128,7 +1128,7 @@ public class OrderDetailsPage extends Page {
 			SoftAssert.checkConditionAndContinueOnFailure("updatedWorkPhone: "+updatedWorkPhone, getAction().getValue(UPDATE_WORK_PHONE).equalsIgnoreCase(updatedWorkPhone));
 
 		}
-
+		getContext().put("adjustmentOption", "");
 
 		return this;
 	}

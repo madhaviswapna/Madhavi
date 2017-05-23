@@ -418,12 +418,21 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 	public OrderDetailsAction verifyAdjustmentCapturedInInteraction(String adjust) {
-		Logger.log("Verify Email sent to customer is captured in interaction",TestStepType.THEN);
+		Logger.log("Verify "+adjust+" is captured in interaction",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyAdjustmentCapturedInInteraction(adjust);
 		return this;
 	}
+	public OrderDetailsAction verifyAdjustmentCapturedInInteraction(List<String> adjust) {
+		
+		for(String s:adjust){
+			Logger.log("Verify "+s+" is captured in interaction",TestStepType.THEN);
+			this.factory.orderdetailspage().verifyAdjustmentCapturedInInteraction(s);
+		}
+		
+		return this;
+	}
 	public OrderDetailsAction verifyAdjustmentCapturedInNotes(String adjust) {
-		Logger.log("Verify Email sent to customer is captured in notes",TestStepType.THEN);
+		Logger.log("Verify "+adjust+" is captured in interaction",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyAdjustmentCapturedInNotes(adjust);
 		return this;
 	}
@@ -433,7 +442,7 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 	public OrderDetailsAction verifyRoutingForOfflineAgent() {
-		Logger.log("Verify Email sent to customer is captured in notes",TestStepType.THEN);
+		Logger.log("Verify Case Routing for Offline Agent",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyRoutingForOfflineAgent();
 		return this;
 	}
@@ -636,13 +645,13 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		return this;
 	}
 	public OrderDetailsAction verifyDeliveryOSHNotes(List<String> list){
-		Logger.log("verify delivery notes updates",TestStepType.THEN);
-
+		
 		Iterator<String> itr =list.iterator();
 		while(itr.hasNext()){
-			String rereserveDos=itr.next();
-			System.out.println(rereserveDos);
-			verifyDataInDeliveryNotes(rereserveDos);
+			String verifyData=itr.next();
+			Logger.log("Verify delivery notes:-" + verifyData,TestStepType.THEN);
+			System.out.println(verifyData);
+			verifyDataInDeliveryNotes(verifyData);
 		}
 		return this;
 	}
