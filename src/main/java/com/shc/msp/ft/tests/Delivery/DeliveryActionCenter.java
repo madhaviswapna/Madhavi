@@ -2073,6 +2073,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Unrestricted Time Window","Delivery Driver");
 	}
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Cancel_Open_Whole_Order_CaptureNotesVerification"}
+	, description = "Verify if whole order can be cancelled", enabled = true)
 	public void MSP_Delivery_Test_Cancel_Open_Whole_Order_CaptureNotesVerification(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
