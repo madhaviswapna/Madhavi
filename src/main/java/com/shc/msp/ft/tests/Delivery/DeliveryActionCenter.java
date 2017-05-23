@@ -2072,6 +2072,44 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Unrestricted Time Window","Delivery Driver");
 	}
+	
+	public void MSP_Delivery_Test_Cancel_Open_Whole_Order_CaptureNotesVerification(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Cancel_Eligible_Order",true);	
+		System.out.println("OrderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed("dosorderId", orderId)
+		.addlogType(TestStepType.THEN)
+		.cancelOrderDelivery("Whole order","Open","")
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: CANCEL ORDER")
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedInNotes("Cancel Delivery Order");
+
+
+	}  
 }
 
 
