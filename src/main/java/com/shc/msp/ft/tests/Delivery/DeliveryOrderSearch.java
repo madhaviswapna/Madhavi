@@ -189,7 +189,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Even_Exchange_Open_HD_Order",true);	
+		String orderId= getProductToTest("Even_Exchange_Open_HD_Order");	
 		
 		String [] interaction = {"Update Delivery Address","Update Delivery Contact Details"};
 		String [] dosNotes = {"UPDATED CONTACT INFO","UPDATED DELIVERY ADDRESS"};
@@ -241,7 +241,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		//String dosorderId= getProductToTest("Partially_Shipped_Order");
 		
 		
-		String[] values= getProductToTest("Scheduleforfollowup_Eligible_Partially_Shipped_Order",true).split(",");
+		String[] values= getProductToTest("Scheduleforfollowup_Eligible_Partially_Shipped_Order").split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
@@ -261,7 +261,54 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}  
-
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder"}
+	, description = "Update the phone number, address line, name and email and verify whether updated", enabled = true)
+	public void MSP_Delivery_Update_Delivery_Info_Partially_Shipped_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String[] values= getProductToTest("Scheduleforfollowup_Eligible_Partially_Shipped_Order").split(",");
+		String orderId=values[0];
+		String dc_no=values[1];
+		System.out.println("orderId:"+orderId+" "+dc_no);
+		String [] interaction = {"Update Delivery Address","Update Delivery Contact Details"};
+		String [] dosNotes = {"UPDATED CONTACT INFO","UPDATED DELIVERY ADDRESS"};
+		
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, dc_no)
+		.choosePartiallyshippedHDOrders()
+		._OrderDetailsAction()
+		.updateAndVerifyNameEmailNumber()
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteraction(Arrays.asList(interaction))
+		.addlogType(TestStepType.THEN)
+		.goToDeliveryNotes()
+		.verifyDeliveryOSHNotes(Arrays.asList(dosNotes))
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.WHEN)
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, dc_no)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyActionCapturedInNotesForUpdateContact()
+		;
+	}
 	//Melvin - Updated code using product id
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "MSP_Delivery_Agent_Search_By_DOS_Order_And_DOS_Unit"}
 
