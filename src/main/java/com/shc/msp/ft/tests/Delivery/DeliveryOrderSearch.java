@@ -262,8 +262,8 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		;
 	}  
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder"}
-	, description = "Update the phone number, address line, name and email and verify whether updated", enabled = true)
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Delivery_Info_Partially_Shipped_Order"}
+	, description = "MSP_Delivery_Update_Delivery_Info_Partially_Shipped_Order", enabled = true)
 	public void MSP_Delivery_Update_Delivery_Info_Partially_Shipped_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
