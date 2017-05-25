@@ -690,5 +690,11 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType,windowType,agent);
 		return this;
 	}
+	public OrderDetailsAction verifyCancelbuttonnotPresent() {
+		Logger.log("Verify cancel button not present in action center",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyCancelbuttonnotPresent();
+		return this;
+	}
+	
 		
 }

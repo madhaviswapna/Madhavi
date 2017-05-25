@@ -1964,7 +1964,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_Cancel_Order_Captured_Notes_Verification_Released_Order"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_Cancel_Order_Captured_Notes_Verification_Released_Order"}
 	, description = "Cancel the whole order and verify notes and interaction are captured for Released order", enabled = true)
 	public void Delivery_Cancel_Order_Captured_Notes_Verification_Released_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -1982,7 +1982,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-
 		.addlogType(TestStepType.GIVEN)
 		.chooseReleasedHDOrders()
 		._OrderDetailsAction()
@@ -1990,6 +1989,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyLineItemDetail("Released")
 		.addlogType(TestStepType.THEN)
 		.cancelOrderDelivery("Whole order","Released","Delivery Driver")
+		.goToDeliveryNotes()
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: CANCEL ORDER")
 		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
@@ -2182,6 +2183,37 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyActionCapturedHistoryNotes();
 
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Contact_Delivery"}
+	, description = "Update the contact details and verify notes and interaction are captured", enabled = true)
+	public void MSP_Delivery_Test_Cancel_not_Eligible_Released_TBC_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();		
+
+		String[] arr= getProductToTest("Released_TBC_Order").split(",");
+		String orderId=arr[0];
+		String dc_number=arr[1];
+		
+		System.out.println("OrderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, dc_number)
+		.addlogType(TestStepType.GIVEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyCancelbuttonnotPresent();
+	} 
+
 }
 
 

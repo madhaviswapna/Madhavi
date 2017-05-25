@@ -6270,6 +6270,17 @@ public class OrderDetailsPage extends Page {
 		return null;
 
 	}
+	
+	public void verifyCancelbuttonnotPresent(){
+		Logger.log("Verify Cancle button is not present in action center", TestStepType.STEP);
+		getAction().waitFor(3000);
+		if(getAction().isVisible(CANCEL_BUTTON)){
+			PageAssert.fail("cancel button is Present");
+		}
+		else
+			Logger.log("cancel button is not present ",TestStepType.VERIFICATION_PASSED);
+	}
+
 
 }
 
