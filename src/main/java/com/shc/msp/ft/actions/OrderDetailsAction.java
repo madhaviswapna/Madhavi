@@ -82,6 +82,12 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyAdjustments(OrderID);
 		return this;
 	}
+	
+	public OrderDetailsAction verifyAdjustmentCapturedInOrderSummary(String adjust, String amount){
+		Logger.log("Verify "+adjust+" in Order Summary",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyAdjustmentCapturedInOrderSummary(adjust, amount);
+		return this;
+	}
 
 	public OrderDetailsAction verifyPayments(String OrderID,String storeId) throws SQLException{
 		Logger.log("Payment summary should be displayed",TestStepType.THEN);

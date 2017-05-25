@@ -367,11 +367,10 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 	}
 
 
-	@Test(dataProvider = "DP_ST_Adjustment_Eligible",groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Sales_Tax_Adjustment_CapturedNotesInteraction"}
-	, description = "Verify sale adjustment at order level", enabled = true, priority=34)	
-	public void Order_Level_Sales_Tax_Adjustment_CapturedNotesInteraction(String  OrderID) {
+	@Test(dataProvider = "DP_ST_Adjustment_Eligible",groups = {TestGroup.MSPP0Tests,"Order_Level_Sales_Tax_Adjustment_Captured_In_Order_Summary_Notes_Interaction"}
+	, description = "Order_Level_Sales_Tax_Adjustment_Captured_In_Order_Summary_Notes_Interaction", enabled = true, priority=34)	
+	public void Order_Level_Sales_Tax_Adjustment_Captured_In_Order_Summary_Notes_Interaction(String  OrderID) throws Exception {
 		//String OrderID = getProductToTest("SaleAdjustmentOrder");
-		
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getUser();
@@ -390,6 +389,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		.taxadjustment("Sales Tax Adjustment",0.1,OrderID)
 		.verifyTrialBalanceIfPresent()
 		.verifyAdjustmentCapturedInInteraction("Sales Tax Adjustment")
+		.verifyAdjustmentCapturedInOrderSummary("SALESTAX", "0.1")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
 		.fillRFCForm()
@@ -403,9 +403,9 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		;
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Shipping_Adjustment_CapturedNotesInteraction"}
-	, description = "Verify sale adjustment at order level with Interaction Notes", enabled = true, priority=34)	
-	public void Order_Level_Shipping_Adjustment_CapturedNotesInteraction(TestData data) {
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "Order_Level_Shipping_Adjustment_Captured_In_Order_Summary_Notes_Interaction"}
+	, description = "Order_Level_Shipping_Adjustment_Captured_In_Order_Summary_Notes_Interaction", enabled = true, priority=34)	
+	public void Order_Level_Shipping_Adjustment_Captured_In_Order_Summary_Notes_Interaction(TestData data) {
 		String OrderID = getProductToTest("ShippingAdjustmentOrder");
 		
 		addCloneIDHostname(data);
@@ -423,10 +423,10 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Shipping Adjustment")
-		.taxadjustment("Shipping Adjustment",0.001,OrderID)
-		//.verifyTrialBalance()
-		.clickSubmitButton()
+		.taxadjustment("Shipping Adjustment",0.01,OrderID)
+		.verifyTrialBalanceIfPresent()
 		.verifyAdjustmentCapturedInInteraction("Shipping Adjustment")
+		.verifyAdjustmentCapturedInOrderSummary("Shipping Charge", "0.01")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
 		.fillRFCForm()

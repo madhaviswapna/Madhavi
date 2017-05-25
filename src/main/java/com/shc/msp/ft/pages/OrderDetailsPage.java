@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -328,7 +330,8 @@ public class OrderDetailsPage extends Page {
 	public final Locator ADJUSTMENTS_AMOUNT_COL_NAME = new Locator("ADJUSTMENTS AMOUNT COL NAME","//legend[text()='Adjustments']//following-sibling::div//table//thead//tr//th[2]","Adjustments Amount Column Name");
 	public final Locator ADJUSTMENTS_DATE_COL_NAME = new Locator("ADJUSTMENTS DATE COL NAME","//legend[text()='Adjustments']//following-sibling::div//table//thead//tr//th[3]","Adjustments Dates Column Name");
 	public final Locator ADJUSTMENTS_SALECHECK_NO_COL_NAME = new Locator("ADJUSTMENTS SALECHECK# COL NAME","//legend[text()='Adjustments']//following-sibling::div//table//thead//tr//th[4]","Adjustments Sales Check# Column Name");
-
+	public final Locator LATEST_ADJUSTMENT_IN_ORDER_SUMMARY = new Locator("LATEST_ADJUSTMENT_IN_ORDER_SUMMARY", "(//legend[text()='Adjustments']//following-sibling::div//tr)[last()]/td[{0}]", "LATEST_ADJUSTMENT_IN_ORDER_SUMMARY");
+	
 	//Order Summary Payment
 	public final Locator PAYMENTS_TITLE_TEXT = new Locator("PAYMENTS TITLE TEXT","//legend[text()='Payments']","Payments Title Text");
 	public final Locator PAYMENTS_TABLE_O = new Locator("ORDER PAYMENTS TABLE","//legend[text()='Payments']//following-sibling::div//table","Payments Table");
@@ -4566,6 +4569,19 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY_ADJUSTMENT.format(adjust,type)).waitForResponse();
 		getAction().click(CONTACT_HISTORY_MENU_DOWN);
 
+	}
+	
+	public OrderDetailsPage verifyAdjustmentCapturedInOrderSummary(String adjust, String amount){
+		getAction().waitFor(2000);
+		Logger.log("Verify "+adjust+" done are captured in Order Summary", TestStepType.STEP);
+		getAction().scrollTo(LATEST_ADJUSTMENT_IN_ORDER_SUMMARY.format("1"));
+		String retrievedAdj = getAction().getText(LATEST_ADJUSTMENT_IN_ORDER_SUMMARY.format("1"));
+		String retrievedAmount = getAction().getText(LATEST_ADJUSTMENT_IN_ORDER_SUMMARY.format("2"));
+		System.out.println("Adjustment "+retrievedAdj.equalsIgnoreCase(adjust));
+		SoftAssert.checkConditionAndContinueOnFailure("Verify "+adjust+" is the latest adjustment in the table", retrievedAdj.equalsIgnoreCase(adjust));
+		System.out.println("Amount "+retrievedAmount.contains(amount));
+		SoftAssert.checkConditionAndContinueOnFailure("Verify adjustment amount", retrievedAmount.contains(amount));
+		return this;		
 	}
 
 	public void verifyEmailCapturedInNotes(){
