@@ -2184,8 +2184,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Contact_Delivery"}
-	, description = "Update the contact details and verify notes and interaction are captured", enabled = true)
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Cancel_not_Eligible_Released_TBC_Order"}
+	, description = "verify cancel nutton is not present for released TBC order", enabled = true)
 	public void MSP_Delivery_Test_Cancel_not_Eligible_Released_TBC_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
