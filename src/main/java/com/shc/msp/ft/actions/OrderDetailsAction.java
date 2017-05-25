@@ -596,7 +596,8 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 			verifyReasonCodes(keyword.get(i).toString(),true);
 		}
 	}
-	public void verifyAllReasonCodePresence(List <Object> keyword) {
+	public void verifyAllReasonCodePresence(List <Object> keyword, String agent) {
+		if(agent.equalsIgnoreCase("delivery"))
 		clickOnReasonDropdown();
 		Iterator<Object> itr= keyword.iterator();
 		while (itr.hasNext()) {

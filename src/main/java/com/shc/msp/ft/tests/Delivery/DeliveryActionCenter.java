@@ -1044,7 +1044,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.verifyAllReasonCodePresence(keywords);
+		.verifyAllReasonCodePresence(keywords,"delivery");
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
@@ -1073,7 +1073,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.verifyAllReasonCodePresence(keywords);
+		.verifyAllReasonCodePresence(keywords,"delivery");
 	}
 
 
@@ -2213,7 +2213,49 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyCancelbuttonnotPresent();
 	} 
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_verify_ReasonCode_HD_Uneven_Exchange_Queue"}
+	, description = "Verify if the reaons codes whle trying to wrap up an order in HD_Uneven_Exchange queue", enabled = true)
+	public void MSP_Delivery_Test_verify_ReasonCode_HD_Uneven_Exchange_Queue(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName="testdelivery0122";
+		user.password="TestPassword";
+		List<Object> keywords= getAllProductToTest("unevenExchangeReasonCodes");
 
+		//String orderId= getProductToTest("Pickup_Eligible_Shipped_Order");
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Uneven Exchange")
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId("384500", DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.queueForFollowUp("Uneven Exchange - Exchange for a different item than is currently in the home.")
+		.addlogType(TestStepType.WHEN)
+		._NavigationAction()
+		.verifyDeliveryOfflineagent()
+		.selectCaseFromAssignedQueue()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.WHEN)
+		.verifyReasoncodeAndWrapup()
+		.addlogType(TestStepType.THEN)
+		.verifyAllReasonCodePresence(keywords,"deliveryOffline");
+	
+	}
 }
 
 

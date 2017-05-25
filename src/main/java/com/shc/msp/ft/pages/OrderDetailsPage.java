@@ -6280,6 +6280,30 @@ public class OrderDetailsPage extends Page {
 		else
 			Logger.log("cancel button is not present ",TestStepType.VERIFICATION_PASSED);
 	}
+	
+	public OrderDetailsPage verifyOfflineReasoncodeAndWrapup(){
+		Logger.log("Click on Wrap Up button in Action Center");
+		AjaxCondition.forElementVisible(WRAPUP_BUTTON).waitForResponse();
+		getAction().scrollTo(WRAPUP_BUTTON);
+		getAction().click(WRAPUP_BUTTON);
+		getAction().waitFor(4000);
+
+		int rndCodeCategory = generateRandomNumberSelect(CATEGORY_DROPDOWN_CODE_COUNT);
+		Logger.log("Select option #"+rndCodeCategory+" in category select");
+		AjaxCondition.forElementPresent(CATEGORY_DROPDOWN_CODE.format(rndCodeCategory));
+		getAction().selectUsingIndex(CATEGORY_DROPDOWN_CODE, rndCodeCategory);
+
+		/*int rndCodeReason = generateRandomNumberSelect(DELIVERY_REASON_DROPDOWN_COUNT);
+
+		System.out.println("-----------------------------------------------------------------------------"+DELIVERY_REASON_DROPDOWN_COUNT);
+		Logger.log("Select option #"+rndCodeReason+" in category select");
+		AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason));
+
+		AjaxCondition.forElementPresent(DELIVERY_REASON_DROPDOWN.format(rndCodeReason))*/;
+		getAction().click(DELIVERY_REASON_DROPDOWN);
+		return this;
+
+	}
 
 
 }
