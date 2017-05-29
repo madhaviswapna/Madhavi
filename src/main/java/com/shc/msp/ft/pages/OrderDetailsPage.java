@@ -719,7 +719,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator REASON_EXCEPTION= new Locator("REASON_EXCEPTION","//label[contains(text(),'Reason for exception')]/following-sibling::textarea","REASON_EXCEPTION");
 	//public final Locator CONTINUE_TO_CANCEL_ORDER= new Locator("CONTINUE_TO_CANCEL_ORDER","//label[contains(text(),'Password')]/following-sibling::input","CONTINUE_TO_CANCEL_ORDER");
 
-
+	public final Locator DELIVERY_NOTES_DATA1= new Locator("DELIVERY_NOTES_DATA","//td[contains(text(),'{0}') and contains(text(),'{1}')]","DELIVERY NOTES DATA");
 
 	
 	Map<String, List<String>> map =new LinkedHashMap<>();
@@ -4631,7 +4631,8 @@ public class OrderDetailsPage extends Page {
 
 		if (orderType.equalsIgnoreCase("Shipped")||orderType.equalsIgnoreCase("Cancelled")){
 			PageAssert.elementNotVisible(RERESERVE_BUTTON);
-			Logger.log("Rereserve button is not available in Action Center" , TestStepType.VERIFICATION_PASSED);}
+			Logger.log("Rereserve button is not available in Action Center" , TestStepType.VERIFICATION_PASSED);
+		}
 
 		else{
 			Logger.log("Verify Rereserve button is present in action center", TestStepType.STEP);
@@ -4886,7 +4887,10 @@ public class OrderDetailsPage extends Page {
 		}
 		else{
 			AjaxCondition.forElementVisible(DELIVERY_NOTES_DATA.format(data)).waitForResponse();
-			SoftAssert.checkConditionAndContinueOnFailure("verified DeliveryNotes has data:"+data, getAction().getText(DELIVERY_NOTES_DATA.format(data)).contains(data));
+			String text=getAction().getText(DELIVERY_NOTES_DATA.format(data)).trim();
+			System.out.println("---------------------------------system value"+text);
+			System.out.println("---------------------------------my     value"+data.trim());
+			SoftAssert.checkConditionAndContinueOnFailure("verified DeliveryNotes has data:"+data,text.contains(data.trim()));
 		}
 	}
 
@@ -6295,6 +6299,43 @@ public class OrderDetailsPage extends Page {
 		}
 		else
 			Logger.log("cancel button is not present ",TestStepType.VERIFICATION_PASSED);
+	}
+	
+	public void captureSalescheckNumber(){
+		Logger.log("Verify Cancle button is not present in action center", TestStepType.STEP);
+		getAction().waitFor(4000);
+		if(getAction().isVisible(DOS_ORDER_SUMMARY_SALESCHECK_NUMBER)){
+			String saleschecknumber=getAction().getText(DOS_ORDER_SUMMARY_SALESCHECK_NUMBER);
+			System.out.println("----------------------------------saleschecknumber"+saleschecknumber);
+			getContext().put("oldOrdersaelchecknumber", saleschecknumber);
+		}
+		else
+			PageAssert.fail("sales check number is not displayed");
+	}
+	
+	public void verifyNewOrderhassameSalescheckNumber(){
+		Logger.log("verify the salescheck number of the new created order is same as old order salescheck", TestStepType.STEP);
+		getAction().waitFor(3000);
+		if(getAction().isVisible(DOS_ORDER_SUMMARY_SALESCHECK_NUMBER)){
+			String saleschecknumber=getAction().getText(DOS_ORDER_SUMMARY_SALESCHECK_NUMBER);
+			System.out.println("----------------------------------------new order saleschecknumber"+saleschecknumber);
+			String oldsaleschecknumber=(String) getContext().get("oldOrdersaelchecknumber");
+			System.out.println("----------------------------------------old order saleschecknumber"+oldsaleschecknumber);
+			if(saleschecknumber.equalsIgnoreCase(oldsaleschecknumber)){
+				Logger.log("new order has same salescheck number as old order",TestStepType.VERIFICATION_PASSED);
+			}
+			else
+				PageAssert.fail("sales check number is not displayed");
+		}
+	}
+	
+	public void verifyDateandUserInDeliveryOSHNote(String str1,String str2){
+		Logger.log("verify Data In DeliveryNotes", TestStepType.STEP);
+		getAction().waitFor(3000);
+		System.out.println("------inside verifyDateandUserInDeliveryOSHNote"+ getAction().getText(DELIVERY_NOTES_DATA1.format(str1,str2)));
+		getAction().scrollTo(DELIVERY_NOTES_DATA1.format(str1,str2));
+		
+		AjaxCondition.forElementVisible(DELIVERY_NOTES_DATA1.format(str1,str2)).waitForResponse();
 	}
 	
 	public OrderDetailsPage verifyOfflineReasoncodeAndWrapup(){

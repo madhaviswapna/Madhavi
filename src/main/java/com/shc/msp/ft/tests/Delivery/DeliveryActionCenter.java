@@ -1,9 +1,13 @@
 package com.shc.msp.ft.tests.Delivery;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -2256,11 +2260,55 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyAllReasonCodePresence(keywords,"deliveryOffline");
 	
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible"}
+	, description = "Verify whether rereserve button is present for open orders", enabled = true)
+	public void MSP_Delivery_Test_Rereserve_Whole_MultiQuantity_Order(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		
+		Calendar currentdate = Calendar.getInstance();
+        String strdate = null;
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+        strdate = formatter.format(currentdate.getTime());
+        TimeZone obj = TimeZone.getTimeZone("CST");
+        formatter.setTimeZone(obj);
+        strdate = formatter.format(currentdate.getTime());
+
+        User user = new User(); user.userName=UserPool.getDeliveryUser();
+		List<String> list= new ArrayList<String>();
+		list.add("RERES DLVR DT SUPPORTED");
+		list.add("MSP USER"+": "+user.userName);
+		list.add("OSH/MSO-WEB: RERESERVATION");
+		list.add("MSP USER"+": "+user.userName);
+		
+		
+		String[] arr= getProductToTest("Open_MultiQuantity_Order").split(",");
+		String orderId=arr[0];
+		String dc_number=arr[1];
+		
+		String ss="MSP USER"+": "+user.userName;
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)	
+		.searchByDeliveryOrderId(orderId,dc_number)
+		.addlogType(TestStepType.GIVEN)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.captureSalescheckNumber()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rereserveItem("open","whole order")
+		.verifyNewOrderhassameSalescheckNumber()
+		.goToDeliveryNotes()
+		.verifyDeliveryOSHNotes(list)
+		.verifyDateandUserInDeliveryOSHNote(strdate,ss);
+	}	
 }
-
-
-
-
-
-
-

@@ -652,12 +652,13 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		return this;
 	}
 	public OrderDetailsAction verifyDeliveryOSHNotes(List<String> list){
-		
+		System.out.println("-----------------------------------------inside verifyDeliveryOSHNotes");
 		Iterator<String> itr =list.iterator();
 		while(itr.hasNext()){
 			String verifyData=itr.next();
 			Logger.log("Verify delivery notes:-" + verifyData,TestStepType.THEN);
-			System.out.println(verifyData);
+			
+			System.out.println("------------------------------------------------------------"+verifyData);
 			verifyDataInDeliveryNotes(verifyData);
 		}
 		return this;
@@ -702,6 +703,21 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().verifyCancelbuttonnotPresent();
 		return this;
 	}
+	public OrderDetailsAction captureSalescheckNumber() {
+		Logger.log("Capture the salescheck number to verify the same salescheck number is ther for the newly created order",TestStepType.THEN);
+		this.factory.orderdetailspage().captureSalescheckNumber();
+		return this;
+	}
+	public OrderDetailsAction verifyNewOrderhassameSalescheckNumber() {
+		Logger.log("Capture the salescheck number to verify the same salescheck number is ther for the newly created order",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyNewOrderhassameSalescheckNumber();
+		return this;
+	}
 	
+	public OrderDetailsAction verifyDateandUserInDeliveryOSHNote(String str1, String str2){
+		Logger.log("Verify data in delivery notes tab",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyDateandUserInDeliveryOSHNote(str1,str2);
+		return this;
+	}
 		
 }
