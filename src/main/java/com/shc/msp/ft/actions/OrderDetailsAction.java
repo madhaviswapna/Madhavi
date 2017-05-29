@@ -474,6 +474,17 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().goToActionCenter();
 		return this;
 	}
+	
+	public OrderDetailsAction goToAuditTrail(){
+		Logger.log("Navigating to Audit Trail",TestStepType.WHEN);
+		this.factory.orderdetailspage().goToAuditTrail();
+		return this;
+	}
+	public OrderDetailsAction verifyActionCapturedInAuditTrail(String action){
+		Logger.log("Verify Action is Performed in Audit Trail",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyActionCapturedInAuditTrail(action);
+		return this;
+	}
 	public OrderDetailsAction pickupOrder() {
 		Logger.log("Verify agent able to do pickup action",TestStepType.THEN);
 		this.factory.orderdetailspage().pickupOrder();

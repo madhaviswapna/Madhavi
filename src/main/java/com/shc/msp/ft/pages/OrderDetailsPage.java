@@ -251,8 +251,11 @@ public class OrderDetailsPage extends Page {
 	public static final Locator SALESCHECKDETAILS = new Locator("SALESCHECKSUMMARY","(//div[@class='col-md-4'])[1]", "Sales check summary");
 	public static final Locator SALESCHECKSHIPPINGADDRESS = new Locator("SALESCHECKDETAILS","(//div[@class='col-md-5'])[1]", "Sales Check details");
 	private static final Locator SEARCH_FOR_ANOTHER_ORDER_LINK = new Locator("SEARCH_FOR_ANOTHER_ORDER_LINK","//span[@info='search_order_link']", "Search for another order link");
-
-
+	
+	//Audit trail page
+	public final Locator SORT_BY_US_CENTRAL_TIME = new Locator("sortByUSCentralTime", "//div[contains(text(),'US Central Time')]", "sortByUSCentralTime");
+	public final Locator AUDIT_TRAIL_ENTRY = new Locator("AUDIT_TRAIL_ENTRY","//tr[contains(.,'{0}')]", "AUDIT_TRAIL_ENTRY");
+	
 	//tabs
 	public final Locator ORDER_SUMMARY_TAB = new Locator("ORDER SUMMARY TAB","//a[text()='Order Summary']","Order Summary Tab");
 	public final Locator ORDER_SUMMARY_WARNING_POPUP = new Locator("ORDER SUMMARY POP ","//div[contains(@class,'modal-content')]//h4[contains(@class,'modal-title ')]","Order Summary Tab popup");
@@ -4866,6 +4869,24 @@ public class OrderDetailsPage extends Page {
 		getAction().scrollTo(DELIVERY_NOTES);
 		getAction().click(DELIVERY_NOTES);
 	}
+	
+	public OrderDetailsPage goToAuditTrail(){
+		Logger.log("Go to Audit Trail", TestStepType.STEP);
+		AjaxCondition.forElementPresent(AUDIT_TRAIL_TAB).waitWithoutException(5);
+		clickOnOrderTabInODP(OrderTab.AUDIT_TRAIL);	
+		return this;
+	}
+	
+	public OrderDetailsPage verifyActionCapturedInAuditTrail(String action){
+		Logger.log("Sort the Audits by US Central Time", TestStepType.STEP);
+		AjaxCondition.forElementPresent(SORT_BY_US_CENTRAL_TIME).waitWithoutException(5);
+		getAction().scrollTo(SORT_BY_US_CENTRAL_TIME);
+		getAction().click(SORT_BY_US_CENTRAL_TIME);
+		getAction().waitFor(2000);
+		SoftAssert.checkElementAndContinueOnFailure(AUDIT_TRAIL_ENTRY.format(action), "Verify the action:- "+action+" is present in the Audit Trail",CheckLocatorFor.isVisible);
+		return this;
+	}
+	
 	public void clickSearchAnotherOrder(){
 		Logger.log("Click on Search for Another Order", TestStepType.STEP);
 		AjaxCondition.forElementVisible(SEARCH_FOR_ANOTHER_ORDER_LINK).waitForResponse(5);

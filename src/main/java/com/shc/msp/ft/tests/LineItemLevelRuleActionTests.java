@@ -105,9 +105,9 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 	//Cancellation - Line Item 
 	
-	@Test(dataProvider = "DP_CancelOrder_Eligible",groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Captured_Notes_Interaction"}
+	@Test(dataProvider = "DP_CancelOrder_Eligible",groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Captured_AuditTrail_Notes_Interaction"}
 	, description = "Verify cancellation at line item level for eligible orders", enabled = true)
-	public void line_Item_Level_Verify_Cancellation_Captured_Notes_Interaction(String orderId, String sku) {
+	public void line_Item_Level_Verify_Cancellation_Captured_AuditTrail_Notes_Interaction(String orderId, String sku) {
 		//String[] test_data = getProductToTest("ItemLevelCancellationEligible").split("\\|");
 		//String OrderID=test_data[0];
 		//String sku = test_data[1];
@@ -137,6 +137,8 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Line Item Cancellation")
+		.goToAuditTrail()
+        .verifyActionCapturedInAuditTrail("KNCNCancel Request")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
 		.fillRFCForm()
