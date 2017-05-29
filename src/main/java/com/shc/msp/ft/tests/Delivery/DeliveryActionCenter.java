@@ -2278,7 +2278,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
         User user = new User(); user.userName=UserPool.getDeliveryUser();
 		List<String> list= new ArrayList<String>();
-		list.add("RERES DLVR DT SUPPORTED");
+		list.add("RERES DLVR DT");
 		list.add("MSP USER"+": "+user.userName);
 		list.add("OSH/MSO-WEB: RERESERVATION");
 		list.add("MSP USER"+": "+user.userName);
