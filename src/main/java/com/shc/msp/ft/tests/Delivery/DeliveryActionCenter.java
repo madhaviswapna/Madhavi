@@ -2262,7 +2262,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Rereserve_Whole_MultiQuantity_Order"}
 	, description = "Verify whether rereserve button is present for open orders", enabled = true)
 	public void MSP_Delivery_Test_Rereserve_Whole_MultiQuantity_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
