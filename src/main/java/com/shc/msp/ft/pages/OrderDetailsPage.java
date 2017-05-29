@@ -522,7 +522,7 @@ public class OrderDetailsPage extends Page {
 	//public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and not(contains(text(),'Cancelled'))]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","(//tr[@value='item'])[1]/td[2]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and contains(text(),'Cancelled')]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
-	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","(//tr[@value='item'])[1]","LINE ITEM ROW");
+	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","//table/tbody[{0}]/tr[@value='item']","LINE ITEM ROW");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[6]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_ORDERED= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[10]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE= new Locator("","//input[@name='selectedQuantity']//ancestor::tr//td[8]","LINE ITEM ROW Quantity Available Even Exchange");
@@ -4934,7 +4934,7 @@ public class OrderDetailsPage extends Page {
 			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
 				getAction().waitFor(3000);
 				verifyDayOfDelivery(agent,"Entire Order");
-				AjaxCondition.forElementVisible(CONTINUE_TO_CANCEL_ORDER).waitForResponse(3000);
+				//AjaxCondition.forElementVisible(CONTINUE_TO_CANCEL_ORDER).waitForResponse(3000);
 				if(agent.equalsIgnoreCase("Delivery Driver")){
 					AjaxCondition.forElementVisible(CONTINUE_TO_CANCEL_ORDER);
 					getAction().click(CONTINUE_TO_CANCEL_ORDER);}}} 
@@ -4942,17 +4942,20 @@ public class OrderDetailsPage extends Page {
 			String lineItemIndex = "1";
 			AjaxCondition.forElementVisible(LINE_ITEM).waitForResponse();
 			getAction().click(LINE_ITEM);
-			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
-			getAction().click(LINE_ITEM_ROW);
-			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex)).waitForResponse();
-			getAction().type(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(lineItemIndex)));
+			int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format("Open"));
+
+			for (int i = 1; i <= openMultiLineItem; i++) {
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW.format(i)).waitForResponse();
+				getAction().click(LINE_ITEM_ROW.format(i));
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex)).waitForResponse();
+				getAction().type(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(lineItemIndex)));
+				getAction().waitFor(1000);
+			}
 			AjaxCondition.forElementVisible(LINE_ITEM_CANCEL).waitForResponse();
 			itemToCancelName =  getAction().getText(LINE_ITEM_NAME_NOT_CANCELLED);
-			getAction().waitFor(1000);
 			getAction().scrollTo(LINE_ITEM_CANCEL);
 			getAction().click(LINE_ITEM_CANCEL);
 		}
-
 		AjaxCondition.forElementVisible(REASON_DROPDOWN_CANCEL).waitForResponse();
 
 		int reasonCodeCount = getAction().getElementCount(REASON_DROPDOWN_CANCEL_OPTIONS_COUNT);
@@ -5830,7 +5833,7 @@ public class OrderDetailsPage extends Page {
 		}
 		getContext().put("adjustmentOption", list);
 		getContext().put("orderRouteStatus", orderRouteStatus);
-		
+		getContext().put("openMultiLineItem", openMultiLineItem);
 		System.out.println("---------------------------------------------"+getContext().get("adjustmentOption"));
 	}
 

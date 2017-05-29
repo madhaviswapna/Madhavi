@@ -2311,4 +2311,100 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyDeliveryOSHNotes(list)
 		.verifyDateandUserInDeliveryOSHNote(strdate,ss);
 	}	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Driver_Agent"}
+	, description = "Verify if an DOD released order can be cancelled", enabled = true)
+	public void MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Driver_Agent(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Released_DOD_Order",true);	
+		System.out.println("salescheck:"+orderId);
+		List<String> list= new ArrayList<String>();
+		list.add("MSP USER"+": "+user.userName);
+		list.add("OSH/MSO-WEB: CANCEL ORDER");
+		list.add("MSP USER"+": "+user.userName);
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.chooseReleasedHDOrders()
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyLineItemDetail("Released")
+		.addlogType(TestStepType.THEN)
+		.cancelOrderDelivery("Whole Order","Released","Delivery Driver")
+		.addlogType(TestStepType.THEN)
+		.goToDeliveryNotes()
+		.addlogType(TestStepType.THEN)
+		.verifyDeliveryOSHNotes(list)
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery();
+	}
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item_CaptureNotesVerification"}
+	, description = "Verify if a line item for Partially Shipped order can be cancelled", enabled = true)
+	public void MSP_Delivery_Test_Cancel_Partially_Shipped_Line_Item_CaptureNotesVerification(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		//String orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true);	
+		List<String> list= new ArrayList<String>();
+		list.add("MSP USER"+": "+user.userName);
+		list.add("OSH/MSO-WEB: ITEM CANCEL");
+		list.add("MSP USER"+": "+user.userName);
+
+		String[] values= getProductToTest("Partially_Shipped_HD_Line_Item",true).split(",");
+		String orderId=values[0];
+		String dc_no=values[1];
+		System.out.println("orderId:"+orderId+" "+dc_no);
+
+		//String orderId= getProductToTest("Cancel_Partially_Shipped",true);
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId,dc_no)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.verifyLineItemDetail("Open")
+		.addlogType(TestStepType.THEN)
+		.cancelOrderDelivery("Line item","Partially Shipped","")
+		.addlogType(TestStepType.THEN)
+		.goToDeliveryNotes()
+		.addlogType(TestStepType.THEN)
+		.verifyDeliveryOSHNotes(list)
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Item")
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId,dc_no)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedHistoryNotes();
+	}
 }
