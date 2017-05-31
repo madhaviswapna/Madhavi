@@ -577,6 +577,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator AUDIT_TRAIL_DETAIL_PAGE = new Locator("AUDIT_TRAIL_Detail","//div[@ng-controller='auditTrailCtrl']","AUDIT TRAIL Detail");
 	public final Locator SYW_MAX_DETAIL_PAGE = new Locator("SYW_MAX_Detail","//div[@ng-controller='sywMaxCtrl']//div/p","SYW MAX Detail");
 	public final Locator NOT_A_SYW_MAX_MEMBER = new Locator("NOT_A_SYW_MAX_MEMBER","//div[@ng-controller='sywMaxCtrl']","NOT_A_SYW_MAX_MEMBER");
+	public final Locator SYW_MAX_SAVINGS = new Locator("SYW_MAX_SAVINGS", "//label[contains(text(),'Max Savings')]/following-sibling::div/p", "SYW_MAX_SAVINGS");
 	public final Locator REASON_DROPDOWN= new Locator("REASON_DROPDOWN","//select[@ng-model='selected.reasonCode']","REASON DROPDOWN");
 
 	public final Locator CATEGORY_DROPDOWN_CODE_COUNT= new Locator("CATEGORY_DROPDOWN_CODE","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select/option","CATEGORY_DROPDOWN_CODE");
@@ -802,20 +803,32 @@ public class OrderDetailsPage extends Page {
 	}
 
 	public OrderDetailsPage clickSYWMaxTabandVerify(String usertype){
-
+		
 		if(getAction().isVisible(SYW_MAX_TAB)){
 			clickOnOrderTabInODP(OrderTab.SYW_MAX);
 		}
 		//get the text from the syw max tab
 		getAction().waitFor(2000);
+		Logger.log("Verify if the member is "+usertype);
 		if(usertype.equalsIgnoreCase("active")){
 			String text=getAction().getText(SYW_MAX_DETAIL_PAGE);
+			
 			PageAssert.textPresentIn(SYW_MAX_DETAIL_PAGE, "ACTIVE");
 		}
 		else if(usertype.equalsIgnoreCase("inactive")){
 			String text=getAction().getText(NOT_A_SYW_MAX_MEMBER);
 			PageAssert.textPresentIn(NOT_A_SYW_MAX_MEMBER, "Not a ShopYourWay Max member.");
 		}
+		return this;
+	}
+	
+	public OrderDetailsPage verifySYWMaxSavingsAmount(String amount){
+		getAction().waitFor(1000);
+		String actualSavings ="";
+		actualSavings = getAction().getText(SYW_MAX_SAVINGS);
+		//double actAmount = Double.parseDouble(savings.replace('$','0'));
+		System.out.println("amount"+amount+"           "+actualSavings);
+		PageAssert.verifyTrue(actualSavings.contains(amount), "Verify the Max Savings are "+amount);
 		return this;
 	}
 
@@ -6313,7 +6326,7 @@ public class OrderDetailsPage extends Page {
 			highlight(RETURNED_STATUS.format(sku));
 			SoftAssert.checkElementAndContinueOnFailure(RETURNED_STATUS.format(sku), "status: "+getAction().getText(RETURNED_STATUS.format(sku)), CheckLocatorFor.isVisible);
 			Logger.log("The status has been changed to Returned",TestStepType.VERIFICATION_PASSED);}
-		return null;
+		return this;
 
 	}
 	

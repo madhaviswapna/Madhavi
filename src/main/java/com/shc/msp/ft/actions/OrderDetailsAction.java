@@ -50,9 +50,16 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 	public OrderDetailsAction  clickSYWMaxTabandVerify(String usertype) {
+		Logger.log("Go to SYW Max tab and verify member is "+usertype,TestStepType.THEN);
 		this.factory.orderdetailspage().clickSYWMaxTabandVerify(usertype);
-		return null;
+		return this;
 	}
+	public OrderDetailsAction  verifySYWMaxTabSavingsAmount(String amount) {
+		Logger.log("Verify the SYW Max savings amount is "+amount,TestStepType.THEN);
+		this.factory.orderdetailspage().verifySYWMaxSavingsAmount(amount);
+		return this;
+	}
+	
 
 	public OrderDetailsAction verifyOrderSummary(String OrderID) throws ParseException, SQLException{
 		Logger.log("Order summary should be displayed",TestStepType.THEN);
@@ -352,28 +359,28 @@ public class OrderDetailsAction extends BaseAction {
 	public OrderDetailsAction verifyOptionIsVisible(String optionName) {
 		Logger.log(optionName+" should be displayed",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyOptionIsVisible(optionName);
-		return null;
+		return this;
 	}
 
 	public OrderDetailsAction verifyOptionIsNotVisible(String optionName) {
 		Logger.log(optionName+" should not be displayed",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyOptionIsNotVisible(optionName);
-		return null;
+		return this;
 	}
 	public OrderDetailsAction verifyDDCfulfillment () {
 		Logger.log("DDC fulfillment should be displayed",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyDDCfulfillment();
-		return null;
+		return this;
 	}
 
 	public OrderDetailsAction  clickTabs() {
 		this.factory.orderdetailspage().clickTabs();
-		return null;
+		return this;
 	}
 
 	public OrderDetailsAction  Adjustment_OrderID() throws Exception {
 		Retrieval_Test_Data_By_Query.Adjustment_OrderID();
-		return null;
+		return this;
 	}
 
 	public OrderDetailsAction clickOnSalesCheckNumberUnderSalesCheckTab(String scNO) {

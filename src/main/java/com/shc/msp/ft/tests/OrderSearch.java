@@ -387,55 +387,59 @@ public class OrderSearch extends BaseTests{
 		}
 
 
-		@Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "Verify_MSP_Online_SYWMax_ActiveUser"}
-	    , description = "Verify search by order id", enabled = true, priority=1)
+		@Test(dataProvider = "TestData",dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP1Tests,"Verify_MSP_Online_SYWMax_ActiveUser_WithMaxSavings"}
+	    , description = "Verify_MSP_Online_SYWMax_ActiveUser_WithMaxSavings", enabled = true)
 	  
-		public void Verify_MSP_Online_SYWMax_ActiveUser(String orderId,String agentID) throws Exception {
-			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
-			addCloneIDHostname(data);
-	 
-			ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
-
-			LogFormatterAction.beginSetup();
-			User user = new User();
-			user.userName = agentID;
-		    user.password = Constant.OnlinePassword;
-
-		    As.guestUser.goToHomePage()
-			.addlogType(TestStepType.WHEN)
-	        .login(user)
-	        .closeWarningPopupWindow()
-	        .addlogType(TestStepType.GIVEN)
-	        .searchByOrderId(orderId)
-	        ._OrderDetailsAction()
-	        .addlogType(TestStepType.THEN)
-	        .clickSYWMaxTabandVerify("active");
-		}
-	    
-	    @Test(dataProvider = "DP_SearchByOrderID2", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "Verify_MSP_Online_SYWMax_InActiveUser"}
-	    , description = "Verify search by order id", enabled = true, priority=1)
-		public void Verify_MSP_Online_SYWMax_InActiveUser(String orderId,String agentID) throws Exception {
-			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
+		public void Verify_MSP_Online_SYWMax_ActiveUser_WithMaxSavings(TestData data) throws Exception {
 			addCloneIDHostname(data);
 			
-			ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+			Retrieval_Test_Data_By_Query.SYW_Max_Member_OrderWithMaxSavings();
+			String orderId = Retrieval_Test_Data_By_Query.SYW_Max_orderIdWithMaxSaving;
+			String amount = Retrieval_Test_Data_By_Query.SYW_Max_orderIdMaxSavingAmount;
 			
 			LogFormatterAction.beginSetup();
-			
 			User user = new User();
-			user.userName = agentID;
-		    user.password = Constant.OnlinePassword;
+			user.userName = UserPool.getUser();
 		    
 		    As.guestUser.goToHomePage()
 			.addlogType(TestStepType.WHEN)
 	        .login(user)
 	        .closeWarningPopupWindow()
-	        .addlogType(TestStepType.GIVEN)
+	        .addlogType(TestStepType.WHEN)
+	        .searchByOrderId(orderId)
+	        ._OrderDetailsAction()
+	        .addlogType(TestStepType.THEN)
+	        .clickSYWMaxTabandVerify("active")
+	        .addlogType(TestStepType.THEN)
+	        .verifySYWMaxTabSavingsAmount(amount);
+		}
+	    
+		@Test(dataProvider = "TestData",dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP1Tests,"Verify_MSP_Online_SYWMax_InActiveUser"}
+	    , description = "Verify search by order id", enabled = true, priority=1)
+		public void Verify_MSP_Online_SYWMax_InActiveUser(TestData data) throws Exception {
+			
+			addCloneIDHostname(data);
+			
+			Retrieval_Test_Data_By_Query.NonSYW_Max_Member_Order();
+			String orderId = Retrieval_Test_Data_By_Query.NonSYW_Max_Member_OrderId;
+			
+			LogFormatterAction.beginSetup();
+			
+			User user = new User();
+			user.userName = UserPool.getUser();
+		    
+		    
+		    As.guestUser.goToHomePage()
+			.addlogType(TestStepType.WHEN)
+	        .login(user)
+	        .closeWarningPopupWindow()
+	        .addlogType(TestStepType.WHEN)
 	        .searchByOrderId(orderId)
 	        ._OrderDetailsAction()
 	        .addlogType(TestStepType.THEN)
 	        .clickSYWMaxTabandVerify("inactive");
 		}
+		
 		@Test(dataProvider = "DP_SearchByOrderID2", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "SearchmemberBySYWlinkPhonenumber"}
 	    , description = "SearchmemberBySYWlinkPhonenumber", enabled = true, priority=1)
 		

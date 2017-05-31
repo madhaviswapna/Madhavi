@@ -42,6 +42,10 @@ public class Retrieval_Test_Data_By_Query {
 	static String Sql_Resend_Order_Confirmation_Eligible = null;
 	static String Sql_Resend_Order_Confirmation_Store = null;
 	static String Sql_Resend_Order_Confirmation_Status = null;
+	static String Sql_SYW_Max_Member_OrderWithMaxSavings = null;
+	static String Sql_SYW_Max_Member_OrderZeroSavings = null;
+	static String Sql_NonSYW_Max_Member_Order = null;
+	
 	static Map<Integer, Object[]> result = new TreeMap<Integer, Object[]>();
 	public static String adj_eligible_orderID = null;
     public static String adj_store_exception = null;
@@ -1170,6 +1174,9 @@ public class Retrieval_Test_Data_By_Query {
 	public static String lineitem_Start_Automated_Return_StatusExpt_orderID = null;
 	public static String lineitem_Start_Automated_Return_StatusExpt_SKU = null;
 	public static String FBM_lineitem_SKU= null;
+	public static String SYW_Max_orderIdWithMaxSaving=null;
+	public static String SYW_Max_orderIdMaxSavingAmount=null;
+	public static String NonSYW_Max_Member_OrderId =null;
 	
 	public static ThreadLocal<Retrieval_Test_Data_By_Query> thread = new ThreadLocal<Retrieval_Test_Data_By_Query>() {
 		protected Retrieval_Test_Data_By_Query initialValue() {
@@ -1975,6 +1982,7 @@ public class Retrieval_Test_Data_By_Query {
 	static String Sql_General_Order = null;
 	static String Sql_Commercail_Order = null;
 	static String Sql_FBM_Order = null;
+	
 	public static String layaway_contract_details_fetch= null;
 	public static String Vendor_details_fetch= null;
 	public static String hasDiscount_OrderID = null;
@@ -2478,5 +2486,54 @@ public void fbm_line_item_cancellation_not_eligible() throws Exception{
 				e.printStackTrace();
 			}
 		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		}
+
+		
+	public static void SYW_Max_Member_OrderWithMaxSavings() throws Exception{
+			Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+			Sql_SYW_Max_Member_OrderWithMaxSavings = "select o.SITE_GEN_ORD_ID,p.SYWMAX_SAVED from ord o, customer_pgm_info p where p.ADDRESS_ID=o.BILLING_ADDRESS_ID and p.SYWMAX_USER='Y' "
+					+ "and p.SYWMAX_SAVED > 0 and o.site_gen_ord_id like '8%' and o.SITE_GEN_ORD_ID = o.ORDER_ID and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
+					+ "and o.last_updated_ts < DATE_SUB(CURDATE(),INTERVAL 30 DAY) order by RAND() limit 1";
+			
+			System.out.println("------------------------------------  Sql_SYW_Max_Member_OrderWithMaxSavings:-  "+Sql_SYW_Max_Member_OrderWithMaxSavings);
+			try {
+				
+				st = conn.prepareStatement(Sql_SYW_Max_Member_OrderWithMaxSavings);
+				Reporter.log("SQL Query: "+Sql_SYW_Max_Member_OrderWithMaxSavings);
+				st.execute();
+				rs = st.getResultSet();
+				while(rs.next()){
+					SYW_Max_orderIdWithMaxSaving = rs.getString("SITE_GEN_ORD_ID").toString();
+					System.out.println("----------------------------------------------------SYW_Max_orderIdWithMaxSaving"+SYW_Max_orderIdWithMaxSaving);
+					SYW_Max_orderIdMaxSavingAmount=rs.getString("SYWMAX_SAVED").toString();
+					System.out.println("----------------------------------------------------SYW_Max_orderIdMaxSavingAmount"+SYW_Max_orderIdMaxSavingAmount);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+		}
+	
+	public static void NonSYW_Max_Member_Order() throws Exception{
+			Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+			Sql_NonSYW_Max_Member_Order = "select o.SITE_GEN_ORD_ID from ord o, customer_pgm_info p where p.ADDRESS_ID=o.BILLING_ADDRESS_ID and p.SYWMAX_USER='N' "
+					+ "and o.site_gen_ord_id like '8%' and o.SITE_GEN_ORD_ID = o.ORDER_ID and o.site_gen_ord_id REGEXP '^-?[0-9]+$' "
+					+ "and o.last_updated_ts < DATE_SUB(CURDATE(),INTERVAL 30 DAY) order by RAND() limit 1";
+			
+			System.out.println("------------------------------------  Sql_NonSYW_Max_Member_Order:-  "+Sql_NonSYW_Max_Member_Order);
+			try {
+				
+				st = conn.prepareStatement(Sql_NonSYW_Max_Member_Order);
+				Reporter.log("SQL Query: "+Sql_NonSYW_Max_Member_Order);
+				st.execute();
+				rs = st.getResultSet();
+				while(rs.next()){
+					NonSYW_Max_Member_OrderId = rs.getString("SITE_GEN_ORD_ID").toString();
+					System.out.println("----------------------------------------------------NonSYW_Max_Member_OrderId"+NonSYW_Max_Member_OrderId);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 		}
 }
