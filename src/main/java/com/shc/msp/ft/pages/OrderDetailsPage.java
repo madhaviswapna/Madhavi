@@ -6192,6 +6192,8 @@ public class OrderDetailsPage extends Page {
 		Date date = simpleDate.parse(currentDeliveryDate);
 		System.out.println();
 		Date date2 = simpleDate.parse(lDate);
+		System.out.println("date----"+date);
+		System.out.println("date2-----"+date2);
 		int comResult = date2.compareTo(date);
 		if (!(comResult > 0)) {
 			PageAssert.fail("Resheduled date is invalid");

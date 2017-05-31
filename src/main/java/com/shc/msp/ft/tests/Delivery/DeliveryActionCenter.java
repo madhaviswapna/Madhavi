@@ -2508,6 +2508,36 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyActionCapturedHistoryNotes();
 	}
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_DOD_Order_Delivery_Agent"}
+	, description = "Verify if an order for released DOD order for driver agent can be rescheduled", enabled = true)
+	public void MSP_Delivery_Test_Reschedule_Released_DOD_Order_Delivery_Agent(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String orderId= getProductToTest("Released_DOD_Order",true);	
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Unrestricted Time Window","Delivery Driver");
+		
+		
+	}
+	
+	
 	
 	
 }
