@@ -18,15 +18,17 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,  
-			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPSalesCheckLevelRuleAction,TestGroup.MSPP1OnlineTests, "sales_Check_Level_Release_Sales_Check_Captured_Notes_Interaction"}
             , description = "Verify release at sales check level", enabled = true, priority=45)
-    public void sales_Check_Level_Release_Sales_Check_Eligible(TestData data) {
-	//	String orderId=getProductToTest("MSP_OL_OrderEligibleForSalesCheckLevelRelease");
-		String orderId="840022993";
-        addCloneIDHostname(data);
+    public void sales_Check_Level_Release_Sales_Check_Captured_Notes_Interaction(TestData data) throws Exception {
+		
+		Retrieval_Test_Data_By_Query.salesCheckRelease_Data();
+		String orderId= Retrieval_Test_Data_By_Query.SalesCheckReleaseEligible_OrderId;
+        String scNo = Retrieval_Test_Data_By_Query.SalesCheckReleaseEligible_SalesCheckNumber;
         
-        User user = new User(); user.userName=UserPool.getUser();
+		addCloneIDHostname(data);
         
+        User user = new User(); user.userName=UserPool.getUser();       
         As.guestUser.goToHomePage()
         		.addlogType(TestStepType.WHEN)
                 .login(user)
@@ -39,12 +41,27 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .addlogType(TestStepType.THEN)
                 .verifyOrderDetailsPageDisplayed()
                 .addlogType(TestStepType.WHEN)
-                .clickOnSalesCheckNumberUnderSalesCheckTab(1)
+                .clickOnSalesCheckNumberUnderSalesCheckTab(scNo)
                 ._SalesCheckDetailsAction()
                 .addlogType(TestStepType.THEN)
                 .verifyOptionVisible("Release Sales Check")
                 .addlogType(TestStepType.THEN)
-                .verifyReleaseSaleCheck();
+                .verifyReleaseSaleCheck()
+                ._OrderDetailsAction()
+                .addlogType(TestStepType.THEN)
+		        .verifyAdjustmentCapturedInInteraction("Release Sales Check")
+		        .addlogType(TestStepType.WHEN)
+		    	.verifyOrderWrapUp()
+				.addlogType(TestStepType.THEN)
+				.fillRFCForm()
+				._NavigationAction()
+				.addlogType(TestStepType.WHEN)
+				.searchByOrderId(orderId)
+				.closeWarningPopupWindow()
+				.addlogType(TestStepType.THEN)
+				._OrderDetailsAction()
+				.verifyActionCapturedInNotes("Release Sales Check")
+		    	;
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,

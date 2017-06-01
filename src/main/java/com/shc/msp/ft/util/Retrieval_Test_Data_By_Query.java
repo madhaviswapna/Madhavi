@@ -109,7 +109,8 @@ public class Retrieval_Test_Data_By_Query {
 	public static String orderID = null;
 	public static String salescheckID = null;
 	public static String FBM_orderId=null;
-	
+	public static String SalesCheckReleaseEligible_OrderId = null;
+	public static String SalesCheckReleaseEligible_SalesCheckNumber = null;
 	
 
     
@@ -662,6 +663,7 @@ public class Retrieval_Test_Data_By_Query {
 	static String  Sql_Ready_for_Pickup_Email_Eligible = null;
 	static String  Sql_Ready_for_Pickup_Email_Store = null;
 	static String  Sql_Ready_for_Pickup_Email_Status = null;
+	static String  Sql_SalesCheckRelease_Data = null;
 
 	public static void release_Sales_Check_Data() throws Exception{
 		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_Rules + Constant.File_Name,Constant.SalesCheckRulesSheetName);
@@ -1082,6 +1084,30 @@ public class Retrieval_Test_Data_By_Query {
 	
 	}
 	
+	public static void salesCheckRelease_Data() throws Exception{
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		Sql_SalesCheckRelease_Data= "select distinct sc.ORDER_ID,sc.SALES_CHECK_NUMBER from sales_check sc, ord o where sc.SALES_CHECK_STS_CD = 'HLD' "
+				+ "and sc.LAST_UPDATED_TS < DATE_SUB(CURDATE(),INTERVAL 30 DAY) and o.ORDER_ID=sc.ORDER_ID and sc.ORDER_ID like '8%' "
+				+ "and sc.SALES_CHECK_NUMBER REGEXP '^-?[0-9]+$' order by RAND() limit 1";
+		try {
+			
+			st = conn.prepareStatement(Sql_SalesCheckRelease_Data);
+			Reporter.log("SQL Query -- Sql_SalesCheckRelease_Data:- "+Sql_SalesCheckRelease_Data);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				SalesCheckReleaseEligible_OrderId = rs.getString("ORDER_ID");
+			System.out.println("SalesCheckRelease_OrderId: "+SalesCheckReleaseEligible_OrderId);
+			SalesCheckReleaseEligible_SalesCheckNumber = rs.getString("SALES_CHECK_NUMBER");
+			System.out.println("SalesCheckRelease_SalesCheckNumber: "+SalesCheckReleaseEligible_SalesCheckNumber);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+	
+	}
 	
 	
 	
