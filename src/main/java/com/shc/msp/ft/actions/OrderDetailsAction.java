@@ -514,9 +514,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyEvenExchange();
 		return this;
 	}
-	public OrderDetailsAction verifyEvenExchangeEntireOrder(){
+	public OrderDetailsAction verifyEvenExchangeEntireOrder(String orderStatus){
 		Logger.log("Verify, if Even Exchange for entire order",TestStepType.THEN);
-		this.factory.orderdetailspage().verifyEvenExchangeEntireOrder();
+		this.factory.orderdetailspage().verifyEvenExchangeEntireOrder(orderStatus);
 		return this;
 	}
 	
