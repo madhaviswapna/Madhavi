@@ -577,6 +577,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator AUDIT_TRAIL_DETAIL_PAGE = new Locator("AUDIT_TRAIL_Detail","//div[@ng-controller='auditTrailCtrl']","AUDIT TRAIL Detail");
 	public final Locator SYW_MAX_DETAIL_PAGE = new Locator("SYW_MAX_Detail","//div[@ng-controller='sywMaxCtrl']//div/p","SYW MAX Detail");
 	public final Locator NOT_A_SYW_MAX_MEMBER = new Locator("NOT_A_SYW_MAX_MEMBER","//div[@ng-controller='sywMaxCtrl']","NOT_A_SYW_MAX_MEMBER");
+	public final Locator SYW_MAX_SAVINGS = new Locator("SYW_MAX_SAVINGS", "//label[contains(text(),'Max Savings')]/following-sibling::div/p", "SYW_MAX_SAVINGS");
 	public final Locator REASON_DROPDOWN= new Locator("REASON_DROPDOWN","//select[@ng-model='selected.reasonCode']","REASON DROPDOWN");
 
 	public final Locator CATEGORY_DROPDOWN_CODE_COUNT= new Locator("CATEGORY_DROPDOWN_CODE","//strong[contains(text(),'Category')]/ancestor::div[1]/div//select/option","CATEGORY_DROPDOWN_CODE");
@@ -723,7 +724,15 @@ public class OrderDetailsPage extends Page {
 	//public final Locator CONTINUE_TO_CANCEL_ORDER= new Locator("CONTINUE_TO_CANCEL_ORDER","//label[contains(text(),'Password')]/following-sibling::input","CONTINUE_TO_CANCEL_ORDER");
 
 	public final Locator DELIVERY_NOTES_DATA1= new Locator("DELIVERY_NOTES_DATA","//td[contains(text(),'{0}') and contains(text(),'{1}')]","DELIVERY NOTES DATA");
+	
+	public final Locator PICK_UP_ITEMS= new Locator("PICK_UP_ITEMS","//td[contains(text(),'PICK-UP')]","PICK_UP_ITEMS");
+	public final Locator ITEM_DESCRIPTION_COUNT= new Locator("ITEM_DESCRIPTION_COUNT","//tr[td[contains(text(),'{0}')]]/td[contains(@data-title,'Division')]","ITEM_DESCRIPTION_COUNT");
 
+	public final Locator DOD_RETURN_CODES_LINE_ITEM_COUNT= new Locator("DOD_RETURN_CODES_LINE_ITEM","(//select[@name='returnCodeSelect'])[{0}]/option","DOD_RETURN_CODES_LINE_ITEM");
+	public final Locator DOD_RETURN_CODES_LINE_ITEM= new Locator("DOD_RETURN_CODES_LINE_ITEM","(//select[@name='returnCodeSelect'])[{0}]/option[{1}]","DOD_RETURN_CODES_LINE_ITEM");
+	public final Locator UPDATE_DELIVERY_STATUS= new Locator("UPDATE_DELIVERY_STATUS","//button[contains(@ng-click,'submit') and contains(text(),'Update Delivery Status')]","UPDATE_DELIVERY_STATUS");
+	public final Locator CONTINUE_TO_RETURN_EXCHANGE_ITEM= new Locator("CONTINUE_TO_RETURN_EXCHANGE_ITEM","//button[contains(text(),'Continue to Return/Exchange Item')]","CONTINUE_TO_RETURN_EXCHANGE_ITEM");
+	
 	
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
@@ -802,20 +811,32 @@ public class OrderDetailsPage extends Page {
 	}
 
 	public OrderDetailsPage clickSYWMaxTabandVerify(String usertype){
-
+		
 		if(getAction().isVisible(SYW_MAX_TAB)){
 			clickOnOrderTabInODP(OrderTab.SYW_MAX);
 		}
 		//get the text from the syw max tab
 		getAction().waitFor(2000);
+		Logger.log("Verify if the member is "+usertype);
 		if(usertype.equalsIgnoreCase("active")){
 			String text=getAction().getText(SYW_MAX_DETAIL_PAGE);
+			
 			PageAssert.textPresentIn(SYW_MAX_DETAIL_PAGE, "ACTIVE");
 		}
 		else if(usertype.equalsIgnoreCase("inactive")){
 			String text=getAction().getText(NOT_A_SYW_MAX_MEMBER);
 			PageAssert.textPresentIn(NOT_A_SYW_MAX_MEMBER, "Not a ShopYourWay Max member.");
 		}
+		return this;
+	}
+	
+	public OrderDetailsPage verifySYWMaxSavingsAmount(String amount){
+		getAction().waitFor(1000);
+		String actualSavings ="";
+		actualSavings = getAction().getText(SYW_MAX_SAVINGS);
+		//double actAmount = Double.parseDouble(savings.replace('$','0'));
+		System.out.println("amount"+amount+"           "+actualSavings);
+		PageAssert.verifyTrue(actualSavings.contains(amount), "Verify the Max Savings are "+amount);
 		return this;
 	}
 
@@ -1588,8 +1609,8 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
 		return this;
 	}
-	public OrderDetailsPage verifyEvenExchangeEntireOrder(){
-
+	public OrderDetailsPage verifyEvenExchangeEntireOrder(String orderStatus){
+		String orderRouteStatus= (String) getContext().get("orderRouteStatus");
 		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
 		Logger.log("Click on Even Exchange Button",TestStepType.STEP);
 		try{
@@ -1621,9 +1642,19 @@ public class OrderDetailsPage extends Page {
 		}
 		AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
 		getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
-		Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
-		AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
-		getAction().click(OFFER_CONSESSION_NO_BUTTON);
+
+		if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+			getAction().waitFor(3000);
+			verifyDayOfDelivery("Delivery Driver","Select Items");
+			if("DELIVERY DRIVER".equalsIgnoreCase("Delivery Driver")){
+				AjaxCondition.forElementVisible(CONTINUE_TO_RETURN_EXCHANGE_ITEM).waitForResponse();
+				getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);}}
+
+		if(orderStatus.equalsIgnoreCase("Shipped")||orderStatus.equalsIgnoreCase("Partially Shipped")||orderStatus.equalsIgnoreCase("Release")){
+			Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
+			AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
+			getAction().click(OFFER_CONSESSION_NO_BUTTON);}
+
 		Logger.log("Select the Category Code",TestStepType.STEP);
 		for(int i=1;i<=num;i++){
 			AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(i)).waitForResponse();
@@ -1652,9 +1683,19 @@ public class OrderDetailsPage extends Page {
 		SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
 		Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
 		AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
+
+		Logger.log("Verify pick up items created equal to orignal items in order detail page",TestStepType.STEP);
+		AjaxCondition.forElementVisible(PICK_UP_ITEMS).waitForResponse();
+		SoftAssert.checkConditionAndContinueOnFailure(num+" pick up items are created", getAction().getElementCount(PICK_UP_ITEMS)==num);
+		Logger.log("Description for the pick up items are",TestStepType.STEP);
+		for(int i = 1; i <=num; i++)
+			Logger.log(getAction().getText(PICK_UP_ITEMS));
+		Logger.log("verify original items needs to be delivered",TestStepType.STEP);
+		for (int i = 1; i <= num; i++){
+			AjaxCondition.forElementVisible(ITEM_DESCRIPTION.format("open",i)).waitForResponse();
+			SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format("open",i)), getAction().getElementCount(ITEM_DESCRIPTION_COUNT.format("Open"))==num);}
 		return this;
 	}
-
 	public OrderDetailsPage verifyEvenExchangeNotAllowed(){
 
 		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
@@ -6192,6 +6233,8 @@ public class OrderDetailsPage extends Page {
 		Date date = simpleDate.parse(currentDeliveryDate);
 		System.out.println();
 		Date date2 = simpleDate.parse(lDate);
+		System.out.println("date----"+date);
+		System.out.println("date2-----"+date2);
 		int comResult = date2.compareTo(date);
 		if (!(comResult > 0)) {
 			PageAssert.fail("Resheduled date is invalid");
@@ -6201,10 +6244,13 @@ public class OrderDetailsPage extends Page {
 	}
 	public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
 
+		int lineItemCount=(int) getContext().get("openMultiLineItem");
+		System.out.println("lineItemCount:"+lineItemCount);
 		Logger.log("Verify Day of Delivery Orders");
-		if (orderType.equalsIgnoreCase("Entire order")) {
+		
 			AjaxCondition.forElementVisible(DAY_OF_DELIVERY_AGENT.format(agent));
 			getAction().click(DAY_OF_DELIVERY_AGENT.format(agent));
+			if (orderType.equalsIgnoreCase("Entire order")) {
 			int rndCodeCategory = generateRandomNumberSelect(DAY_OF_DELIVERY_RETURN_CODES_COUNT);
 			AjaxCondition.forElementVisible(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
 			getAction().click(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
@@ -6220,6 +6266,20 @@ public class OrderDetailsPage extends Page {
 				AjaxCondition.forElementVisible(STATUS_UPDATE).waitForResponse(3000);
 				getAction().click(STATUS_UPDATE);
 				}}
+		else 
+			for (int i = 1; i <= lineItemCount; i++) {
+				AjaxCondition.forElementPresent(DOD_RETURN_CODES_LINE_ITEM_COUNT.format(i)).waitForResponse();
+				int rndCodeCategory = generateRandomNumberSelect(DOD_RETURN_CODES_LINE_ITEM_COUNT.format(i));
+				System.out.println("rndCodeCategory----"+rndCodeCategory);
+				AjaxCondition.forElementVisible(DOD_RETURN_CODES_LINE_ITEM.format(i,rndCodeCategory)).waitForResponse();
+				getAction().click(DOD_RETURN_CODES_LINE_ITEM.format(i,rndCodeCategory)); 
+				}
+		AjaxCondition.forElementPresent(ARRIVAL_TIME).waitForResponse(3000);
+		getAction().click(ARRIVAL_TIME);
+		AjaxCondition.forElementPresent(DEPARTURE_TIME).waitForResponse(3000);
+		getAction().click(DEPARTURE_TIME);
+		AjaxCondition.forElementVisible(UPDATE_DELIVERY_STATUS).waitForResponse(3000);
+		getAction().click(UPDATE_DELIVERY_STATUS);
 		return this;
 	}
 
@@ -6311,7 +6371,7 @@ public class OrderDetailsPage extends Page {
 			highlight(RETURNED_STATUS.format(sku));
 			SoftAssert.checkElementAndContinueOnFailure(RETURNED_STATUS.format(sku), "status: "+getAction().getText(RETURNED_STATUS.format(sku)), CheckLocatorFor.isVisible);
 			Logger.log("The status has been changed to Returned",TestStepType.VERIFICATION_PASSED);}
-		return null;
+		return this;
 
 	}
 	

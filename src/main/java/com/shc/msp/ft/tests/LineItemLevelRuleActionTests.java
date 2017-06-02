@@ -137,8 +137,10 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteraction("Line Item Cancellation")
+		.addlogType(TestStepType.WHEN)
 		.goToAuditTrail()
-        .verifyActionCapturedInAuditTrail("KNCNCancel Request")
+		.addlogType(TestStepType.THEN)
+		.verifyActionCapturedInAuditTrail("KNCNCancel Request")
 		.verifyOrderWrapUp()
 		.addlogType(TestStepType.THEN)
 		.fillRFCForm()
@@ -185,9 +187,9 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	}
 
 	//Return Item
-		@Test(dataProvider = "DP_Return_Item_Eligible_orderID",groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
+		@Test(dataProvider = "DP_Return_Item_Eligible_orderID",groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Return_Item_Captured_AuditTrail_Notes_Interaction"}
 		 , description = "Verify return functionality at line item level for eligible items", enabled = true)
-		 public void line_Item_Level_Verify_Return_Item_Eligible(String orderId, String sku) {
+		 public void line_Item_Level_Verify_Return_Item_Captured_AuditTrail_Notes_Interaction(String orderId, String sku) {
 			 //	String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnEligible").split("\\|");
 			 //		// String[] test_data ="940220064|02252449000".split("\\|");
 			 //		 	
@@ -224,6 +226,10 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 			 .addlogType(TestStepType.THEN)
 			 
 			 .verifyAdjustmentCapturedInInteraction("Return Line Item")
+			 .addlogType(TestStepType.WHEN)
+			 .goToAuditTrail()
+			 .addlogType(TestStepType.THEN)
+			 .verifyActionCapturedInAuditTrail("RETItem Return")
 			 .verifyOrderWrapUp()
 			 .addlogType(TestStepType.THEN)
 			 .fillRFCForm()

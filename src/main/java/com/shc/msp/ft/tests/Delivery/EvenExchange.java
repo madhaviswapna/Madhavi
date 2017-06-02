@@ -112,7 +112,7 @@ public class EvenExchange extends BaseTestsEx{
 				  .addlogType(TestStepType.WHEN)
 				  .goToActionCenter()
 				  .addlogType(TestStepType.THEN)
-				  .verifyEvenExchangeEntireOrder()
+				  .verifyEvenExchangeEntireOrder("Shipped")
 				  ;
 				 }
 			
@@ -182,9 +182,65 @@ public class EvenExchange extends BaseTestsEx{
 			        
 			        .addlogType(TestStepType.THEN)
 			        .verifyEvenExchangeEligibility(orderType)
-			        .verifyEvenExchangeEntireOrder()
+			        .verifyEvenExchangeEntireOrder("Released")
 			        .goToDeliveryNotes()
 					.verifyDataInDeliveryNotes("OSH/MSO-WEB: PICK UP/EXCHANGE APP")
 					.verifyDataInDeliveryNotes("MSP NEW EXCHANGE ORDER");
 			}
+			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+		            groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Test_Even_Exchange_Released_DOD_Order_Driver_Agent"}
+		            , description = "Even Exchange for released DOD Order", enabled = true)
+		     	public void Test_Even_Exchange_Released_DOD_Order_Driver_Agent(TestData data) throws Exception {
+					LogFormatterAction.beginSetup();
+		    		User user = new User(); 
+		    		user.userName=UserPool.getDeliveryUser();
+					String orderType = "Released";
+				/*	List<String> list= new ArrayList<String>();
+					list.add("MSP USER"+": "+user.userName);
+					list.add("OSH/MSO-WEB: CANCEL ORDER");
+					list.add("MSP USER"+": "+user.userName);*/
+					
+					String orderId= getProductToTest("Released_DOD_Order",true);	
+			
+					As.guestUser.goToHomePage()
+					._NavigationAction()
+					.addlogType(TestStepType.WHEN)
+					.login(user)
+					.addlogType(TestStepType.THEN)
+					.VerifyDeliveryAgent()
+					.closeWarningPopupWindow()
+					.addlogType(TestStepType.WHEN)
+					.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+					
+			        .addlogType(TestStepType.WHEN)
+			        .chooseReleasedHDOrders()
+			        
+			        ._OrderDetailsAction()
+			        .addlogType(TestStepType.WHEN)
+			    	.verifyLineItemDetail("Released")
+			    	 .addlogType(TestStepType.WHEN)
+			        .goToActionCenter()
+			        
+			        .addlogType(TestStepType.THEN)
+			        .verifyEvenExchangeEligibility(orderType)
+			        .addlogType(TestStepType.THEN)
+			        .verifyEvenExchangeEntireOrder("Release DOD");
+			       /* .goToDeliveryNotes()
+			        .addlogType(TestStepType.THEN)
+					.verifyDeliveryOSHNotes(list)
+					.addlogType(TestStepType.THEN)
+					.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Order")
+					.addlogType(TestStepType.WHEN)
+					.goToActionCenter()
+					.wrapUpOrderWithoutContactDelivery()
+					._NavigationAction()
+					.addlogType(TestStepType.WHEN)
+					.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
+					.addlogType(TestStepType.WHEN)
+					.selectOrderInMyRecentDeliveryInteractions(1)
+					.closeWarningPopupWindow()
+					._OrderDetailsAction()
+					.verifyActionCapturedHistoryNotes();*/
+				}
+			
 }

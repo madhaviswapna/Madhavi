@@ -1212,10 +1212,13 @@ public class SalesCheckDetailsPage extends Page {
 		Logger.log("Enter details on adjustment notes",TestStepType.STEP);
 		getAction().click(OrderDetailsPage.ADJUSTMENT_NOTES);
 		getAction().type(OrderDetailsPage.ADJUSTMENT_NOTES,"MSP automation release sales check");
+		getContext().put("adjustmentOption", "MSP automation release sales check");
 		getAction().waitFor(1000);
 		Logger.log("Verify that Submit button is visible",TestStepType.VERIFICATION_STEP);
 		AjaxCondition.forElementVisible(OrderDetailsPage.SUBMIT_BUTTON).waitForResponse();
-		Logger.log("Submit Button is Visible" , TestStepType.STEP);
+		Logger.log("Click on Submit Button" , TestStepType.STEP);
+		getAction().click(OrderDetailsPage.SUBMIT_BUTTON);
+		
 		/* getAction().click(OrderDetailsPage.SUBMIT_BUTTON);
 	       getAction().waitFor(3000);
 	       AjaxCondition.forElementVisible(OK_POPUp).waitForResponse();
