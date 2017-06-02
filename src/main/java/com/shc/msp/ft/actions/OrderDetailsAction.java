@@ -737,5 +737,19 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().verifyDateandUserInDeliveryOSHNote(str1,str2);
 		return this;
 	}
-		
+	public OrderDetailsAction pickupEntireOrderTillConcessionPopUp() {
+		Logger.log("Verify agent able to do pickup action",TestStepType.THEN);
+		this.factory.orderdetailspage().pickupEntireOrderTillConcessionPopUp();
+		return this;
+	}
+	public OrderDetailsAction rereserveItemTillOfferConcessionPopUp(String orderType,String order) {
+		Logger.log("Verify Rereserve action for "+orderType,TestStepType.THEN);
+		this.factory.orderdetailspage().rereserveItemTillOfferConcessionPopUp(orderType,order);
+		return this;
+	}
+	public OrderDetailsAction AcceptOfferConcession(String inputs) {
+		Logger.log("concession offer",TestStepType.THEN);
+		this.factory.orderdetailspage().acceptofferconcession(inputs);
+		return this;
+	}	
 }

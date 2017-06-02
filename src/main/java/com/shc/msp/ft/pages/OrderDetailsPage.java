@@ -38,6 +38,7 @@ import com.shc.automation.utils.TestUtils.CheckLocatorFor;
 import com.shc.automation.utils.TestUtils.TestStepType;
 import com.shc.msp.ft.entities.CancelReasonCode;
 import com.shc.msp.ft.entities.OrderCharge;
+import com.shc.msp.ft.entities.User;
 import com.shc.msp.ft.factory.SiteFactory;
 import com.shc.msp.ft.pages.OrderDetailsPage.OrderTab;
 import com.shc.msp.ft.util.FileUtil;
@@ -733,6 +734,18 @@ public class OrderDetailsPage extends Page {
 	public final Locator UPDATE_DELIVERY_STATUS= new Locator("UPDATE_DELIVERY_STATUS","//button[contains(@ng-click,'submit') and contains(text(),'Update Delivery Status')]","UPDATE_DELIVERY_STATUS");
 	public final Locator CONTINUE_TO_RETURN_EXCHANGE_ITEM= new Locator("CONTINUE_TO_RETURN_EXCHANGE_ITEM","//button[contains(text(),'Continue to Return/Exchange Item')]","CONTINUE_TO_RETURN_EXCHANGE_ITEM");
 	
+	
+	public final Locator CONTACT_HISTORY_NOTES_DELIVERY= new Locator("CONTACT_HISTORY_NOTES_DELIVERY","//div[contains(text(),'{0}')]","CONTACT_HISTORY_NOTES_DELIVERY");
+	public final Locator OFFER_CONSESSION_YES_BUTTON = new Locator("OFFER_CONSESSION_YES_BUTTON", "//div[starts-with(@question,'Was the')]//button[contains(text(),'Yes')]", "Offer Consession Yes Button");
+	public final Locator MEMBER_CONSESSION_YES_BUTTON = new Locator("MEMBER_CONSESSION_YES_BUTTON", "//div[starts-with(@question,'Did the')]//button[contains(text(),'Yes')]", "Member Consession Yes Button");
+	public final Locator MEMBER_CONSESSION_NO_BUTTON = new Locator("MEMBER_CONSESSION_NO_BUTTON", "//div[starts-with(@question,'Did the')]//button[contains(text(),'No')]", "Member Consession No Button");
+	public final Locator SELECT_CONSESSION_TYPE = new Locator("SELECT_CONSESSION_TYPE", "(//*[contains(@ng-model,'selectedConcession')])[{0}]", "SELECT_CONSESSION_TYPE");
+	
+	public final Locator CONSESSION_AMOUNT = new Locator("CONSESSION_AMOUNT","(//input[@name='quantity'])[{0}]", "CONSESSION_AMOUNT");
+	public final Locator CONSESSION_DELETE = new Locator("CONSESSION_DELETE", "(//button[contains(@ng-click,'removeConcession')])[{0}]", "CONSESSION_DELETE");
+	public final Locator FINISH_BUTTON = new Locator("FINISH_BUTTON", "//button[contains(text(),'Finish')]", "FINISH_BUTTON");
+	public final Locator ADD_CONCESSION = new Locator("ADD_CONCESSION", "(//*[contains(@ng-click,'addAdditionalConcession')])[{0}]", "ADD_CONCESSION");
+	public final Locator DELETE_CONCESSION = new Locator("ADD_CONCESSION", "(//*[contains(@ng-click,'removeConcession')])[{0}]", "ADD_CONCESSION");
 	
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
@@ -1558,7 +1571,9 @@ public class OrderDetailsPage extends Page {
 	}
 	public OrderDetailsPage verifyEvenExchange(){
 
-		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);		
+		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
+		User user = User.find("Onlineuser1");
+		
 		Logger.log("Click on Even Exchange Button",TestStepType.STEP);
 		try{
 			getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
@@ -1582,6 +1597,29 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
 		getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
 		getAction().waitFor(1000);
+		
+		
+		if(getAction().isVisible(MATTRESS_TEXT)){
+			getAction().click(MATTRESS_DROPDOWN);
+			AjaxCondition.forElementPresent(MATRESS_DROPDOWN_TEXT).waitForResponse(2000);
+			getAction().click(MATRESS_DROPDOWN_TEXT);
+			getAction().click(CONTINUE_BUTTON);
+			}
+		getAction().waitFor(2000);
+		if(getAction().isVisible(RETURN_POLICY)){
+			Logger.log(getAction().getText(RETURN_POLICY),TestStepType.STEP);
+			getAction().click(CONTINUE_BUTTON);
+			AjaxCondition.forElementVisible(PICK_UP_EXCEPTION).waitForResponse(2000);
+			getAction().type(EXCEPTION_USERNAME, user.userName);
+			getAction().type(EXCEPTION_PASSWORD,user.password);
+			getAction().type(REASON_EXCEPTION, "this is an automated test");
+			getAction().waitFor(2000);
+			getAction().click(SUBMIT);
+		}
+		
+		getAction().waitFor(3000);
+		
+		
 		AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
 		getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
 		Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
@@ -1606,6 +1644,7 @@ public class OrderDetailsPage extends Page {
 		System.out.println("New order created    "+newDosOrderNumber+" Old order "+dosOrderNumber);
 		SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for even exchange:-"+newDosOrderNumber);
 		Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
+	
 		AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
 		return this;
 	}
@@ -6445,7 +6484,117 @@ public class OrderDetailsPage extends Page {
 		return this;
 
 	}
+	public void pickupEntireOrderTillConcessionPopUp(){
+		Logger.log("Agent should be able to do pickup action", TestStepType.STEP);
+		getAction().waitFor(3000);
+		getAction().scrollTo(PICKUP_BUTTON);
+		AjaxCondition.forElementVisible(PICKUP_BUTTON).waitForResponse();
+		getAction().click(PICKUP_BUTTON);
+		getAction().waitFor(3000);
+		int num=getAction().getVisibleElementCount(SELECT_ITEM_NUMBER);
+		for(int i=num;i>0;i--){
+			AjaxCondition.forElementVisible(SELECT_ITEM.format(i)).waitForResponse();
+			getAction().click(SELECT_ITEM.format(i));
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
+			getAction().click(REASON_FOR_PICKUP_DROPDOWN);
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
+			getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
+			getAction().click(PICKUP_QUANTITY);
+			getAction().type(PICKUP_QUANTITY, "1");
+		}
+		getAction().waitFor(3000);
+		getAction().scrollTo(CONTINUE_BUTTON);
+		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+		getAction().click(CONTINUE_BUTTON);
+		getAction().waitFor(3000);
+		
+	}
+	public void rereserveItemTillOfferConcessionPopUp(String orderType,String order){
 
+		if (orderType.equalsIgnoreCase("Shipped")||orderType.equalsIgnoreCase("Cancelled")){
+			PageAssert.elementNotVisible(RERESERVE_BUTTON);
+			Logger.log("Rereserve button is not available in Action Center" , TestStepType.VERIFICATION_PASSED);
+		}
+
+		else{
+			Logger.log("Verify Rereserve button is present in action center", TestStepType.STEP);
+			String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(RERESERVE_BUTTON).waitForResponse();
+			getAction().scrollTo(RERESERVE_BUTTON);
+			getAction().click(RERESERVE_BUTTON);
+			getAction().waitFor(3000);
+			AjaxCondition.forElementVisible(RERESERVE_ITEM_COUNT).waitForResponse();
+			int num=0;
+			if(order.equalsIgnoreCase("whole order")){
+				num=getAction().getVisibleElementCount(RERESERVE_ITEM_COUNT);
+				for(int i=1;i<=num;i++){
+					getAction().scrollTo(RERESERVE_ITEM.format(i));
+					AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
+					getAction().click(RERESERVE_ITEM.format(i));
+					AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
+					getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
+					getAction().waitFor(3000);
+				}
+			}
+			else{
+				AjaxCondition.forElementVisible(RERESERVE_ITEM.format(1)).waitForResponse();
+				getAction().click(RERESERVE_ITEM.format(1));
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
+				getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
+				getAction().waitFor(3000);
+				num=1;
+			}
+			AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
+			getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
+			Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
+			AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
+		
+			}
+		}
+	//input parameters separated by "," and further separated by : 
+	//MEMBER_CONSESSION_YES_BUTTON-this means click on yes whether the  agent offered the concession to member
+	//MEMBER_CONSESSION_YES_BUTTON-click on yes button if agent accepted the offer
+	//SELECT_CONSESSION_TYPE:Coupon:1--this gives us the value which you want to select ex: coupon, syw points etc 
+	//and also give the index of the select box and the text box, if you want to select 1st select box then give 1 or else give 2 or 3 based on your requirement
+
+	public OrderDetailsPage acceptofferconcession(String concessionInputs){
+		String[] inputs=concessionInputs.split(",");
+		for(int i=0;i<inputs.length;i++){
+			String[] casetype=inputs[i].split(":");
+		switch(casetype[0]){
+			case "OFFER_CONSESSION_YES_BUTTON":
+				getAction().click(OFFER_CONSESSION_YES_BUTTON);
+				break;
+			case "MEMBER_CONSESSION_YES_BUTTON":
+				getAction().click(MEMBER_CONSESSION_YES_BUTTON);
+				break;
+			case "SELECT_CONSESSION_TYPE":
+				getAction().waitFor(4000);
+				getAction().selectByText(SELECT_CONSESSION_TYPE.format(casetype[2]),casetype[1]);
+				break;
+			case "CONSESSION_AMOUNT":
+				getAction().type(CONSESSION_AMOUNT.format(casetype[2]), casetype[1]);
+				break;
+			case "ADD_CONCESSION":				
+				getAction().click(ADD_CONCESSION.format(casetype[1]));
+				break;
+			case "DELETE_CONCESSION":
+				getAction().click(DELETE_CONCESSION.format(casetype[1]));
+				break;
+			case "FINISH_BUTTON":
+				getAction().click(FINISH_BUTTON);
+				break;
+			default:
+				break;
+			}
+		}
+		return this;	
+	}
 
 }
 

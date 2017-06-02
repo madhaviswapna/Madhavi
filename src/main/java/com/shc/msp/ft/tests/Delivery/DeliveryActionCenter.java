@@ -90,10 +90,20 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
+		.captureSalescheckNumber()
 		.rereserveItem("open","whole order")
-		;
-
-	}  
+		._NavigationAction()
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		._OrderDetailsAction()
+		.verifyActionCapturedInNotes("new order created new dos number with dos number+old dos number");
+	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible_Released_Orders"}
 	, description = "Verify whether rereserve button is present for released orders", enabled = true)
@@ -248,7 +258,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Order"}
 	, description = "Verify order is created after pickup action", enabled = true)
-	public void MSP_Delivery_Test_Pickup_Entire_Order (TestData data) throws ParseException {
+	public void MSP_Delivery_Test_Pickup_Entire_Order(TestData data) throws ParseException {
+
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
@@ -271,9 +282,11 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyPickupbuttonPresent()
 		.addlogType(TestStepType.THEN)
-		.pickupEntireOrder()
-		;
-
+		.pickupEntireOrderTillConcessionPopUp()
+		.AcceptOfferConcession("OFFER_CONSESSION_YES_BUTTON,MEMBER_CONSESSION_YES_BUTTON,SELECT_CONSESSION_TYPE:Other:1,CONSESSION_AMOUNT:100:1,FINISH_BUTTON")
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.pickupEntireOrder();
 	}  
 	/*	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Order"}
@@ -1647,14 +1660,22 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
 		.addlogType(TestStepType.GIVEN)
 		.chooseOpenHDOrders()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rereserveItem("open","whole order")
+		.rereserveItemTillOfferConcessionPopUp("open","whole order")
+		.AcceptOfferConcession("OFFER_CONSESSION_YES_BUTTON,MEMBER_CONSESSION_YES_BUTTON,SELECT_CONSESSION_TYPE:Coupon:1,CONSESSION_AMOUNT:100:1,FINISH_BUTTON")
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.rereserveItemTillOfferConcessionPopUp("open","whole order")
+		.AcceptOfferConcession("OFFER_CONSESSION_YES_BUTTON,MEMBER_CONSESSION_YES_BUTTON,SELECT_CONSESSION_TYPE:SYWR Points:1,CONSESSION_AMOUNT:6000:1,ADD_CONCESSION:1,SELECT_CONSESSION_TYPE:RPA Coverage:2,FINISH_BUTTON")
+		.addlogType(TestStepType.THEN)
 		._NavigationAction()
 		.logout()
 		.addlogType(TestStepType.WHEN)
@@ -1662,14 +1683,14 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
 		.addlogType(TestStepType.GIVEN)
 		.chooseOpenHDOrders()
 		._OrderDetailsAction()
-		.addlogType(TestStepType.WHEN)
-		.goToDeliveryNotes()
-		.verifyDeliveryOSHNotes(list)
-		;
+		.verifyActionCapturedInNotes("Re-Reservation Avoided")
+		.verifyActionCapturedInNotes("The following concession(s) were given to the member")
+		.verifyActionCapturedInNotes("Type :SYWR Points, Unit :Points, Value :6000")
+		.verifyActionCapturedInNotes("Type :RPA Coverage");
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Open_Order"}
@@ -2288,7 +2309,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		String orderId=arr[0];
 		String dc_number=arr[1];
 		
-		String ss="MSP USER"+": "+user.userName;
+		String msp_user="MSP USER"+": "+user.userName;
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -2309,7 +2330,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyNewOrderhassameSalescheckNumber()
 		.goToDeliveryNotes()
 		.verifyDeliveryOSHNotes(list)
-		.verifyDateandUserInDeliveryOSHNote(strdate,ss);
+		.verifyDateandUserInDeliveryOSHNote(strdate,msp_user);
 	}	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,

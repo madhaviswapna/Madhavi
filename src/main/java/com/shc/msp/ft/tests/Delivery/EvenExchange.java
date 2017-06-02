@@ -91,7 +91,7 @@ public class EvenExchange extends BaseTestsEx{
 			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 		            groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Test_Even_Exchange_Shipped_Order"}
 		            , description = "Even Exchange for Shipped Order", enabled = true)
-		     	public void Test_Even_Exchange_Whole_Order(TestData data) {
+			public void Test_Even_Exchange_Whole_Order(TestData data) {
 				addCloneIDHostname(data);
 				  LogFormatterAction.beginSetup();
 				  User user = new User(); user.userName=UserPool.getDeliveryUser();
@@ -110,11 +110,15 @@ public class EvenExchange extends BaseTestsEx{
 				  .chooseShippedHDOrders()
 				  ._OrderDetailsAction()
 				  .addlogType(TestStepType.WHEN)
+				  .captureSalescheckNumber()
 				  .goToActionCenter()
 				  .addlogType(TestStepType.THEN)
-				  .verifyEvenExchangeEntireOrder("Shipped")
+				  .verifyEvenExchangeEntireOrder("shipped")
+				  .verifyNewOrderhassameSalescheckNumber()
 				  ;
 				 }
+			
+			
 			
 			@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 		            groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"Test_Even_Exchange_Div605_Shipped_Item"}
