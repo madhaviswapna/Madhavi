@@ -726,7 +726,7 @@ public class OrderDetailsPage extends Page {
 
 	public final Locator DELIVERY_NOTES_DATA1= new Locator("DELIVERY_NOTES_DATA","//td[contains(text(),'{0}') and contains(text(),'{1}')]","DELIVERY NOTES DATA");
 	
-	public final Locator PICK_UP_ITEMS= new Locator("PICK_UP_ITEMS","//td[contains(text(),'PICK-UP')]","PICK_UP_ITEMS");
+	public final Locator PICK_UP_ITEMS_COUNT= new Locator("PICK_UP_ITEMS_COUNT","//td[contains(text(),'PICK-UP')]","PICK_UP_ITEMS_COUNT");
 	public final Locator ITEM_DESCRIPTION_COUNT= new Locator("ITEM_DESCRIPTION_COUNT","//tr[td[contains(text(),'{0}')]]/td[contains(@data-title,'Division')]","ITEM_DESCRIPTION_COUNT");
 
 	public final Locator DOD_RETURN_CODES_LINE_ITEM_COUNT= new Locator("DOD_RETURN_CODES_LINE_ITEM","(//select[@name='returnCodeSelect'])[{0}]/option","DOD_RETURN_CODES_LINE_ITEM");
@@ -734,6 +734,9 @@ public class OrderDetailsPage extends Page {
 	public final Locator UPDATE_DELIVERY_STATUS= new Locator("UPDATE_DELIVERY_STATUS","//button[contains(@ng-click,'submit') and contains(text(),'Update Delivery Status')]","UPDATE_DELIVERY_STATUS");
 	public final Locator CONTINUE_TO_RETURN_EXCHANGE_ITEM= new Locator("CONTINUE_TO_RETURN_EXCHANGE_ITEM","//button[contains(text(),'Continue to Return/Exchange Item')]","CONTINUE_TO_RETURN_EXCHANGE_ITEM");
 	
+	public final Locator PICK_UP_ITEMS= new Locator("PICK_UP_ITEMS"," (//td[contains(text(),'PICK-UP')])[{0}]","PICK_UP_ITEMS");
+	public final Locator ITEM_DESCRIPTION_WITHOUT_PICKUP= new Locator("ITEM_DESCRIPTION_WITHOUT_PICKUP","(//td[contains(@data-title,'Description') and not(contains(text(),'PICK-UP'))])[{0}]","ITEM_DESCRIPTION_WITHOUT_PICKUP");
+	public final Locator ITEM_DESCRIPTION_WITHOUT_PICKUP_COUNT= new Locator("ITEM_DESCRIPTION_WITHOUT_PICKUP_COUNT","//td[contains(@data-title,'Description') and not(contains(text(),'PICK-UP'))]","ITEM_DESCRIPTION_WITHOUT_PICKUP_COUNT");
 	
 	public final Locator CONTACT_HISTORY_NOTES_DELIVERY= new Locator("CONTACT_HISTORY_NOTES_DELIVERY","//div[contains(text(),'{0}')]","CONTACT_HISTORY_NOTES_DELIVERY");
 	public final Locator OFFER_CONSESSION_YES_BUTTON = new Locator("OFFER_CONSESSION_YES_BUTTON", "//div[starts-with(@question,'Was the')]//button[contains(text(),'Yes')]", "Offer Consession Yes Button");
@@ -1682,14 +1685,18 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
 		getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
 
-		if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
-			getAction().waitFor(3000);
-			verifyDayOfDelivery("Delivery Driver","Select Items");
-			if("DELIVERY DRIVER".equalsIgnoreCase("Delivery Driver")){
-				AjaxCondition.forElementVisible(CONTINUE_TO_RETURN_EXCHANGE_ITEM).waitForResponse();
-				getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);}}
+		try {
+			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+				getAction().waitFor(3000);
+				verifyDayOfDelivery("Delivery Driver","Select Items");
+				if("DELIVERY DRIVER".equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_RETURN_EXCHANGE_ITEM).waitForResponse();
+					getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);}}
+		} catch (NullPointerException e ) {
+			orderRouteStatus="";
+		}
 
-		if(orderStatus.equalsIgnoreCase("Shipped")||orderStatus.equalsIgnoreCase("Partially Shipped")||orderStatus.equalsIgnoreCase("Release")){
+		if(orderStatus.equalsIgnoreCase("Shipped")||orderStatus.equalsIgnoreCase("Partially Shipped")||orderStatus.equalsIgnoreCase("Released")){
 			Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
 			AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
 			getAction().click(OFFER_CONSESSION_NO_BUTTON);}
@@ -1724,15 +1731,15 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
 
 		Logger.log("Verify pick up items created equal to orignal items in order detail page",TestStepType.STEP);
-		AjaxCondition.forElementVisible(PICK_UP_ITEMS).waitForResponse();
-		SoftAssert.checkConditionAndContinueOnFailure(num+" pick up items are created", getAction().getElementCount(PICK_UP_ITEMS)==num);
+		AjaxCondition.forElementVisible(PICK_UP_ITEMS_COUNT).waitForResponse();
+		SoftAssert.checkConditionAndContinueOnFailure(num+" pick up items are created", getAction().getElementCount(PICK_UP_ITEMS_COUNT)==num);
 		Logger.log("Description for the pick up items are",TestStepType.STEP);
 		for(int i = 1; i <=num; i++)
-			Logger.log(getAction().getText(PICK_UP_ITEMS));
+			Logger.log(getAction().getText(PICK_UP_ITEMS.format(i)));
 		Logger.log("verify original items needs to be delivered",TestStepType.STEP);
 		for (int i = 1; i <= num; i++){
-			AjaxCondition.forElementVisible(ITEM_DESCRIPTION.format("open",i)).waitForResponse();
-			SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format("open",i)), getAction().getElementCount(ITEM_DESCRIPTION_COUNT.format("Open"))==num);}
+			AjaxCondition.forElementVisible(ITEM_DESCRIPTION_WITHOUT_PICKUP.format(i)).waitForResponse();
+			SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION_WITHOUT_PICKUP.format(i)), getAction().getElementCount(ITEM_DESCRIPTION_WITHOUT_PICKUP_COUNT)==num);}
 		return this;
 	}
 	public OrderDetailsPage verifyEvenExchangeNotAllowed(){
