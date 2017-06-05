@@ -286,7 +286,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.AcceptOfferConcession("OFFER_CONSESSION_YES_BUTTON,MEMBER_CONSESSION_YES_BUTTON,SELECT_CONSESSION_TYPE:Other:1,CONSESSION_AMOUNT:100:1,FINISH_BUTTON")
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.pickupEntireOrder();
+		.pickupEntireOrder("");
 	}  
 	/*	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Order"}
@@ -2328,10 +2328,26 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rereserveItem("open","whole order")
 		.verifyNewOrderhassameSalescheckNumber()
+		.captureNewOrderNumber()
 		.goToDeliveryNotes()
 		.verifyDeliveryOSHNotes(list)
-		.verifyDateandUserInDeliveryOSHNote(strdate,msp_user);
+		.verifyDateandUserInDeliveryOSHNote(strdate,msp_user)
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, dc_number)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.verifyActionCapturedHistoryNotes("Following Item(s) were re reserved",dc_number,getContext().get("oldOrdersaelchecknumber").toString());
 	}	
+	
+
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Driver_Agent"}
@@ -2557,8 +2573,37 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		
 		
 	}
-	
-	
-	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Order"}
+	, description = "Verify order is created after pickup action", enabled = true)
+	public void MSP_Delivery_Test_Pickup_Released_DOD_Order_Driver_Agent(TestData data) throws ParseException {
+
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Released_DOD_Order",true);
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		
+        .addlogType(TestStepType.WHEN)
+        .chooseReleasedHDOrders()
+        
+        ._OrderDetailsAction()
+        .addlogType(TestStepType.WHEN)
+    	.verifyLineItemDetail("Released")
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyPickupbuttonPresent()
+		.addlogType(TestStepType.THEN)
+		.pickupEntireOrder("Release DOD");
+	}  
 	
 }

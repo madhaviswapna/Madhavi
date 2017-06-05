@@ -749,7 +749,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator FINISH_BUTTON = new Locator("FINISH_BUTTON", "//button[contains(text(),'Finish')]", "FINISH_BUTTON");
 	public final Locator ADD_CONCESSION = new Locator("ADD_CONCESSION", "(//*[contains(@ng-click,'addAdditionalConcession')])[{0}]", "ADD_CONCESSION");
 	public final Locator DELETE_CONCESSION = new Locator("ADD_CONCESSION", "(//*[contains(@ng-click,'removeConcession')])[{0}]", "ADD_CONCESSION");
-	
+	public final Locator CONTACT_HISTORY_NOTESS = new Locator("CONTACT_HISTORY_NOTES", "//*[contains(text(),'{0}') and contains(text(),'{1}') and contains(text(),'{2}')]", "CONTACT_HISTORY_NOTES");
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -4870,7 +4870,9 @@ public class OrderDetailsPage extends Page {
 
 
 	}
-	public void pickupEntireOrder(){
+	public void pickupEntireOrder(String orderStatus){
+		String orderRouteStatus= (String) getContext().get("orderRouteStatus");
+		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
 		Logger.log("Agent should be able to do pickup action", TestStepType.STEP);
 		getAction().waitFor(3000);
 		getAction().scrollTo(PICKUP_BUTTON);
@@ -4897,6 +4899,23 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
 		getAction().click(CONTINUE_BUTTON);
 		getAction().waitFor(3000);
+		
+		if(orderStatus.equalsIgnoreCase("Shipped")||orderStatus.equalsIgnoreCase("Partially Shipped")||orderStatus.equalsIgnoreCase("Release")){
+			getAction().click(CONCESSIONACCEPTED_NO);					Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
+				AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
+				getAction().click(OFFER_CONSESSION_NO_BUTTON);
+			}
+			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+				getAction().waitFor(3000);
+				verifyDayOfDelivery("Delivery Driver","Select Items");
+				if("DELIVERY DRIVER".equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_RETURN_EXCHANGE_ITEM).waitForResponse();
+					getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);
+				}
+			}
+			getAction().waitFor(3000);
+		
+		
 		AjaxCondition.forElementVisible(CONCESSION_YES).waitForResponse();
 		getAction().click(CONCESSION_YES);
 		AjaxCondition.forElementVisible(CONCESSIONACCEPTED_NO).waitForResponse();
@@ -6293,17 +6312,18 @@ public class OrderDetailsPage extends Page {
 		int lineItemCount=(int) getContext().get("openMultiLineItem");
 		System.out.println("lineItemCount:"+lineItemCount);
 		Logger.log("Verify Day of Delivery Orders");
-		
-			AjaxCondition.forElementVisible(DAY_OF_DELIVERY_AGENT.format(agent));
-			getAction().click(DAY_OF_DELIVERY_AGENT.format(agent));
-			if (orderType.equalsIgnoreCase("Entire order")) {
+
+		AjaxCondition.forElementVisible(DAY_OF_DELIVERY_AGENT.format(agent));
+		getAction().click(DAY_OF_DELIVERY_AGENT.format(agent));
+		if (orderType.equalsIgnoreCase("Entire order")) {
 			int rndCodeCategory = generateRandomNumberSelect(DAY_OF_DELIVERY_RETURN_CODES_COUNT);
 			AjaxCondition.forElementVisible(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
 			getAction().click(DAY_OF_DELIVERY_RETURN_CODES.format(rndCodeCategory));
+			
 			if(rndCodeCategory==3||rndCodeCategory==7||rndCodeCategory==12||rndCodeCategory==13||rndCodeCategory==14){
 				AjaxCondition.forElementVisible(STATUS_UPDATE).waitForResponse(3000);
 				getAction().click(STATUS_UPDATE);}
-				
+
 			else{
 				AjaxCondition.forElementPresent(ARRIVAL_TIME).waitForResponse(3000);
 				getAction().click(ARRIVAL_TIME);
@@ -6311,23 +6331,35 @@ public class OrderDetailsPage extends Page {
 				getAction().click(DEPARTURE_TIME);
 				AjaxCondition.forElementVisible(STATUS_UPDATE).waitForResponse(3000);
 				getAction().click(STATUS_UPDATE);
-				}}
-		else 
+			}
+		}
+		else {
+			System.out.println("----------------------------------------------lineItemCount"+lineItemCount);
 			for (int i = 1; i <= lineItemCount; i++) {
 				AjaxCondition.forElementPresent(DOD_RETURN_CODES_LINE_ITEM_COUNT.format(i)).waitForResponse();
 				int rndCodeCategory = generateRandomNumberSelect(DOD_RETURN_CODES_LINE_ITEM_COUNT.format(i));
+				if(rndCodeCategory==1)
+					rndCodeCategory =2;
 				System.out.println("rndCodeCategory----"+rndCodeCategory);
 				AjaxCondition.forElementVisible(DOD_RETURN_CODES_LINE_ITEM.format(i,rndCodeCategory)).waitForResponse();
-				getAction().click(DOD_RETURN_CODES_LINE_ITEM.format(i,rndCodeCategory)); 
+				getAction().click(DOD_RETURN_CODES_LINE_ITEM.format(i,rndCodeCategory));
+			
+				//if(rndCodeCategory==5||rndCodeCategory==9||rndCodeCategory==14||rndCodeCategory==15||rndCodeCategory==16){
+
+				//}
+				if(getAction().isElementPresent(ARRIVAL_TIME)){
+					AjaxCondition.forElementPresent(ARRIVAL_TIME).waitForResponse(3000);
+					getAction().click(ARRIVAL_TIME);
+					AjaxCondition.forElementPresent(DEPARTURE_TIME).waitForResponse(3000);
+					getAction().click(DEPARTURE_TIME);
 				}
-		AjaxCondition.forElementPresent(ARRIVAL_TIME).waitForResponse(3000);
-		getAction().click(ARRIVAL_TIME);
-		AjaxCondition.forElementPresent(DEPARTURE_TIME).waitForResponse(3000);
-		getAction().click(DEPARTURE_TIME);
+			}	
+		}
 		AjaxCondition.forElementVisible(UPDATE_DELIVERY_STATUS).waitForResponse(3000);
 		getAction().click(UPDATE_DELIVERY_STATUS);
 		return this;
 	}
+
 
 	public OrderDetailsPage selectwindowType(String windowType,String agent) {
 		Logger.log("Select the:"+windowType,TestStepType.STEP);
@@ -6602,6 +6634,45 @@ public class OrderDetailsPage extends Page {
 		}
 		return this;	
 	}
+	
+	public void verifyActionCapturedHistoryNotes(String notes,String dosNumber,String newOrderNumber){
+		Logger.log("Verify adjustment done on order are captured in History Notes", TestStepType.STEP);
+		getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
+		getAction().click(ORDER_CONTACT_HISTORY);
+		getAction().waitFor(3000);
+		SoftAssert.checkElementAndContinueOnFailure(CONTACT_HISTORY_NOTESS.format(notes,dosNumber,newOrderNumber),"new order details desplayed in contact history" , CheckLocatorFor.isPresent);
+	}
+	public void captureNewOrderNumber(){
+		Logger.log("Verify Cancle button is not present in action center", TestStepType.STEP);
+		getAction().waitFor(4000);
+		if(getAction().isVisible((DELIVERYDETAILS_DOS_NUMBER))){
+			String newOrderNum=getAction().getText(DELIVERYDETAILS_DOS_NUMBER);
+			System.out.println("----------------------------------new order number"+newOrderNum);
+			getContext().put("newOrderNum", newOrderNum);
+		}
+		else
+			PageAssert.fail("order number is not displayed");
+	}
+	
+	public void verifynewOrderdetailsinContactHistoryOfOldOrder(){
+		Logger.log("verify the salescheck number of the new created order is same as old order salescheck", TestStepType.STEP);
+		getAction().waitFor(3000);
+		if(getAction().isVisible(DOS_ORDER_SUMMARY_SALESCHECK_NUMBER)){
+			String saleschecknumber=getAction().getText(DOS_ORDER_SUMMARY_SALESCHECK_NUMBER);
+			System.out.println("----------------------------------------new order saleschecknumber"+saleschecknumber);
+			String oldsaleschecknumber=(String) getContext().get("oldOrdersaelchecknumber");
+			System.out.println("----------------------------------------old order saleschecknumber"+oldsaleschecknumber);
+			if(saleschecknumber.equalsIgnoreCase(oldsaleschecknumber)){
+				Logger.log("new order has same salescheck number as old order",TestStepType.VERIFICATION_PASSED);
+			}
+			else
+				PageAssert.fail("sales check number is not displayed");
+		}
+	}
+	
+
+
 
 }
 

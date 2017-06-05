@@ -498,9 +498,9 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 
-	public OrderDetailsAction pickupEntireOrder() {
+	public OrderDetailsAction pickupEntireOrder(String orderstatus) {
 		Logger.log("Verify agent able to do pickup action on entire order",TestStepType.THEN);
-		this.factory.orderdetailspage().pickupEntireOrder();
+		this.factory.orderdetailspage().pickupEntireOrder(orderstatus);
 		return this;
 	}
 
@@ -752,4 +752,17 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().acceptofferconcession(inputs);
 		return this;
 	}	
+	public OrderDetailsAction verifyActionCapturedHistoryNotes(String notes,String DosUnit,String newOrder) {
+		Logger.log("Verify contact hisory is updated",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyActionCapturedHistoryNotes(notes,DosUnit,newOrder);
+		return this;
+	}
+	public OrderDetailsAction captureNewOrderNumber() {
+		Logger.log("Capture the order number of the newly created orderd",TestStepType.THEN);
+		this.factory.orderdetailspage().captureNewOrderNumber();
+		return this;
+	}
+
+
+
 }
