@@ -6667,8 +6667,9 @@ public class OrderDetailsPage extends Page {
 		}
 	}
 	public void verifyPendCode(String codetype){
-		Logger.log("verify the salescheck number of the new created order is same as old order salescheck", TestStepType.STEP);
 		getAction().waitFor(3000);
+		goToOrderDetail();
+		Logger.log("verify the pend code is displayed as expected for the order", TestStepType.STEP);
 		if(getAction().isVisible(DOS_ORDER_SUMMARY_PEND_CODE)){
 			String pendcode=getAction().getText(DOS_ORDER_SUMMARY_PEND_CODE);
 			System.out.println("----------------------------------------pendcode:"+pendcode);

@@ -2630,7 +2630,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyPendCode("DDH")
-		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Preferred Time Windows","")
+		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Unrestricted Time Window","")
 		.verifyPendCode("");
 	}
 }
