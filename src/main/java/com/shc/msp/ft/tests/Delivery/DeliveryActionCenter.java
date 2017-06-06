@@ -2624,7 +2624,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.login(user)
 		.addlogType(TestStepType.WHEN)
 		.closeWarningPopupWindow()
-		.searchByDeliveryOrderId("205010","8720")
+		.searchByDeliveryOrderId(dosorderID,dosunitID)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
