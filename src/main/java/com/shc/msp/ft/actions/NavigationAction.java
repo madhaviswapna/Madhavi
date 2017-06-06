@@ -220,9 +220,15 @@ public class NavigationAction extends BaseAction {
 	
 	
 	
-	public NavigationAction manageQueues() {
-		Logger.log("Super admin tries to change the queue priority",TestStepType.THEN);
-		this.factory.vendorDetailsPage().ManageQueues();
+	public NavigationAction verifyManageQueues() {
+		Logger.log("Verify the Queue priority and SVL values can be changed",TestStepType.THEN);
+		this.factory.vendorDetailsPage().verifyManageQueues();
+        return this;
+	}
+	
+	public NavigationAction resetQueueValues(){
+		Logger.log("Reset the Queue Priority",TestStepType.THEN);
+		this.factory.vendorDetailsPage().resetQueueValues();
         return this;
 	}
 	

@@ -12,11 +12,12 @@ import com.shc.msp.ft.entities.As;
 import com.shc.msp.ft.entities.User;
 import com.shc.msp.ft.util.Retrieval_Test_Data_By_Query;
 import com.shc.msp.ft.util.TestGroup;
+import com.shc.msp.ft.util.UserPool;
 
 public class AdminTests extends BaseTests {
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPSuperAdminTest,TestGroup.MSPP1OnlineTests,"manage_Queues_SuperAdmin"}, description = "superAdmin_manage_queues", enabled = true)
-	public void manage_Queues_SuperAdmin(TestData data) throws Exception{
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"SuperAdmin_Manage_Queue"}, description = "SuperAdmin_Manage_Queue", enabled = true)
+	public void SuperAdmin_Manage_Queue(TestData data) throws Exception{
 
 		addCloneIDHostname(data);
 		User user = User.find("Onlineuser1");
@@ -29,8 +30,29 @@ public class AdminTests extends BaseTests {
 		.verifySuperAdmin()
 		.addlogType(TestStepType.THEN)
 		._NavigationAction()
-		.manageQueues();
+		.verifyManageQueues()
+		.addlogType(TestStepType.THEN)
+		.resetQueueValues();
 	}	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"Admin_Manage_Queue"}, description = "Admin_Manage_Queue", enabled = true)
+	public void Admin_Manage_Queue(TestData data) throws Exception{
+
+		addCloneIDHostname(data);
+		User user = new User(); user.userName=UserPool.getUser();
+
+		LogFormatterAction.beginSetup();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyAdmin()
+		.addlogType(TestStepType.THEN)
+		._NavigationAction()
+		.verifyManageQueues()
+		.addlogType(TestStepType.THEN)
+		.resetQueueValues();
+	}
 
 	@Test(dataProvider = "DP_Layaway_Contract_Details",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSuperAdminTest,"Search_Layaway_SuperAdmin"}, description = "Admin search layaway contract by contact id")
 	public void Search_Layaway_SuperAdmin(String contractID)throws Exception {
