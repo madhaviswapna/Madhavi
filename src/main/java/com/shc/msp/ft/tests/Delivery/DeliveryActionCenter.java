@@ -286,7 +286,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.AcceptOfferConcession("OFFER_CONSESSION_YES_BUTTON,MEMBER_CONSESSION_YES_BUTTON,SELECT_CONSESSION_TYPE:Other:1,CONSESSION_AMOUNT:100:1,FINISH_BUTTON")
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.pickupEntireOrder("");
+		.pickupEntireOrder("Shipped");
 	}  
 	/*	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Order"}
@@ -459,8 +459,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.cancelOrderDelivery("Line item","Open","");
-
-
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Open_HD_Order"}

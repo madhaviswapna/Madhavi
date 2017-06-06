@@ -4899,23 +4899,17 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
 		getAction().click(CONTINUE_BUTTON);
 		getAction().waitFor(3000);
-		
-		if(orderStatus.equalsIgnoreCase("Shipped")||orderStatus.equalsIgnoreCase("Partially Shipped")||orderStatus.equalsIgnoreCase("Release")){
-			getAction().click(CONCESSIONACCEPTED_NO);					Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
-				AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
-				getAction().click(OFFER_CONSESSION_NO_BUTTON);
-			}
+		try {
 			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
 				getAction().waitFor(3000);
 				verifyDayOfDelivery("Delivery Driver","Select Items");
 				if("DELIVERY DRIVER".equalsIgnoreCase("Delivery Driver")){
 					AjaxCondition.forElementVisible(CONTINUE_TO_RETURN_EXCHANGE_ITEM).waitForResponse();
-					getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);
-				}
-			}
-			getAction().waitFor(3000);
-		
-		
+					getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);}}
+		} catch (NullPointerException e ) {
+			orderRouteStatus="";
+		}
+		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CONCESSION_YES).waitForResponse();
 		getAction().click(CONCESSION_YES);
 		AjaxCondition.forElementVisible(CONCESSIONACCEPTED_NO).waitForResponse();
