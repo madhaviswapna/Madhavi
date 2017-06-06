@@ -762,7 +762,11 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().captureNewOrderNumber();
 		return this;
 	}
-
+	public OrderDetailsAction verifyPendCode(String code) {
+		Logger.log("Capture pend code from the order and veriy its DDH",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyPendCode(code);
+		return this;
+	}
 
 
 }

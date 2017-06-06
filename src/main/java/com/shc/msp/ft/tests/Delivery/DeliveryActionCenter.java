@@ -2605,5 +2605,32 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.pickupEntireOrder("Release DOD");
 	}  
-	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests, "MSP_Delivery_VerifyDDH_PendCode_Removed_After_Reschedule"}
+	, description = "Verify update option for pended orders", enabled = true, priority=1)
+	public void MSP_Delivery_VerifyDDH_PendCode_Removed_After_Reschedule(TestData data) throws Exception {
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		
+		String[] arr= getProductToTest("Pended_DDH_Open_Order",true).split(",");
+		String dosorderID=arr[0];
+		String dosunitID=arr[1];
+
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.searchByDeliveryOrderId("205010","8720")
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifyPendCode("DDH")
+		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Preferred Time Windows","")
+		.verifyPendCode("");
+	}
 }

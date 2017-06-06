@@ -5320,6 +5320,8 @@ public class OrderDetailsPage extends Page {
 	}
 
 	public void rescheduleDeliveryOrder(String type) throws ParseException{
+		
+		getAction().waitFor(3000);
 		Logger.log("Verify whether order can be rescheduled", TestStepType.STEP);
 
 		goToOrderDetail();
@@ -6662,6 +6664,19 @@ public class OrderDetailsPage extends Page {
 			}
 			else
 				PageAssert.fail("sales check number is not displayed");
+		}
+	}
+	public void verifyPendCode(String codetype){
+		Logger.log("verify the salescheck number of the new created order is same as old order salescheck", TestStepType.STEP);
+		getAction().waitFor(3000);
+		if(getAction().isVisible(DOS_ORDER_SUMMARY_PEND_CODE)){
+			String pendcode=getAction().getText(DOS_ORDER_SUMMARY_PEND_CODE);
+			System.out.println("----------------------------------------pendcode:"+pendcode);
+			if(codetype.equalsIgnoreCase(pendcode)){
+				Logger.log("order has the expected pend code",TestStepType.VERIFICATION_PASSED);
+			}
+			else
+				PageAssert.fail("Order pend code is not expected");
 		}
 	}
 	
