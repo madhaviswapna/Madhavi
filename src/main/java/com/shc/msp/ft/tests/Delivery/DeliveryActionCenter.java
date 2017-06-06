@@ -2572,7 +2572,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Order"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Pickup_Released_DOD_Order_Driver_Agent"}
 	, description = "Verify order is created after pickup action", enabled = true)
 	public void MSP_Delivery_Test_Pickup_Released_DOD_Order_Driver_Agent(TestData data) throws ParseException {
 
