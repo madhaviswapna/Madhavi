@@ -1,10 +1,13 @@
 package com.shc.msp.ft.pages;
 
+import java.util.Random;
+
 import com.shc.automation.AjaxCondition;
 import com.shc.automation.Locator;
 import com.shc.automation.Logger;
 import com.shc.automation.PageAssert;
 import com.shc.automation.SoftAssert;
+import com.shc.automation.utils.TestUtils.CheckLocatorFor;
 import com.shc.automation.utils.TestUtils.TestStepType;
 import com.shc.msp.ft.factory.SiteFactory;
 import com.shc.msp.ft.util.Utility;
@@ -29,10 +32,16 @@ public class VendorDetailsPage extends Page {
     public static final Locator MANAGE_QUEUES= new Locator("Manage queues", "//span[contains(text(),'Manage Queues')]", "Manage queues");
     public static final Locator MANAGE_ROLES= new Locator("MANAGE_ROLES", "//span[contains(text(),'Manage Roles')]", "MANAGE_ROLES");
     public static final Locator MANAGE_ROLES_PAGE= new Locator("MANAGE_ROLES_PAGE", "//h3[contains(text(),'Manage Roles')]", "MANAGE_ROLES_PAGE");
-    public static final Locator ADMIN_ROLE= new Locator("ADMIN_ROLE", "//a[contains(text(),'ADMIN')]", "ADMIN_ROLE");
-    public static final Locator ADMIN_ROLE_PRIVILAGE= new Locator("ADMIN_ROLE_PRIVILAGE", "(//div[contains(@ng-repeat,'role in roles ')])[1]//li[contains(text(),'{0}')]", "ADMIN_ROLE_PRIVILAGE");
+    public static final Locator ROLE= new Locator("ROLE", "//a[contains(text(),'{0}')]", "ROLE");
+    //public static final Locator ADMIN_ROLE_PRIVILEGE= new Locator("ADMIN_ROLE_PRIVILAGE", "(//div[contains(@ng-repeat,'role in roles ')])[1]//li[contains(text(),'{0}')]", "ADMIN_ROLE_PRIVILAGE");
+    public static final Locator ASSIGNED_ROLE_PRIVILEGE= new Locator("ASSIGNED_ROLE_PRIVILEGE","//legend[contains(.,'{0}')]/following-sibling::div//li[contains(text(),'{1}')]","ASSIGNED_ROLE_PRIVILEGE");
+    
     public static final Locator CHECKED_ROLE= new Locator("CHECKED_ROLE", "//span[@ng-if='privilege.checked']/input", "CHECKED_ROLE");
     public static final Locator UNCHECKED_ROLE= new Locator("UNCHECKED_ROLE", "//span[@ng-if='!privilege.checked']/input", "UNCHECKED_ROLE");
+    
+    public static final Locator UNCHECKED_PRIVILEGE= new Locator("UNCHECKED_PRIVILEGE", "(//span[@ng-if='!privilege.checked']/input){0}", "UNCHECKED_PRIVILEGE");
+    public static final Locator ASSIGNED_PRIVILEGE= new Locator("ASSIGNED_PRIVILEGE","//input[@value='{0}']","ASSIGNED_PRIVILEGE");
+    
     public static final Locator QUEUE_NAME= new Locator("queue name", "//input[@id='queueName']", "queue name");
     public static final Locator SEARCH_BUTTON= new Locator("searchbutton", "   //button[contains(@class,'search')]", "searchbutton");
     public static final Locator SUBMIT_BUTTON= new Locator("SUBMIT_BUTTON", "//button[contains(text(),'Submit')]", "SUBMIT_BUTTON");
@@ -187,38 +196,57 @@ public class VendorDetailsPage extends Page {
     	return this;
     }
     
-    public VendorDetailsPage manageRoles() {
-    	Logger.log("Verify if role management can be done", TestStepType.VERIFICATION_STEP);
+    public VendorDetailsPage verifyPrivelegeAssignmentToRole(String role) {
+    	Logger.log("Verify Privilege can be assigned to the Agent Role:- "+role, TestStepType.STEP);
     	getAction().waitFor(2000);
     	AjaxCondition.forElementVisible(MENU_BUTTON).waitForResponse();  
     	getAction().click(MENU_BUTTON);
     	getAction().waitFor(2000);
     	AjaxCondition.forElementVisible(MANAGE_ROLES).waitForResponse();  
     	getAction().click(MANAGE_ROLES);
+    	Logger.log("Click on the Menu followed by Manage Roles", TestStepType.STEP);
     	getAction().waitFor(2000);
     	AjaxCondition.forElementVisible(MANAGE_ROLES_PAGE).waitForResponse(); 
-    	AjaxCondition.forElementVisible(ADMIN_ROLE).waitForResponse(); 
-    	getAction().click(ADMIN_ROLE);
+    	AjaxCondition.forElementVisible(ROLE.format(role)).waitForResponse();
+    	getAction().scrollTo(ROLE.format(role));
+    	Logger.log("Click on Role:- "+role, TestStepType.STEP);
+    	getAction().click(ROLE.format(role));
     	
-    	AjaxCondition.forElementVisible(CHECKED_ROLE).waitForResponse();  
-    	Logger.log("Unchecking the privilage: "+getAction().getText(CHECKED_ROLE)+"for admin", TestStepType.VERIFICATION_STEP);
-    	getAction().click(CHECKED_ROLE);
-    	AjaxCondition.forElementVisible(UNCHECKED_ROLE).waitForResponse();
-    	String role=getAction().getText(UNCHECKED_ROLE);
-    	Logger.log("selecting the privilage: "+role+"for admin", TestStepType.STEP);
-    	getAction().click(UNCHECKED_ROLE);
-
+    	int privlegeCount = getAction().getElementCount(UNCHECKED_PRIVILEGE.format(""));
+    	Random rand = new Random();
+    	Integer index = rand.nextInt(privlegeCount);
+    	String randomUncheckedPrivlege = "["+index.toString()+"]";
+    	String newPrivilege=getAction().getAttribute(UNCHECKED_PRIVILEGE.format(randomUncheckedPrivlege),"value");
+    	setData("newPrivilege", newPrivilege);
+    	Logger.log("Click on Checkbox:- "+newPrivilege, TestStepType.STEP);
+    	getAction().click(UNCHECKED_PRIVILEGE.format(randomUncheckedPrivlege));
+    	Logger.log("Click on Submit Button", TestStepType.STEP); 	
     	AjaxCondition.forElementVisible(SUBMIT_BUTTON).waitForResponse();  
     	getAction().click(SUBMIT_BUTTON);
     	getAction().waitFor(2000);
-    	
-    	AjaxCondition.forElementVisible(ADMIN_ROLE_PRIVILAGE.format(role)).waitForResponse();
-    	Logger.log("Verified that the added privilage is present in the privilage list", TestStepType.VERIFICATION_STEP);
-    	
+    	SoftAssert.checkElementAndContinueOnFailure(ASSIGNED_ROLE_PRIVILEGE.format(role,newPrivilege), "Verify the privlege "+newPrivilege+"is added to the role "+role, CheckLocatorFor.isVisible);
     	
     	return this;
     }
     
+    public VendorDetailsPage resetPrivelegeAssignmentToRole(String role){
+    	Logger.log("Reset privilege assigned to the Agent Role:- "+role, TestStepType.STEP);
+    	getAction().waitFor(2000);
+    	getAction().scrollTo(ROLE.format(role));
+    	Logger.log("Click on Role:- "+role, TestStepType.STEP);
+    	getAction().click(ROLE.format(role));
+    	String newPrivilege= (String)getData("newPrivilege");
+    	getAction().waitFor(2000);
+    	Logger.log("Uncheck the checkbox:- "+newPrivilege, TestStepType.STEP);
+    	getAction().scrollTo(ASSIGNED_PRIVILEGE.format(newPrivilege));
+    	getAction().click(ASSIGNED_PRIVILEGE.format(newPrivilege));
+    	Logger.log("Click on Submit Button", TestStepType.STEP); 	
+    	AjaxCondition.forElementVisible(SUBMIT_BUTTON).waitForResponse();  
+    	getAction().click(SUBMIT_BUTTON);
+    	getAction().waitFor(2000);
+    	SoftAssert.checkElementAndContinueOnFailure(ASSIGNED_ROLE_PRIVILEGE.format(role,newPrivilege), "Verify the privlege "+newPrivilege+"is added to the role "+role, CheckLocatorFor.isNotVisible);
+    	return this;
+    }
 
     public VendorDetailsPage VerifyLayawayContractDetails(String contractID){
        	Logger.log("Verify if Layaway Contract Details is displayed", TestStepType.VERIFICATION_STEP);

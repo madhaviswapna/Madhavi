@@ -232,12 +232,16 @@ public class NavigationAction extends BaseAction {
         return this;
 	}
 	
-	public NavigationAction manageRoles() {
-		Logger.log("Super admin tries to manage roles",TestStepType.THEN);
-		this.factory.vendorDetailsPage().manageRoles();
+	public NavigationAction verifyPrivelegeAssignmentToRole(String role) {
+		Logger.log("Verify Privelege assignment to role "+role,TestStepType.THEN);
+		this.factory.vendorDetailsPage().verifyPrivelegeAssignmentToRole(role);
         return this;
 	}
-
+	public NavigationAction resetPrivelegeAssignmentToRole(String role) {
+		Logger.log("Reset Privelege assignment to role "+role,TestStepType.THEN);
+		this.factory.vendorDetailsPage().resetPrivelegeAssignmentToRole(role);
+        return this;
+	}
 
 	public NavigationAction searchByEmail(String email) {
 		Logger.log("Agent searches for an order by email",TestStepType.WHEN);

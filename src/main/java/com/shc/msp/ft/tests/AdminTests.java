@@ -94,8 +94,8 @@ public class AdminTests extends BaseTests {
 		.logout();
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPSuperAdminTest,TestGroup.MSPP1OnlineTests,"manage_Roles_SuperAdmin"}, description = "superAdmin_manage_roles", enabled = true)
-	public void manage_Roles_SuperAdmin(TestData data) throws Exception{
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"verifyRolePrivelegeAssignmentSuperAdmin"}, description = "verifyRolePrivelegeAssignmentSuperAdmin", enabled = true)
+	public void verifyRolePrivelegeAssignmentSuperAdmin(TestData data) throws Exception{
 
 		addCloneIDHostname(data);
 		User user = User.find("Onlineuser1");
@@ -108,7 +108,8 @@ public class AdminTests extends BaseTests {
 		.verifySuperAdmin()
 		.addlogType(TestStepType.THEN)
 		._NavigationAction()
-		.manageRoles();
+		.verifyPrivelegeAssignmentToRole("VIEW ONLY")
+		.resetPrivelegeAssignmentToRole("VIEW ONLY");
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPSuperAdminTest,TestGroup.MSPP1OnlineTests,"manage_Roles_SuperAdmin"}, description = "superAdmin_manage_roles", enabled = true)
 	public void View_Queue_Volume_Report_Admin(TestData data) throws Exception{
