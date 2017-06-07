@@ -146,15 +146,15 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		//String salescheck= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order");
 
-	//	String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
+		//	String orderId= getProductToTest("Rereserve_Eligible_Partially_Shipped_Order",true);	
 		//String orderId= getProductToTest("Rereserve_Partially_Shipped_Order");
-		
-		
+
+
 		String[] values= getProductToTest("Rereserve_Eligible_Partially_shipped_Order",true).split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
-		
+
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -231,7 +231,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
-		
+
 		//String dosorderID= getProductToTest("Pickup_Partially_Shipped");
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -417,9 +417,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
-		
+
 		//String orderId= getProductToTest("Cancel_Partially_Shipped",true);
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -682,12 +682,12 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 
 		//String dosorderId= getProductToTest("Partially_Shipped_Order");	
-		
+
 		String[] values= getProductToTest("Reschedule_Eligible_Partially_Shipped_Order",true).split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
-		
+
 
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -757,7 +757,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: PARTIAL RELEASE");
 
 	}  
-*/
+	 */
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Schedule_Follow_Up_Open_HD_Order"}
 	, description = "Verify if an open HD order can be scheduled for follow up", enabled = true)
@@ -956,7 +956,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
-		
+
 		String[] arr= getProductToTest("Pended_Open_Order",true).split(",");
 		//ProductData order = getProductDataToTest("Pended_Open_Order");
 		String dosorderID=arr[0];
@@ -1957,12 +1957,12 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		//String orderId= getProductToTest("Schedule_Follow_Up_Partially_Shipped");
-		
+
 		String[] values= getProductToTest("Scheduleforfollowup_Eligible_Partially_Shipped_Order",true).split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -2056,7 +2056,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Unrestricted Time Window","Delivery Driver");
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Cancel_Open_Whole_Order_CaptureNotesVerification"}
 	, description = "Verify if whole order can be cancelled", enabled = true)
@@ -2097,7 +2097,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 	}  
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Cancel_Open_Line_Item"}
 	, description = "Verify if a line item for open order can be cancelled", enabled = true)
@@ -2135,7 +2135,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedInNotes("Cancel Delivery Item");
 	}  
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification_Open_Order"}
 	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
@@ -2219,7 +2219,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		String[] arr= getProductToTest("Released_TBC_Order").split(",");
 		String orderId=arr[0];
 		String dc_number=arr[1];
-		
+
 		System.out.println("OrderId:"+orderId);
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -2236,9 +2236,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.verifyCancelbuttonnotPresent();
+		.verifyCancelbuttonnotPresent("Released");
 	} 
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_verify_ReasonCode_HD_Uneven_Exchange_Queue"}
 	, description = "Verify if the reaons codes whle trying to wrap up an order in HD_Uneven_Exchange queue", enabled = true)
@@ -2279,36 +2279,36 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyReasoncodeAndWrapup()
 		.addlogType(TestStepType.THEN)
 		.verifyAllReasonCodePresence(keywords,"deliveryOffline");
-	
+
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Rereserve_Whole_MultiQuantity_Order"}
 	, description = "Verify whether rereserve button is present for open orders", enabled = true)
 	public void MSP_Delivery_Test_Rereserve_Whole_MultiQuantity_Order(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
-		
-		Calendar currentdate = Calendar.getInstance();
-        String strdate = null;
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
-        strdate = formatter.format(currentdate.getTime());
-        TimeZone obj = TimeZone.getTimeZone("CST");
-        formatter.setTimeZone(obj);
-        strdate = formatter.format(currentdate.getTime());
 
-        User user = new User(); user.userName=UserPool.getDeliveryUser();
+		Calendar currentdate = Calendar.getInstance();
+		String strdate = null;
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		strdate = formatter.format(currentdate.getTime());
+		TimeZone obj = TimeZone.getTimeZone("CST");
+		formatter.setTimeZone(obj);
+		strdate = formatter.format(currentdate.getTime());
+
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		List<String> list= new ArrayList<String>();
 		list.add("RERES DLVR DT");
 		list.add("MSP USER"+": "+user.userName);
 		list.add("OSH/MSO-WEB: RERESERVATION");
 		list.add("MSP USER"+": "+user.userName);
-		
-		
+
+
 		String[] arr= getProductToTest("Open_MultiQuantity_Order").split(",");
 		String orderId=arr[0];
 		String dc_number=arr[1];
-		
+
 		String msp_user="MSP USER"+": "+user.userName;
 		As.guestUser.goToHomePage()
 		._NavigationAction()
@@ -2346,9 +2346,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedHistoryNotes("Following Item(s) were re reserved",dc_number,getContext().get("oldOrdersaelchecknumber").toString());
 	}	
-	
 
-	
+
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Driver_Agent"}
 	, description = "Verify if an DOD released order can be cancelled", enabled = true)
@@ -2444,7 +2444,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedHistoryNotes();
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_verify_ReasonCode_HD_Part_Request_Queue"}
 	, description = "Verify if the reaons codes whle trying to wrap up an order in HD_Part_Request queue", enabled = true)
@@ -2454,7 +2454,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		User user = new User(); user.userName="testdelivery0122";
 		user.password="TestPassword";
 		List<Object> keywords= getAllProductToTest("partRequestReasonCodes");
-		
+
 		String[] values= getProductToTest("Pickup_Eligible_Partially_shipped_Order").split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
@@ -2488,9 +2488,9 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.verifyReasoncodeAndWrapup()
 		.addlogType(TestStepType.THEN)
 		.verifyAllReasonCodePresence(keywords,"deliveryOffline");
-	
+
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Member_Agent"}
 	, description = "Verify if an DOD released order can be cancelled", enabled = true)
@@ -2504,7 +2504,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		list.add("MSP USER"+": "+user.userName);
 		list.add("OSH/MSO-WEB: CANCEL ORDER");
 		list.add("MSP USER"+": "+user.userName);
-		
+
 		String dosunitID=DcNumber.DC_NO;//order.getUnitNumber().toString();
 		String dosOrderInfo = orderId + "-" + dosunitID;
 
@@ -2544,7 +2544,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyActionCapturedHistoryNotes();
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_DOD_Order_Delivery_Agent"}
 	, description = "Verify if an order for released DOD order for driver agent can be rescheduled", enabled = true)
@@ -2570,8 +2570,8 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
 		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Unrestricted Time Window","Delivery Driver");
-		
-		
+
+
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Pickup_Released_DOD_Order_Driver_Agent"}
@@ -2592,13 +2592,13 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
 		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		
-        .addlogType(TestStepType.WHEN)
-        .chooseReleasedHDOrders()
-        
-        ._OrderDetailsAction()
-        .addlogType(TestStepType.WHEN)
-    	.verifyLineItemDetail("Released")
+
+		.addlogType(TestStepType.WHEN)
+		.chooseReleasedHDOrders()
+
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.verifyLineItemDetail("Released")
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
 		.verifyPickupbuttonPresent()
@@ -2614,7 +2614,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		User user = new User();
 		user.userName=UserPool.getDeliveryUser();
-		
+
 		String[] arr= getProductToTest("Pended_DDH_Open_Order",true).split(",");
 		String dosorderID=arr[0];
 		String dosunitID=arr[1];
@@ -2633,4 +2633,36 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Unrestricted Time Window","")
 		.verifyPendCode("");
 	}
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_DOD_Order_Member_Agent"}
+	, description = "Verify if an order for released DOD order for driver agent can be rescheduled", enabled = true)
+	public void MSP_Delivery_Test_Reschedule_Released_DOD_Order_Member_Agent(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		String orderId= getProductToTest("Released_DOD_Order",true);	
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+		._OrderDetailsAction()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rescheduleServiceWindowOrder("Released", "ENTIRE ORDER","Preferred Time Windows","Member");
+
+
+	}
+
+
 }
+

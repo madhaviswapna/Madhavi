@@ -59,7 +59,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifySYWMaxSavingsAmount(amount);
 		return this;
 	}
-	
+
 
 	public OrderDetailsAction verifyOrderSummary(String OrderID) throws ParseException, SQLException{
 		Logger.log("Order summary should be displayed",TestStepType.THEN);
@@ -89,7 +89,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyAdjustments(OrderID);
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyAdjustmentCapturedInOrderSummary(String adjust, String amount){
 		Logger.log("Verify "+adjust+" in Order Summary",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyAdjustmentCapturedInOrderSummary(adjust, amount);
@@ -127,19 +127,19 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().CancelOrder(orderId);
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyEmpowermentGuidelinePopUp(){
 		Logger.log("Verify Empowerment Guideline pop up",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyEmpowermentGuidelinePopUp();
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyMarketplaceItemPopUp(){
 		Logger.log("Verify Marketplace Item pop up",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyMarketplaceItemPopUp();
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyEmpowermentGuidelineStatusColor(String Enabled){
 		Logger.log("Verify Empowerment Guideline Status Color",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyEmpowermentGuidelineStatusColor(Enabled);
@@ -262,9 +262,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyTrialBalance();
 		return this;	
 	}
-	
+
 	public OrderDetailsAction verifyTrialBalanceIfPresent() {
-		
+
 		try {
 			this.factory.orderdetailspage().verifyTrialBalance();
 			Logger.log("Verify Trial balance if available", TestUtils.TestStepType.THEN);
@@ -436,12 +436,12 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 	public OrderDetailsAction verifyAdjustmentCapturedInInteraction(List<String> adjust) {
-		
+
 		for(String s:adjust){
 			Logger.log("Verify "+s+" is captured in interaction",TestStepType.THEN);
 			this.factory.orderdetailspage().verifyAdjustmentCapturedInInteraction(s);
 		}
-		
+
 		return this;
 	}
 	public OrderDetailsAction verifyAdjustmentCapturedInNotes(String adjust) {
@@ -481,7 +481,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().goToActionCenter();
 		return this;
 	}
-	
+
 	public OrderDetailsAction goToAuditTrail(){
 		Logger.log("Navigating to Audit Trail",TestStepType.WHEN);
 		this.factory.orderdetailspage().goToAuditTrail();
@@ -519,10 +519,10 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyEvenExchangeEntireOrder(orderStatus);
 		return this;
 	}
-	
-	public OrderDetailsAction verifyEvenExchangeNotAllowed(){
+
+	public OrderDetailsAction verifyEvenExchangeNotAllowed(String action){
 		Logger.log("Verify, no items are allowed for Even Exchange ",TestStepType.THEN);
-		this.factory.orderdetailspage().verifyEvenExchangeNotAllowed();
+		this.factory.orderdetailspage().verifyEvenExchangeNotAllowed(action);
 		return this;
 	}
 
@@ -552,7 +552,7 @@ public class OrderDetailsAction extends BaseAction {
 		return this;
 	}
 
-public OrderDetailsAction scheduleFollowUp() throws ParseException {
+	public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		Logger.log("Schedule for follow up",TestStepType.THEN);
 		this.factory.orderdetailspage().scheduleFollowUp();
 		return this;
@@ -622,7 +622,7 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 	}
 	public void verifyAllReasonCodePresence(List <Object> keyword, String agent) {
 		if(agent.equalsIgnoreCase("delivery"))
-		clickOnReasonDropdown();
+			clickOnReasonDropdown();
 		Iterator<Object> itr= keyword.iterator();
 		while (itr.hasNext()) {
 			ProductData incoming =   (ProductData) itr.next();
@@ -636,7 +636,7 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().wrapUpOrderWithoutContactDelivery();
 		return this;
 	}
-	
+
 
 	public OrderDetailsAction verifyCapturedInInteractionsforUpdateContact() {
 		Logger.log("Verify adjustment is updated in the current interaction for updated contact",TestStepType.THEN);
@@ -675,7 +675,7 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		while(itr.hasNext()){
 			String verifyData=itr.next();
 			Logger.log("Verify delivery notes:-" + verifyData,TestStepType.THEN);
-			
+
 			System.out.println("------------------------------------------------------------"+verifyData);
 			verifyDataInDeliveryNotes(verifyData);
 		}
@@ -716,9 +716,9 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().rescheduleServiceWindowOrder(type,ordType,windowType,agent);
 		return this;
 	}
-	public OrderDetailsAction verifyCancelbuttonnotPresent() {
+	public OrderDetailsAction verifyCancelbuttonnotPresent(String orderStatus) {
 		Logger.log("Verify cancel button not present in action center",TestStepType.THEN);
-		this.factory.orderdetailspage().verifyCancelbuttonnotPresent();
+		this.factory.orderdetailspage().verifyCancelbuttonnotPresent(orderStatus);
 		return this;
 	}
 	public OrderDetailsAction captureSalescheckNumber() {
@@ -731,7 +731,7 @@ public OrderDetailsAction scheduleFollowUp() throws ParseException {
 		this.factory.orderdetailspage().verifyNewOrderhassameSalescheckNumber();
 		return this;
 	}
-	
+
 	public OrderDetailsAction verifyDateandUserInDeliveryOSHNote(String str1, String str2){
 		Logger.log("Verify data in delivery notes tab",TestStepType.THEN);
 		this.factory.orderdetailspage().verifyDateandUserInDeliveryOSHNote(str1,str2);
