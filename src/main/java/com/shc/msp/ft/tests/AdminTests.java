@@ -10,6 +10,7 @@ import com.shc.automation.utils.TestUtils.TestStepType;
 import com.shc.msp.ft.actions.LogFormatterAction;
 import com.shc.msp.ft.entities.As;
 import com.shc.msp.ft.entities.User;
+import com.shc.msp.ft.util.MongoDB;
 import com.shc.msp.ft.util.Retrieval_Test_Data_By_Query;
 import com.shc.msp.ft.util.TestGroup;
 import com.shc.msp.ft.util.UserPool;
@@ -21,7 +22,8 @@ public class AdminTests extends BaseTests {
 
 		addCloneIDHostname(data);
 		User user = User.find("Onlineuser1");
-
+		String queueName = MongoDB.fetchRandomQueueFrom_cssQueue();
+		
 		LogFormatterAction.beginSetup();
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
@@ -30,7 +32,7 @@ public class AdminTests extends BaseTests {
 		.verifySuperAdmin()
 		.addlogType(TestStepType.THEN)
 		._NavigationAction()
-		.verifyManageQueues()
+		.verifyManageQueues(queueName)
 		.addlogType(TestStepType.THEN)
 		.resetQueueValues();
 	}	
@@ -40,7 +42,8 @@ public class AdminTests extends BaseTests {
 
 		addCloneIDHostname(data);
 		User user = new User(); user.userName=UserPool.getUser();
-
+		String queueName = MongoDB.fetchRandomQueueFrom_cssQueue();
+		
 		LogFormatterAction.beginSetup();
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
@@ -49,7 +52,7 @@ public class AdminTests extends BaseTests {
 		.verifyAdmin()
 		.addlogType(TestStepType.THEN)
 		._NavigationAction()
-		.verifyManageQueues()
+		.verifyManageQueues(queueName)
 		.addlogType(TestStepType.THEN)
 		.resetQueueValues();
 	}
@@ -99,7 +102,7 @@ public class AdminTests extends BaseTests {
 
 		addCloneIDHostname(data);
 		User user = User.find("Onlineuser1");
-
+		String role = MongoDB.fetchRandomRoleFrom_cssRole();
 		LogFormatterAction.beginSetup();
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
@@ -108,8 +111,8 @@ public class AdminTests extends BaseTests {
 		.verifySuperAdmin()
 		.addlogType(TestStepType.THEN)
 		._NavigationAction()
-		.verifyPrivelegeAssignmentToRole("VIEW ONLY")
-		.resetPrivelegeAssignmentToRole("VIEW ONLY");
+		.verifyPrivelegeAssignmentToRole(role)
+		.resetPrivelegeAssignmentToRole(role);
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPSuperAdminTest,TestGroup.MSPP1OnlineTests,"manage_Roles_SuperAdmin"}, description = "superAdmin_manage_roles", enabled = true)
 	public void View_Queue_Volume_Report_Admin(TestData data) throws Exception{

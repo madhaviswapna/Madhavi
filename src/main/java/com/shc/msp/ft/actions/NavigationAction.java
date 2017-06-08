@@ -220,9 +220,9 @@ public class NavigationAction extends BaseAction {
 	
 	
 	
-	public NavigationAction verifyManageQueues() {
+	public NavigationAction verifyManageQueues(String queueName) {
 		Logger.log("Verify the Queue priority and SVL values can be changed",TestStepType.THEN);
-		this.factory.vendorDetailsPage().verifyManageQueues();
+		this.factory.vendorDetailsPage().verifyManageQueues(queueName);
         return this;
 	}
 	

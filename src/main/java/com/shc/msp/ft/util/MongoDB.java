@@ -1,6 +1,9 @@
 package com.shc.msp.ft.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -64,6 +67,52 @@ public class MongoDB {
 		return true;
 	}
 	
+	public static synchronized String fetchRandomRoleFrom_cssRole(){
+		try {
+			BasicDBObject searchQuery = new BasicDBObject();
+			searchQuery.put("enabled", true);
+			
+			Integer Count = (int) MongoDB.getDB().getCollection("cssRole").find(searchQuery).count();
+			System.out.println("Count of records in cssRole:- "+Count);
+			Random rand = new Random();
+			DBCursor cursor =MongoDB.getDB().getCollection("cssRole").find(searchQuery).skip(rand.nextInt(Count)-1).limit(1);
+			BasicDBObject result = (BasicDBObject) cursor.next();
+			String role = result.get("name").toString();
+			System.out.println(role);
+			return role;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Execution Failed "+e.getMessage();
+		}		
+	}
+	
+	public static synchronized String fetchRandomQueueFrom_cssQueue(){
+		try {
+			BasicDBObject searchQuery = new BasicDBObject();
+			List<BasicDBObject> obj1 = new ArrayList<BasicDBObject>();
+			obj1.add(new BasicDBObject("isActive", true));
+			obj1.add(new BasicDBObject("management.piority",new BasicDBObject("$exists", true)));
+			//obj1.add(new BasicDBObject("svl.hour",new BasicDBObject("$gt", 0)));
+			searchQuery.put("$and", obj1);
+		
+			
+			Integer Count = (int) MongoDB.getDB().getCollection("cssQueue").find(searchQuery).count();
+			System.out.println("Count of records in cssQueue:- "+Count);
+			Random rand = new Random();
+			DBCursor cursor =MongoDB.getDB().getCollection("cssQueue").find(searchQuery).skip(rand.nextInt(Count)-1).limit(1);
+			BasicDBObject result = (BasicDBObject) cursor.next();
+			String role = result.get("description").toString();
+			System.out.println(role);
+			return role;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Execution Failed "+e.getMessage();
+		}		
+	}
+	//Main method for testing purposes
+	public static void main(String[] args) {
+		
+	}
 	
 	public static synchronized boolean createUser(String userName) {
 		return createUser(userName,"testonline0001");

@@ -104,7 +104,7 @@ public class VendorDetailsPage extends Page {
     }
     
     
-    public VendorDetailsPage verifyManageQueues() {
+    public VendorDetailsPage verifyManageQueues(String queueName) {
     	Logger.log("Verify if queue priority changing", TestStepType.VERIFICATION_STEP);
     	getAction().waitFor(2000);
     	AjaxCondition.forElementVisible(MENU_BUTTON).waitForResponse();  
@@ -115,7 +115,7 @@ public class VendorDetailsPage extends Page {
     	getAction().waitFor(2000);
     	AjaxCondition.forElementVisible(QUEUE_NAME).waitForResponse();  
     	getAction().click(QUEUE_NAME);
-    	getAction().type(QUEUE_NAME, "demar");
+    	getAction().type(QUEUE_NAME,queueName);
     	getAction().waitFor(2000);
     	AjaxCondition.forElementVisible(SEARCH_BUTTON).waitForResponse();  
     	getAction().click(SEARCH_BUTTON);
@@ -179,6 +179,7 @@ public class VendorDetailsPage extends Page {
     	
     	getAction().waitFor(2000);
     	AjaxCondition.forElementVisible(QUEUE_HOUR_DROPDOWN.format("")).waitForResponse();  
+    	System.out.println(QUEUE_HOUR_DROPDOWN.format("/option[@value='"+oldHour+"']").getValue());
     	getAction().click(QUEUE_HOUR_DROPDOWN.format("/option[@value='"+oldHour+"']"));
     	
     	getAction().waitFor(2000);
