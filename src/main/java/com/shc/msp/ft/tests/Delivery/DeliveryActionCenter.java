@@ -2662,7 +2662,51 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests, "MSP_Delivery_Rereserve_OrderWithDDHPendCode"}
+	, description = "Verify update option for pended orders", enabled = true, priority=1)
+	public void MSP_Delivery_Rereserve_OrderWithDDHPendCode(TestData data) throws Exception {
+		addCloneIDHostname(data);
 
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+
+		String[] arr= getProductToTest("Pended_DDH_Open_Order",true).split(",");
+		String dosorderID=arr[0];
+		String dosunitID=arr[1];
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID,dosunitID)
+		.addlogType(TestStepType.GIVEN)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.captureSalescheckNumber()
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.rereserveItem("open","whole order")
+		._NavigationAction()
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID,dosunitID)
+		.addlogType(TestStepType.GIVEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		._OrderDetailsAction()
+		.verifyPendCode("");
+	}
 
 }
 
