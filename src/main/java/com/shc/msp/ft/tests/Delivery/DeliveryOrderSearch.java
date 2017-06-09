@@ -568,6 +568,31 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyPerformanceSupportMessage("Late: Will arrive outside of 2 hour window.")
 		.VerifyPerformanceSupportMessage("Updated: The Delivery team has arrived at the member’s home.");
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"Verify_Performance_Support_Message_OrderSearchResults_OrderStatus"}
+	, description = "Verify performance support message of order status", enabled = true, priority=1)
+	public void Verify_Performance_Support_Message_OrderSearchResults_OrderStatus(TestData data) throws Exception {
+		addCloneIDHostname(data);
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.VerifyDeliveryAgent()
+		.ClickOnOrderTab()
+		.searchByDeliveryOrderId("100","")
+		.ClickOnPerformanceSupportOnOrderSearchResults("Order Status")
+		.VerifyPerformanceSupportMessage("Released – Routed for delivery")	
+		.VerifyPerformanceSupportMessage("Open – Not yet routed")
+		.VerifyPerformanceSupportMessage("Partial – Some items delivered, other to be delivered")
+		.VerifyPerformanceSupportMessage("Cancelled – Order cancelled")
+		.VerifyPerformanceSupportMessage("Shipped – Order delivered");
+	}
 }
 
 

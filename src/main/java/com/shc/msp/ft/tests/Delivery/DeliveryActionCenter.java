@@ -2817,7 +2817,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.goToActionCenter()
 
 		.addlogType(TestStepType.THEN)
-		.verifyInvalidQuantityError();
+		.verifyInvalidQuantityError("pickup");
 
 		;
 	}

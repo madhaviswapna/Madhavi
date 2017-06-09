@@ -6794,22 +6794,23 @@ public class OrderDetailsPage extends Page {
 		
 	}
 	
-	public void verifyInvalidQuantityError(){
-		Logger.log("Agent should be able to do pickup action", TestStepType.STEP);
-		//getAction().waitFor(3000);
-		AjaxCondition.forElementVisible(PICKUP_BUTTON).waitForResponse();
-		getAction().scrollTo(PICKUP_BUTTON);
-		getAction().click(PICKUP_BUTTON);
-		//getAction().waitFor(3000);
+	public void verifyInvalidQuantityError(String action){
+		Logger.log("Agent should be able to do "+action+" action", TestStepType.STEP);
+		if(action.equalsIgnoreCase("Pickup")){
+			AjaxCondition.forElementVisible(PICKUP_BUTTON).waitForResponse();
+			getAction().scrollTo(PICKUP_BUTTON);
+			getAction().click(PICKUP_BUTTON);}
+		else {
+			AjaxCondition.forElementVisible(EVEN_EXCHANGE_BUTTON).waitForResponse();
+			getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
+			getAction().click(EVEN_EXCHANGE_BUTTON);}
+		
 		AjaxCondition.forElementVisible(SELECT_ITEM.format(1)).waitForResponse();
 		getAction().click(SELECT_ITEM.format(1));
-		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
 		getAction().click(REASON_FOR_PICKUP_DROPDOWN);
-		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
 		getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
-	//	getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
 		getAction().click(PICKUP_QUANTITY);
 		int availableQty=  Integer.parseInt(getAction().getText(AVAILABLE_QTY));
@@ -6818,9 +6819,9 @@ public class OrderDetailsPage extends Page {
 		getAction().type(PICKUP_QUANTITY,i);
 		PageAssert.elementVisible(INVALID_QTY_ERR);
 		Logger.log("Verified Invalid Quantity Error", TestStepType.STEP);
-		
-			
-		}
+
+
+	}
 	}
 
 

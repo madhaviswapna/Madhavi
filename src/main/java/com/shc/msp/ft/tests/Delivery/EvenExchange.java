@@ -246,5 +246,35 @@ public class EvenExchange extends BaseTestsEx{
 					._OrderDetailsAction()
 					.verifyActionCapturedHistoryNotes();*/
 	}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_Even_Exchange_Not_Allowed_For_Exceed_Quantity"}
+	, description = "verify pickup quantity cannot be allowed to exceed the quantity on the original order in even exchange", enabled = true)
+	public void MSP_Delivery_Test_Even_Exchange_Not_Allowed_For_Exceed_Quantity(TestData data) throws Exception {
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+
+		.addlogType(TestStepType.THEN)
+		.verifyInvalidQuantityError("Even-Exchange");
+
+		;
+	}
 
 }
