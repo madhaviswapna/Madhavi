@@ -10,6 +10,7 @@ import com.shc.automation.utils.TestUtils.TestStepType;
 import com.shc.msp.ft.actions.LogFormatterAction;
 import com.shc.msp.ft.entities.As;
 import com.shc.msp.ft.entities.User;
+import com.shc.msp.ft.util.Constant;
 import com.shc.msp.ft.util.MongoDB;
 import com.shc.msp.ft.util.Retrieval_Test_Data_By_Query;
 import com.shc.msp.ft.util.TestGroup;
@@ -130,7 +131,64 @@ public class AdminTests extends BaseTests {
 		._NavigationAction()
 		.queueVolumeReport();
 	}	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Agent_Role_Assignment")
+	public void Admin_Verify_Agent_Role_Assignment(TestData data)throws Exception {
 
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyAdmin()
+		.addlogType(TestStepType.THEN)
+		._NavigationAction()
+		.roleAssignmentUser(user.userName, "PILOTUSER")
+		.addlogType(TestStepType.THEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyDisplayAdmin("PILOT USER")
+		.addlogType(TestStepType.THEN)
+		.roleRemovalUser(user.userName, "PILOTUSER")
+		;
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "SuperAdmin_Verify_Agent_Role_Assignment")
+	public void SuperAdmin_Verify_Agent_Role_Assignment(TestData data)throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		
+		User user = User.find("Onlineuser1");
+		
+
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifySuperAdmin()
+		.addlogType(TestStepType.THEN)
+		._NavigationAction()
+		.roleAssignmentUser(user.userName, "APPROVER")
+		.addlogType(TestStepType.THEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyDisplayAdmin("APPROVER")
+		.addlogType(TestStepType.THEN)
+		.roleRemovalUser(user.userName, "APPROVER")
+		;
+	}
+	
 	@DataProvider (name="DP_Layaway_Contract_Details",parallel=true)
 	public Object[][] DP_Return_Tracking_Information() throws Exception{
 		Retrieval_Test_Data_By_Query.layaway_contract_details_fetch();

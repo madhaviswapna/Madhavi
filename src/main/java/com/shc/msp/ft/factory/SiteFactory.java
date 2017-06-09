@@ -10,6 +10,7 @@ import com.shc.msp.ft.modules.EmailTemplatePopUp;
 import com.shc.msp.ft.modules.ReturnTrackingInformationPopUp;
 import com.shc.msp.ft.modules.ScheduleReturnPopUp;
 import com.shc.msp.ft.modules.UpdateExpectedShipArrivalDatePopUp;
+import com.shc.msp.ft.pages.AdminPage;
 import com.shc.msp.ft.pages.HomePage;
 import com.shc.msp.ft.pages.LineItemDetailsPage;
 import com.shc.msp.ft.pages.OrderDetailsPage;
@@ -84,5 +85,8 @@ public class SiteFactory {
     public ProfilePage profilePage(){
     	return new ProfilePage(this);
     }
-
+    
+    public AdminPage adminPage(){
+    	return new AdminPage(this);
+    }
 }

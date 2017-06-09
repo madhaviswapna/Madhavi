@@ -849,7 +849,9 @@ public class HomePage extends Page {
 		else if(status==true){
 			SoftAssert.checkElementAndContinueOnFailure(AGENT_ACTIVE_ROLE_OPTION.format(roleName), "check whether the role:"+roleName+" is not displayed in subscribed roles", CheckLocatorFor.isNotVisible);
 		}
-		
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(CLOSE_PROFILE_MODAL).waitForResponse(10);
+		getAction().click(CLOSE_PROFILE_MODAL);
 		return this;
 		
 	}

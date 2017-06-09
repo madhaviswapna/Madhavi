@@ -721,6 +721,15 @@ public class NavigationAction extends BaseAction {
 	        this.factory.homePage().ClickOnPerformanceSupportOnOrderSearchResults(name);
 	        return this;
 	 }
-		
+	public NavigationAction roleAssignmentUser(String user, String role){
+			Logger.log("Assign role:- "+role+"to agent:- "+user, TestUtils.TestStepType.WHEN); 		
+			this.factory.adminPage().roleAssignmentUser(user, role);
+			return this;
+	 }
+	public NavigationAction roleRemovalUser(String user, String role){
+		Logger.log("Remove role:- "+role+"to agent:- "+user, TestUtils.TestStepType.THEN); 		
+		this.factory.adminPage().roleRemovalUser(user, role);
+		return this;
+ }
 }
 
