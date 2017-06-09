@@ -433,13 +433,14 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Line item","Partially Shipped","");
+		.cancelOrderDelivery("Line item","Open","");
 	}  
 
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Cancel_Released_Line_Item"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Cancel_Released_Line_Item_CaptureNotesVerification"}
 	, description = "Verify if a line item for released order can be cancelled", enabled = true)
-	public void MSP_Delivery_Test_Cancel_Released_Line_Item(TestData data) throws Exception {
+	public void MSP_Delivery_Test_Cancel_Released_Line_Item_CaptureNotesVerification(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
@@ -459,8 +460,27 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.chooseReleasedHDOrders()
 		.addlogType(TestStepType.WHEN)
 		._OrderDetailsAction()
+		.verifyLineItemDetail("Released")
 		.addlogType(TestStepType.THEN)
-		.cancelOrderDelivery("Line item","Open","");
+		.cancelOrderDelivery("Line item","Released","")
+		.addlogType(TestStepType.THEN)
+		.goToDeliveryNotes()
+		.addlogType(TestStepType.THEN)
+		.verifyDataInDeliveryNotes("OSH/MSO-WEB: ITEM CANCEL")
+		.addlogType(TestStepType.THEN)
+		.verifyAdjustmentCapturedInInteractionsForCancelOrder("Cancel Delivery Item")
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.wrapUpOrderWithoutContactDelivery()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.addlogType(TestStepType.WHEN)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedHistoryNotes();
+
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Reschedule_Open_HD_Order"}
@@ -2707,6 +2727,101 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		._OrderDetailsAction()
 		.verifyPendCode("");
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_Line_Item_Cancellation_Not_Allowed_After_Even_Exchange"}
+	, description = "verify cancel line item is not allowed on items after even exchange", enabled = true)
+	public void MSP_Delivery_Test_Line_Item_Cancellation_Not_Allowed_After_Even_Exchange(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();		
+		//String orderId= getProductToTest("PickUp_Line_item_Order",true);	
+		
+	//	System.out.println("OrderId:"+orderId);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId("390000", DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyCancelbuttonnotPresent("open");
+	} 
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+            groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_Rereserve_Not_Allowed_For_Div605"}
+            , description = "verify re-reserve is not allowed divison number 605", enabled = true)
+     	public void MSP_Delivery_Test_Rereserve_Not_Allowed_For_Div605(TestData data) throws Exception {
+			LogFormatterAction.beginSetup();
+    		User user = new User(); 
+    		user.userName=UserPool.getDeliveryUser();
+			/*String orderType = "Shipped";
+			String orderIdDosNo = getProductToTest("MSPEvenExchangeDiv605ShippedOrder");
+			
+			String orderId=orderIdDosNo.split(",")[0];
+			String dosNo=orderIdDosNo.split(",")[1];
+			System.out.println(orderId+dosNo+"    5555555555555555555555555555");*/
+    		As.guestUser.goToHomePage()
+			._NavigationAction()
+			.addlogType(TestStepType.WHEN)
+			.login(user)
+			.addlogType(TestStepType.THEN)
+			.VerifyDeliveryAgent()
+			.closeWarningPopupWindow()
+			.addlogType(TestStepType.WHEN)
+			.searchByDeliveryOrderId("973860", "8702")
+			.selectOrderInMyRecentDeliveryInteractions(1)
+	        .addlogType(TestStepType.WHEN)
+	        
+	        ._OrderDetailsAction()
+	        .addlogType(TestStepType.WHEN)
+	        .goToActionCenter()
+	        
+	        .addlogType(TestStepType.THEN)
+			  .verifyEvenExchangeNotAllowed("Rereserve")
+			  
+			  ;
+		}
+
+@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_Pickup_Not_Allowed_For_Exceed_Quantity"}
+	, description = "verify pickup quantity cannot be allowed to exceed the quantity on the original order", enabled = true)
+	public void MSP_Delivery_Test_Pickup_Not_Allowed_For_Exceed_Quantity(TestData data) throws Exception {
+		LogFormatterAction.beginSetup();
+		User user = new User(); 
+		user.userName=UserPool.getDeliveryUser();
+		String dosorderID= getProductToTest("Pickup_Eligible_Shipped_Line_Item");
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderID, DcNumber.DC_NO)
+		.selectOrderInMyRecentDeliveryInteractions(1)
+		.addlogType(TestStepType.WHEN)
+
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+
+		.addlogType(TestStepType.THEN)
+		.verifyInvalidQuantityError();
+
+		;
+	}
+
 
 }
 

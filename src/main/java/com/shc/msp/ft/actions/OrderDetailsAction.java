@@ -767,6 +767,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyPendCode(code);
 		return this;
 	}
-
-
+	public OrderDetailsAction verifyInvalidQuantityError() {
+		Logger.log("verify invalid quantity error",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyInvalidQuantityError();
+		return this;
+	}
 }

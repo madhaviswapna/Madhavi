@@ -524,11 +524,11 @@ public class OrderDetailsPage extends Page {
 	//public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and not(contains(text(),'Cancelled'))]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","(//tr[@value='item'])[1]/td[2]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and contains(text(),'Cancelled')]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
-	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","//table/tbody[{0}]/tr[@value='item']","LINE ITEM ROW");
+	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","(//tr[@value='item'])[{0}]","LINE ITEM ROW");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[6]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_ORDERED= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[10]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE= new Locator("","//input[@name='selectedQuantity']//ancestor::tr//td[8]","LINE ITEM ROW Quantity Available Even Exchange");
-	public final Locator LINE_ITEM_ROW_QUANTITY= new Locator("LINE_ITEM_ROW_QUANTITY","(//input[@name='selectedQuantity'])[{0}]","LINE ITEM ROW Quantity");
+	public final Locator LINE_ITEM_ROW_QUANTITY= new Locator("LINE_ITEM_ROW_QUANTITY","(//td[contains(text(),'{0}')]/parent::tr//input[@name='selectedQuantity'])[{1}]","LINE ITEM ROW Quantity");
 	public final Locator LINE_ITEM_ROW_QUANTITY_COUNT= new Locator("LINE_ITEM_ROW_QUANTITY_COUNT","(//input[@name='selectedQuantity'])[{0}]","LINE ITEM ROW Quantity");
 	public final Locator LINE_ITEM_CANCEL= new Locator("LINE_ITEM_CANCEL","//button[contains(text(),'Cancel Items')]","LINE ITEM CANCEL");
 	public final Locator EVEN_EXCHANGE_BUTTON = new Locator("Even Exchange Button", "//button[contains(text(),'Even Exchange')]", "Even Exchange Button");
@@ -758,8 +758,10 @@ public class OrderDetailsPage extends Page {
 	public final Locator ORDER_DETAIL_SCIM_CODE = new Locator("ORDER_DETAIL_SCIM_CODE", "//td[contains(text(),'{0}') and not(contains(text(),'PICK-UP'))]/parent::tr/td[contains(@data-title,'Deluxe (SCIM) Code') and contains(text(),'{1}')]", "ORDER_DETAIL_SCIM_CODE");
 
 	public final Locator RERESERVE_NOT_ALLOWED = new Locator("RERESERVE_NOT_ALLOWED", "//div[contains(text(),'No item(s) eligible for Re-reserve action')]", "RERESERVE_NOT_ALLOWED");
-
-
+	public final Locator AVAILABLE_QTY = new Locator("AVAILABLE_QTY", "(//input[@name='selectedQuantity']//ancestor::tr//td[8])", "AVAILABLE_QTY");
+	public final Locator INVALID_QTY_ERR = new Locator("INVALID_QTY_ERR", "//span[contains(text(),'Invalid Quantity')]", "INVALID_QTY_ERR");
+	public final Locator ORDER_STATUS_RELEASED = new Locator("ORDER_STATUS_RELEASED", "//div[@label='DOS Order Status']//div/p/span[contains(text(),'Released')]", "ORDER_STATUS_RELEASED");
+	public final Locator ORDER_STATUS_SHIPPED = new Locator("ORDER_STATUS_SHIPPED", "//div[@label='DOS Order Status']//div/p/span[contains(text(),'Shipped')]", "ORDER_STATUS_SHIPPED");
 
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
@@ -4828,34 +4830,32 @@ public class OrderDetailsPage extends Page {
 	}
 	public void pickupOrder(){
 		Logger.log("Agent should be able to do pickup action", TestStepType.STEP);
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(PICKUP_BUTTON).waitForResponse();
 		getAction().scrollTo(PICKUP_BUTTON);
 		getAction().click(PICKUP_BUTTON);
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(SELECT_ITEM.format(1)).waitForResponse();
 		getAction().click(SELECT_ITEM.format(1));
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
 		getAction().click(REASON_FOR_PICKUP_DROPDOWN);
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
 		getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
-		getAction().waitFor(3000);
+	//	getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
 		getAction().click(PICKUP_QUANTITY);
 		getAction().type(PICKUP_QUANTITY, "1");
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
+		if(getAction().isVisible(MATTRESS_TEXT))
+		verifyMattressExchange();
+		else{
 		getAction().scrollTo(CONTINUE_BUTTON);
 		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
-		getAction().click(CONTINUE_BUTTON);
-		if(getAction().isVisible(MATTRESS_TEXT)){
-			getAction().click(MATTRESS_DROPDOWN);
-			AjaxCondition.forElementPresent(MATRESS_DROPDOWN_TEXT).waitForResponse(2000);
-			getAction().click(MATRESS_DROPDOWN_TEXT);
-			getAction().click(CONTINUE_BUTTON);}
+		getAction().click(CONTINUE_BUTTON);}
 		getAction().waitFor(2000);
-		if(getAction().isVisible(RETURN_POLICY)){
+		/*if(getAction().isVisible(RETURN_POLICY)){
 			Logger.log(getAction().getText(RETURN_POLICY),TestStepType.STEP);
 			getAction().click(CONTINUE_BUTTON);
 			AjaxCondition.forElementVisible(PICK_UP_EXCEPTION).waitForResponse(2000);
@@ -4863,29 +4863,29 @@ public class OrderDetailsPage extends Page {
 			getAction().type(EXCEPTION_PASSWORD, "TestPassword");
 			getAction().type(REASON_EXCEPTION, "this is an automated test");
 			getAction().click(SUBMIT);
-		}
-		getAction().waitFor(3000);
+		}*/
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CONCESSION_YES).waitForResponse();
 		getAction().click(CONCESSION_YES);
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CONCESSIONACCEPTED_NO).waitForResponse();
 		getAction().click(CONCESSIONACCEPTED_NO);
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN.format(1)).waitForResponse();
 		getAction().click(CATEGORY_CODE_DROPDOWN.format(1));
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CATEGORY_CODE_DROPDOWN_OPTION.format(1)).waitForResponse();
 		getAction().click(CATEGORY_CODE_DROPDOWN_OPTION.format(1));
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(PICKUP_REASON_CODE_DROPDOWN.format(1)).waitForResponse();
 		getAction().click(PICKUP_REASON_CODE_DROPDOWN.format(1));
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION.format(1)).waitForResponse();
 		getAction().click(REASON_CODE_DROPDOWN_OPTION.format(1));
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(CREATE_ORDER_BUTTON).waitForResponse();
 		getAction().click(CREATE_ORDER_BUTTON);
-		getAction().waitFor(3000);
+		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(NEW_ORDER_CREATED_MSG).waitForResponse();
 		if(!getAction().getText(NEW_ORDER_CREATED_MSG).contains("New order has been created. Close this notification to proceed to new order.")){
 			PageAssert.fail("New order created sucess msg not shown");
@@ -5074,17 +5074,20 @@ public class OrderDetailsPage extends Page {
 					AjaxCondition.forElementVisible(CONTINUE_TO_CANCEL_ORDER);
 					getAction().click(CONTINUE_TO_CANCEL_ORDER);}}} 
 		else {
-			String lineItemIndex = "1";
+			//String lineItemIndex = "1";
 			AjaxCondition.forElementVisible(LINE_ITEM).waitForResponse();
 			getAction().click(LINE_ITEM);
-			int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format("Open"));
+			int multiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderStatus));
 
-			for (int i = 1; i <= openMultiLineItem; i++) {
+			for (int i = 1; i <= multiLineItem; i++) {
+				
 				AjaxCondition.forElementVisible(LINE_ITEM_ROW.format(i)).waitForResponse();
 				getAction().click(LINE_ITEM_ROW.format(i));
-				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex)).waitForResponse();
-				getAction().type(LINE_ITEM_ROW_QUANTITY.format(lineItemIndex), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(lineItemIndex)));
-				getAction().waitFor(1000);
+				//getAction().waitFor(2000);
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(orderStatus,i)).waitForResponse();
+				//AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(i)).waitForResponse();
+				getAction().type(LINE_ITEM_ROW_QUANTITY.format(orderStatus,i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE.format(i)));
+				getAction().waitFor(2000);
 			}
 			AjaxCondition.forElementVisible(LINE_ITEM_CANCEL).waitForResponse();
 			itemToCancelName =  getAction().getText(LINE_ITEM_NAME_NOT_CANCELLED);
@@ -5148,13 +5151,14 @@ public class OrderDetailsPage extends Page {
 			if(getAction().getElementCount(LINE_ITEM_NAME_CANCELLED)==getAction().getElementCount(LINE_ITEM_COUNT)){
 				Logger.log("Verified that Order status is Cancelled", TestStepType.VERIFICATION_PASSED);
 				AjaxCondition.forElementVisible(ORDER_STATUS_CANCELLED).waitForResponse();
-			}else{
-				Logger.log("Verified that Order status is Open", TestStepType.VERIFICATION_PASSED);
-				AjaxCondition.forElementVisible(LINE_ITEM_TEXT.format(1)).waitForResponse();
-				if(!getAction().getText(LINE_ITEM_TEXT.format(1)).contains("Released") && !orderStatus.equalsIgnoreCase("Partially Shipped")){//For released items only after batch job runs, the status is shown as cancelled
-					AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
-				}
+				
+			}else if (getAction().getText(LINE_ITEM_TEXT.format(1)).contains("Released")){ 
+				AjaxCondition.forElementVisible(ORDER_STATUS_RELEASED).waitForResponse();
+				Logger.log("Verified that order status is Released", TestStepType.VERIFICATION_PASSED);
 			}
+			else
+				AjaxCondition.forElementVisible(ORDER_STATUS_SHIPPED).waitForResponse();
+				Logger.log("Verified that order status is Shipped", TestStepType.VERIFICATION_PASSED);
 		}
 
 	}
@@ -5961,16 +5965,16 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementPresent(ORDER_ROUTE_STATUS).waitForResponse(3000);
 		String orderRouteStatus=getAction().getText(ORDER_ROUTE_STATUS);
 		System.out.println("orderRouteStatus==="+ orderRouteStatus);
-		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
-		System.out.println("-------------------------------------------- "+openMultiLineItem);
+		int multiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
+		System.out.println("-------------------------------------------- "+multiLineItem);
 		getAction().waitFor(2000);
-		Logger.log("Order have "+openMultiLineItem+" multiline item");
-		for (int i = 1; i <= openMultiLineItem; i++) {
+		Logger.log("Order have "+multiLineItem+" multiline item");
+		for (int i = 1; i <= multiLineItem; i++) {
 			list.add(getAction().getText(DIVISION.format(orderType,i))+getAction().getText(ITEM.format(orderType,i)) +"000");
 		}
 		getContext().put("adjustmentOption", list);
 		getContext().put("orderRouteStatus", orderRouteStatus);
-		getContext().put("openMultiLineItem", openMultiLineItem);
+		getContext().put("multiLineItem", multiLineItem);
 		System.out.println("---------------------------------------------"+getContext().get("adjustmentOption"));
 	}
 
@@ -6058,12 +6062,12 @@ public class OrderDetailsPage extends Page {
 		scrollDown();
 		//	if(orderType.equalsIgnoreCase("open")){
 		getAction().waitFor(4000);
-		int openMultiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
+		int multiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
 		System.out.println("----------------------------------------------------------------xpath"+DOS_ITEM_STATUS_COUNT.format(orderType).getValue());
-		System.out.println("-----------------------------------------------------------"+openMultiLineItem);
-		Logger.log("Order have "+openMultiLineItem+""+ orderType+""+" multiline item");
+		System.out.println("-----------------------------------------------------------"+multiLineItem);
+		Logger.log("Order have "+multiLineItem+""+ orderType+""+" multiline item");
 		Logger.log("Item description before SCIM CODE updation", TestStepType.STEP);
-		for (int i = 1; i <= openMultiLineItem; i++) {
+		for (int i = 1; i <= multiLineItem; i++) {
 			System.out.println("----------------------------------------------------------------xpath"+SCIM_CODE.format(orderType,i).getValue());
 			if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
 				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has scim code "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "not available"), true);
@@ -6075,7 +6079,7 @@ public class OrderDetailsPage extends Page {
 		getAction().scrollTo(UPDATE_SCIM_CODE);
 		getAction().click(UPDATE_SCIM_CODE);
 
-		for(int i=1;i<=openMultiLineItem;i++){
+		for(int i=1;i<=multiLineItem;i++){
 			AjaxCondition.forElementPresent(CLICK_TO_UPDATE.format(i)).waitForResponse();
 			getAction().click(CLICK_TO_UPDATE.format(i));
 			AjaxCondition.forElementPresent(SCIM_CODE_COUNT).waitForResponse();
@@ -6099,7 +6103,7 @@ public class OrderDetailsPage extends Page {
 		getAction().waitFor(3000);
 		verifyOrderDetailsPageDisplayed();
 		Logger.log("Item description after SCIM CODE updation", TestStepType.STEP);
-		for (int i = 1; i <= openMultiLineItem; i++) {
+		for (int i = 1; i <= multiLineItem; i++) {
 			if (getAction().getText(SCIM_CODE.format(orderType,i)).equalsIgnoreCase(""))
 				SoftAssert.checkConditionAndContinueOnFailure(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+" has "+getAction().getText(SCIM_CODE.format(orderType,i)).replaceFirst("", "no scim code"), true);
 			else
@@ -6341,7 +6345,7 @@ public class OrderDetailsPage extends Page {
 	public OrderDetailsPage verifyDayOfDelivery(String agent,String orderType) {
 		int lineItemCount=0;
 		try {
-			lineItemCount=(int) getContext().get("openMultiLineItem");
+			lineItemCount=(int) getContext().get("multiLineItem");
 			System.out.println("lineItemCount:"+lineItemCount);
 
 		} catch (Exception e) {
@@ -6410,8 +6414,13 @@ public class OrderDetailsPage extends Page {
 			Logger.log("Selecting the "+updatedTimeWindow+" from the Unrestricted time window",TestStepType.SUBSTEP);
 			System.out.println("updatedTimeWindow:"+updatedTimeWindow);
 			getContext().put("updatedTimeWindow", updatedTimeWindow);
-			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory)).waitForResponse();
-			getAction().click(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
+			AjaxCondition.forElementPresent(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory)).waitForResponse(3000);
+			try{
+				getAction().scrollTo(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
+				getAction().click(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
+			}catch(Exception e){
+				clickJ(UNRESTRICTED_TIME_WINDOWS.format(rndCodeCategory));
+			}
 			String orderRouteStatus =(String) getContext().get("route status");
 			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
 				getAction().waitFor(3000);
@@ -6765,11 +6774,55 @@ public class OrderDetailsPage extends Page {
 				PageAssert.fail("Order pend code is not expected");
 		}
 	}
+	
+	public void verifyMattressExchange(){
+			getAction().click(MATTRESS_DROPDOWN);
+			AjaxCondition.forElementPresent(MATRESS_DROPDOWN_TEXT).waitForResponse(2000);
+			getAction().click(MATRESS_DROPDOWN_TEXT);
+			getAction().scrollTo(CONTINUE_BUTTON);
+			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+			getAction().click(CONTINUE_BUTTON);
+			getAction().waitFor(2000);
+			if(getAction().isVisible(RETURN_POLICY)){
+				Logger.log(getAction().getText(RETURN_POLICY),TestStepType.STEP);
+				getAction().click(CONTINUE_BUTTON);
+				AjaxCondition.forElementVisible(PICK_UP_EXCEPTION).waitForResponse(2000);
+				getAction().type(EXCEPTION_USERNAME, "testdelivery0121");
+				getAction().type(EXCEPTION_PASSWORD, "TestPassword");
+				getAction().type(REASON_EXCEPTION, "this is an automated test");
+				getAction().click(SUBMIT);}
+		
+	}
+	
+	public void verifyInvalidQuantityError(){
+		Logger.log("Agent should be able to do pickup action", TestStepType.STEP);
+		//getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(PICKUP_BUTTON).waitForResponse();
+		getAction().scrollTo(PICKUP_BUTTON);
+		getAction().click(PICKUP_BUTTON);
+		//getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(SELECT_ITEM.format(1)).waitForResponse();
+		getAction().click(SELECT_ITEM.format(1));
+		//getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
+		getAction().click(REASON_FOR_PICKUP_DROPDOWN);
+		//getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
+		getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
+	//	getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
+		getAction().click(PICKUP_QUANTITY);
+		int availableQty=  Integer.parseInt(getAction().getText(AVAILABLE_QTY));
+		availableQty++;
+		String i =Integer.toString(availableQty);
+		getAction().type(PICKUP_QUANTITY,i);
+		PageAssert.elementVisible(INVALID_QTY_ERR);
+		Logger.log("Verified Invalid Quantity Error", TestStepType.STEP);
+		
+			
+		}
+	}
 
-
-
-
-}
 
 
 
