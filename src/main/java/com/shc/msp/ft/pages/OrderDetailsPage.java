@@ -5307,7 +5307,7 @@ public class OrderDetailsPage extends Page {
 			AjaxCondition.forElementVisible(RERESERVE_BUTTON).waitForResponse();
 			getAction().scrollTo(RERESERVE_BUTTON);
 			getAction().click(RERESERVE_BUTTON);
-			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
+			AjaxCondition.forElementVisible(LINE_ITEM_ROW.format(1)).waitForResponse();
 
 		}
 
