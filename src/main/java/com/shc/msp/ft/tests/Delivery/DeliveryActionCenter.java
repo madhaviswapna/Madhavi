@@ -288,7 +288,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.pickupEntireOrder("Shipped")
 		.goToActionCenter()
-		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Preferred Time Windows","");
+		.rescheduleServiceWindowOrder("OPEN","ENTIRE ORDER","Unrestricted Time Window","");
 	}  
 	/*	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Pickup_Order"}

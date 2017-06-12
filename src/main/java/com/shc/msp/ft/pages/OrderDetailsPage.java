@@ -4843,17 +4843,17 @@ public class OrderDetailsPage extends Page {
 		//getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
 		getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
-	//	getAction().waitFor(3000);
+		//	getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
 		getAction().click(PICKUP_QUANTITY);
 		getAction().type(PICKUP_QUANTITY, "1");
 		//getAction().waitFor(3000);
 		if(getAction().isVisible(MATTRESS_TEXT))
-		verifyMattressExchange();
+			verifyMattressExchange();
 		else{
-		getAction().scrollTo(CONTINUE_BUTTON);
-		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
-		getAction().click(CONTINUE_BUTTON);}
+			getAction().scrollTo(CONTINUE_BUTTON);
+			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+			getAction().click(CONTINUE_BUTTON);}
 		getAction().waitFor(2000);
 		/*if(getAction().isVisible(RETURN_POLICY)){
 			Logger.log(getAction().getText(RETURN_POLICY),TestStepType.STEP);
@@ -5080,7 +5080,7 @@ public class OrderDetailsPage extends Page {
 			int multiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderStatus));
 
 			for (int i = 1; i <= multiLineItem; i++) {
-				
+
 				AjaxCondition.forElementVisible(LINE_ITEM_ROW.format(i)).waitForResponse();
 				getAction().click(LINE_ITEM_ROW.format(i));
 				//getAction().waitFor(2000);
@@ -5151,14 +5151,14 @@ public class OrderDetailsPage extends Page {
 			if(getAction().getElementCount(LINE_ITEM_NAME_CANCELLED)==getAction().getElementCount(LINE_ITEM_COUNT)){
 				Logger.log("Verified that Order status is Cancelled", TestStepType.VERIFICATION_PASSED);
 				AjaxCondition.forElementVisible(ORDER_STATUS_CANCELLED).waitForResponse();
-				
+
 			}else if (getAction().getText(LINE_ITEM_TEXT.format(1)).contains("Released")){ 
 				AjaxCondition.forElementVisible(ORDER_STATUS_RELEASED).waitForResponse();
 				Logger.log("Verified that order status is Released", TestStepType.VERIFICATION_PASSED);
 			}
 			else
 				AjaxCondition.forElementVisible(ORDER_STATUS_SHIPPED).waitForResponse();
-				Logger.log("Verified that order status is Shipped", TestStepType.VERIFICATION_PASSED);
+			Logger.log("Verified that order status is Shipped", TestStepType.VERIFICATION_PASSED);
 		}
 
 	}
@@ -6582,6 +6582,10 @@ public class OrderDetailsPage extends Page {
 
 	}
 	public void pickupEntireOrderTillConcessionPopUp(){
+
+		String orderRouteStatus= (String) getContext().get("orderRouteStatus");
+		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
+
 		Logger.log("Agent should be able to do pickup action", TestStepType.STEP);
 		getAction().waitFor(3000);
 		getAction().scrollTo(PICKUP_BUTTON);
@@ -6609,7 +6613,19 @@ public class OrderDetailsPage extends Page {
 		getAction().click(CONTINUE_BUTTON);
 		getAction().waitFor(3000);
 
+		try {
+			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+				getAction().waitFor(3000);
+				UpdateDeliveryStatusOfDOD("Delivery Driver",0);
+				if("DELIVERY DRIVER".equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_RETURN_EXCHANGE_ITEM).waitForResponse();
+					getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);}}
+		} catch (NullPointerException e ) {
+			orderRouteStatus="";
+		}
+
 	}
+
 	public void rereserveItemTillOfferConcessionPopUp(String orderType,String order){
 
 		if (orderType.equalsIgnoreCase("Shipped")||orderType.equalsIgnoreCase("Cancelled")){
@@ -6774,26 +6790,26 @@ public class OrderDetailsPage extends Page {
 				PageAssert.fail("Order pend code is not expected");
 		}
 	}
-	
+
 	public void verifyMattressExchange(){
-			getAction().click(MATTRESS_DROPDOWN);
-			AjaxCondition.forElementPresent(MATRESS_DROPDOWN_TEXT).waitForResponse(2000);
-			getAction().click(MATRESS_DROPDOWN_TEXT);
-			getAction().scrollTo(CONTINUE_BUTTON);
-			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+		getAction().click(MATTRESS_DROPDOWN);
+		AjaxCondition.forElementPresent(MATRESS_DROPDOWN_TEXT).waitForResponse(2000);
+		getAction().click(MATRESS_DROPDOWN_TEXT);
+		getAction().scrollTo(CONTINUE_BUTTON);
+		AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
+		getAction().click(CONTINUE_BUTTON);
+		getAction().waitFor(2000);
+		if(getAction().isVisible(RETURN_POLICY)){
+			Logger.log(getAction().getText(RETURN_POLICY),TestStepType.STEP);
 			getAction().click(CONTINUE_BUTTON);
-			getAction().waitFor(2000);
-			if(getAction().isVisible(RETURN_POLICY)){
-				Logger.log(getAction().getText(RETURN_POLICY),TestStepType.STEP);
-				getAction().click(CONTINUE_BUTTON);
-				AjaxCondition.forElementVisible(PICK_UP_EXCEPTION).waitForResponse(2000);
-				getAction().type(EXCEPTION_USERNAME, "testdelivery0121");
-				getAction().type(EXCEPTION_PASSWORD, "TestPassword");
-				getAction().type(REASON_EXCEPTION, "this is an automated test");
-				getAction().click(SUBMIT);}
-		
+			AjaxCondition.forElementVisible(PICK_UP_EXCEPTION).waitForResponse(2000);
+			getAction().type(EXCEPTION_USERNAME, "testdelivery0121");
+			getAction().type(EXCEPTION_PASSWORD, "TestPassword");
+			getAction().type(REASON_EXCEPTION, "this is an automated test");
+			getAction().click(SUBMIT);}
+
 	}
-	
+
 	public void verifyInvalidQuantityError(String action){
 		Logger.log("Agent should be able to do "+action+" action", TestStepType.STEP);
 		if(action.equalsIgnoreCase("Pickup")){
@@ -6804,7 +6820,7 @@ public class OrderDetailsPage extends Page {
 			AjaxCondition.forElementVisible(EVEN_EXCHANGE_BUTTON).waitForResponse();
 			getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
 			getAction().click(EVEN_EXCHANGE_BUTTON);}
-		
+
 		AjaxCondition.forElementVisible(SELECT_ITEM.format(1)).waitForResponse();
 		getAction().click(SELECT_ITEM.format(1));
 		AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
@@ -6822,7 +6838,47 @@ public class OrderDetailsPage extends Page {
 
 
 	}
+	public OrderDetailsPage UpdateDeliveryStatusOfDOD(String agent,int Reasoncode) {
+		int lineItemCount=0;
+		try {
+			lineItemCount=(int) getContext().get("openMultiLineItem");
+			System.out.println("lineItemCount:"+lineItemCount);
+
+		} catch (Exception e) {
+			lineItemCount=0;
+		}
+		Logger.log("Verify Day of Delivery Orders");
+
+		AjaxCondition.forElementVisible(DAY_OF_DELIVERY_AGENT.format(agent));
+		getAction().click(DAY_OF_DELIVERY_AGENT.format(agent));
+		for (int i = 1; i <= lineItemCount; i++) {
+			AjaxCondition.forElementPresent(DOD_RETURN_CODES_LINE_ITEM_COUNT.format(i)).waitForResponse();
+			int rndCodeCategory;
+			if(i!=1){
+				rndCodeCategory = generateRandomNumberSelect(DOD_RETURN_CODES_LINE_ITEM_COUNT.format(i));
+			}
+			else
+				rndCodeCategory=2;
+
+			if(rndCodeCategory==1)
+				rndCodeCategory =2;
+			System.out.println("rndCodeCategory----"+rndCodeCategory);
+			AjaxCondition.forElementVisible(DOD_RETURN_CODES_LINE_ITEM.format(i,rndCodeCategory)).waitForResponse();
+			getAction().click(DOD_RETURN_CODES_LINE_ITEM.format(i,rndCodeCategory));
+
+			if(getAction().isElementPresent(ARRIVAL_TIME)){
+				AjaxCondition.forElementPresent(ARRIVAL_TIME).waitForResponse(3000);
+				getAction().click(ARRIVAL_TIME);
+				AjaxCondition.forElementPresent(DEPARTURE_TIME).waitForResponse(3000);
+				getAction().click(DEPARTURE_TIME);
+			}
+		}	
+		AjaxCondition.forElementVisible(UPDATE_DELIVERY_STATUS).waitForResponse(3000);
+		getAction().click(UPDATE_DELIVERY_STATUS);
+		return this;
+
 	}
+}
 
 
 
