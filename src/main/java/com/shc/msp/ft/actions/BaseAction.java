@@ -52,6 +52,10 @@ public abstract class BaseAction {
         return this.factory.salesCheckDetailsAction();
     }
     
+    public AdminAction _AdminAction(){
+    	return this.factory.adminAction();
+    }
+    
     public BaseAction demarcate(LogFormatterAction.LogType typeOfLog, String textToAppendAsTitle) {
         return this._LogFormatterAction().demarcate(typeOfLog, textToAppendAsTitle);
     }

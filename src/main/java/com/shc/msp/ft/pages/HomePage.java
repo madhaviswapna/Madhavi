@@ -170,7 +170,9 @@ public class HomePage extends Page {
 	public final Locator OK_BUTTON = new Locator("", "(//button[contains(@id,'modalclose')])[last()]", "Ok button pop-up");
 	public static final Locator VIEW_PROFILE_LINK = new Locator("", "//ul[@class='nav navbar-nav navbar-right user-profile-pull-down']//li[@class='dropdown']//a", "View use profile link");
 	public final Locator QUEUE_NAME = new Locator("QUEUE_NAME", "//td[contains(@data-title,'Queue Name')]", "QUEUE_NAME");
-
+	public final Locator VACATION_STATUS_ON_PROFILE = new Locator("VACATION_STATUS_ON_PROFILE", "//input[@name='rbVacationT']", "VACATION_STATUS_ON_PROFILE");
+	public final Locator VACATION_STATUS_OFF_PROFILE = new Locator("VACATION_STATUS_OFF_PROFILE", "//input[@name='rbVacationF']", "VACATION_STATUS_OFF_PROFILE");
+	
 	public final Locator ORDER_RESULT_DATE_R1 = new Locator("","//div[@class='table-responsive ng-scope']//fieldset//table[@ng-table='orderListTableParams']//tbody/tr[1]/td[1]","Order Result Date Row 1");
 	public final Locator ORDER_RESULT_DATE_R2 = new Locator("","//div[@class='table-responsive ng-scope']//fieldset//table[@ng-table='orderListTableParams']//tbody/tr[2]/td[1]","Order Result Date Row 2");
 	public final Locator ORDER_RESULT_DATE_R3 = new Locator("","//div[@class='table-responsive ng-scope']//fieldset//table[@ng-table='orderListTableParams']//tbody/tr[3]/td[1]","Order Result Date Row 3");
@@ -2375,5 +2377,31 @@ public class HomePage extends Page {
 			}
 			
 		
-		
+		 public HomePage VerifyVacationMode(boolean status) {
+			 	boolean vacationStatus;
+			 	String vacStatus = "";
+				getAction().waitFor(1000);
+				closeWarningPopupWindow();
+				Logger.log("Click on the View Profile Link", TestStepType.STEP);
+				AjaxCondition.forElementVisible(VIEW_PROFILE_LINK).waitForResponse();
+				getAction().click(VIEW_PROFILE_LINK);
+				getAction().waitFor(3000);
+				
+				if(status){
+					vacationStatus = getAction().isSelected(VACATION_STATUS_ON_PROFILE);
+					vacStatus = "enabled";
+				}else{
+					vacationStatus = getAction().isSelected(VACATION_STATUS_OFF_PROFILE);
+					vacStatus = "disabled";
+				}
+				
+				System.out.println("vacation status "+vacStatus+"      "+vacationStatus);
+				SoftAssert.checkTrue(vacationStatus, "Verify the vacation mode is "+vacStatus);
+				
+				getAction().waitFor(2000);
+				AjaxCondition.forElementVisible(CLOSE_PROFILE_MODAL).waitForResponse(10);
+				getAction().click(CLOSE_PROFILE_MODAL);
+				
+				return this;
+		 }
 }

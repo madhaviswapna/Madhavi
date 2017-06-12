@@ -26,6 +26,7 @@ public class AdminPage extends Page{
 	public final Locator UPDATE_MESSAGE = new Locator("", "//div[contains(text(),'Update user Action has been successfully processed')]","UPDATE_MESSAGE");
 	public final Locator UPDATE_MESSAGE_OK = new Locator("", "//button[contains(text(),'OK')]","UPDATE_MESSAGE_OK");
 	public final Locator SEARCH = new Locator("SEARCH", "//button[contains(text(),'Search')]", "SEARCH");
+	public final Locator VACATION_MODE_BUTTON = new Locator("VACATION_MODE_BUTTON", "//button[@ng-model='selectedUser.onVacation' and contains(text(),'{0}')]", "VACATION_MODE_BUTTON"); 
 	
 	
 	public AdminPage roleAssignmentUser(String user,String role){
@@ -42,7 +43,6 @@ public class AdminPage extends Page{
 		getAction().click(USER_ID_LINK);
 		getAction().scrollTo(AGENT_CHECKBOX.format(role));
 		getAction().waitFor(3000);
-		System.out.println("*************************  "+!getAction().isChecked(AGENT_CHECKBOX.format(role)));
 		String action = !getAction().isChecked(AGENT_CHECKBOX.format(role))?"Assign":"Remove";
 		System.out.println(action+" "+role+" in the agent profile");
 		Logger.log(action+" "+role+" in the agent profile" , TestStepType.STEP);
@@ -63,4 +63,53 @@ public class AdminPage extends Page{
 		roleAssignmentUser(user,role);
 		return this;
 	}
+	
+	public AdminPage searchUserAndClickOnUserID(String user){
+		Logger.log("Search for user "+user+"and click on Search" , TestStepType.STEP);
+		getAction().waitFor(4000);
+		AjaxCondition.forElementVisible(USER_SEARCH).waitForResponse();
+		
+		AjaxCondition.forElementVisible(USER_ID).waitForResponse();
+		getAction().type(USER_ID, user);
+		AjaxCondition.forElementVisible(SEARCH).waitForResponse();
+		getAction().click(SEARCH);
+		
+		Logger.log("Click on the Agent ID "+user , TestStepType.STEP);
+		AjaxCondition.forElementVisible(USER_ID_LINK).waitForResponse();
+		getAction().click(USER_ID_LINK);
+		return this;
+	}
+	
+	public AdminPage turnVacationModeOff(){
+		Logger.log("Turn Vacation mode Off",TestStepType.STEP);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(VACATION_MODE_BUTTON.format("No")).waitWithoutException(5);
+		getAction().click(VACATION_MODE_BUTTON.format("No"));
+		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
+		getAction().scrollTo(UPDATE_BUTTON);
+		getAction().click(UPDATE_BUTTON);
+		getContext().put("Check", false);
+		AjaxCondition.forElementVisible(UPDATE_MESSAGE).waitForResponse();
+		AjaxCondition.forElementVisible(UPDATE_MESSAGE_OK).waitForResponse();
+		getAction().click(UPDATE_MESSAGE_OK);
+		getAction().waitFor(2000);
+		return this;
+	}
+	
+	public AdminPage turnVacationModeOn(){
+		Logger.log("Turn Vacation mode On",TestStepType.STEP);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(VACATION_MODE_BUTTON.format("Yes")).waitWithoutException(5);
+		getAction().click(VACATION_MODE_BUTTON.format("Yes"));
+		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
+		getAction().scrollTo(UPDATE_BUTTON);
+		getAction().click(UPDATE_BUTTON);
+		getContext().put("Check", false);
+		AjaxCondition.forElementVisible(UPDATE_MESSAGE).waitForResponse();
+		AjaxCondition.forElementVisible(UPDATE_MESSAGE_OK).waitForResponse();
+		getAction().click(UPDATE_MESSAGE_OK);
+		getAction().waitFor(2000);
+		return this;
+	}
+	
 }

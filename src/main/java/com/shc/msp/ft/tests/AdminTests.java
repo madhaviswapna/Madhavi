@@ -189,6 +189,66 @@ public class AdminTests extends BaseTests {
 		;
 	}
 	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "SuperAdmin_Verify_Vacation_Mode")
+	public void SuperAdmin_Verify_Vacation_Mode(TestData data)throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		
+		User user = User.find("Onlineuser1");
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifySuperAdmin()
+		._AdminAction()
+		.searchUserAndClickOnUserID(user.userName)
+		.turnVacationModeOn()
+		._NavigationAction()
+		.logout()
+		.login(user)
+		.VerifyVacationMode(true)
+		._AdminAction()
+		.searchUserAndClickOnUserID(user.userName)
+		.turnVacationModeOff()
+		._NavigationAction()
+		.logout()
+		.login(user)
+		.VerifyVacationMode(false);
+		
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Vacation_Mode")
+	public void Admin_Verify_Vacation_Mode(TestData data)throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		
+		User user = new User(); user.userName=UserPool.getUser();
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyAdmin()
+		._AdminAction()
+		.searchUserAndClickOnUserID(user.userName)
+		.turnVacationModeOn()
+		._NavigationAction()
+		.logout()
+		.login(user)
+		.VerifyVacationMode(true)
+		._AdminAction()
+		.searchUserAndClickOnUserID(user.userName)
+		.turnVacationModeOff()
+		._NavigationAction()
+		.logout()
+		.login(user)
+		.VerifyVacationMode(false);
+		
+	}
+	
 	@DataProvider (name="DP_Layaway_Contract_Details",parallel=true)
 	public Object[][] DP_Return_Tracking_Information() throws Exception{
 		Retrieval_Test_Data_By_Query.layaway_contract_details_fetch();

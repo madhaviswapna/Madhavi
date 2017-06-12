@@ -1,5 +1,6 @@
 package com.shc.msp.ft.factory;
 
+import com.shc.msp.ft.actions.AdminAction;
 import com.shc.msp.ft.actions.LineItemDetailsAction;
 import com.shc.msp.ft.actions.LogFormatterAction;
 import com.shc.msp.ft.actions.NavigationAction;
@@ -88,5 +89,9 @@ public class SiteFactory {
     
     public AdminPage adminPage(){
     	return new AdminPage(this);
+    }
+    
+    public AdminAction adminAction(){
+    	return new AdminAction(this);
     }
 }

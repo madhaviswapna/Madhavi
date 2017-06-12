@@ -731,5 +731,9 @@ public class NavigationAction extends BaseAction {
 		this.factory.adminPage().roleRemovalUser(user, role);
 		return this;
  }
+	public NavigationAction VerifyVacationMode(boolean status){
+		this.factory.homePage().VerifyVacationMode(status);
+		return this;
+	}
 }
 
