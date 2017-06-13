@@ -5,9 +5,13 @@ package com.shc.msp.ft.tests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.shc.automation.AjaxCondition;
 import com.shc.automation.BaseTests;
+import com.shc.automation.Logger;
+import com.shc.automation.SoftAssert;
 import com.shc.automation.data.TestData;
 import com.shc.automation.dataprovider.TestDataProvider;
+import com.shc.automation.utils.TestUtils.CheckLocatorFor;
 import com.shc.automation.utils.TestUtils.TestStepType;
 import com.shc.msp.ft.actions.LogFormatterAction;
 import com.shc.msp.ft.entities.As;
@@ -216,10 +220,9 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
 	, description = "Verify order level cancellation", enabled = true, priority=41)
-	public void  order_Level_Cancellation_Eligible(TestData data) {
+	public void  order_Level_Cancellation_Eligible_Captured_Notes_Verification(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderEligibleForCancellation");
 		
-
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getUser();
@@ -234,9 +237,18 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Cancellation - Order")
-		.cancelOrder(OrderID);
-
-	}
+		.cancelOrder(OrderID)
+		._NavigationAction()
+		.logout()
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.THEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedHistoryNotes("Order Cancellation");
+		}
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}

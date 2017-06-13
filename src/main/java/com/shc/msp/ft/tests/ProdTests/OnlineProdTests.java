@@ -102,10 +102,7 @@ public class OnlineProdTests extends BaseTests{
 		.selectOrderInMyRecentInteractions_SearchByEmail(1)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyOrderDetailsPageDisplayed()
-
-		;
-
+		.verifyOrderDetailsPageDisplayed();
 	}
 
 	@Test(groups = {TestGroup.MSPP0SanityProdTests}

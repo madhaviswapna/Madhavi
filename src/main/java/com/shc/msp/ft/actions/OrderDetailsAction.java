@@ -772,4 +772,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyInvalidQuantityError(action);
 		return this;
 	}
+	public OrderDetailsAction verifyActionCapturedHistoryNotes(String notes) {
+		Logger.log("Verify contact hisory is updated",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyActionCapturedHistoryNotes(notes);
+		return this;
+	}
 }

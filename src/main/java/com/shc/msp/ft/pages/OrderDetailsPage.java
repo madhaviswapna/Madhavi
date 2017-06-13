@@ -762,7 +762,10 @@ public class OrderDetailsPage extends Page {
 	public final Locator INVALID_QTY_ERR = new Locator("INVALID_QTY_ERR", "//span[contains(text(),'Invalid Quantity')]", "INVALID_QTY_ERR");
 	public final Locator ORDER_STATUS_RELEASED = new Locator("ORDER_STATUS_RELEASED", "//div[@label='DOS Order Status']//div/p/span[contains(text(),'Released')]", "ORDER_STATUS_RELEASED");
 	public final Locator ORDER_STATUS_SHIPPED = new Locator("ORDER_STATUS_SHIPPED", "//div[@label='DOS Order Status']//div/p/span[contains(text(),'Shipped')]", "ORDER_STATUS_SHIPPED");
-
+	
+	
+	public final Locator CANCEL_ORDER_SUCCESS_MESSAGE = new Locator("CANCEL_ORDER_SUCCESS_MESSAGE", "//div[contains(text(),'Cancel Order Action has been successfully processed')]", "CANCEL_ORDER_SUCCESS_MESSAGE");
+	public final Locator CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON = new Locator("CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON", "//button[contains(text(),'OK')]", "CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON");
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -825,7 +828,19 @@ public class OrderDetailsPage extends Page {
 		getAction().type(CANCEL_ORDER_POP_UP_NOTES_TEXT_FIELD, "my note");
 		getAction().waitFor(2000);
 
-		AjaxCondition.forElementVisible(CANCEL_ORDER_POP_UP_SUBMIT_BUTTON).waitForResponse(10);	
+		//AjaxCondition.forElementVisible(CANCEL_ORDER_POP_UP_SUBMIT_BUTTON).waitForResponse(10);	
+		
+		//getAction().waitFor(1000);
+		Logger.log("Click Submit Button" , TestStepType.STEP);
+		getAction().click(SUBMIT_BUTTON);
+		getAction().waitFor(2000);
+		
+		AjaxCondition.forElementVisible(CANCEL_ORDER_SUCCESS_MESSAGE).waitForResponse(10);
+		PageAssert.elementVisible(CANCEL_ORDER_SUCCESS_MESSAGE);
+		Logger.log("Click 'OK' on pop up",TestStepType.STEP);
+		getAction().click(CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON);
+		getAction().waitFor(5000);
+		
 		return this;
 	}
 
@@ -6748,6 +6763,15 @@ public class OrderDetailsPage extends Page {
 		getAction().click(ORDER_CONTACT_HISTORY);
 		getAction().waitFor(3000);
 		SoftAssert.checkElementAndContinueOnFailure(CONTACT_HISTORY_NOTESS.format(notes,dosNumber,newOrderNumber),"new order details desplayed in contact history" , CheckLocatorFor.isPresent);
+	}
+	
+	public void verifyActionCapturedHistoryNotes(String notes){
+		Logger.log("Verify action performed on order are captured in Contact History Notes", TestStepType.STEP);
+		getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(ORDER_CONTACT_HISTORY).waitForResponse();
+		getAction().click(ORDER_CONTACT_HISTORY);
+		getAction().waitFor(3000);
+		SoftAssert.checkElementAndContinueOnFailure(ORDER_CONTACT_HISTORY_NOTES.format(notes),"cancel order" , CheckLocatorFor.isPresent);
 	}
 	public void captureNewOrderNumber(){
 		Logger.log("Verify Cancle button is not present in action center", TestStepType.STEP);
