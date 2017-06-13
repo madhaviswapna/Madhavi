@@ -19,7 +19,7 @@ import com.shc.msp.ft.util.UserPool;
 public class AdminTests extends BaseTests {
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"SuperAdmin_Manage_Queue"}, description = "SuperAdmin_Manage_Queue", enabled = true)
-	public void SuperAdmin_Manage_Queue(TestData data) throws Exception{
+	public void SuperAdmin_Manage_Queues(TestData data) throws Exception{
 
 		addCloneIDHostname(data);
 		User user = User.find("Onlineuser1");
@@ -39,7 +39,7 @@ public class AdminTests extends BaseTests {
 	}	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"Admin_Manage_Queue"}, description = "Admin_Manage_Queue", enabled = true)
-	public void Admin_Manage_Queue(TestData data) throws Exception{
+	public void Admin_Manage_Queues(TestData data) throws Exception{
 
 		addCloneIDHostname(data);
 		User user = new User(); user.userName=UserPool.getUser();
@@ -247,6 +247,48 @@ public class AdminTests extends BaseTests {
 		.login(user)
 		.VerifyVacationMode(false);
 		
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Change_Queue_Agent")
+	public void SuperAdmin_Verify_Change_Queue_Agent(TestData data)throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		
+		String queueName = MongoDB.fetchRandomQueueFrom_cssQueue();
+		User user = User.find("Onlineuser2");
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifySuperAdmin()
+		._AdminAction()
+		.searchUserAndClickOnUserID(user.userName)
+		.changeAgentQueue(queueName)
+		.clickUpdateButton()
+		.resetQueueFromAgentProfile(queueName);
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Change_Queue_Agent")
+	public void Admin_Verify_Change_Queue_Agent(TestData data)throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		
+		String queueName = MongoDB.fetchRandomQueueFrom_cssQueue();
+		User user = new User(); user.userName=UserPool.getUser();
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyAdmin()
+		._AdminAction()
+		.searchUserAndClickOnUserID(user.userName)
+		.changeAgentQueue(queueName)
+		.clickUpdateButton()
+		.resetQueueFromAgentProfile(queueName);
 	}
 	
 	@DataProvider (name="DP_Layaway_Contract_Details",parallel=true)

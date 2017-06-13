@@ -26,8 +26,10 @@ public class AdminPage extends Page{
 	public final Locator UPDATE_MESSAGE = new Locator("", "//div[contains(text(),'Update user Action has been successfully processed')]","UPDATE_MESSAGE");
 	public final Locator UPDATE_MESSAGE_OK = new Locator("", "//button[contains(text(),'OK')]","UPDATE_MESSAGE_OK");
 	public final Locator SEARCH = new Locator("SEARCH", "//button[contains(text(),'Search')]", "SEARCH");
-	public final Locator VACATION_MODE_BUTTON = new Locator("VACATION_MODE_BUTTON", "//button[@ng-model='selectedUser.onVacation' and contains(text(),'{0}')]", "VACATION_MODE_BUTTON"); 
+	public final Locator VACATION_MODE_BUTTON = new Locator("VACATION_MODE_BUTTON", "//button[@ng-model='selectedUser.onVacation' and contains(text(),'{0}')]", "VACATION_MODE_BUTTON");
 	
+	public final Locator SEARCH_QUEUE_TEXT_BOX = new Locator ("SEARCH_QUEUE_TEXT_BOX","//input[@id='filterName']","SEARCH_QUEUE_TEXT_BOX");
+	public final Locator ASSIGN_QUEUE_CHECKBOX = new Locator("ASSIGN_QUEUE_CHECKBOX","((//td[contains(.,'{0}')])/preceding-sibling::td)/input","ASSIGN_QUEUE_CHECKBOX");
 	
 	public AdminPage roleAssignmentUser(String user,String role){
 		Logger.log("Search for user "+user+"and click on Search" , TestStepType.STEP);
@@ -88,7 +90,6 @@ public class AdminPage extends Page{
 		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
 		getAction().scrollTo(UPDATE_BUTTON);
 		getAction().click(UPDATE_BUTTON);
-		getContext().put("Check", false);
 		AjaxCondition.forElementVisible(UPDATE_MESSAGE).waitForResponse();
 		AjaxCondition.forElementVisible(UPDATE_MESSAGE_OK).waitForResponse();
 		getAction().click(UPDATE_MESSAGE_OK);
@@ -104,7 +105,39 @@ public class AdminPage extends Page{
 		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
 		getAction().scrollTo(UPDATE_BUTTON);
 		getAction().click(UPDATE_BUTTON);
-		getContext().put("Check", false);
+		AjaxCondition.forElementVisible(UPDATE_MESSAGE).waitForResponse();
+		AjaxCondition.forElementVisible(UPDATE_MESSAGE_OK).waitForResponse();
+		getAction().click(UPDATE_MESSAGE_OK);
+		getAction().waitFor(2000);
+		return this;
+	}
+	
+	public AdminPage changeAgentQueue(String queue){
+		getAction().waitFor(2000);
+		Logger.log("Search for Queue: -"+queue+" in the agent settings", TestStepType.STEP);
+		AjaxCondition.forElementVisible(SEARCH_QUEUE_TEXT_BOX).waitWithoutException(5);
+		getAction().scrollTo(SEARCH_QUEUE_TEXT_BOX);
+		getAction().type(SEARCH_QUEUE_TEXT_BOX, queue);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(ASSIGN_QUEUE_CHECKBOX.format(queue)).waitWithoutException(5);
+		boolean queuePreselected = getAction().isChecked(ASSIGN_QUEUE_CHECKBOX.format(queue));
+		String action = !queuePreselected?"Assign":"Remove";
+		Logger.log(action+" the queue"+queue+" from the list", TestStepType.STEP);
+		System.out.println(action+" the queue"+queue+" from the list");
+		getAction().scrollTo(ASSIGN_QUEUE_CHECKBOX.format(queue));
+		getAction().click(ASSIGN_QUEUE_CHECKBOX.format(queue));
+		return this;
+	}
+	
+	public AdminPage resetQueueFromAgentProfile(String queue){
+		Logger.log("Remove the Queue :- "+queue+" from the agent profile", TestStepType.STEP);
+		changeAgentQueue(queue);
+		return this;
+	}
+	public AdminPage clickUpdateButton(){
+		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
+		getAction().scrollTo(UPDATE_BUTTON);
+		getAction().click(UPDATE_BUTTON);
 		AjaxCondition.forElementVisible(UPDATE_MESSAGE).waitForResponse();
 		AjaxCondition.forElementVisible(UPDATE_MESSAGE_OK).waitForResponse();
 		getAction().click(UPDATE_MESSAGE_OK);

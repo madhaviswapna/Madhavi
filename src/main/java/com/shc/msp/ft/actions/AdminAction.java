@@ -41,4 +41,19 @@ public class AdminAction extends BaseAction {
 		 this.factory.adminPage().turnVacationModeOn();
 		 return this;
 	}
+	
+	public AdminAction changeAgentQueue(String queue){
+		this.factory.adminPage().changeAgentQueue(queue);
+		return this;
+	}
+	
+	public AdminAction clickUpdateButton(){
+		this.factory.adminPage().clickUpdateButton();
+		return this;
+		
+	}
+	public AdminAction resetQueueFromAgentProfile(String queue){
+		this.factory.adminPage().resetQueueFromAgentProfile(queue);
+		return this;
+	}
 }

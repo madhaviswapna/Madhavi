@@ -2,6 +2,10 @@ Onlineuser1: !!com.shc.msp.ft.entities.User {
   userName: testonline0001,
   password: TestPassword
 }
+Onlineuser2: !!com.shc.msp.ft.entities.User {
+  userName: testonline0002,
+  password: TestPassword
+}
 Onlineuser3: !!com.shc.msp.ft.entities.User {
   userName: testonline0003,
   password: TestPassword
