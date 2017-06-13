@@ -154,7 +154,7 @@ public class OnlineProdTests extends BaseTests{
 		User user = new User();
 		user.userName = "testonline0502";
 		user.password = Constant.OnlinePasswordProd;
-		String email="searsarjun@gmail.com";
+		String email="sarika.patil@searshc.com";
 
 
 		As.guestUser.goToHomePage()
