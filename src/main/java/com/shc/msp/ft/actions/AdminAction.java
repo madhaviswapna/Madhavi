@@ -25,7 +25,7 @@ public class AdminAction extends BaseAction {
 	}
 	
 	public AdminAction searchUserAndClickOnUserID(String user){
-		Logger.log("Search for Agent and click on the User ID"+ user, TestUtils.TestStepType.WHEN);
+		Logger.log("Search for Agent and click on the User ID"+ user, TestUtils.TestStepType.GIVEN);
 		 this.factory.adminPage().searchUserAndClickOnUserID(user);
 		 return this;
 	}
@@ -43,17 +43,30 @@ public class AdminAction extends BaseAction {
 	}
 	
 	public AdminAction changeAgentQueue(String queue){
+		Logger.log("Change Agent Queue", TestUtils.TestStepType.THEN);
 		this.factory.adminPage().changeAgentQueue(queue);
 		return this;
 	}
 	
 	public AdminAction clickUpdateButton(){
+		Logger.log("Click Update Button", TestUtils.TestStepType.THEN);
 		this.factory.adminPage().clickUpdateButton();
 		return this;
 		
 	}
 	public AdminAction resetQueueFromAgentProfile(String queue){
+		Logger.log("Reset Agent Queue", TestUtils.TestStepType.THEN);
 		this.factory.adminPage().resetQueueFromAgentProfile(queue);
+		return this;
+	}
+	public AdminAction deactivateUser(){
+		Logger.log("Deactivate User", TestUtils.TestStepType.THEN);
+		this.factory.adminPage().deactivateUser();
+		return this;
+	}
+	public AdminAction activateUser(){
+		Logger.log("Activate User", TestUtils.TestStepType.THEN);
+		this.factory.adminPage().activateUser();
 		return this;
 	}
 }

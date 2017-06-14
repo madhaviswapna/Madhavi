@@ -474,11 +474,3 @@ Onlineuser119: !!com.shc.msp.ft.entities.User {
   userName: testonline0119,
   password: TestPassword
 }
-Onlineuser120: !!com.shc.msp.ft.entities.User {
-  userName: testonline0120,
-  password: TestPassword
-}
-Onlineuser121: !!com.shc.msp.ft.entities.User {
-  userName: testonline0121,
-  password: TestPassword
-}

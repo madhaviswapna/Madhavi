@@ -72,6 +72,7 @@ public class HomePage extends Page {
 	public final Locator AGENTID_TEXTBOX = new Locator("", "//input[@id='j_username']", "Agent Id text box");
 	public final Locator PASSWORD_TEXTBOX = new Locator("", "//input[@name='j_password']", "password input text box");
 	public final Locator LOGIN_BUTTON = new Locator("", "//button[contains(text(),'Login')]", "Login button");
+	public final Locator INVALID_LOGIN_MESSAGE = new Locator("INVALID_LOGIN_MESSAGE", "//div[@id='invalid']", "INVALID_LOGIN_MESSAGE");
 	public final Locator ERROR_POP_WINDOW = new Locator("ERROR POP UP WINDOW","//div[@class='modal-content']","Error Pop-up Window");
 	public final Locator CLOSE_ERROR_POP_WINDOW = new Locator("CLOSE ERROR POP UP WINDOW","//button[@id='modalclose']","Close Error Pop-up Window Button");
 	public final Locator ORDER_NUMBER_FIELD = new Locator("", "//input[@name='orderNumber']", "Order number ");
@@ -2402,6 +2403,26 @@ public class HomePage extends Page {
 				AjaxCondition.forElementVisible(CLOSE_PROFILE_MODAL).waitForResponse(10);
 				getAction().click(CLOSE_PROFILE_MODAL);
 				
+				return this;
+		 }
+		 public HomePage verifyInvaliLogin(User user){
+			 	
+			 	Logger.log("Login using the Agent credentials" , TestStepType.STEP);
+				AjaxCondition.forElementVisible(LOGIN_BUTTON).waitForResponse(5);
+				getAction().waitFor(2000);
+				Logger.log("Agentid - "+user.userName,TestStepType.SUBSTEP);
+				getAction().click(AGENTID_TEXTBOX);
+				getAction().type(AGENTID_TEXTBOX, user.userName);
+				Logger.log("Password - "+user.password,TestStepType.SUBSTEP);
+				getAction().click(PASSWORD_TEXTBOX);
+				getAction().type(PASSWORD_TEXTBOX, user.password);
+				getAction().waitFor(1000);
+				Logger.log("Click on login button",TestStepType.STEP);
+				getAction().click(LOGIN_BUTTON); 
+				getAction().waitFor(3000);
+				AjaxCondition.forElementVisible(INVALID_LOGIN_MESSAGE).waitWithoutException(5);
+				Logger.log("Verify if the Login Failed! message is disolayed",TestStepType.VERIFICATION_RESULT);
+				PageAssert.elementVisible(INVALID_LOGIN_MESSAGE);
 				return this;
 		 }
 }

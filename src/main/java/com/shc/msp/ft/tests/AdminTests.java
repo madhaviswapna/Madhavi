@@ -203,18 +203,28 @@ public class AdminTests extends BaseTests {
 		.addlogType(TestStepType.THEN)
 		.verifySuperAdmin()
 		._AdminAction()
+		.addlogType(TestStepType.GIVEN)
 		.searchUserAndClickOnUserID(user.userName)
+		.addlogType(TestStepType.WHEN)
 		.turnVacationModeOn()
 		._NavigationAction()
+		.addlogType(TestStepType.THEN)
 		.logout()
+		.addlogType(TestStepType.WHEN)
 		.login(user)
+		.addlogType(TestStepType.THEN)
 		.VerifyVacationMode(true)
 		._AdminAction()
+		.addlogType(TestStepType.GIVEN)
 		.searchUserAndClickOnUserID(user.userName)
+		.addlogType(TestStepType.WHEN)
 		.turnVacationModeOff()
 		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
 		.logout()
+		.addlogType(TestStepType.WHEN)
 		.login(user)
+		.addlogType(TestStepType.THEN)
 		.VerifyVacationMode(false);
 		
 	}
@@ -233,18 +243,28 @@ public class AdminTests extends BaseTests {
 		.addlogType(TestStepType.THEN)
 		.verifyAdmin()
 		._AdminAction()
+		.addlogType(TestStepType.GIVEN)
 		.searchUserAndClickOnUserID(user.userName)
+		.addlogType(TestStepType.WHEN)
 		.turnVacationModeOn()
 		._NavigationAction()
+		.addlogType(TestStepType.THEN)
 		.logout()
+		.addlogType(TestStepType.WHEN)
 		.login(user)
+		.addlogType(TestStepType.THEN)
 		.VerifyVacationMode(true)
 		._AdminAction()
+		.addlogType(TestStepType.GIVEN)
 		.searchUserAndClickOnUserID(user.userName)
+		.addlogType(TestStepType.WHEN)
 		.turnVacationModeOff()
 		._NavigationAction()
+		.addlogType(TestStepType.THEN)
 		.logout()
+		.addlogType(TestStepType.WHEN)
 		.login(user)
+		.addlogType(TestStepType.THEN)
 		.VerifyVacationMode(false);
 		
 	}
@@ -264,9 +284,13 @@ public class AdminTests extends BaseTests {
 		.addlogType(TestStepType.THEN)
 		.verifySuperAdmin()
 		._AdminAction()
+		.addlogType(TestStepType.GIVEN)
 		.searchUserAndClickOnUserID(user.userName)
+		.addlogType(TestStepType.WHEN)
 		.changeAgentQueue(queueName)
+		.addlogType(TestStepType.THEN)
 		.clickUpdateButton()
+		.addlogType(TestStepType.THEN)
 		.resetQueueFromAgentProfile(queueName);
 	}
 	
@@ -285,10 +309,90 @@ public class AdminTests extends BaseTests {
 		.addlogType(TestStepType.THEN)
 		.verifyAdmin()
 		._AdminAction()
+		.addlogType(TestStepType.GIVEN)
 		.searchUserAndClickOnUserID(user.userName)
+		.addlogType(TestStepType.WHEN)
 		.changeAgentQueue(queueName)
+		.addlogType(TestStepType.THEN)
 		.clickUpdateButton()
+		.addlogType(TestStepType.THEN)
 		.resetQueueFromAgentProfile(queueName);
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Deactivation_Activation_User")
+	public void Admin_Verify_Deactivation_Activation_User(TestData data)throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getUser();
+		User userDeactivate = new User();userDeactivate.userName="testonline0121";
+		
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyAdmin()
+		._AdminAction()
+		.addlogType(TestStepType.WHEN)
+		.searchUserAndClickOnUserID(userDeactivate.userName)
+		.addlogType(TestStepType.THEN)
+		.deactivateUser()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.THEN)
+		.verifyInvaliLogin(userDeactivate)
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		._AdminAction()
+		.addlogType(TestStepType.WHEN)
+		.searchUserAndClickOnUserID(userDeactivate.userName)
+		.addlogType(TestStepType.THEN)
+		.activateUser()
+		._NavigationAction()
+		.addlogType(TestStepType.THEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(userDeactivate);
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "SuperAdmin_Verify_Deactivation_Activation_User")
+	public void SuperAdmin_Verify_Deactivation_Activation_User(TestData data)throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = User.find("Onlineuser2");
+		User userDeactivate = new User();userDeactivate.userName="testonline0120";
+		
+		addCloneIDHostname(data);
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifySuperAdmin()
+		._AdminAction()
+		.addlogType(TestStepType.WHEN)
+		.searchUserAndClickOnUserID(userDeactivate.userName)
+		.addlogType(TestStepType.THEN)
+		.deactivateUser()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.logout()
+		.addlogType(TestStepType.THEN)
+		.verifyInvaliLogin(userDeactivate)
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		._AdminAction()
+		.addlogType(TestStepType.WHEN)
+		.searchUserAndClickOnUserID(userDeactivate.userName)
+		.addlogType(TestStepType.THEN)
+		.activateUser()
+		._NavigationAction()
+		.addlogType(TestStepType.THEN)
+		.logout()
+		.addlogType(TestStepType.WHEN)
+		.login(userDeactivate);
 	}
 	
 	@DataProvider (name="DP_Layaway_Contract_Details",parallel=true)

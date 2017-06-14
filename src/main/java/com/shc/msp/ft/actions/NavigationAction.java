@@ -732,7 +732,13 @@ public class NavigationAction extends BaseAction {
 		return this;
  }
 	public NavigationAction VerifyVacationMode(boolean status){
+		Logger.log("Verify vacation mode status is "+ status,TestUtils.TestStepType.THEN);
 		this.factory.homePage().VerifyVacationMode(status);
+		return this;
+	}
+	public NavigationAction verifyInvaliLogin(User user){
+		Logger.log("Verify User is invalid/Not Activated ",TestUtils.TestStepType.THEN);
+		this.factory.homePage().verifyInvaliLogin(user);
 		return this;
 	}
 }

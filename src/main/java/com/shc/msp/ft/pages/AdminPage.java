@@ -27,7 +27,8 @@ public class AdminPage extends Page{
 	public final Locator UPDATE_MESSAGE_OK = new Locator("", "//button[contains(text(),'OK')]","UPDATE_MESSAGE_OK");
 	public final Locator SEARCH = new Locator("SEARCH", "//button[contains(text(),'Search')]", "SEARCH");
 	public final Locator VACATION_MODE_BUTTON = new Locator("VACATION_MODE_BUTTON", "//button[@ng-model='selectedUser.onVacation' and contains(text(),'{0}')]", "VACATION_MODE_BUTTON");
-	
+	public final Locator ACTIVE_ONLY_CHECKBOX = new Locator("ACTIVE_ONLY_CHECKBOX", "//input[@id='activeOnly']", "ACTIVE_ONLY_CHECKBOX");
+	public final Locator DEACTIVATE_USER_BUTTON = new Locator("DEACTIVATE_USER_BUTTON", "//button[@ng-model='selectedUser.enabled' and contains(text(),'{0}')]", "DEACTIVATE_USER_BUTTON");
 	public final Locator SEARCH_QUEUE_TEXT_BOX = new Locator ("SEARCH_QUEUE_TEXT_BOX","//input[@id='filterName']","SEARCH_QUEUE_TEXT_BOX");
 	public final Locator ASSIGN_QUEUE_CHECKBOX = new Locator("ASSIGN_QUEUE_CHECKBOX","((//td[contains(.,'{0}')])/preceding-sibling::td)/input","ASSIGN_QUEUE_CHECKBOX");
 	
@@ -69,8 +70,11 @@ public class AdminPage extends Page{
 	public AdminPage searchUserAndClickOnUserID(String user){
 		Logger.log("Search for user "+user+"and click on Search" , TestStepType.STEP);
 		getAction().waitFor(4000);
+		if(getAction().isSelected(ACTIVE_ONLY_CHECKBOX)){
+			Logger.log("Uncleck Active only checkbox if Checked", TestStepType.STEP);
+			getAction().click(ACTIVE_ONLY_CHECKBOX);
+		}
 		AjaxCondition.forElementVisible(USER_SEARCH).waitForResponse();
-		
 		AjaxCondition.forElementVisible(USER_ID).waitForResponse();
 		getAction().type(USER_ID, user);
 		AjaxCondition.forElementVisible(SEARCH).waitForResponse();
@@ -135,6 +139,7 @@ public class AdminPage extends Page{
 		return this;
 	}
 	public AdminPage clickUpdateButton(){
+		Logger.log("Click Update button", TestStepType.STEP);
 		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
 		getAction().scrollTo(UPDATE_BUTTON);
 		getAction().click(UPDATE_BUTTON);
@@ -145,4 +150,21 @@ public class AdminPage extends Page{
 		return this;
 	}
 	
+	public AdminPage deactivateUser(){
+		Logger.log("Turn Vacation mode On",TestStepType.STEP);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(DEACTIVATE_USER_BUTTON.format("Yes")).waitWithoutException(5);
+		getAction().click(DEACTIVATE_USER_BUTTON.format("Yes"));
+		clickUpdateButton();
+		return this;	
+	}
+	
+	public AdminPage activateUser(){
+		Logger.log("Turn Vacation mode On",TestStepType.STEP);
+		getAction().waitFor(2000);
+		AjaxCondition.forElementVisible(DEACTIVATE_USER_BUTTON.format("No")).waitWithoutException(5);
+		getAction().click(DEACTIVATE_USER_BUTTON.format("No"));
+		clickUpdateButton();
+		return this;	
+	}
 }
