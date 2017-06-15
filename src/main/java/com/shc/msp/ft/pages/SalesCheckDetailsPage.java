@@ -1195,10 +1195,11 @@ public class SalesCheckDetailsPage extends Page {
 		AjaxCondition.forElementVisible(OrderDetailsPage.ADJUSTMENT_NOTES).waitForResponse();
 		Logger.log("Enter the Notes", TestStepType.STEP);
 		getAction().type(OrderDetailsPage.ADJUSTMENT_NOTES,"MSP automation update sales check");
+		getContext().put("adjustmentOption", "MSP automation update sales check");
 		Logger.log("Submit Botton is Visible", TestStepType.STEP);
 		AjaxCondition.forElementVisible(OrderDetailsPage.SUBMIT_BUTTON).waitForResponse();
 		
-		//getAction().click(OrderDetailsPage.SUBMIT_BUTTON);
+		getAction().click(OrderDetailsPage.SUBMIT_BUTTON);
 		return this;
 	}
 

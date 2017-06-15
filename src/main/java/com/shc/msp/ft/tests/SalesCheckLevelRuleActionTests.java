@@ -92,9 +92,9 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
-            , description = "Verify update sales check option is displayed", enabled = true, priority=47)
-    public void sales_Check_Level_Update_Sales_Check_Eligible(TestData data) {
+			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Update_Sales_Check_Captured_Notes_Interaction"}
+            , description = "sales_Check_Level_Update_Sales_Check_Captured_Notes_Interaction", enabled = true, priority=47)
+    public void sales_Check_Level_Update_Sales_Check_Captured_Notes_Interaction(TestData data) {
 		String orderId=getProductToTest("MSP_OL_OrderEligibleForUpdateSalesCheck");
 	    addCloneIDHostname(data);    	        
         User user = new User(); user.userName=UserPool.getUser();
@@ -118,7 +118,19 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .addlogType(TestStepType.WHEN)
                 .selectAction("Update Sales Check")
                 .addlogType(TestStepType.THEN)
-                .verifyUpdateSaleCheck();
+                .verifyUpdateSaleCheck()
+                ._OrderDetailsAction()
+                .addlogType(TestStepType.THEN)
+                .verifyAdjustmentCapturedInInteraction("Update Sales Check")
+             	.verifyOrderWrapUp()
+         		.addlogType(TestStepType.THEN)
+         		.fillRFCForm()
+         		._NavigationAction()
+         		.addlogType(TestStepType.WHEN)
+         		.searchByOrderId(orderId)
+         		.closeWarningPopupWindow()
+         		._OrderDetailsAction()
+         		.verifyAdjustmentCapturedInNotes("Update Sales Check");
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
