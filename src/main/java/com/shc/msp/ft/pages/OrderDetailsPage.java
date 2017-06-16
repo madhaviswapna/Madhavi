@@ -766,6 +766,7 @@ public class OrderDetailsPage extends Page {
 	
 	public final Locator CANCEL_ORDER_SUCCESS_MESSAGE = new Locator("CANCEL_ORDER_SUCCESS_MESSAGE", "//div[contains(text(),'Cancel Order Action has been successfully processed')]", "CANCEL_ORDER_SUCCESS_MESSAGE");
 	public final Locator CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON = new Locator("CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON", "//button[contains(text(),'OK')]", "CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON");
+	public final Locator RELEASE_ORDER_SUCCESS_MESSAGE = new Locator("CANCEL_ORDER_SUCCESS_MESSAGE", "//div[contains(text(),'Release Order Action has been successfully processed')]", "CANCEL_ORDER_SUCCESS_MESSAGE");
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -1831,6 +1832,16 @@ public class OrderDetailsPage extends Page {
 		getAction().type(RELEASE_ORDER_POPUP_NOTES_TEXT_FIELD,"MSP automation release order");
 		Logger.log("Verify Release Order 'Submit' Button is visible" , TestStepType.SUBSTEP);
 		AjaxCondition.forElementVisible(SUBMIT_BUTTON).waitForResponse();
+		
+		Logger.log("Click Submit Button" , TestStepType.STEP);
+		getAction().click(SUBMIT_BUTTON);
+		getAction().waitFor(2000);
+		
+		AjaxCondition.forElementVisible(RELEASE_ORDER_SUCCESS_MESSAGE).waitForResponse(10);
+		PageAssert.elementVisible(RELEASE_ORDER_SUCCESS_MESSAGE);
+		Logger.log("Click 'OK' on pop up",TestStepType.STEP);
+		getAction().click(CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON);
+		getAction().waitFor(5000);
 		return this;
 	}   
 

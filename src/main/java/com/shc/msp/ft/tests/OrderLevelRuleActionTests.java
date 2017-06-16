@@ -145,10 +145,9 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, 
 			groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
 	, description = "Verify held orders can be released", enabled = true, priority=38)
-	public void order_Level_Release_Order_Eligible(TestData data) {
+	public void order_Level_Release_Order_Eligible_Verify_ContactHistory(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderEligibleForRelease");
 		
-
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getUser();
@@ -163,7 +162,17 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Release Order")
-		.releaseOrder();
+		.releaseOrder()
+		._NavigationAction()
+		.logout()
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.verifyonlineagent()
+		.addlogType(TestStepType.THEN)
+		.searchByOrderId(OrderID)
+		.closeWarningPopupWindow()
+		._OrderDetailsAction()
+		.verifyActionCapturedHistoryNotes("Release Order");
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,	groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
