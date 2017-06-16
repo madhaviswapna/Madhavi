@@ -136,10 +136,13 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
             , description = "Verify Update Sales Check option is not shown for ineligible orders", enabled = true, priority=48)
-    public void sales_Check_Level_Update_Sales_Check_NonEligible(TestData data) {
+    public void sales_Check_Level_Update_Sales_Check_NonEligible(TestData data) throws Exception {
+		Retrieval_Test_Data_By_Query.UpdateSalesCheckIneligibleData();
+		String orderId = Retrieval_Test_Data_By_Query.UpdateSalesCheckIneligible_OrderID;
+		String salesCheck = Retrieval_Test_Data_By_Query.UpdateSalesCheckIneligible_SalesCheck;
 		
 		//String orderId=getProductToTest("MSP_OL_OrderInEligibleForUpdateSalesCheck");
-		String orderId="941374199";
+		//String orderId="941374199";
 	    addCloneIDHostname(data);    	        
         User user = new User(); user.userName=UserPool.getUser();
          
@@ -155,7 +158,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .addlogType(TestStepType.THEN)
                 .verifyOrderDetailsPageDisplayed()
                 .addlogType(TestStepType.WHEN)
-                .clickOnSalesCheckNumberUnderSalesCheckTab(1)
+                .clickOnSalesCheckNumberUnderSalesCheckTab(salesCheck)
                 ._SalesCheckDetailsAction()
                 .addlogType(TestStepType.THEN)
                 .verifyOptionIsNotVisible("Update Sales Check");

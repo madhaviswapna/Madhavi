@@ -111,6 +111,8 @@ public class Retrieval_Test_Data_By_Query {
 	public static String FBM_orderId=null;
 	public static String SalesCheckReleaseEligible_OrderId = null;
 	public static String SalesCheckReleaseEligible_SalesCheckNumber = null;
+	public static String UpdateSalesCheckIneligible_OrderID = null;
+	public static String UpdateSalesCheckIneligible_SalesCheck = null;
 	
 
     
@@ -664,6 +666,7 @@ public class Retrieval_Test_Data_By_Query {
 	static String  Sql_Ready_for_Pickup_Email_Store = null;
 	static String  Sql_Ready_for_Pickup_Email_Status = null;
 	static String  Sql_SalesCheckRelease_Data = null;
+	static String  Sql_UpdateSalesCheckIneligibleData = null;
 
 	public static void release_Sales_Check_Data() throws Exception{
 		ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_Rules + Constant.File_Name,Constant.SalesCheckRulesSheetName);
@@ -1109,6 +1112,28 @@ public class Retrieval_Test_Data_By_Query {
 	
 	}
 	
+	public static void UpdateSalesCheckIneligibleData() throws Exception{
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		Sql_UpdateSalesCheckIneligibleData= "select ORDER_ID,SALES_CHECK_NUMBER from sales_check where SALES_CHECK_STS_CD in ('SCCA','ALM') "
+				+ "and ORDER_ID like '8%' and LAST_UPDATED_TS > DATE_SUB(CURDATE(),INTERVAL 90 DAY) ORDER BY RAND() limit 1";
+		try {
+			
+			st = conn.prepareStatement(Sql_UpdateSalesCheckIneligibleData);
+			Reporter.log("SQL Query -- Sql_UpdateSalesCheckIneligibleData:- "+Sql_UpdateSalesCheckIneligibleData);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				UpdateSalesCheckIneligible_OrderID = rs.getString("ORDER_ID");
+				System.out.println("UpdateSalesCheckIneligible_OrderID: "+UpdateSalesCheckIneligible_OrderID);
+				UpdateSalesCheckIneligible_SalesCheck= rs.getString("SALES_CHECK_NUMBER");
+				System.out.println("UpdateSalesCheckIneligible_SalesCheck: "+UpdateSalesCheckIneligible_SalesCheck);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+	}
 	
 	
 	/*****************************
