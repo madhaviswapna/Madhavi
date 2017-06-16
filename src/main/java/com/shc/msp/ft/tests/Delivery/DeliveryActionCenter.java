@@ -2370,7 +2370,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Driver_Agent"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSP_DOD_DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Driver_Agent"}
 	, description = "Verify if an DOD released order can be cancelled", enabled = true)
 	public void MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Driver_Agent(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -2512,7 +2512,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Member_Agent"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSP_DOD_DeliveryTests,"MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Member_Agent"}
 	, description = "Verify if an DOD released order can be cancelled", enabled = true)
 	public void MSP_Delivery_Test_Whole_Released_DOD_Order_Cancellation_Member_Agent(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -2566,7 +2566,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_DOD_Order_Delivery_Agent"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSP_DOD_DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_DOD_Order_Delivery_Agent"}
 	, description = "Verify if an order for released DOD order for driver agent can be rescheduled", enabled = true)
 	public void MSP_Delivery_Test_Reschedule_Released_DOD_Order_Delivery_Agent(TestData data) throws Exception {
 		addCloneIDHostname(data);
@@ -2594,7 +2594,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Pickup_Released_DOD_Order_Driver_Agent"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSP_DOD_DeliveryTests,"MSP_Delivery_Test_Pickup_Released_DOD_Order_Driver_Agent"}
 	, description = "Verify order is created after pickup action", enabled = true)
 	public void MSP_Delivery_Test_Pickup_Released_DOD_Order_Driver_Agent(TestData data) throws ParseException {
 
@@ -2655,7 +2655,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_DOD_Order_Member_Agent"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSP_DOD_DeliveryTests,"MSP_Delivery_Test_Reschedule_Released_DOD_Order_Member_Agent"}
 	, description = "Verify if an order for released DOD order for driver agent can be rescheduled", enabled = true)
 	public void MSP_Delivery_Test_Reschedule_Released_DOD_Order_Member_Agent(TestData data) throws Exception {
 		addCloneIDHostname(data);

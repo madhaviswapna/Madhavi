@@ -468,7 +468,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Partially_Shipped_Order"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSP_DOD_DeliveryTests, "Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Partially_Shipped_Order"}
 
 	, description = "Verify search by order id", enabled = true, priority=1)
 	public void Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Partially_Shipped_Order(TestData data) throws Exception {

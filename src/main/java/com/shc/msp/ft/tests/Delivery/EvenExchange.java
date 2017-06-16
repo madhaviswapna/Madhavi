@@ -192,7 +192,7 @@ public class EvenExchange extends BaseTestsEx{
 		.verifyDataInDeliveryNotes("MSP NEW EXCHANGE ORDER");
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Test_Even_Exchange_Released_DOD_Order_Driver_Agent"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSP_DOD_DeliveryTests,"Test_Even_Exchange_Released_DOD_Order_Driver_Agent"}
 	, description = "Even Exchange for released DOD Order", enabled = true)
 	public void Test_Even_Exchange_Released_DOD_Order_Driver_Agent(TestData data) throws Exception {
 		LogFormatterAction.beginSetup();
