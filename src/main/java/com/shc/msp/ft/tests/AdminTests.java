@@ -58,7 +58,7 @@ public class AdminTests extends BaseTests {
 		.resetQueueValues();
 	}
 
-	@Test(dataProvider = "DP_Layaway_Contract_Details",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSuperAdminTest,"Search_Layaway_SuperAdmin"}, description = "Admin search layaway contract by contact id")
+	@Test(dataProvider = "DP_Layaway_Contract_Details",groups = {TestGroup.MSPP0Tests,"Search_Layaway_SuperAdmin"}, description = "Admin search layaway contract by contact id")
 	public void Search_Layaway_SuperAdmin(String contractID)throws Exception {
 
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -78,7 +78,7 @@ public class AdminTests extends BaseTests {
 		.logout();
 	}
 
-	@Test(dataProvider = "DP_Vendor_Details",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSuperAdminTest,"Search_vendor_SuperAdmin"}, description = "Admin searches vendor details by vendorid")
+	@Test(dataProvider = "DP_Vendor_Details",groups = {TestGroup.MSPP0Tests,"Search_vendor_SuperAdmin"}, description = "Admin searches vendor details by vendorid")
 	public void Search_Vendor_SuperAdmin(String VendorID)throws Exception {
 		VendorID=getProductToTest("MSP_Vendor_ID");
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -115,7 +115,7 @@ public class AdminTests extends BaseTests {
 		.verifyPrivelegeAssignmentToRole(role)
 		.resetPrivelegeAssignmentToRole(role);
 	}
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPSuperAdminTest,TestGroup.MSPP1OnlineTests,"manage_Roles_SuperAdmin"}, description = "superAdmin_manage_roles", enabled = true)
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"View_Queue_Volume_Report_Admin"}, description = "View_Queue_Volume_Report_Admin", enabled = true)
 	public void View_Queue_Volume_Report_Admin(TestData data) throws Exception{
 
 		addCloneIDHostname(data);
@@ -132,7 +132,7 @@ public class AdminTests extends BaseTests {
 		.queueVolumeReport();
 	}	
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Agent_Role_Assignment")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"Admin_Verify_Agent_Role_Assignment"}, description = "Admin_Verify_Agent_Role_Assignment")
 	public void Admin_Verify_Agent_Role_Assignment(TestData data)throws Exception {
 
 		addCloneIDHostname(data);
@@ -160,7 +160,7 @@ public class AdminTests extends BaseTests {
 		;
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "SuperAdmin_Verify_Agent_Role_Assignment")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"SuperAdmin_Verify_Agent_Role_Assignment"}, description = "SuperAdmin_Verify_Agent_Role_Assignment")
 	public void SuperAdmin_Verify_Agent_Role_Assignment(TestData data)throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -189,7 +189,7 @@ public class AdminTests extends BaseTests {
 		;
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "SuperAdmin_Verify_Vacation_Mode")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"SuperAdmin_Verify_Vacation_Mode"}, description = "SuperAdmin_Verify_Vacation_Mode")
 	public void SuperAdmin_Verify_Vacation_Mode(TestData data)throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -229,7 +229,7 @@ public class AdminTests extends BaseTests {
 		
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Vacation_Mode")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"Admin_Verify_Vacation_Mode"}, description = "Admin_Verify_Vacation_Mode")
 	public void Admin_Verify_Vacation_Mode(TestData data)throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -269,7 +269,7 @@ public class AdminTests extends BaseTests {
 		
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Change_Queue_Agent")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"SuperAdmin_Verify_Change_Queue_Agent"}, description = "SuperAdmin_Verify_Change_Queue_Agent")
 	public void SuperAdmin_Verify_Change_Queue_Agent(TestData data)throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -294,7 +294,7 @@ public class AdminTests extends BaseTests {
 		.resetQueueFromAgentProfile(queueName);
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Change_Queue_Agent")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"Admin_Verify_Change_Queue_Agent"}, description = "Admin_Verify_Change_Queue_Agent")
 	public void Admin_Verify_Change_Queue_Agent(TestData data)throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -319,7 +319,7 @@ public class AdminTests extends BaseTests {
 		.resetQueueFromAgentProfile(queueName);
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "Admin_Verify_Deactivation_Activation_User")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"Admin_Verify_Deactivation_Activation_User"}, description = "Admin_Verify_Deactivation_Activation_User")
 	public void Admin_Verify_Deactivation_Activation_User(TestData data)throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
@@ -357,7 +357,7 @@ public class AdminTests extends BaseTests {
 		.login(userDeactivate);
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests}, description = "SuperAdmin_Verify_Deactivation_Activation_User")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests,"SuperAdmin_Verify_Deactivation_Activation_User"}, description = "SuperAdmin_Verify_Deactivation_Activation_User")
 	public void SuperAdmin_Verify_Deactivation_Activation_User(TestData data)throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
