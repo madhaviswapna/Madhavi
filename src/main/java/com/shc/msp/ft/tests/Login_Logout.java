@@ -13,7 +13,7 @@ import com.shc.msp.ft.util.UserPool;
 
 public class Login_Logout extends BaseTests {
 	
-	@Test(groups = {TestGroup.QA_Environment, "MSPLogin_Logout"}
+	@Test(groups = {TestGroup.MSPP1OnlineTests, "loginLogout_OnlineAgent"}
             , description = "Verify login and logout is working for online agent")
     public void loginLogout_OnlineAgent() {
 
@@ -31,7 +31,7 @@ public class Login_Logout extends BaseTests {
     }
 	
 	
-	@Test(groups = {TestGroup.QA_Environment, "MSPLogin_Logout"}
+	@Test(groups = {TestGroup.MSPP1OnlineTests, "loginLogout_OfflineAgent"}
             , description = "Verify login and logout is working for offline agent")
     public void loginLogout_OfflineAgent() {
 
@@ -50,7 +50,7 @@ public class Login_Logout extends BaseTests {
     }
 	
 	
-	@Test(groups = {TestGroup.QA_Environment, "MSPLogin_Logout"}
+	@Test(groups = {TestGroup.MSPP1OnlineTests, "loginLogout_Delivery_Agent"}
             , description = "Verify login and logout is working for delivery agent")
     public void loginLogout_Delivery_Agent() {
 

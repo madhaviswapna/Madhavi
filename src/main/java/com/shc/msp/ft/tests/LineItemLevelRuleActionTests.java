@@ -20,7 +20,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 
 	//Sale Adjustment
-	@Test(dataProvider = "DP_SaleAdjustment_Eligible",groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Sales_Adjustment_Eligible"}
+	@Test(dataProvider = "DP_SaleAdjustment_Eligible",groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Sales_Adjustment_Captured_Notes_Interaction"}
 	, description = "Verify sales adjustment can be done at line item level", enabled = true)
 	public void  line_Item_Level_Verify_Sales_Adjustment_Captured_Notes_Interaction(String orderId, String sku) {
 		System.out.println("Order Number "+orderId+" Item Number "+sku);
@@ -71,7 +71,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Sales_Adjustment_NonEligible"}
+			groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Sales_Adjustment_NonEligible"}
 	, description = "Verify Sale adjustment is not shown for ineligible items", enabled = true)
 	public void  line_Item_Level_Verify_Sales_Adjustment_NonEligible(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevel_SaleAdjustmentInEligibleData").split("\\|");
@@ -105,7 +105,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 	//Cancellation - Line Item 
 	
-	@Test(dataProvider = "DP_CancelOrder_Eligible",groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Cancellation_Captured_AuditTrail_Notes_Interaction"}
+	@Test(dataProvider = "DP_CancelOrder_Eligible",groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Cancellation_Captured_AuditTrail_Notes_Interaction"}
 	, description = "Verify cancellation at line item level for eligible orders", enabled = true)
 	public void line_Item_Level_Verify_Cancellation_Captured_AuditTrail_Notes_Interaction(String orderId, String sku) {
 		//String[] test_data = getProductToTest("ItemLevelCancellationEligible").split("\\|");
@@ -156,7 +156,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test
-	(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Cancellation_NonEligible", "MSPLineItemLevelRuleActionTests"},
+	(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Cancellation_NonEligible"},
 	description = "Verify ineligible items cannot be cancelled", enabled = true)
 	public void  line_Item_Level_Verify_Cancellation_NonEligible(TestData data) {
 
@@ -244,7 +244,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 		 }
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests, "line_Item_Level_Verify_Return_Item_NonEligible"}
 	, description = "Verify return option is not shown for orders which are not eligible", enabled = true)
 	public void line_Item_Level_Verify_Return_Item_NonEligible(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnInEligible").split("\\|");
@@ -276,7 +276,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	//Return Tracking Information 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPLineItemLevelRuleActionTest,"MSPLineItemLevelRuleActionTests"}, 
+			groups = {TestGroup.MSPP1OnlineTests,"line_Item_Level_Verify_ReturnTrackingInformation_Eligible"}, 
 			description = "Verify return tracking information is displayed for eligible items", enabled = true)		
 	public void line_Item_Level_Verify_ReturnTrackingInformation_Eligible(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnTrackingInfoEligible").split("\\|");
@@ -308,7 +308,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	}
 
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPLineItemLevelRuleActionTest, "MSPLineItemLevelRuleActionTests"},
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "line_Item_Level_Verify_ReturnTrackingInformation_NonEligible"},
 			description = "Verify return tracking information should not be shown for ineligible orders", enabled = true)
 	public void line_Item_Level_Verify_ReturnTrackingInformation_NonEligible(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevelReturnTrackingInfoInEligible").split("\\|");
@@ -343,7 +343,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 	//Update Expected Ship/Arrival Date 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, //dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests"},
+			groups = {TestGroup.MSPP0Tests, "line_Item_Level_Verify_UpdateExpectedShipArrivalDate_Eligible"},
 			description = "Verify online agent can update expected ship arrival date for eligible orders", enabled = true)
 	public void  line_Item_Level_Verify_UpdateExpectedShipArrivalDate_Eligible(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevelUpdateETAEligible").split("\\|");
@@ -389,7 +389,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, //dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests"},
+			groups = {TestGroup.MSPP0Tests, "line_Item_Level_Verify_UpdateExpectedShipArrivalDate_NonEligible"},
 			description = "Verify that ineligible orders should not have update ship arrival date option", enabled = true)
 	public void  line_Item_Level_Verify_UpdateExpectedShipArrivalDate_NonEligible(TestData data) {//TestData data
 
@@ -425,7 +425,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	 * Verify if email can be sent to Marketplace Seller on the Line Item Level
 	 * */	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_Contact_MarketplaceSeller_Eligible"}
+			groups = {TestGroup.MSPP0Tests, "line_Item_Level_Verify_Contact_MarketplaceSeller_Eligible"}
 	, description = "Verify if email can be send to the Marketplace Seller from the Line Item Detail Page", enabled = true)
 	public void line_Item_Level_Verify_Contact_MarketplaceSeller_Eligible(TestData data) throws Exception {
 		/*String[] test_data = getProductToTest("MSP_OL_ItemLevelContactMPSellerEligible").split("\\|");
@@ -532,7 +532,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	 * Verify if fulfilled orders have "Contact Vendor" option on the Line Item Level
 	 * */
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemLevelRuleActionTest, "line_Item_Level_Verify_VendorFulfilledOrders_Have_ContactVendor_Option"}
+			groups = {TestGroup.MSPP0Tests, "line_Item_Level_Verify_VendorFulfilledOrders_Have_ContactVendor_Option"}
 	, description = " Verify if Vendor Fulfilled Orders have Contact Vendor option in Line Item Detail Page", enabled = true)
 	public void  line_Item_Level_Verify_VendorFulfilledOrders_Have_ContactVendor_Option(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevelContactVendorEligible").split("\\|");
@@ -569,7 +569,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	 * Verify if email can be sent to customer on the Line Item Level
 	 * */	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPLineItemLevelRuleActionTest, "MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "line_Item_Level_Verify_Contact_Customer_Eligible"}
 	, description = "Verify if Email can be send to the Customer from the Line Item Detail Page", enabled = true)
 	public void line_Item_Level_Verify_Contact_Customer_Eligible(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevelContactCustomerEligible").split("\\|");
@@ -603,7 +603,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 	//Schedule Return
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,//dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPLineItemLevelRuleActionTest, "MSPLineItemLevelRuleActionTests"}, 
+			groups = {TestGroup.MSPP1OnlineTests, "line_Item_Level_Verify_ScheduleReturn_Eligible"}, 
 			description = "Verify if 'Schedule Return' option is Visible", enabled = true)
 	public void line_Item_Level_Verify_ScheduleReturn_Eligible(TestData data) {
 
@@ -635,7 +635,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, //dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPLineItemLevelRuleActionTest, "MSPLineItemLevelRuleActionTests"}, 
+			groups = {TestGroup.MSPP1OnlineTests, "line_Item_Level_Verify_ScheduleReturn_NonEligible"}, 
 			description = " Verify that 'Schedule Return' option is not displayed for orders not eligible for return", enabled = true)
 	public void line_Item_Level_Verify_ScheduleReturn_NonEligible(TestData data) {
 
@@ -669,7 +669,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 	//	Reschedule Delivery	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,//dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPLineItemLevelRuleActionTest, "MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "line_Item_Level_Verify_Eligible_Reschedule_delivery_Eligible"}
 	, description = "Verify reschedule delivery option is shown for eligible orders", enabled = true)
 	public void line_Item_Level_Verify_Eligible_Reschedule_delivery_Eligible(TestData data) throws Exception{
 
@@ -705,7 +705,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,//dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPLineItemLevelRuleActionTest, "MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "line_Item_Level_Verify_Eligible_Reschedule_delivery_NonEligible"}
 	, description = "Verify reschedule delivery option is not shown for ineligible orders", enabled = true)
 	public void line_Item_Level_Verify_Eligible_Reschedule_delivery_NonEligible(TestData data) throws Exception{
 
@@ -740,7 +740,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 	//Start Automated Return Item
 	@Test(dataProvider = "DP_Start_Automated_Return_Eligible_orderID", 
-			groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Start_Automated_Return_Item_Eligible"}
 	, description = "Verify Start Automated Return functionality at line item level for eligible items", enabled = true)
 	public void line_Item_Level_Verify_Start_Automated_Return_Item_Eligible(String orderId,String sku) {
 
@@ -769,7 +769,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 	}
 
 	@Test(dataProvider = "DP_Start_Automated_Return_NonEligible_orderID", 
-			groups = {TestGroup.MSPP0Tests,"MSPLineItemLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_Start_Automated_Return_Item_NonEligible"}
 	, description = "Verify Start Automated Return functionality at line item level for eligible items", enabled = true)
 	public void line_Item_Level_Verify_Start_Automated_Return_Item_NonEligible(String orderId,String sku) {
 		orderId="840018754";sku="02213003000";
@@ -799,7 +799,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Contact_Customer_CapturedNotesInteraction"}
+			groups = {TestGroup.MSPP0Tests, "line_Item_Level_Contact_Customer_CapturedNotesInteraction"}
 	, description = "line_Item_Level_Contact_Customer_CapturedNotesInteraction", enabled = true)
 	public void  line_Item_Level_Contact_Customer_CapturedNotesInteraction(TestData data) {
 		String[] test_data = getProductToTest("MSP_OL_ItemLevelContactCustomerEligible").split("\\|");
@@ -857,7 +857,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test(dataProvider = "DP_FBM_Line_Item_Cancellation_NonEligible_orderID",
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_NoCancellation_FBM"}
+			groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_NoCancellation_FBM"}
 	, description = "Verify cancellation at line item level for eligible orders", enabled = true)
 	public void line_Item_Level_Verify_NoCancellation_FBM(String orderId, String sku) {
 		/*String[] test_data = getProductToTest("ItemLevelFBMCancellation").split(",");
@@ -898,7 +898,7 @@ public class LineItemLevelRuleActionTests extends BaseTests {
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPLineItemLevelRuleActionTests","line_Item_Level_Verify_NoCancellation_FBMKmart"}
+			groups = {TestGroup.MSPP0Tests,"line_Item_Level_Verify_NoCancellation_FBMKmart"}
 	, description = "Verify cancellation at line item level for eligible orders", enabled = true)
 	public void line_Item_Level_Verify_NoCancellation_FBMKmart(TestData data) {
 		String[] test_data = getProductToTest("ItemLevelFBMCancellationKmart").split(",");

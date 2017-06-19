@@ -21,7 +21,7 @@ public class LineItem_Summary extends BaseTests {
 	
 	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 	
-	@Test(dataProvider = "DP_SearchByOrderID1",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemSummaryTests"}
+	@Test(dataProvider = "DP_SearchByOrderID1",groups = {TestGroup.MSPP0Tests,"lineItemSummaryVerify"}
     , description = "Verify line item summary for an order", enabled = true, priority =25)
 	public void lineItemSummaryVerify(String OrderID) throws Exception{
 			addCloneIDHostname(data);
@@ -45,7 +45,7 @@ public class LineItem_Summary extends BaseTests {
 	        		.verifylineItemSummary(2);
 	}
 	
-	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemShippingInfoTests"}
+	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP0Tests,"lineItemShippingInfoVerify"}
     , description = "Verify shipping information in line item summary", enabled = true, priority =26)
 	public void lineItemShippingInfoVerify(String OrderID) throws Exception{
 			addCloneIDHostname(data);
@@ -71,7 +71,7 @@ public class LineItem_Summary extends BaseTests {
 
 	}
 	
-	@Test(dataProvider = "DP_Tracking_Detail",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemTrackingDeatilsTests"}
+	@Test(dataProvider = "DP_Tracking_Detail",groups = {TestGroup.MSPP0Tests,"lineItemTrackingDetailsVerify"}
     , description = "Verify tracking details in line item summary", enabled = true, priority =27)
 	public void lineItemTrackingDetailsVerify(String OrderID, String sku) throws Exception{
 			addCloneIDHostname(data);
@@ -97,7 +97,7 @@ public class LineItem_Summary extends BaseTests {
 	        		.verifyTrackingDetails();
 	}
 	
-	@Test(dataProvider = "DP_Return_Information",groups = {TestGroup.MSPP0Tests,TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemReturnInformationTests"}
+	@Test(dataProvider = "DP_Return_Information",groups = {TestGroup.MSPP0Tests,"lineItemReturnInfoVerify"}
     , description = "Verify return information in line item tab", enabled = true, priority =28)
 	public void lineItemReturnInfoVerify(String OrderID,String sku) throws Exception{
 			addCloneIDHostname(data);
@@ -123,7 +123,7 @@ public class LineItem_Summary extends BaseTests {
 
 	}
 	
-	@Test(dataProvider = "DP_Return_Tracking_Information", groups = {TestGroup.MSPLineItemSummary, "MSPLineItemReturnTrackingInfoTests"}
+	@Test(dataProvider = "DP_Return_Tracking_Information", groups = {TestGroup.MSPP1OnlineTests, "lineItemReturnTrackingInfo"}
     , description = "Verify return tracking information in line item tab", enabled = true, priority =29)
 	public void lineItemReturnTrackingInfo(String OrderID,String sku) throws Exception{
 			addCloneIDHostname(data);
@@ -148,7 +148,7 @@ public class LineItem_Summary extends BaseTests {
 	        		.verifyReturnTrackingInfo(1);
 	}
 	
-	@Test(dataProvider = "DP_Installation_Information",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemInstallationInfoTests"}
+	@Test(dataProvider = "DP_Installation_Information",groups = {TestGroup.MSPP0Tests, "lineItemInstallationInfoVerify"}
     , description = "Verify installation details in line item details tab", enabled = true, priority =30)
 	public void lineItemInstallationInfoVerify(String OrderID, String sku) throws Exception{
 			addCloneIDHostname(data);
@@ -174,7 +174,7 @@ public class LineItem_Summary extends BaseTests {
 
 	}
 
-	@Test(dataProvider = "DP_Gift_Card_Information",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemGiftCardInfoTests","lineItemGiftCardInfoVerify"}
+	@Test(dataProvider = "DP_Gift_Card_Information",groups = {TestGroup.MSPP0Tests,"lineItemGiftCardInfoVerify"}
     , description = "Verify all relevant details are displayed for a Gift Card order", enabled = true, priority =31)
 	public void lineItemGiftCardInfoVerify(String orderID, String sku) throws Exception{
 			addCloneIDHostname(data);
@@ -201,7 +201,7 @@ public class LineItem_Summary extends BaseTests {
 
 	}
 
-	@Test(dataProvider = "DP_Discount_Eligible_orderID",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemDiscountsInfoTests"}
+	@Test(dataProvider = "DP_Discount_Eligible_orderID",groups = {TestGroup.MSPP0Tests,"lineItemDiscountsVerify"}
     , description = "Verify discount information in line item tab", enabled = true, priority =32)
 	public void lineItemDiscountsVerify(String OrderID, String sku) throws Exception{
 			addCloneIDHostname(data);
@@ -226,7 +226,7 @@ public class LineItem_Summary extends BaseTests {
 	        		.verifyDiscountsOnLineItem(OrderID);
 	}
 	
-	@Test(dataProvider = "DP_Adjustment",groups = {TestGroup.MSPP0Tests,TestGroup.MSPLineItemSummary, "MSPLineItemAdjustmentsTests"}
+	@Test(dataProvider = "DP_Adjustment",groups = {TestGroup.MSPP0Tests,"lineItemAdjustmentsVerify"}
     , description = "Verify adjustment details in line item tab", enabled = true, priority =33)
 	public void lineItemAdjustmentsVerify(String OrderID, String sku) throws Exception{
 			addCloneIDHostname(data);
