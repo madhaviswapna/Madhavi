@@ -43,7 +43,7 @@ public class Order_Summary extends BaseTests {
     		.verifyCustomerInfoVerify(OrderID);
 	}
 
-	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP0Tests,TestGroup.MSPOrderSummary, "MSPorderSummaryVerify"}
+	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP0Tests, "orderSummaryVerify"}
     , description = "Verify order summary after searching for an order", enabled = true, priority=7)	
 	public void orderSummaryVerify(String OrderID) throws Exception{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -66,7 +66,7 @@ public class Order_Summary extends BaseTests {
     		.verifyOrderSummary(OrderID);
 	}
 	
-	@Test(dataProvider = "DP_SearchByOrderID3",groups = {TestGroup.MSPP0Tests,TestGroup.MSPOrderSummary, "orderSummaryOrderCharges"}, 
+	@Test(dataProvider = "DP_SearchByOrderID3",groups = {TestGroup.MSPP0Tests, "orderSummaryOrderChargesVerify"}, 
 			description = "Verify order charges section", enabled = true, priority=8)
 	public void orderSummaryOrderChargesVerify(String OrderID) throws Exception{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -89,7 +89,7 @@ public class Order_Summary extends BaseTests {
     		.verifyOrderCharges(OrderID);
 	}
 	
-	@Test(dataProvider = "DP_Discount_Eligible_orderID",groups = {TestGroup.MSPP0Tests,TestGroup.MSPOrderSummary, "MSPDiscountsTests"}
+	@Test(dataProvider = "DP_Discount_Eligible_orderID",groups = {TestGroup.MSPP0Tests, "orderSummaryDiscountsVerify"}
     , description = "Verify discount section for an order", enabled = true, priority=9)
 	public void orderSummaryDiscountsVerify(String OrderID) throws Exception{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -112,7 +112,7 @@ public class Order_Summary extends BaseTests {
     		.verifyDiscounts(OrderID);
 	}
 
-	@Test(dataProvider = "DP_Adjustment", groups = {TestGroup.MSPOrderSummary, "MSPAdjustmentsTests"}
+	@Test(dataProvider = "DP_Adjustment", groups = {TestGroup.MSPP1OnlineTests, "orderSummaryAdjustmentsVerify"}
     , description = "Verify adjustments section for an order", enabled = true, priority=10)
 	public void orderSummaryAdjustmentsVerify(String OrderID) throws Exception{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -135,7 +135,7 @@ public class Order_Summary extends BaseTests {
     		.verifyAdjustments(OrderID);
 	}
 	
-	@Test(dataProvider = "DP_Payment", groups = {TestGroup.MSPP0Tests,TestGroup.MSPOrderSummary, "MSPAdjustmentsTests"}
+	@Test(dataProvider = "DP_Payment", groups = {TestGroup.MSPP0Tests, "orderSummarypaymentVerify_OnlineAgent"}
     , description = "Verify payment section in order summary for online agent", enabled = true)	
 	public void orderSummarypaymentVerify_OnlineAgent(String OrderID, String storeID) throws Exception{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -159,7 +159,7 @@ public class Order_Summary extends BaseTests {
 
 	}
 	
-	@Test(dataProvider = "DP_Payment", groups = {TestGroup.MSPOrderSummary, "MSPAdjustmentsTests"}
+	@Test(dataProvider = "DP_Payment", groups = {TestGroup.MSPP1OnlineTests, "orderSummarypaymentVerify_OfflineAgent"}
     , description = "Verify payment section in order summary for offline agent", enabled = true)	
 	public void orderSummarypaymentVerify_OfflineAgent(String OrderID, String storeID) throws Exception{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -183,7 +183,7 @@ public class Order_Summary extends BaseTests {
 
 	}
 	
-	@Test(dataProvider = "DP_OrderDetails",groups = {TestGroup.MSPP0Tests,TestGroup.MSPOrderSummary, "MSPOrderDetailsTests"}
+	@Test(dataProvider = "DP_OrderDetails",groups = {TestGroup.MSPP0Tests, "orderSummaryOrderDetailsVerify"}
     , description = "Verify details in order details page", enabled = true, priority=12)
 	public void orderSummaryOrderDetailsVerify(String OrderID, String storeId) throws Exception{
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -207,7 +207,7 @@ public class Order_Summary extends BaseTests {
 	}
 
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups={TestGroup.MSPOrderSummary,"MemberPage360DegreeValidation"},description = "Search for member and verify profile details")
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups={TestGroup.MSPP1OnlineTests,"MemberPage360DegreeValidation"},description = "Search for member and verify profile details")
 	public void MemberPage360DegreeValidation(TestData data){
 		addCloneIDHostname(data);
 		User user = new User(); user.userName=UserPool.getUser();
@@ -224,7 +224,7 @@ public class Order_Summary extends BaseTests {
 	
 	
 	
-	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPOrderSummary, "MSPOrderSummaryAgentNotesTests"}
+	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP1OnlineTests, "agentNotesVerifyPresent"}
     , description = "Verify agent notes field is present in order details page", enabled = true, priority=14)
 
 	public void agentNotesVerifyPresent(String OrderID) throws Exception{

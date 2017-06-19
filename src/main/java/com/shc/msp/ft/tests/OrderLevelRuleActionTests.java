@@ -25,7 +25,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests","order_Level_Sales_Tax_Adjustment_Eligible"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "order_Level_Sales_Tax_Adjustment_Eligible"}
 	, description = "Verify sale adjustment at order level", enabled = true, priority=34)	
 	public void order_Level_Sales_Tax_Adjustment_Eligible(TestData data) {
 		String OrderID = getProductToTest("SaleAdjustmentOrder");
@@ -49,7 +49,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		.verifyTrialBalance();
 	}
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP1OnlineTests, "order_Level_Sales_Tax_Adjustment_NonEligible"}
 	, description = "Verify sale tax adjustment is not available at order level for ineligible orders", enabled = true, priority=35)
 	public void order_Level_Sales_Tax_Adjustment_NonEligible(TestData data) {
 		String OrderID = getProductToTest("IneligibleSaleAdjustmentOrder");
@@ -70,7 +70,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "order_Level_Shipping_Adjustment_Eligible"}
 	, description = "Verify shipping adjustment is available for eligible orders", enabled = true, priority=35)
 	public void order_Level_Shipping_Adjustment_Eligible(TestData data) {
 		//String OrderID = getProductToTest("ShippingAdjustmentEligibleOrder");
@@ -93,34 +93,9 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		;
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
-	, description = "Verify shipping adjustment is available for eligible orders", enabled = true, priority=35)
-	public void order_Level_Shipping_Adjustment_Eligible_1(TestData data) {
-		//String OrderID = getProductToTest("ShippingAdjustmentEligibleOrder");
-		String OrderID = "840027700";
-		addCloneIDHostname(data);
-		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getUser();
-		As.guestUser.goToHomePage()
-		.addlogType(TestStepType.WHEN)
-		.login(user)
-		.addlogType(TestStepType.THEN)
-		.verifyonlineagent()
-		.addlogType(TestStepType.WHEN)
-		.searchByOrderId(OrderID)
-		.closeWarningPopupWindow()
-		._OrderDetailsAction()
-		.addlogType(TestStepType.WHEN)
-		.verifyOptionVisible("Shipping Adjustment")
-		.taxadjustment("Shipping Adjustment",0.1,OrderID)
-		;
-	}
-
-
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "order_Level_Shipping_Adjustment_NonEligible"}
 	, description = "Verify shipping adjustment is not available for orders that are not eligible", enabled = true, priority=37)
 	public void order_Level_Shipping_Adjustment_NonEligible(TestData data) {
 		String OrderID = getProductToTest("ShippingAdjustmentIneligibleOrder");
@@ -143,7 +118,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, 
-			groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "order_Level_Release_Order_Eligible_Verify_ContactHistory"}
 	, description = "Verify held orders can be released", enabled = true, priority=38)
 	public void order_Level_Release_Order_Eligible_Verify_ContactHistory(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderEligibleForRelease");
@@ -175,7 +150,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		.verifyActionCapturedHistoryNotes("Release Order");
 	}
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,	groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,	groups = {TestGroup.MSPP1OnlineTests, "order_Level_Release_Order_NonEligible"}
 	, description = "Verify release option is not shown for orders that are not eligible", enabled = true, priority=39)
 	public void order_Level_Release_Order_NonEligible(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderNotEligibleForRelease");
@@ -198,7 +173,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 
 	}
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,	groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,	groups = {TestGroup.MSPP1OnlineTests, "order_Level_Contact_Customer_Eligible"}
 	, description = "Verify customer contact option is displayed for eligible orders", enabled = true, priority=40)
 
 	public void order_Level_Contact_Customer_Eligible(TestData data) {
@@ -227,7 +202,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 	}
 
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "order_Level_Cancellation_Eligible_Captured_Notes_Verification"}
 	, description = "Verify order level cancellation", enabled = true, priority=41)
 	public void  order_Level_Cancellation_Eligible_Captured_Notes_Verification(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderEligibleForCancellation");
@@ -260,7 +235,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		}
 
 
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPOrderLevelRuleAction, "MSPOrderLevelRuleActionTests"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "order_Level_Cancellation_NonEligible"}
 	, description = "Verify cancellation is not shown for orders that are not eligible", enabled = true, priority=42)
 	public void order_Level_Cancellation_NonEligible(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderInEligibleForCancellation");
@@ -563,7 +538,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		;
 	}
 	
-	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests, "MSPOrderLevelRuleActionTests",TestGroup.MSPOrderLevelRuleAction, "Order_Level_Shipping_Adjustment_CapturedNotesInteraction"}
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP1OnlineTests, "order_Level_Shipping_Adjustment_Eligible_for_Commercial_TWOrder"}
 	, description = "Verify sale adjustment at order level with Interaction Notes", enabled = true, priority=34)	
 	public void order_Level_Shipping_Adjustment_Eligible_for_Commercial_TWOrder(TestData data) {
 		String OrderID = getProductToTest("MSPCommercialTWOrderForSaleTaxAdjustment");
