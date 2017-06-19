@@ -1,20 +1,12 @@
 package com.shc.msp.ft.tests;
 
-import java.io.IOException;
-
-import org.json.JSONObject;
-import org.json.XML;
 import org.testng.annotations.Test;
-
 import com.shc.automation.BaseTests;
 import com.shc.automation.data.TestData;
 import com.shc.automation.dataprovider.TestDataProvider;
 import com.shc.msp.ft.actions.LogFormatterAction;
 import com.shc.msp.ft.entities.As;
 import com.shc.msp.ft.entities.User;
-import com.shc.msp.ft.modules.ActionDropdown.SelectPage;
-import com.shc.msp.ft.util.Constant;
-import com.shc.msp.ft.util.ExcelUtil;
 import com.shc.msp.ft.util.TestGroup;
 //import com.shc.msp.ft.util.RetrieveDataInMySQLDB;
 
@@ -25,8 +17,8 @@ public class MSPFunctionalTest extends BaseTests {
 	    	
 	    	
 	    	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-	                groups = {TestGroup.QA_Environment}
-	                , description = "MSPCancelOrderTests", enabled = true)
+	                groups = {TestGroup.QA_Environment,"MSP_Verify_EasyOptions_Option_SalesCheckDetailPage_Not_Visible"}
+	                , description = "MSP_Verify_EasyOptions_Option_SalesCheckDetailPage_Not_Visible", enabled = true)
 	        public void MSP_Verify_EasyOptions_Option_SalesCheckDetailPage_Not_Visible(TestData data) {
 	            addCloneIDHostname(data);
 	            
@@ -52,8 +44,8 @@ public class MSPFunctionalTest extends BaseTests {
 	        }
 	    
 	    	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-	                groups = {TestGroup.QA_Environment}
-	                , description = "MSPCancelOrderTests", enabled = true)
+	                groups = {TestGroup.QA_Environment,"MSP_Verify_EasyOptions_Option_SalesCheckDetailPage_Visible"}
+	                , description = "MSP_Verify_EasyOptions_Option_SalesCheckDetailPage_Visible", enabled = true)
 	        public void MSP_Verify_EasyOptions_Option_SalesCheckDetailPage_Visible(TestData data) {
 	            addCloneIDHostname(data);
 	            
@@ -83,8 +75,8 @@ public class MSPFunctionalTest extends BaseTests {
 	   	 * Verify if Marketplace Warning PopUp is present
 	   	 * */	
 	   	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-	               groups = {TestGroup.QA_Environment, "MSPMarketPlaceWarning"}
-	               , description = "MSPContactCustomer_LineItem_Level", enabled = true)
+	               groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_Marketplace_Warning_PopUp"}
+	               , description = "MSP_Verify_Marketplace_Warning_PopUp", enabled = true)
 	       public void MSP_Verify_Marketplace_Warning_PopUp(TestData data) {
 	           addCloneIDHostname(data);
 	           
