@@ -23,7 +23,7 @@ public class SalesCheck_Summary extends BaseTests{
 	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 	
 	
-	@Test(dataProvider = "DP_SearchByOrderID1",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSalesCheckSummary, "MSPSalesCheckSummaryTests"}
+	@Test(dataProvider = "DP_SearchByOrderID1",groups = {TestGroup.MSPP0Tests, "salesCheckSummaryVerify"}
     , description = "Verify sales check summary section", enabled = true, priority =15)
 	public void salesCheckSummaryVerify(String OrderID) throws Exception {
 			addCloneIDHostname(data);
@@ -45,7 +45,7 @@ public class SalesCheck_Summary extends BaseTests{
 	        		.verifySalesCheckSummary(OrderID);
 	}
 	
-	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSalesCheckSummary, "MSPSalesCheckDeatailTests"}
+	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP0Tests,"salesCheckSummaryDetailVerify"}
     , description = "Verify sales check detail section", enabled = true, priority =16)
 	public void salesCheckSummaryDetailVerify(String OrderID) throws Exception{
 			addCloneIDHostname(data);
@@ -67,7 +67,7 @@ public class SalesCheck_Summary extends BaseTests{
 	        		.salesCheckDetailVerify(OrderID);
 	}
 
-	@Test(dataProvider = "DP_StorePOStoWEB_Information",groups = {TestGroup.MSPSalesCheckSummary, "MSPSalesCheckstorePOStoWEBTests"}
+	@Test(dataProvider = "DP_StorePOStoWEB_Information",groups = {TestGroup.MSPP1OnlineTests, "salesCheckSummarystorePOStoWEBVerify"}
     , description = "Verify Store POS to Web flow", enabled = true, priority =17)
 	public void salesCheckSummarystorePOStoWEBVerify(String OrderID,String scNO) throws Exception{
 			addCloneIDHostname(data);
@@ -90,7 +90,7 @@ public class SalesCheck_Summary extends BaseTests{
 	}
 	
 
-	@Test(dataProvider = "DP_SearchByOrderID4",groups = {TestGroup.MSPP0Tests,TestGroup.MSPSalesCheckSummary, "MSPSalesCheckContactInfoTests"}
+	@Test(dataProvider = "DP_SearchByOrderID4",groups = {TestGroup.MSPP0Tests,"salesCheckSummaryContactInfoVerify"}
     , description = "Verify contact information for salescheck", enabled = true, priority =19)
 	public void salesCheckSummaryContactInfoVerify(String OrderID) throws Exception{
 			addCloneIDHostname(data);
@@ -112,7 +112,7 @@ public class SalesCheck_Summary extends BaseTests{
 	        		.salesCheckContactInfoVerify(OrderID);
 	}
 	
-	@Test(dataProvider = "DP_Return_Gift_Card_Information",groups = {TestGroup.MSPP0Tests, "MSPSalesCheckReturnGiftCardInfoTests"}
+	@Test(dataProvider = "DP_Return_Gift_Card_Information",groups = {TestGroup.MSPP0Tests, "salesCheckSummaryverifyReturnGiftCardInformation"}
 	, description = "Verify return gift card information", enabled = true, priority =20)
 	public void salesCheckSummaryverifyReturnGiftCardInformation(String OrderID, String scNO) throws Exception{
 			addCloneIDHostname(data);
@@ -135,7 +135,7 @@ public class SalesCheck_Summary extends BaseTests{
 
 }
 	
-	@Test(dataProvider = "DP_Discount_Eligible_orderID",groups = {TestGroup.MSPSalesCheckSummary, "MSPSalesCheckDiscountsTests"}
+	@Test(dataProvider = "DP_Discount_Eligible_orderID",groups = {TestGroup.MSPP1OnlineTests, "salesCheckSummaryverifyDiscounts"}
     , description = "Verify discounts in sales check", enabled = true, priority =21)
 	public void salesCheckSummaryverifyDiscounts(String OrderID, String scNO) throws Exception{
 			addCloneIDHostname(data);
@@ -158,7 +158,7 @@ public class SalesCheck_Summary extends BaseTests{
 
 	}
 	
-	@Test(dataProvider = "DP_Delivery_Details",groups = {TestGroup.MSPP0Tests, "MSPSalesCheckDeliveryDetailsTests"}
+	@Test(dataProvider = "DP_Delivery_Details",groups = {TestGroup.MSPP0Tests, "salesCheckSummaryverifyDeliveryDetails"}
 	, description = "Verify delivery details for salescheck", enabled = true, priority =22)
 	public void salesCheckSummaryverifyDeliveryDetails(String OrderID,String scNO) throws Exception{
 			addCloneIDHostname(data);
@@ -182,7 +182,7 @@ public class SalesCheck_Summary extends BaseTests{
 		}
 
 	@Test(dataProvider = "TestData",dataProviderClass = TestDataProvider.class,
-	groups = {TestGroup.QA_Environment, "MSPSalesCheckPaymentsTests"}
+	groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_SOAPrequest_SalesCheck"}
 	, description = "Verify SOAP request response for salescheck", enabled = true)
 	public void MSP_Verify_SOAPrequest_SalesCheck(TestData data) throws Exception{
 			addCloneIDHostname(data);
@@ -211,7 +211,7 @@ public class SalesCheck_Summary extends BaseTests{
 			}
 			
 	
-	@Test(dataProvider = "DP_Payment",groups = {TestGroup.MSPSalesCheckSummary, "MSPSalesCheckPaymentsTests"}
+	@Test(dataProvider = "DP_Payment",groups = {TestGroup.MSPP1OnlineTests, "salesCheckSummaryverifyPayments"}
 	, description = "Verify payments in salescheck summary", enabled = true, priority =23)
 	public void salesCheckSummaryverifyPayments(String OrderID, String storeId) throws Exception{
 			addCloneIDHostname(data);
@@ -236,7 +236,7 @@ public class SalesCheck_Summary extends BaseTests{
 		
 		}
 	
-	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPSalesCheckSummary, "MSPSalesCheckPaymentsTests"}
+	@Test(dataProvider = "DP_SearchByOrderID2",groups = {TestGroup.MSPP1OnlineTests, "salesCheckSummaryverifySaralink"}
 			, description = "Verify SARA link in salescheck", enabled = true, priority =24)
 			public void salesCheckSummaryverifySaralink(String OrderID) throws Exception{
 					addCloneIDHostname(data);
@@ -259,7 +259,7 @@ public class SalesCheck_Summary extends BaseTests{
 				
 				}
 	
-	@Test(dataProvider = "DP_Delivery_Details",groups = {TestGroup.QA_Environment, "MSPSalesCheckDeliveryDetailsTests"}
+	@Test(dataProvider = "DP_Delivery_Details",groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_SalesCheck_DDC_Fulfillment"}
 	, description = "Verify DDC fulfillment in salescheck summary page", enabled = true)
 	public void MSP_Verify_SalesCheck_DDC_Fulfillment (String OrderID,String scNO) throws Exception{
 			addCloneIDHostname(data);		
