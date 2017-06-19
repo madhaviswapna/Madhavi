@@ -16,7 +16,7 @@ import com.shc.msp.ft.util.UserPool;
 
 public class ReturnItemValidation extends BaseTests{
 	@Test(dataProvider = "schedule_Return_Not_Eligible_Data", 
-            groups = {TestGroup.QA_Environment, "ReturnItemTests"}
+            groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_ReturnItem_Option_Visible"}
             , description = "Verify return item option is present for eligible orders", enabled = true)
     public void MSP_Verify_ReturnItem_Option_Visible(String orderId, String sku) {
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -49,7 +49,7 @@ public class ReturnItemValidation extends BaseTests{
 	
 	
 	@Test(dataProvider = "Return_Not_Eligible_Data",
-            groups = {TestGroup.QA_Environment, "ReturnItemTests"}
+            groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_ReturnItem_Option_Not_Visible"}
             , description = "Verify return option is not displayed for orders that are not eligible", enabled = true)
     public void MSP_Verify_ReturnItem_Option_Not_Visible(String orderId) {
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -78,7 +78,7 @@ public class ReturnItemValidation extends BaseTests{
         ;
     }
 	@Test(dataProvider = "schedule_Return_Not_Eligible_Data",
-			  groups = {TestGroup.MSPReturnItem, "ReturnItemTests"}, 
+			  groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_ReturnTrackingInformation_Option_Visible"}, 
            description = "Verify return tracking information is displayed", enabled = true)
   public void MSP_Verify_ReturnTrackingInformation_Option_Visible(String orderId, String sku) {
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -110,7 +110,7 @@ public class ReturnItemValidation extends BaseTests{
 	
 	
 	@Test(dataProvider = "ReturnTrackingNotEligible", 
-          groups = {TestGroup.MSPReturnItem, "ReturnItemTests"}, 
+          groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_ReturnTrackingInformation_Option_Not_Visible"}, 
            description = "Verify return tracking information is not visible for ineligible orders", enabled = true)
   public void MSP_Verify_ReturnTrackingInformation_Option_Not_Visible(String orderId, String sku) {
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -137,7 +137,7 @@ public class ReturnItemValidation extends BaseTests{
       ;
   }
 	@Test(dataProvider = "schedule_Return_Data",
-			  groups = {TestGroup.MSPReturnItem, "ReturnItemTests"}, 
+			  groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_ScheduleReturn_Option_Visible"}, 
            description = "Verify schedule return option is visible", enabled = true)
   public void MSP_Verify_ScheduleReturn_Option_Visible(String orderId, String sku) {
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
@@ -167,7 +167,7 @@ public class ReturnItemValidation extends BaseTests{
 	
 	
 	@Test(dataProvider = "schedule_Return_Not_Eligible_Data",
-          groups = {TestGroup.MSPReturnItem, "ReturnItemTests"}, 
+          groups = {TestGroup.MSPP1OnlineTests, "MSP_Verify_ScheduleReturn_Option_Not_Visible"}, 
            description = "Verify schedule return option is not visible for ineligible orders", enabled = true)
   public void MSP_Verify_ScheduleReturn_Option_Not_Visible(String orderId, String sku) {
 		TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
