@@ -21,7 +21,7 @@ import com.shc.msp.ft.util.UserPool;
 public class Search_Summary extends BaseTests {
 	
 	
-	@Test(dataProvider = "DP_SearchByOrderID",groups = {TestGroup.MSPOrderSearchAndSummary, "MSPOrderSearchAndSummaryTests"}
+	@Test(dataProvider = "DP_SearchByOrderID",groups = {TestGroup.MSPP1OnlineTests, "Search_Summary_Test"}
     , description = "Verify search by order id")//, enabled = true,dependsOnMethods = { "MSP_Search_Tests" }
 
 	public void Search_Summary_Test(String orderId, String storeId) throws Exception {

@@ -24,7 +24,7 @@ import com.shc.msp.ft.util.UserPool;
 
 public class OrderSearch extends BaseTests{
 	String url=FrameworkProperties.SELENIUM_BASE_URL;
-	@Test(dataProvider = "DP_SearchAll", groups = {TestGroup.MSPGroupSearch, "SearchOrderByOnlineAgentTests"}
+	@Test(dataProvider = "DP_SearchAll", groups = {TestGroup.MSPP1OnlineTests, "MSP_Search_Tests"}
 
     , description = "Verify search by name, orderid, phone, email, salescheck and store", enabled = true)
 	public void MSP_Search_Tests(String orderId, String firstName, String lastName, String phonenumber, String email, String salesCheckNO,String agentID, String store) throws Exception {
@@ -99,7 +99,7 @@ public class OrderSearch extends BaseTests{
 	 * Online Agent   
 	 */
 
-		@Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "SearchOrderByOrderIDByOnlineAgentTests"}
+		@Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP0Tests, "MSP_Online_Agent_Search_By_OrderNumber"}
 
         , description = "Verify search by order id", enabled = true, priority=1)
 		public void MSP_Online_Agent_Search_By_OrderNumber(String orderId,String agentID) throws Exception {
@@ -132,7 +132,7 @@ public class OrderSearch extends BaseTests{
 		    
 		}
 		
-		@Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "SearchOrderByOrderIDByOnlineAgentTests"}
+		@Test(dataProvider = "DP_SearchByOrderID", groups = {TestGroup.MSPP1OnlineTests, "MSP_Itemcondition"}
         , description = "Verify search by order id", enabled = true, priority=1)
 		public void MSP_Itemcondition(String orderId,String agentID) throws Exception {
 			
@@ -250,7 +250,7 @@ public class OrderSearch extends BaseTests{
             .verifyLayawayDetailsPageDisplayed();
 		}
 		
-		@Test(dataProvider = "DP_SearchByFName_LName", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByCustomerNameTests"}
+		@Test(dataProvider = "DP_SearchByFName_LName", groups = {TestGroup.MSPP0Tests, "MSP_Online_Agent_Search_By_Name"}
 	            , description = "Verify search by name", enabled = true, priority=2)
 		      
 		public void MSP_Online_Agent_Search_By_Name(String firstName, String lastName,String agentID) throws Exception {
@@ -285,7 +285,7 @@ public class OrderSearch extends BaseTests{
 	    }
 
 	
-		@Test(dataProvider = "DP_SearchByOrderID",	groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderBySalesCheckNOTests"}
+		@Test(dataProvider = "DP_SearchByOrderID",	groups = {TestGroup.MSPP0Tests, "MSP_Online_Agent_Search_SalesCheck"}
 	            , description = "Verify search by salescheck", enabled = true, priority=3)
 	
 	    public void MSP_Online_Agent_Search_SalesCheck(String salesCheck,String store) throws Exception {
@@ -316,7 +316,7 @@ public class OrderSearch extends BaseTests{
 		            .verifyOrderDetailsPageDisplayed();
 	    }
 	    
-		@Test(dataProvider = "DP_SearchByPhone", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByPhoneNOTests"}
+		@Test(dataProvider = "DP_SearchByPhone", groups = {TestGroup.MSPP0Tests, "MSP_Online_Agent_Search_Phone"}
 	            , description = "Verify agent search by phone number", enabled = true, priority=4)
 	    
 		public void MSP_Online_Agent_Search_Phone(String phoneNumber,String agentID) throws Exception {
@@ -349,7 +349,7 @@ public class OrderSearch extends BaseTests{
 	    }
 	    
 	    
-	    @Test(dataProvider = "DP_SearchByEmail", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "MSPSearchOrderByEmailTests"}
+	    @Test(dataProvider = "DP_SearchByEmail", groups = {TestGroup.MSPP0Tests, "MSP_Online_Agent_Search_Email"}
 	            , description = "Verify order search by email", enabled = true, priority=5)
 	    
 	    public void MSP_Online_Agent_Search_Email(String email,String agentID) throws Exception {
@@ -440,7 +440,7 @@ public class OrderSearch extends BaseTests{
 	        .clickSYWMaxTabandVerify("inactive");
 		}
 		
-		@Test(dataProvider = "DP_SearchByOrderID2", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "SearchmemberBySYWlinkPhonenumber"}
+		@Test(dataProvider = "DP_SearchByOrderID2", groups = {TestGroup.MSPP0Tests, "SearchmemberBySYWlinkPhonenumber"}
 	    , description = "SearchmemberBySYWlinkPhonenumber", enabled = true, priority=1)
 		
 		public void SearchmemberBySYWlinkPhonenumber(String orderId,String agentID) throws Exception {
@@ -468,7 +468,7 @@ public class OrderSearch extends BaseTests{
 		}
 		//searchBySYWlinkEmail
 		
-		@Test(dataProvider = "DP_SearchByOrderID2", groups = {TestGroup.MSPP0Tests,TestGroup.MSPSearch, "SearchmemberBySYWlinkEmail"}
+		@Test(dataProvider = "DP_SearchByOrderID2", groups = {TestGroup.MSPP0Tests, "SearchmemberBySYWlinkEmail"}
 	    , description = "SearchmemberBySYWlinkEmail", enabled = true, priority=1)
 		
 		public void SearchmemberBySYWlinkEmail(String orderId,String agentID) throws Exception {
