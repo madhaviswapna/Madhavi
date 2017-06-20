@@ -18,8 +18,8 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 	TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,  
-			groups = {TestGroup.MSPSalesCheckLevelRuleAction,TestGroup.MSPP1OnlineTests, "sales_Check_Level_Release_Sales_Check_Captured_Notes_Interaction"}
-            , description = "Verify release at sales check level", enabled = true, priority=45)
+			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Release_Sales_Check_Captured_Notes_Interaction"}
+            , description = "sales_Check_Level_Release_Sales_Check_Captured_Notes_Interaction", enabled = true, priority=45)
     public void sales_Check_Level_Release_Sales_Check_Captured_Notes_Interaction(TestData data) throws Exception {
 		
 		Retrieval_Test_Data_By_Query.salesCheckRelease_Data();
@@ -65,7 +65,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Release_Sales_Check_NonEligible"}
             , description = "Verify release sales check is not shown for ineligible orders", enabled = true, priority=46)
     public void sales_Check_Level_Release_Sales_Check_NonEligible(TestData data) {
 		String orderId=getProductToTest("MSP_OL_OrderInEligibleForSalesCheckLevelRelease");
@@ -134,7 +134,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Update_Sales_Check_NonEligible"}
             , description = "Verify Update Sales Check option is not shown for ineligible orders", enabled = true, priority=48)
     public void sales_Check_Level_Update_Sales_Check_NonEligible(TestData data) throws Exception {
 		Retrieval_Test_Data_By_Query.UpdateSalesCheckIneligibleData();
@@ -165,7 +165,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, 
-			groups = {TestGroup.MSPSalesCheckLevelRuleAction, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Contact_Customer_Eligible"}
             , description = "Verify agent is able to contact customer at salescheck level", enabled = true, priority=49)
     public void sales_Check_Level_Contact_Customer_Eligible(TestData data) {
         
@@ -197,7 +197,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
        
 	}
 	
-	@Test(dataProvider = "DP_Cancel_Sales_Check_Eligible",groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests","sales_Check_Level_Cancellation_Captured_AuditTrail_Notes_Interaction"}
+	@Test(dataProvider = "DP_Cancel_Sales_Check_Eligible",groups = {TestGroup.MSPP0Tests, "sales_Check_Level_Cancellation_Captured_AuditTrail_Notes_Interaction"}
             , description = "Verify cancellation at salescheck level", enabled = true, priority=51)
     public void sales_Check_Level_Cancellation_Captured_AuditTrail_Notes_Interaction(String OrderID,String SalesCheck) {		
 		//
@@ -243,7 +243,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
        	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests,"sales_Check_Level_Cancellation_NonEligible"}
             , description = "Verify ineligible orders does not have cancel options", enabled = true, priority=52)
     public void sales_Check_Level_Cancellation_NonEligible(TestData data) {
 		
@@ -270,7 +270,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests","sales_Check_Level_ReadyForPickupEmail_Option_Eligible"}
+			groups = {TestGroup.MSPP0Tests, "sales_Check_Level_ReadyForPickupEmail_Option_Eligible"}
             , description = "Verify ready for pickup mails", enabled = true, priority=53)
     public void sales_Check_Level_ReadyForPickupEmail_Option_Eligible(TestData data) {
 		
@@ -320,7 +320,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests"}
+			groups = {TestGroup.MSPP0Tests, "sales_Check_Level_ReadyForPickupEmail_Option_NonEligible"}
             , description = "Verify ready for pickup email is not shown for ineligible orders", enabled = true, priority=54)
     public void sales_Check_Level_ReadyForPickupEmail_Option_NonEligible(TestData data) {
 		
@@ -347,7 +347,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.MSPP0Tests, "MSPSalesCheckLevelRuleActionTests","sales_Check_Level_EmailToCustomer_CapturedInNotes"}
+			groups = {TestGroup.MSPP0Tests, "sales_Check_Level_EmailToCustomer_CapturedInNotes"}
             , description = "sales_Check_Level_EmailToCustomer_CapturedInNotes", enabled = true, priority=54)
     public void sales_Check_Level_EmailToCustomer_CapturedInNotes(TestData data) {
 		
