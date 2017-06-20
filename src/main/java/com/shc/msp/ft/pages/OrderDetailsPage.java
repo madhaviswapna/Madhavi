@@ -528,7 +528,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[6]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_ORDERED= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[10]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE= new Locator("","//input[@name='selectedQuantity']//ancestor::tr//td[8]","LINE ITEM ROW Quantity Available Even Exchange");
-	public final Locator LINE_ITEM_ROW_QUANTITY= new Locator("LINE_ITEM_ROW_QUANTITY","(//td[contains(text(),'{0}')]/parent::tr//input[@name='selectedQuantity'])[{1}]","LINE ITEM ROW Quantity");
+	public final Locator LINE_ITEM_ROW_QUANTITY= new Locator("LINE_ITEM_ROW_QUANTITY","(//td[contains(text(),'{0}')]/parent::tr//input[@name='selectedQuantity'])['{1}']","LINE ITEM ROW Quantity");
 	public final Locator LINE_ITEM_ROW_QUANTITY_COUNT= new Locator("LINE_ITEM_ROW_QUANTITY_COUNT","(//input[@name='selectedQuantity'])[{0}]","LINE ITEM ROW Quantity");
 	public final Locator LINE_ITEM_CANCEL= new Locator("LINE_ITEM_CANCEL","//button[contains(text(),'Cancel Items')]","LINE ITEM CANCEL");
 	public final Locator EVEN_EXCHANGE_BUTTON = new Locator("Even Exchange Button", "//button[contains(text(),'Even Exchange')]", "Even Exchange Button");
@@ -4796,23 +4796,22 @@ public class OrderDetailsPage extends Page {
 			getAction().click(RERESERVE_BUTTON);
 			getAction().waitFor(3000);
 			AjaxCondition.forElementVisible(RERESERVE_ITEM_COUNT).waitForResponse();
-			int num=0;
+			int num=getAction().getVisibleElementCount(RERESERVE_ITEM_COUNT);
 			if(order.equalsIgnoreCase("whole order")){
-				num=getAction().getVisibleElementCount(RERESERVE_ITEM_COUNT);
 				for(int i=1;i<=num;i++){
 					getAction().scrollTo(RERESERVE_ITEM.format(i));
 					AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
 					getAction().click(RERESERVE_ITEM.format(i));
-					AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
-					getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
-					getAction().waitFor(3000);
+					AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(orderType,i)).waitForResponse();
+					getAction().type(LINE_ITEM_ROW_QUANTITY.format(orderType,i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
+					getAction().waitFor(000);
 				}
 			}
 			else{
 				AjaxCondition.forElementVisible(RERESERVE_ITEM.format(1)).waitForResponse();
 				getAction().click(RERESERVE_ITEM.format(1));
-				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
-				getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(orderType,1)).waitForResponse();
+				getAction().type(LINE_ITEM_ROW_QUANTITY.format(orderType,1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
 				getAction().waitFor(3000);
 				num=1;
 			}
@@ -5088,6 +5087,8 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(CANCEL_BUTTON).waitForResponse();
 		getAction().scrollTo(CANCEL_BUTTON);
 		getAction().click(CANCEL_BUTTON);
+		
+		closeCommercialOrderNotificationPopUp();
 
 		if (orderType.equalsIgnoreCase("Whole order")) {
 			AjaxCondition.forElementVisible(ENTIRE_ORDER).waitForResponse();
@@ -6675,16 +6676,16 @@ public class OrderDetailsPage extends Page {
 					getAction().scrollTo(RERESERVE_ITEM.format(i));
 					AjaxCondition.forElementVisible(RERESERVE_ITEM.format(i)).waitForResponse();
 					getAction().click(RERESERVE_ITEM.format(i));
-					AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(i)).waitForResponse();
-					getAction().type(LINE_ITEM_ROW_QUANTITY.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
+					AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(orderType,i)).waitForResponse();
+					getAction().type(LINE_ITEM_ROW_QUANTITY.format(orderType,i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
 					getAction().waitFor(3000);
 				}
 			}
 			else{
 				AjaxCondition.forElementVisible(RERESERVE_ITEM.format(1)).waitForResponse();
 				getAction().click(RERESERVE_ITEM.format(1));
-				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
-				getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
+				AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(orderType,1)).waitForResponse();
+				getAction().type(LINE_ITEM_ROW_QUANTITY.format(orderType,1), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(1)));
 				getAction().waitFor(3000);
 				num=1;
 			}
