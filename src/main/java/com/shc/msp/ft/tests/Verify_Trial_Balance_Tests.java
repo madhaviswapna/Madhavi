@@ -13,7 +13,7 @@ import com.shc.msp.ft.util.TestGroup;
 public class Verify_Trial_Balance_Tests extends BaseTests {
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-            groups = {TestGroup.QA_Environment, "MSPTrial_BalanceTests"}
+            groups = {TestGroup.QA_Environment,"MSP_Verify_Trial_Balance_Refund_Without_Return"}
             , description = "MSPTrial_Balance_Refund_Without_Return", enabled = true)
     public void MSP_Verify_Trial_Balance_Refund_Without_Return(TestData data) {
         addCloneIDHostname(data);
@@ -40,7 +40,7 @@ public class Verify_Trial_Balance_Tests extends BaseTests {
 	
 	
     @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-            groups = {TestGroup.QA_Environment, "MSPTrial_BalanceTests"}
+            groups = {TestGroup.QA_Environment, "MSP_Verify_Trial_Balance_Sales_Tax_Adjustment"}
     , description = "MSPTrial_Balance_Sales_Tax_Adjustment", enabled = true)
      	        public void MSP_Verify_Trial_Balance_Sales_Tax_Adjustment(TestData data) {
             addCloneIDHostname(data);
@@ -64,7 +64,7 @@ public class Verify_Trial_Balance_Tests extends BaseTests {
     
     // Below test case is failing due to test data 
     @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-            groups = {TestGroup.QA_Environment, "MSPTrial_BalanceTests"}
+            groups = {TestGroup.QA_Environment, "MSP_Verify_Trial_Balance_Shipping_Adjustment"}
     , description = "MSPTrial_Balance_Shipping_Adjustment", enabled = true)
  	        public void MSP_Verify_Trial_Balance_Shipping_Adjustment(TestData data) {
         addCloneIDHostname(data);
@@ -87,7 +87,7 @@ public class Verify_Trial_Balance_Tests extends BaseTests {
 }
     //Failing due to test data
     @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-            groups = {TestGroup.QA_Environment, "MSPTrial_BalanceTests"}
+            groups = {TestGroup.QA_Environment, "MSP_Verify_Trial_Balance_Sales_Adjustment_LineItem"}
     , description = "MSPTrial_Balance_Sales_Adjustment_LineItem", enabled = true)
     public void  MSP_Verify_Trial_Balance_Sales_Adjustment_LineItem(TestData data)   {
         addCloneIDHostname(data);
@@ -114,7 +114,7 @@ public class Verify_Trial_Balance_Tests extends BaseTests {
     }	        
     
     @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-            groups = {TestGroup.QA_Environment, "MSPTrial_BalanceTests"}
+            groups = {TestGroup.QA_Environment, "MSP_Verify_Trial_Balance_Salescheck_cancelOrder"}
     , description = "MSPTrial_Balance_Salescheck_cancelOrder", enabled = true)
     public void MSP_Verify_Trial_Balance_Salescheck_cancelOrder(TestData data) {
         addCloneIDHostname(data);
@@ -141,7 +141,7 @@ public class Verify_Trial_Balance_Tests extends BaseTests {
     }
     //Failing due to test data
     @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-            groups = {TestGroup.QA_Environment, "MSPTrial_BalanceTests"}
+            groups = {TestGroup.QA_Environment, "MSP_Verify_Trial_Balance_Sales_Adjustment"}
     , description = "MSPTrial_Balance_Sales_Adjustment", enabled = true)
     public void  MSP_Verify_Trial_Balance_Sales_Adjustment(TestData data) {
         addCloneIDHostname(data);
@@ -166,7 +166,7 @@ public class Verify_Trial_Balance_Tests extends BaseTests {
                 	;
     }	        
     @Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-            groups =  {TestGroup.QA_Environment, "MSPTrial_BalanceTests"}
+            groups =  {TestGroup.QA_Environment, "MSP_Verify_Trial_Balance_lineItem_cancelOrder"}
     , description = "MSPTrial_Balance_lineItem_cancelOrder", enabled = true)
     public void MSP_Verify_Trial_Balance_lineItem_cancelOrder(TestData data) {
         addCloneIDHostname(data);
