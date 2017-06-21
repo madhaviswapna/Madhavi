@@ -211,11 +211,12 @@ public class Order_Summary extends BaseTests {
 	public void MemberPage360DegreeValidation(TestData data){
 		addCloneIDHostname(data);
 		User user = new User(); user.userName=UserPool.getUser();
+		String name = getSearchTermToTest("MSP_MemberSearch_By_FirstAndLastName");
 		As.guestUser.goToHomePage()
 		.addlogType(TestStepType.WHEN)
 		.login(user)
 		.addlogType(TestStepType.WHEN)
-		.searchByCustomer("Namith Newton")
+		.searchByCustomer(name)
 		.addlogType(TestStepType.THEN)
 		.verify360DegreePage()
 		.addlogType(TestStepType.THEN)
