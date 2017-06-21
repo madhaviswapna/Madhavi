@@ -167,7 +167,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, 
 			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Contact_Customer_Eligible"}
             , description = "Verify agent is able to contact customer at salescheck level", enabled = true, priority=49)
-    public void sales_Check_Level_Contact_Customer_Eligible(TestData data) {
+    public void sales_Check_Level_Contact_Customer_Captured_Notes_Interaction(TestData data) {
         
 		String OrderID=getProductToTest("MSP_OL_OrderEligibleForContactCustomerAtSalescheck");
 		
@@ -193,7 +193,20 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
                 .addlogType(TestStepType.WHEN)
                 .selectAction("Contact Customer")
                 .addlogType(TestStepType.THEN)
-                .verifyEmailTemplatePopUp();  
+                .contactCustomer()
+                ._OrderDetailsAction()
+                .addlogType(TestStepType.THEN)
+                .verifyAdjustmentCapturedInInteraction("Contact Customer")
+             	.verifyOrderWrapUp()
+         		.addlogType(TestStepType.THEN)
+         		.fillRFCForm()
+  
+         		._NavigationAction()
+         		.addlogType(TestStepType.WHEN)
+         		.searchByOrderId(OrderID)
+         		.closeWarningPopupWindow()
+         		._OrderDetailsAction()
+         		.verifyAdjustmentCapturedInNotes("Contact Customer");
        
 	}
 	

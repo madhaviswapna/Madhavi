@@ -176,7 +176,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,	groups = {TestGroup.MSPP1OnlineTests, "order_Level_Contact_Customer_Eligible"}
 	, description = "Verify customer contact option is displayed for eligible orders", enabled = true, priority=40)
 
-	public void order_Level_Contact_Customer_Eligible(TestData data) {
+	public void order_Level_Contact_Customer_Captured_Notes_Interaction(TestData data) {
 		String OrderID = getProductToTest("MSP_OL_OrderEligibleForContactCustomer");
 		
 
@@ -197,7 +197,20 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Contact Customer")
 		.addlogType(TestStepType.THEN)
-		.verifyEmailTemplatePopUp(); 
+		.contactCustomer()
+        ._OrderDetailsAction()
+        .addlogType(TestStepType.THEN)
+        .verifyAdjustmentCapturedInInteraction("Contact Customer")
+     	.verifyOrderWrapUp()
+ 		.addlogType(TestStepType.THEN)
+ 		.fillRFCForm()
+
+ 		._NavigationAction()
+ 		.addlogType(TestStepType.WHEN)
+ 		.searchByOrderId(OrderID)
+ 		.closeWarningPopupWindow()
+ 		._OrderDetailsAction()
+ 		.verifyAdjustmentCapturedInNotes("Contact Customer"); 
 
 	}
 

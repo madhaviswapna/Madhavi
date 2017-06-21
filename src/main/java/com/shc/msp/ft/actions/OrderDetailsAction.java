@@ -256,7 +256,7 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.actionDropdown().verifyOptionVisible(SelectPage.SUMMARY_PAGE, optionName);
 		return this;
 	}
-
+	
 	public OrderDetailsAction verifyTrialBalance() {
 		Logger.log("Trial balance option should be available", TestUtils.TestStepType.THEN);
 		this.factory.orderdetailspage().verifyTrialBalance();
@@ -274,6 +274,13 @@ public class OrderDetailsAction extends BaseAction {
 		}
 		return this;	
 	}
+	
+	 public OrderDetailsAction contactCustomer(){
+	    	Logger.log("Verify Email template and Contact Customer",TestStepType.THEN);
+	        this.factory.emailTemplatePopUp().contactCustomer();
+	        return this;
+	    }
+	 
 	public OrderDetailsAction selectAction(String actionName) {
 		Logger.log("Agent selects "+actionName+" - action in summary page",TestStepType.WHEN);
 		this.factory.actionDropdown().selectAction(SelectPage.SUMMARY_PAGE, actionName);

@@ -68,6 +68,11 @@ public class SalesCheckDetailsAction extends BaseAction {
         return this;	
 	}
     
+    public SalesCheckDetailsAction contactCustomer(){
+    	Logger.log("Verify Email template and Contact Customer",TestStepType.THEN);
+        this.factory.emailTemplatePopUp().contactCustomer();
+        return this;
+    }
     public SalesCheckDetailsAction verifyUpdateSaleCheck() {
     	Logger.log("Agent should be able to update the salescheck",TestStepType.THEN);
         this.factory.salesCheckDetailsPage().verifyUpdateSaleCheck();
