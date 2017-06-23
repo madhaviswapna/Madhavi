@@ -596,8 +596,8 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 	
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Update_Name_Email_Number"}
-	, description = "Update the phone number, address line, name and email and verify whether updated", enabled = true)
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_UpdateAddress"}
+	, description = "Update the address and verify the suggesseed address are displayed", enabled = true)
 	public void MSP_Delivery_UpdateAddress(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
