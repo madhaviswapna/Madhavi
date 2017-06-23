@@ -593,6 +593,29 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyPerformanceSupportMessage("Cancelled – Order cancelled")
 		.VerifyPerformanceSupportMessage("Shipped – Order delivered");
 	}
+	
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Update_Name_Email_Number"}
+	, description = "Update the phone number, address line, name and email and verify whether updated", enabled = true)
+	public void MSP_Delivery_UpdateAddress(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId("546410","8730")
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.updateAddress();
+	}
 }
 
 

@@ -784,4 +784,11 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyActionCapturedHistoryNotes(notes);
 		return this;
 	}
+	
+
+public OrderDetailsAction updateAddress() {
+		Logger.log("Updating name,Email and home phone number",TestStepType.THEN);
+		this.factory.orderdetailspage().updateAddress();
+		return this;
+	}
 }

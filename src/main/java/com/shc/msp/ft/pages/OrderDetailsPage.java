@@ -767,6 +767,10 @@ public class OrderDetailsPage extends Page {
 	public final Locator CANCEL_ORDER_SUCCESS_MESSAGE = new Locator("CANCEL_ORDER_SUCCESS_MESSAGE", "//div[contains(text(),'Cancel Order Action has been successfully processed')]", "CANCEL_ORDER_SUCCESS_MESSAGE");
 	public final Locator CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON = new Locator("CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON", "//button[contains(text(),'OK')]", "CANCEL_ORDER__SUCCESS_DIALOG_OK_BUTTON");
 	public final Locator RELEASE_ORDER_SUCCESS_MESSAGE = new Locator("CANCEL_ORDER_SUCCESS_MESSAGE", "//div[contains(text(),'Release Order Action has been successfully processed')]", "CANCEL_ORDER_SUCCESS_MESSAGE");
+	
+	public final Locator SUGGESTED_ADDRESS_MSG = new Locator ("SUGGESTED_ADDRESS_MSG","(//div[contains(text(),'The address you entered could not be recognized.  You can either select one of the suggested address or select the address you entered.')])","SUGGESTED ADDRESS");
+	public final Locator VERIFY_SUGGESTED_ADDRESS_DISPLAYED = new Locator ("VERIFY_SUGGESTED_ADDRESS_DISPLAYED","(//div/b[contains(text(),'{0}')])","VERIFY_SUGGESTED_ADDRESS_DISPLAYED");
+	public final Locator FIRST_SUGGESTED_ADDRESS = new Locator ("FIRST_SUGGESTED_ADDRESS","(//div[@value='address']//b)[1]","FIRST_SUGGESTED_ADDRESS");
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -6913,6 +6917,55 @@ public class OrderDetailsPage extends Page {
 		getAction().click(UPDATE_DELIVERY_STATUS);
 		return this;
 
+	}
+public OrderDetailsPage updateAddress(){
+		
+		Logger.log("Updating name, email and home phone number ",TestStepType.STEP);
+
+		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
+		getAction().click(UPDATE_BUTTON);
+		AjaxCondition.forElementVisible(UPDATE_NAME).waitForResponse();
+		getAction().scrollTo(UPDATE_NAME);
+		
+		String originalValue=getAction().getValue(UPDATE_ADDRESS);
+		System.out.println("---------------------------------originalValue"+originalValue);
+		
+		getAction().type(UPDATE_ADDRESS, "CHESTERFIELD");
+		getAction().waitFor(2000);
+		
+		//String updatedAddress= (String) getContext().get("updatedAddress");
+		
+		AjaxCondition.forElementVisible(SAVE_BUTTON).waitForResponse();
+		getAction().click(SAVE_BUTTON);
+		String selectedAddress = null;
+		
+		
+		if(AjaxCondition.forElementVisible(SUGGESTED_ADDRESS).waitWithoutException(5000)){
+			AjaxCondition.forElementVisible(SUGGESTED_ADDRESS_MSG).waitForResponse();
+			AjaxCondition.forElementVisible(VERIFY_SUGGESTED_ADDRESS_DISPLAYED.format("100 CHESTERFIELD BUS PKWY FL 2, CHESTERFIELD, MO 63005")).waitForResponse();
+			getAction().click(SUGGESTED_ADDRESS);
+			
+			selectedAddress=getAction().getValue(FIRST_SUGGESTED_ADDRESS);
+			System.out.println("-----------------------------------------selectedAddress:"+selectedAddress);
+			AjaxCondition.forElementVisible(SUBMIT_BUTTON_ADDRESS).waitForResponse();
+			getAction().click(SUBMIT_BUTTON_ADDRESS);
+			AjaxCondition.forElementVisible(NOTATION_PAD).waitForResponse(3000);	
+			SoftAssert.checkConditionAndContinueOnFailure("updatedAddress: "+selectedAddress, getAction().getValue(UPDATE_ADDRESS).equalsIgnoreCase(selectedAddress));	
+		}
+		
+		//very that the address what we selected is updated properly
+		
+		AjaxCondition.forElementVisible(UPDATE_BUTTON).waitForResponse();
+		getAction().click(UPDATE_BUTTON);
+		AjaxCondition.forElementVisible(UPDATE_NAME).waitForResponse();
+		getAction().scrollTo(UPDATE_NAME);
+		
+		SoftAssert.checkConditionAndContinueOnFailure("updatedAddress: "+selectedAddress, getAction().getValue(UPDATE_ADDRESS).equalsIgnoreCase(selectedAddress));
+		
+		
+		
+		getContext().put("adjustmentOption", "");
+		return this;
 	}
 }
 
