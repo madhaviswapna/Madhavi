@@ -741,5 +741,11 @@ public class NavigationAction extends BaseAction {
 		this.factory.homePage().verifyInvaliLogin(user);
 		return this;
 	}
+	
+	 public NavigationAction ClickOnPerformanceSupportOnActionTab(String name) {
+	    	Logger.log("Click on the performance support(?) symbol", TestUtils.TestStepType.THEN);
+	        this.factory.homePage().ClickOnPerformanceSupportOnActionTab(name);
+	        return this;
+	 }
 }
 

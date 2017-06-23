@@ -234,10 +234,11 @@ public class HomePage extends Page {
 	public final Locator IGNORE_CERTIFICATE_ERROR = new Locator("", "//a[@id='overridelink']", "Certificate error IE 11");
 	private int invalidLoginCount = 1;
 	
-	public final Locator PERFORMANCE_SUPPORT_DISPLAY_MSG = new Locator("","(//performance-support)[2]","PERFORMANCE_SUPPORT_DISPLAY_MSG");
+	public final Locator PERFORMANCE_SUPPORT_DISPLAY_MSG = new Locator("","(//performance-support)[2] | //performance-support","PERFORMANCE_SUPPORT_DISPLAY_MSG");
 	public final Locator PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE = new Locator("","//performance-support","PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE");
 	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//*[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
 	public final Locator PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS = new Locator("", "//*[contains(text(),'{0}')]/parent::*/preceding-sibling::img","PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS");
+	public final Locator PERFORMANCE_SUPPORT_ACTION_TAB = new Locator("PERFORMANCE_SUPPORT_ACTION_TAB", "//button[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_ACTION_TAB");
 	
 	 public final Locator OE_ERROR = new Locator("", "//div[contains(text(),'MSP OE')]", "OE_ERROR");
 	 public final Locator CLOSE_ERROR = new Locator("", "//button[contains(text(),'Close')]", "CLOSE_ERROR");
@@ -2425,4 +2426,15 @@ public class HomePage extends Page {
 				PageAssert.elementVisible(INVALID_LOGIN_MESSAGE);
 				return this;
 		 }
+		 
+		 public HomePage ClickOnPerformanceSupportOnActionTab(String name) {
+				
+				getAction().waitFor(2000);
+				System.out.println("--------------------------------------------"+PERFORMANCE_SUPPORT_ACTION_TAB .format(name).getValue());
+				AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_ACTION_TAB .format(name)).waitForResponse();
+				getAction().click(PERFORMANCE_SUPPORT_ACTION_TAB.format(name));
+				Logger.log("click on performance support", TestStepType.STEP);
+				getAction().waitFor(2000);
+				return this;
+			}
 }

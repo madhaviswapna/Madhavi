@@ -616,6 +616,46 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		._OrderDetailsAction()
 		.updateAddress();
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP2DeliveryTests,"Verify_Performance_Support_Message_OrderSearchResults_ActionCenterTAB"}
+	, description = "Verify performance support message in action center tab", enabled = true, priority=1)
+	public void Verify_Performance_Support_Message_OrderSearchResults_ActionCenterTAB(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		String orderId= getProductToTest("Even_Exchange_Open_HD_Order");
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.VerifyDeliveryAgent()
+		.ClickOnOrderTab()
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToActionCenter()
+		._NavigationAction()
+		.ClickOnPerformanceSupportOnActionTab("Cancel Order")
+		.VerifyPerformanceSupportMessage("Delivery needs to be cancelled.")	
+		.VerifyPerformanceSupportMessage("Commercial orders")
+		.VerifyPerformanceSupportMessage(" cannot be cancelled in MSP. Transfer caller to Commercial Customer Care using proper hold and transfer process.")
+		.ClickOnPerformanceSupportOnActionTab("Reschedule Delivery")
+		.VerifyPerformanceSupportMessage("Delivery needs to be rescheduled to a")	
+		.VerifyPerformanceSupportMessage("future date")
+		.VerifyPerformanceSupportMessage("If member requests an earlier delivery date then what is available and has been prevoiusly inconvenienced, see the EDD P&P on")
+		.ClickOnPerformanceSupportOnActionTab("Hold for Future Delivery")
+		.VerifyPerformanceSupportMessage("Member requests the delivery be postponed to an undetermined future date.")	
+		.VerifyPerformanceSupportMessage("Schedule a date to follow up with the user regarding a new delivery date. Advise member to call back once they determine a convenient delivery date.")
+		.VerifyPerformanceSupportMessage("If member requests an earlier delivery date then what is available and has been prevoiusly inconvenienced, see the EDD P&P on")
+		.ClickOnPerformanceSupportOnActionTab("Queue for Follow Up")
+		.VerifyPerformanceSupportMessage("Additional offline action is required to address the member’s delivery concern.")	
+		.VerifyPerformanceSupportMessage("Delivery – Member History – Queue for follow-up");
+		
+	}
 }
 
 
