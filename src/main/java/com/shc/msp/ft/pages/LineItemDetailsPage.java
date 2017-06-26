@@ -747,6 +747,7 @@ public class LineItemDetailsPage extends Page {
 	  	}
 
   	public LineItemDetailsPage verifyReturnTrackingInfo(int saleschecknumber) throws ParseException {
+  		getAction().waitFor(3000);
   		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 	  	ArrayList<String> tracking_date  =  new ArrayList<String>();
 	  	ArrayList<String> carrier_type  =  new ArrayList<String>();
@@ -759,7 +760,8 @@ public class LineItemDetailsPage extends Page {
     	Logger.log("item number is displayed");
         String sql ="select rt.created_ts, rt.CARRIER, rt.TRACKING_NUMBER,rt.QUANTITY from return_tracking rt,ord_item oi,ord o, sales_check sc "
         		+ "where oi.ORDER_ITEM_ID=rt.ORDER_ITEM_ID and o.ORDER_ID=oi.ORDER_ID and oi.order_id = sc.order_id and oi.ORDER_ITEM_ID= ? "
-        		+ "and sc.sales_check_number=?";  
+        		+ "and sc.sales_check_number=?"; 
+        
 	        try {
 				    st = conn.prepareStatement(sql);
 		            st.setString (1, itemNumber);
@@ -799,18 +801,19 @@ public class LineItemDetailsPage extends Page {
   		int returntrackinginfo_table_rows_count = returntrackinginfo_table_rows.size();
   		for (int i=0; i<returntrackinginfo_table_rows_count; i++){
 			 List<WebElement> returntrackinginfo_table_columns = returntrackinginfo_table_rows.get(i).findElements(By.tagName("td"));
+			 int j = return_tracking_number.indexOf(returntrackinginfo_table_columns.get(2).getText());
+		
+			 Logger.log("Verify Return Tracking Information 'Retrun Date' is "+ tracking_date.get(j) +" in Database and "+returntrackinginfo_table_columns.get(0).getText()+" is displayed", TestStepType.STEP);
+			 PageAssert.verifyEqual(sdf2.format(sdf1.parse(tracking_date.get(j).split(" ")[0])), returntrackinginfo_table_columns.get(0).getText());
 			 
-			 Logger.log("Verify Return Tracking Information 'Retrun Date' is "+ tracking_date.get(i) +" in Database and "+returntrackinginfo_table_columns.get(0).getText()+" is displayed", TestStepType.STEP);
-			 PageAssert.verifyEqual(sdf2.format(sdf1.parse(tracking_date.get(i).split(" ")[0])), returntrackinginfo_table_columns.get(0).getText());
-			 
-			 Logger.log("Verify Return Tracking Information Carrier is "+ carrier_type.get(i) +" in Database and "+returntrackinginfo_table_columns.get(1).getText()+" is displayed", TestStepType.STEP);
-	    	 PageAssert.verifyEqual(carrier_type.get(i), returntrackinginfo_table_columns.get(1).getText());
+			 Logger.log("Verify Return Tracking Information Carrier is "+ carrier_type.get(j) +" in Database and "+returntrackinginfo_table_columns.get(1).getText()+" is displayed", TestStepType.STEP);
+	    	 PageAssert.verifyEqual(carrier_type.get(j), returntrackinginfo_table_columns.get(1).getText());
 	    	 
-	    	 Logger.log("Verify Return Tracking Information Tracking Number is "+ return_tracking_number.get(i) +" in Database and "+returntrackinginfo_table_columns.get(2).getText()+" is displayed", TestStepType.STEP);
-	    	 PageAssert.verifyEqual(return_tracking_number.get(i), returntrackinginfo_table_columns.get(2).getText());
+	    	 Logger.log("Verify Return Tracking Information Tracking Number is "+ return_tracking_number.get(j) +" in Database and "+returntrackinginfo_table_columns.get(2).getText()+" is displayed", TestStepType.STEP);
+	    	 PageAssert.verifyEqual(return_tracking_number.get(j), returntrackinginfo_table_columns.get(2).getText());
 	    	 
-	    	 Logger.log("Verify Return Tracking Information Quantiy is "+ quantity.get(i) +" in Database and "+returntrackinginfo_table_columns.get(3).getText()+" is displayed", TestStepType.STEP);
-	    	 PageAssert.verifyEqual(quantity.get(i), returntrackinginfo_table_columns.get(3).getText());
+	    	 Logger.log("Verify Return Tracking Information Quantiy is "+ quantity.get(j) +" in Database and "+returntrackinginfo_table_columns.get(3).getText()+" is displayed", TestStepType.STEP);
+	    	 PageAssert.verifyEqual(quantity.get(j), returntrackinginfo_table_columns.get(3).getText());
 	    	}	
   				Reporter.log("Verified Line Item Return Tracking Informaiton Table Successfully");
   		

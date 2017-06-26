@@ -126,6 +126,7 @@ public class LineItem_Summary extends BaseTests {
 	@Test(dataProvider = "DP_Return_Tracking_Information", groups = {TestGroup.MSPP1OnlineTests, "lineItemReturnTrackingInfo"}
     , description = "Verify return tracking information in line item tab", enabled = true, priority =29)
 	public void lineItemReturnTrackingInfo(String OrderID,String sku) throws Exception{
+			System.out.println(OrderID+"--------------"+sku);
 			addCloneIDHostname(data);
 	        LogFormatterAction.beginSetup();
 	        User user = new User(); user.userName=UserPool.getUser();

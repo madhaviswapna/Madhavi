@@ -2282,9 +2282,11 @@ public static void return_Information_OrderID() throws Exception{
 public static void return_Tracking_Information_OrderID() throws Exception{
 	
 	Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
-	Sql_Return_Tracking_Info_Eligible = "select o.SITE_GEN_ORD_ID, oi.item_id from return_tracking rt,ord_item oi,ord o where o.order_id = oi.order_id "
+	Sql_Return_Tracking_Info_Eligible = "select distinct o.SITE_GEN_ORD_ID,oi.ITEM_ID from ord_item oi, return_tracking rt, ord o where oi.ORDER_ITEM_ID = rt.ORDER_ITEM_ID "
+			+ "and oi.ORDER_ID = o.SITE_GEN_ORD_ID and oi.ORDER_ITEM_STS_CD = 'RET' and o.LAST_UPDATED_TS > DATE_SUB(CURDATE(),INTERVAL 180 DAY) order by RAND() limit 1;";
+		/*"select o.SITE_GEN_ORD_ID, oi.item_id from return_tracking rt,ord_item oi,ord o where o.order_id = oi.order_id "
 			+ "and oi.ORDER_ITEM_ID=rt.ORDER_ITEM_ID and o.ORDER_ID=oi.ORDER_ID and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') "
-			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id REGEXP '^-?[0-9]+$' limit 1;";
+			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id REGEXP '^-?[0-9]+$' limit 1;";*/
 
 	try {
 		
@@ -2293,9 +2295,9 @@ public static void return_Tracking_Information_OrderID() throws Exception{
 		st.execute();
 		rs = st.getResultSet();
 		while(rs.next()){
-			hasReturnTrackingInfo_OrderID = rs.getString("site_gen_ord_id");
+			hasReturnTrackingInfo_OrderID = rs.getString("SITE_GEN_ORD_ID");
 			System.out.println("OrderID has Return Tracking Information: "+hasReturnTrackingInfo_OrderID);
-			hasReturnTrackingInfo_SKU = rs.getString("item_id");
+			hasReturnTrackingInfo_SKU = rs.getString("ITEM_ID");
 			System.out.println("SKU has Return Tracking Information: "+hasReturnTrackingInfo_SKU);
 			}
 		} catch (SQLException e) {
