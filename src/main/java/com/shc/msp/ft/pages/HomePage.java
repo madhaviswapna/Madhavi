@@ -2351,13 +2351,14 @@ public class HomePage extends Page {
 		 }
 		 public HomePage ClickOnPerformanceSupport(String name) {
 		  AjaxCondition.forElementVisible(PERFORMANCE_SUPPORT_NAME.format(name)).waitForResponse();
+		  getAction().scrollTo(PERFORMANCE_SUPPORT_NAME.format(name));
 		  getAction().click(PERFORMANCE_SUPPORT_NAME.format(name));
 		  Logger.log("click on performance support", TestStepType.STEP);
 		  getAction().waitFor(2000);
 		  return this;
 		 }
 		 public HomePage VerifyPerformanceSupportMessage(String msg) {
-		  String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
+			 String msg1=getAction().getAttribute(PERFORMANCE_SUPPORT_DISPLAY_MSG, "innerText");
 		   msg = msg.replaceAll("[^a-zA-Z0-9]", ""); 
 		   msg1 = msg1.replaceAll("[^a-zA-Z0-9]", ""); 
 		  System.out.println("-------------------------------------Performance support Message displayed on application is : "+msg1);
