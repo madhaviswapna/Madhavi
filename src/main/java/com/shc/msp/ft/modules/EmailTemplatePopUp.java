@@ -31,11 +31,12 @@ public class EmailTemplatePopUp extends Module{
     public static final Locator EMAIL_TEMPLATE_DROPDOWN_OPTION= new Locator("EMAIL_TEMPLATE_DROPDOWN_OPTION","//select[@ng-model='emailService.selected.typeByStore']/option[@value='{0}']", "Email Template Dropdown Option");
     public static final Locator TO_FIELD= new Locator("TO_FIELD", "//input[@ng-model='emailService.toEmailAddress']", "To Field");
     public static final Locator SUBJECT_FIELD= new Locator("SUBJECT_FIELD", "//textarea[@ng-model='emailService.subject']", "Subject Field");
-    public static final Locator EMAIL_TEMPLATE_TEXTAREA= new Locator("EMAIL_TEMPLATE_TEXTAREA", "//div[@ng-model='emailService.emailTemplateHtml']", "Email Template Text Area");
+    public static final Locator EMAIL_TEMPLATE_TEXTAREA= new Locator("EMAIL_TEMPLATE_TEXTAREA", "//div[starts-with(@id,'taTextElement')]", "Email Template Text Area");
     public static final Locator CANCEL_BUTTON= new Locator("CANCEL_BUTTON", "//div[@class='modal-footer ng-scope']/button[@ng-click='cancel()']", "Cancel Button");
     public static final Locator SUBMIT_BUTTON= new Locator("SUBMIT_BUTTON", "//button[@ng-click='ok()' and @validatetext='emailService.emailTemplateHtml']", "Submit Button");
     public final Locator LINEITEMDETAILS_ACTION_SELECT_BOX = new Locator("", "//div[@ng-if='actions']//select", "Select action drop down");
 	public final Locator LINEITEDETAILS_ACTION_GO_BUTTON = new Locator("", "//div[@ng-if='actions']//button[contains(.,'Go')]", "Select action Go button");
+	
 	
     Utility util = new Utility();
     
@@ -94,7 +95,10 @@ public class EmailTemplatePopUp extends Module{
     	
     	Logger.log("Verify if \"Email Template\" Text Area is Visible",TestStepType.VERIFICATION_SUBSTEP);
     	AjaxCondition.forElementVisible(EMAIL_TEMPLATE_TEXTAREA).waitForResponse();
-    	
+    	String emailText = getAction().getText(EMAIL_TEMPLATE_TEXTAREA);
+    	System.out.println("Email Text = "+emailText);
+    	System.out.println(emailText.replaceAll("X", "Blah Blah"));
+    	getAction().type(EMAIL_TEMPLATE_TEXTAREA, emailText);
     	Logger.log("Verify if \"Cancel\" Button is Visible",TestStepType.VERIFICATION_SUBSTEP);
     	AjaxCondition.forElementVisible(CANCEL_BUTTON).waitForResponse();
     	

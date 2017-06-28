@@ -165,7 +165,7 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
     }
 	
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, 
-			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Contact_Customer_Eligible"}
+			groups = {TestGroup.MSPP1OnlineTests, "sales_Check_Level_Contact_Customer_Captured_Notes_Interaction"}
             , description = "Verify agent is able to contact customer at salescheck level", enabled = true, priority=49)
     public void sales_Check_Level_Contact_Customer_Captured_Notes_Interaction(TestData data) {
         

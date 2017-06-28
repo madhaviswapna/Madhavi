@@ -331,8 +331,8 @@ public class Retrieval_Test_Data_By_Query {
 			Sql_Release_Order_Eligible = "select distinct o.site_gen_ord_id from ord o, ord_item oi "
 					+ "where o.order_id = oi.order_id and o.order_sts_cd in ("+release_order_eligible_status+") "
 					+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') "
-					+ "and o.SITE_ID not in ("+release_store_exp+") and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.placement_ts > DATE_SUB(CURDATE(),INTERVAL 30 DAY) "
-					+ " limit 1";
+					+ "and o.SITE_ID not in ("+release_store_exp+") and o.site_gen_ord_id like '8%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.placement_ts > DATE_SUB(CURDATE(),INTERVAL 30 DAY) "
+					+ " order by RAND() limit 1";
 			System.out.println("SQL query is "+Sql_Release_Order_Eligible);
 			Sql_Release_Order_Store = "select distinct o.site_gen_ord_id AS Release_Order_Store_Expt from ord o, ord_item oi "
 					+ "where o.order_id = oi.order_id and o.order_sts_cd in ("+release_order_eligible_status+") "
@@ -344,7 +344,7 @@ public class Retrieval_Test_Data_By_Query {
 			Sql_Release_Order_Status = "select distinct o.site_gen_ord_id AS Release_Order_Status_Expt from ord o, ord_item oi "
 					+ "where o.order_id = oi.order_id and o.order_sts_cd NOT in ("+release_order_eligible_status+") "
 					+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') "
-					+ "and o.SITE_ID not in ("+release_store_exp+") and o.site_gen_ord_id like '9%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' "
+					+ "and o.SITE_ID not in ("+release_store_exp+") and o.site_gen_ord_id like '8%' and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '2015-02-15 01:01:01' and o.last_updated_ts < '2015-05-15 01:01:01' "
 					+ " limit 1";
 			
 			
@@ -1875,6 +1875,7 @@ public class Retrieval_Test_Data_By_Query {
 		
 			st = conn.prepareStatement(Sql_schedule_Return_FFMinExpt);
 			Reporter.log("SQL Query: "+Sql_schedule_Return_FFMinExpt);
+			System.out.println("SQL Query :: "+Sql_schedule_Return_FFMinExpt);
 			st.execute();
 			rs = st.getResultSet();
 			while(rs.next()){
