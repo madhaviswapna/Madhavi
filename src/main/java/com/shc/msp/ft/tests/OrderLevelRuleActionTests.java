@@ -45,7 +45,7 @@ public class OrderLevelRuleActionTests extends BaseTestsEx{
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
 		.verifyOptionVisible("Sales Tax Adjustment")
-		.taxadjustment("Sales Tax Adjustment",0.1,OrderID)
+		.taxadjustment("Sales Tax Adjustment",0.01,OrderID)
 		.verifyTrialBalance();
 	}
 
