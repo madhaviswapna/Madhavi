@@ -446,14 +446,12 @@ public class OrderSearch extends BaseTests{
 		public void SearchmemberBySYWlinkPhonenumber(String orderId,String agentID) throws Exception {
 			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 			addCloneIDHostname(data);
-	 
-			//ExcelUtil.getExcelUtil().setupExcelFile(Constant.Path_TestData + Constant.File_TestData,Constant.OrderSearch);
+		
 			String phno="8888888888";
 			LogFormatterAction.beginSetup();
 			
-			User user = new User();
-			user.userName = agentID;
-		    user.password = Constant.OnlinePassword;
+		    User user = new User();
+			user.userName = UserPool.getUser();
 			
 		    As.guestUser.goToHomePage()
 			.addlogType(TestStepType.WHEN)
