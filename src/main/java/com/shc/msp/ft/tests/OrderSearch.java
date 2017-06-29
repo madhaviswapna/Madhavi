@@ -442,7 +442,6 @@ public class OrderSearch extends BaseTests{
 		
 		@Test(dataProvider = "DP_SearchByOrderID2", groups = {TestGroup.MSPP0Tests, "SearchmemberBySYWlinkPhonenumber"}
 	    , description = "SearchmemberBySYWlinkPhonenumber", enabled = true, priority=1)
-		
 		public void SearchmemberBySYWlinkPhonenumber(String orderId,String agentID) throws Exception {
 			TestData<String, String, Integer> data = new TestData<String, String, Integer>("Test", "Test", 1);
 			addCloneIDHostname(data);
@@ -477,9 +476,10 @@ public class OrderSearch extends BaseTests{
 			String email="sarika.patil@searshc.com";
 			LogFormatterAction.beginSetup();
 			
-			User user = new User();
-			user.userName = agentID;
-		    user.password = Constant.OnlinePassword;
+
+		    User user = new User();
+			user.userName = UserPool.getUser();
+			
 
 		    As.guestUser.goToHomePage()
 			.addlogType(TestStepType.WHEN)
