@@ -219,7 +219,7 @@ public class OrderDetailsPage extends Page {
 	public static final Locator RETURN_QUANTITY= new Locator("RETURN QUANTITY", "//input[@name='returnQuantity']", "Return quantity");
 	//trial balance 
 	public static final Locator TRIAL_BALANCE_POPUP= new Locator("Trail balance popup", "(//div[@class='modal-content'])[2]", "Trail balance popup");
-	public static final Locator TRIAL_BALANCE_POPUP_PAYMENTTYPE= new Locator("Trail balance popup payment", "//td[contains(text(),'Cash') or contains(text(),'Credit Card') or contains(text(),'PayPalUC') or contains(text(),'PinDebit')]", "Trail balance popup payment");
+	public static final Locator TRIAL_BALANCE_POPUP_PAYMENTTYPE= new Locator("Trail balance popup payment", "//td[contains(text(),'Cash') or contains(text(),'Credit Card') or contains(text(),'CreditCard') or contains(text(),'PayPalUC') or contains(text(),'PinDebit')]", "Trail balance popup payment");
 	public static final Locator TRIAL_BALANCE_POPUP_CANCEL_BUTTON= new Locator("Trail balance popup cancel button",  "(//button[contains(text(),'Cancel')])[2]" , "Trail balance popup cancel button");
 	public static final Locator TRIAL_BALANCE_POPUP_SUBMIT_BUTTON= new Locator("Trail balance popup submit button",  "(//button[contains(text(),'Submit')])[2]" , "Trail balance popup submit button");
 	public static final Locator TRIAL_BALANCE_POPUP_MESSAGE= new Locator("Trail balance popup message",  "//font[contains(text(),'Credit Amount(s) include')]"  , "Trail balance message");
