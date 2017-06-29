@@ -1188,10 +1188,12 @@ public class SalesCheckDetailsPage extends Page {
 		Logger.log("Verify Update sales check Popup" , TestStepType.STEP);
 		AjaxCondition.forElementVisible(UPDATE_SALES_CHECK_POPUP).waitForResponse();
 		
-		Logger.log("Verify Ringin ID textbox", TestStepType.STEP);
+		Logger.log("Type Ringin ID as 987654321", TestStepType.STEP);
 		AjaxCondition.forElementVisible(RINGING_Id_TEXTBOX).waitForResponse();
-		Logger.log("Verify Rc code", TestStepType.STEP);
+		getAction().type(RINGING_Id_TEXTBOX, "987654321");
+		Logger.log("Type RC code as 123456", TestStepType.STEP);
 		AjaxCondition.forElementVisible(RC_CODE_TEXTBOX).waitForResponse();
+		getAction().type(RC_CODE_TEXTBOX, "123456");
 		AjaxCondition.forElementVisible(OrderDetailsPage.ADJUSTMENT_NOTES).waitForResponse();
 		Logger.log("Enter the Notes", TestStepType.STEP);
 		getAction().type(OrderDetailsPage.ADJUSTMENT_NOTES,"MSP automation update sales check");

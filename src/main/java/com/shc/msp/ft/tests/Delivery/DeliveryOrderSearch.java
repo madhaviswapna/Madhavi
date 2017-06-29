@@ -52,7 +52,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Deliver_Test_search_phonenumber"}
 	, description = "Search by phone number and verify results", enabled = true)
@@ -77,7 +77,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Deliver_Test_search_phonenumber"}
 	, description = "Search by phone number and verify results", enabled = true)
@@ -102,9 +102,9 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}
-	
-	
-	
+
+
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Deliver_Test_search_phonenumber"}
 	, description = "Search by phone number and verify results", enabled = true)
@@ -129,7 +129,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Sequence"}
 	, description = "Verify the sequence in which the orders appear on order search", enabled = true)
@@ -181,7 +181,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}  
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Address_Captured_Notes_Interaction_Open_Order"}
 	, description = "MSP_Delivery_Update_Address_Captured_Notes_Interaction_Open_Order", enabled = true)
@@ -190,10 +190,10 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		LogFormatterAction.beginSetup();
 		User user = new User(); user.userName=UserPool.getDeliveryUser();
 		String orderId= getProductToTest("Even_Exchange_Open_HD_Order");	
-		
+
 		String [] interaction = {"Update Delivery Address","Update Delivery Contact Details"};
 		String [] dosNotes = {"UPDATED CONTACT INFO","UPDATED DELIVERY ADDRESS"};
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -228,7 +228,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.verifyActionCapturedInNotesForUpdateContact()
 		;
 	} 
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder"}
 	, description = "Update the phone number, address line, name and email and verify whether updated", enabled = true)
 	public void MSP_Delivery_Update_Name_Email_address_partiallyshippedOrder(TestData data) throws Exception {
@@ -239,13 +239,13 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		//user.password = "TestPassword";
 		//String[] orderId= getProductToTest("Partially_Shipped_HD_Line_Item",true).split(",");	
 		//String dosorderId= getProductToTest("Partially_Shipped_Order");
-		
-		
+
+
 		String[] values= getProductToTest("Scheduleforfollowup_Eligible_Partially_Shipped_Order").split(",");
 		String orderId=values[0];
 		String dc_no=values[1];
 		System.out.println("orderId:"+orderId+" "+dc_no);
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -261,7 +261,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 
 		;
 	}  
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"MSP_Delivery_Update_Delivery_Info_Partially_Shipped_Order"}
 	, description = "MSP_Delivery_Update_Delivery_Info_Partially_Shipped_Order", enabled = true)
 	public void MSP_Delivery_Update_Delivery_Info_Partially_Shipped_Order(TestData data) throws Exception {
@@ -274,7 +274,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		System.out.println("orderId:"+orderId+" "+dc_no);
 		String [] interaction = {"Update Delivery Address","Update Delivery Contact Details"};
 		String [] dosNotes = {"UPDATED CONTACT INFO","UPDATED DELIVERY ADDRESS"};
-		
+
 		As.guestUser.goToHomePage()
 		._NavigationAction()
 		.addlogType(TestStepType.WHEN)
@@ -467,7 +467,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSP_DOD_DeliveryTests, "Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Partially_Shipped_Order"}
 
 	, description = "Verify search by order id", enabled = true, priority=1)
@@ -492,7 +492,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP0DeliveryTests, "Delivery_Search_By_DOS_Order_And_DOS_Unit_For_Shipped_Order"}
 
 	, description = "Verify search by order id", enabled = true, priority=1)
@@ -517,7 +517,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifySearchedDOSOrderIsDisplayed(dosOrderInfo, "Order");
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Verify_Performance_Support_Message_PhoneNumber"}
 	, description = "Verify search by order id", enabled = true, priority=1)
 	public void Verify_Performance_Support_Message_PhoneNumber(TestData data) throws Exception {
@@ -568,7 +568,7 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyPerformanceSupportMessage("Late: Will arrive outside of 2 hour window.")
 		.VerifyPerformanceSupportMessage("Updated: The Delivery team has arrived at the member’s home.");
 	}
-	
+
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.QA_Environment,TestGroup.MSPP2DeliveryTests,"Verify_Performance_Support_Message_OrderSearchResults_OrderStatus"}
 	, description = "Verify performance support message of order status", enabled = true, priority=1)
 	public void Verify_Performance_Support_Message_OrderSearchResults_OrderStatus(TestData data) throws Exception {
@@ -656,6 +656,72 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyPerformanceSupportMessage("Delivery – Member History – Queue for follow-up");
 		
 	}
+
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPSearch,TestGroup.MSPP2DeliveryTests, "Verify_Performance_Support_Message_OrderDetailPageAction"}
+	, description = "Verify performance support message ETA, Time Window, Ship Method, Dos order status in order detail page", enabled = true, priority=1)
+	public void Verify_Performance_Support_Message_OrderDetailPageAction(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		String etaMsg="The ETA is provided on the day of delivery only.";
+		String timeMsg="Time windows update after 5 PM the day before delivery.";
+		String shipMsg1="Home Delivery – Delivered by our Delivery team.";
+		String shipMsg2="Back to Store – Member or Local Delivery to pick up at Store";
+		String shipMsg3="Dock Pickup – Member purchased";
+		String shipMsg4="Installation – Member or Installation team will pick up";
+		String dosMsg1="Released – Item routed for delivery.";
+		String dosMsg2="Open – Item not yet routed for delivery.";
+		String dosMsg3="Partial – Some items delivered but some items pending delivery.";
+		String dosMsg4="Cancel – Order has been cancelled.";
+		String dosMsg5="Shipped – Item has been delivered.";
+
+		LogFormatterAction.beginSetup();
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		String dosorderId= getProductToTest("Reschedule_Open_HD_Order");
+
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.addlogType(TestStepType.THEN)
+		.ClickOnOrderTab()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(dosorderId,DcNumber.DC_NO)
+		.addlogType(TestStepType.GIVEN)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.THEN)
+		.verifySearchedDOSOrderIsDisplayed(dosorderId, "dosorderId")
+		._NavigationAction()
+		.addlogType(TestStepType.THEN)
+		.ClickOnPerformanceSupport("ETA")
+		.addlogType(TestStepType.THEN)
+		.VerifyPerformanceSupportMessage(etaMsg)
+		.ClickOnPerformanceSupport("Time Window")
+		.addlogType(TestStepType.THEN)
+		.VerifyPerformanceSupportMessage(timeMsg)
+		.ClickOnPerformanceSupport("Ship Method")
+		.addlogType(TestStepType.THEN)
+		.VerifyPerformanceSupportMessage(shipMsg1)
+		.VerifyPerformanceSupportMessage(shipMsg2)
+		.VerifyPerformanceSupportMessage(shipMsg3)
+		.VerifyPerformanceSupportMessage(shipMsg4)
+		.ClickOnPerformanceSupport("DOS Order Status")
+		.addlogType(TestStepType.THEN)
+		.VerifyPerformanceSupportMessage(dosMsg1)
+		.VerifyPerformanceSupportMessage(dosMsg2)
+		.VerifyPerformanceSupportMessage(dosMsg3)
+		.VerifyPerformanceSupportMessage(dosMsg4)
+		.VerifyPerformanceSupportMessage(dosMsg5);
+	}
+
 }
+
+
+
 
 
