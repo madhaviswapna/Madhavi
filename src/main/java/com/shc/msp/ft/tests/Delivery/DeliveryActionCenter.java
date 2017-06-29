@@ -33,7 +33,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible_Open_Orders"}
 	, description = "Verify whether rereserve button is present for open orders", enabled = true)
 	public void MSP_Delivery_Test_Rereserve_Eligible_Open_Orders(TestData data) throws ParseException {
 		addCloneIDHostname(data);
@@ -65,45 +65,47 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}  
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible"}
-	, description = "Verify whether rereserve button is present for open orders", enabled = true)
-	public void MSP_Delivery_Test_Rereserve_Whole_Order(TestData data) throws ParseException {
-		addCloneIDHostname(data);
-		LogFormatterAction.beginSetup();
-		User user = new User(); user.userName=UserPool.getDeliveryUser();
-		//String phoneNumber ="6164503584";
-		//String salescheck= getProductToTest("Rereserve_Eligible_Open_Order");	
+			, description = "Verify whether rereserve button is present for open orders", enabled = true)
+			public void MSP_Delivery_Test_Rereserve_Whole_Order(TestData data) throws ParseException {
+				addCloneIDHostname(data);
+				LogFormatterAction.beginSetup();
+				User user = new User(); user.userName=UserPool.getDeliveryUser();
+				//String phoneNumber ="6164503584";
+				//String salescheck= getProductToTest("Rereserve_Eligible_Open_Order");	
 
-		String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);	
-		System.out.println("OrderId:"+orderId);
-		As.guestUser.goToHomePage()
-		._NavigationAction()
-		.addlogType(TestStepType.WHEN)
-		.login(user)
-		.addlogType(TestStepType.THEN)
-		.VerifyDeliveryAgent()
-		.closeWarningPopupWindow()
-		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		.addlogType(TestStepType.GIVEN)
-		.chooseOpenHDOrders()
-		._OrderDetailsAction()
-		.addlogType(TestStepType.WHEN)
-		.captureSalescheckNumber()
-		.goToActionCenter()
-		.addlogType(TestStepType.THEN)
-		.rereserveItem("Open","whole order")
-		._NavigationAction()
-		.logout()
-		.addlogType(TestStepType.WHEN)
-		.login(user)
-		.addlogType(TestStepType.THEN)
-		.VerifyDeliveryAgent()
-		.closeWarningPopupWindow()
-		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
-		._OrderDetailsAction()
-		.verifyActionCapturedInNotes("new order created new dos number with dos number+old dos number");
-	}
+				String orderId= getProductToTest("Reschedule_Open_HD_Line_Item",true);	
+				System.out.println("OrderId:"+orderId);
+				As.guestUser.goToHomePage()
+				._NavigationAction()
+				.addlogType(TestStepType.WHEN)
+				.login(user)
+				.addlogType(TestStepType.THEN)
+				.VerifyDeliveryAgent()
+				.closeWarningPopupWindow()
+				.addlogType(TestStepType.WHEN)
+				.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+				.addlogType(TestStepType.GIVEN)
+				.chooseOpenHDOrders()
+				._OrderDetailsAction()
+				.addlogType(TestStepType.WHEN)
+				.itemDetail("Open")
+				.captureSalescheckNumber()
+				.goToActionCenter()
+				.addlogType(TestStepType.THEN)
+				.rereserveItem("Open","whole order")
+				._NavigationAction()
+				.logout()
+				.addlogType(TestStepType.WHEN)
+				.login(user)
+				.addlogType(TestStepType.THEN)
+				.VerifyDeliveryAgent()
+				.closeWarningPopupWindow()
+				.addlogType(TestStepType.WHEN)
+				.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+				._OrderDetailsAction()
+				.verifyActionCapturedInNotes("new order created new dos number with dos number+old dos number");
+			}
+			
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"MSP_Delivery_Test_Rereserve_Eligible_Released_Orders"}
 	, description = "Verify whether rereserve button is present for released orders", enabled = true)
@@ -2821,7 +2823,6 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		;
 	}
-
-
+	
 }
 

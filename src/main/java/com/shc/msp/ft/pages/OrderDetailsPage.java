@@ -701,6 +701,15 @@ public class OrderDetailsPage extends Page {
 	public final Locator LAST_PAYMENT_DATE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[4]","LAST_PAYMENT_DATE");
 	public final Locator FUTURE = new Locator("","//legend[contains(text(),'Contract Terms & Conditions')]/following-sibling::div[5]","FUTURE");
 	public final Locator DELIVERY_INFO = new Locator("","//legend[contains(text(),'Delivery Information')]/parent::fieldset","DELIVERY_INFO");
+	
+	public final Locator STORE_INFORMATION = new Locator("","//legend[contains(text(),'Store Information')]","STORE_INFORMATION");
+	public final Locator ORIGIN_STORE = new Locator("","//strong[contains(text(),'Origin Store #:')]","ORIGIN_STORE");
+	public final Locator ORIGIN_STORE_TYPE = new Locator("","//strong[contains(text(),'Origin Store Type:')]","ORIGIN_STORE_TYPE");
+	public final Locator PICK_UP_LOC_STORE  = new Locator("","//strong[contains(text(),'Pick-Up Loc Store #:')]","PICK_UP_LOC_STORE");
+	public final Locator ADDRESS = new Locator("","//strong[contains(text(),'Address:')]","ADDRESS");
+	public final Locator CITY = new Locator("","//fieldset[legend[contains(text(),'Store Info')]]//strong[contains(text(),'City')]","CITY");
+	public final Locator STATE = new Locator("","//fieldset[legend[contains(text(),'Store Info')]]//strong[contains(text(),'State:')]","STATE");
+	public final Locator PHONE = new Locator("","//strong[contains(text(),'Phone:')]","PHONE");
 
 	//return
 	public final Locator RETURNED_STATUS = new Locator("","//td[@data-title-text='SKU']//a[contains(text(),'{0}')]/ancestor::tr/td[contains(text(),'Returned')]","RETURNED_STATUS");
@@ -771,6 +780,10 @@ public class OrderDetailsPage extends Page {
 	public final Locator SUGGESTED_ADDRESS_MSG = new Locator ("SUGGESTED_ADDRESS_MSG","(//div[contains(text(),'The address you entered could not be recognized.  You can either select one of the suggested address or select the address you entered.')])","SUGGESTED ADDRESS");
 	public final Locator VERIFY_SUGGESTED_ADDRESS_DISPLAYED = new Locator ("VERIFY_SUGGESTED_ADDRESS_DISPLAYED","(//div/b[contains(text(),'{0}')])","VERIFY_SUGGESTED_ADDRESS_DISPLAYED");
 	public final Locator FIRST_SUGGESTED_ADDRESS = new Locator ("FIRST_SUGGESTED_ADDRESS","(//div[@value='address']//b)[1]","FIRST_SUGGESTED_ADDRESS");
+	
+	public final Locator ITEM_DETAIL = new Locator("ITEM_DETAIL", "//td[contains(text(),'{0}')]/following-sibling::td[contains(text(),'{1}')]/following-sibling::td[contains(text(),'{2}')]", "ITEM_DETAIL");
+
+	
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
 
@@ -975,36 +988,49 @@ public class OrderDetailsPage extends Page {
 			AjaxCondition.forElementPresent(MEMBERDETAILS_IN_ODP).waitForResponse(3);
 			SoftAssert.checkElementAndContinueOnFailure(MEMBERDETAILS_IN_ODP, "Verify Member Details section is displayed", CheckLocatorFor.isVisible);
 
-			SoftAssert.checkElementAndContinueOnFailure(LAYAWAY_CONTRACT_INFO, "Verify Layaway Contract Information text is displayed", CheckLocatorFor.isVisible);
-			Logger.log("Check all the attribute of the Layaway Contract Information");
-			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_ID, "Verify Contract Id is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_STATUS, "Verify Contract status is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(ORDER_NUMBER, "Verify Order Number is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(ORDER_TOTAL, "Verify Order Total is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(FULLFIMENT_TYPE, "Verify Fulfillment Type is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(PERCENTAGE_COMPLETED, "Verify % Completed is displayed", CheckLocatorFor.isVisible);
-
-			AjaxCondition.forElementPresent(PAYMENT_INFO).waitForResponse(2);
-			getAction().scrollTo(PAYMENT_INFO);
-			SoftAssert.checkElementAndContinueOnFailure(PAYMENT_INFO, "Verify Payment Information is displayed", CheckLocatorFor.isVisible);
-			Logger.log("Check all the attribute of the Payment information Contract Information");
-			SoftAssert.checkElementAndContinueOnFailure(MIN_PAYMENT_AMT, "Verify Min Payment Amt is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(NEXT_PAYMENT_DATE, "Verify Next Payment Date is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(UNPAID_AMT, "Verify Unpaid Amt is displayed", CheckLocatorFor.isVisible);
-
-			AjaxCondition.forElementPresent(CONTRACT_TERMS_AND_CONDITION).waitForResponse(2);
-			getAction().scrollTo(CONTRACT_TERMS_AND_CONDITION);
-			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_TERMS_AND_CONDITION, "Verify Contract Id is displayed", CheckLocatorFor.isVisible);
-			Logger.log("Check all the attribute of the Layaway Contract Information");
-			SoftAssert.checkElementAndContinueOnFailure(CONTRACT_START_DATE, "Verify Contract Start Date is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(END_DATE, "Verify Contract End Date is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(WEEKS_OF_DURATION, "Verify Weeks of Duration is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(LAST_PAYMENT_DATE, "Verify Last Payment Date is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(FUTURE, "Verify Future is displayed", CheckLocatorFor.isVisible);
-
-			SoftAssert.checkElementAndContinueOnFailure(LAYAWAY_INSTALLMENT_INFORMATION, "Verify Layaway Installment Information is displayed", CheckLocatorFor.isVisible);
-			SoftAssert.checkElementAndContinueOnFailure(DELIVERY_INFO, "Verify Delivery Info is displayed", CheckLocatorFor.isVisible);
-
+			//sample test
+			
+			Locator[] loc={LAYAWAY_CONTRACT_INFO,PAYMENT_INFO,CONTRACT_TERMS_AND_CONDITION,LAYAWAY_INSTALLMENT_INFORMATION};
+			Locator[] loc1={CONTRACT_ID,CONTRACT_STATUS,ORDER_NUMBER,ORDER_TOTAL,FULLFIMENT_TYPE,PERCENTAGE_COMPLETED};
+			Locator[] loc2={MIN_PAYMENT_AMT,NEXT_PAYMENT_DATE,UNPAID_AMT};
+			Locator[] loc3={CONTRACT_START_DATE, END_DATE, WEEKS_OF_DURATION, LAST_PAYMENT_DATE, FUTURE};
+			//Locator[] loc4={ORIGIN_STORE, ORIGIN_STORE_TYPE, PICK_UP_LOC_STORE, ADDRESS, CITY,STATE,PHONE};
+			
+			
+			for (int i = 0; i < loc.length; i++) {
+				
+				
+				Logger.log( getAction().getText(loc[i]), TestStepType.STEP);
+				SoftAssert.checkElementAndContinueOnFailure(loc[i], "Verify "+ getAction().getText(loc[i]) +" text is displayed", CheckLocatorFor.isVisible);
+			
+				switch (i) {
+				case 0:
+					for (int j = 0; j < loc1.length; j++) 
+					SoftAssert.checkElementAndContinueOnFailure(loc1[j], "Verify "+ getAction().getText(loc1[j]) +" text is displayed", CheckLocatorFor.isVisible);
+					break;
+					
+				case 1:
+					for (int j = 0; j < loc2.length; j++) 
+					SoftAssert.checkElementAndContinueOnFailure(loc2[j], "Verify "+ getAction().getText(loc2[j]) +" text is displayed", CheckLocatorFor.isVisible);
+					break;
+	
+				case 2:
+					for (int j = 0; j < loc3.length; j++) 
+					SoftAssert.checkElementAndContinueOnFailure(loc3[j], "Verify "+ getAction().getText(loc3[j]) +" text is displayed", CheckLocatorFor.isVisible);
+					break;
+					
+				/*case 3:
+					for (int j = 0; j < loc4.length; j++) 
+					SoftAssert.checkElementAndContinueOnFailure(loc4[j], "Verify "+ getAction().getText(loc4[j]) +" text is displayed", CheckLocatorFor.isVisible);
+					break;
+						*/
+				default:
+					break;
+				}
+				
+				
+			}
+			
 		}
 		return this;
 	}
@@ -4808,7 +4834,7 @@ public class OrderDetailsPage extends Page {
 					getAction().click(RERESERVE_ITEM.format(i));
 					AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(orderType,i)).waitForResponse();
 					getAction().type(LINE_ITEM_ROW_QUANTITY.format(orderType,i), getAction().getText(LINE_ITEM_ROW_QUANTITY_ORDERED.format(i)));
-					getAction().waitFor(000);
+					getAction().waitFor(3000);
 				}
 			}
 			else{
@@ -4845,6 +4871,16 @@ public class OrderDetailsPage extends Page {
 			SoftAssert.checkTrue(!(dosOrderNumber.equals(newDosOrderNumber)), "New order is created for re reserve:-"+newDosOrderNumber);
 			Logger.log("Verified that New Order status is Open", TestStepType.VERIFICATION_PASSED);
 			AjaxCondition.forElementVisible(ORDER_STATUS_OPEN).waitForResponse();
+			//test as part of P2
+			if(order.equalsIgnoreCase("Whole")){
+			@SuppressWarnings("unchecked")
+			List<String> list=(List<String>) getContext().get("adjustmentOption");
+			Iterator<String> itr=list.iterator();
+			while (itr.hasNext()) {
+					String[] details=itr.next().split(":");
+					SoftAssert.checkElementAndContinueOnFailure(ITEM_DETAIL.format(details[0],details[1],details[2]), "items details are auto populated correctly", CheckLocatorFor.isVisible);
+					getAction().waitFor(3000);}
+			}
 		}
 	}
 	public void verifyPickupbuttonPresent(){
@@ -6966,6 +7002,29 @@ public OrderDetailsPage updateAddress(){
 		
 		getContext().put("adjustmentOption", "");
 		return this;
+	}
+	
+	public void itemDetail(String orderType){
+
+		scrollDown();
+		getAction().waitFor(3000);
+		List<String> list = new ArrayList<String>();
+		int multiLineItem=getAction().getElementCount(DOS_ITEM_STATUS_COUNT.format(orderType));
+		System.out.println("-------------------------------------------- "+multiLineItem);
+		getAction().waitFor(2000);
+		Logger.log("Order have "+multiLineItem+" multiline item");
+		for (int i = 1; i <= multiLineItem; i++) {
+			list.add(getAction().getText(ITEM_DESCRIPTION.format(orderType,i))+":"+getAction().getText(DIVISION.format(orderType,i))+":"+getAction().getText(ITEM.format(orderType,i)));
+		}
+		getContext().put("adjustmentOption", list);
+		System.out.println(list);
+	}
+	
+	public void goToMiscellaneous(){
+		Logger.log("Verify user is in Miscellaneous", TestStepType.STEP);
+		getAction().waitFor(3000);
+		AjaxCondition.forElementVisible(DELIVERYDETAILS_TABS.format("Miscellaneous")).waitForResponse(5);
+		getAction().click(DELIVERYDETAILS_TABS.format("Miscellaneous"));
 	}
 }
 

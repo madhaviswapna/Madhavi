@@ -718,6 +718,64 @@ public class DeliveryOrderSearch extends BaseTestsEx{
 		.VerifyPerformanceSupportMessage(dosMsg4)
 		.VerifyPerformanceSupportMessage(dosMsg5);
 	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP2DeliveryTests,"Verify_Performance_Support_Message_MiscellaneousPage"}
+	, description = "Verify performance support message of ADAC status in Miscellaneous Page", enabled = true, priority=1)
+	public void Verify_Performance_Support_Message_MiscellaneousPage(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		String orderId= getProductToTest("Even_Exchange_Open_HD_Order");
+		
+		String adacMsg="Shows if a call was made to member the night before delivery notifying of expected time window.";
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.VerifyDeliveryAgent()
+		.ClickOnOrderTab()
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToMiscellaneous()
+		._NavigationAction()
+		.ClickOnPerformanceSupport("ADAC Status")
+		.VerifyPerformanceSupportMessage(adacMsg);
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class, groups = {TestGroup.MSPP2DeliveryTests,"Verify_Performance_Support_Message_DeliveryNotesTab"}
+	, description = "Verify performance support message of Delivery Notes", enabled = true, priority=1)
+	public void Verify_Performance_Support_Message_DeliveryNotesTab(TestData data) throws Exception {
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		String orderId= getProductToTest("Even_Exchange_Open_HD_Order");
+		
+		String deliveryNotesMsg="Review notes individually or search by keyword.  "
+				+ "Notes cannot be deleted. Explain the reason for the call. "
+				+ "Use the 5 Ws:";
+
+		User user = new User();
+		user.userName=UserPool.getDeliveryUser();
+		As.guestUser.goToHomePage()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.WHEN)
+		.closeWarningPopupWindow()
+		.VerifyDeliveryAgent()
+		.ClickOnOrderTab()
+		.searchByDeliveryOrderId(orderId,DcNumber.DC_NO)
+		.chooseOpenHDOrders()
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.goToMiscellaneous()
+		._NavigationAction()
+		.ClickOnPerformanceSupport("Add New Delivery Note :")
+		.VerifyPerformanceSupportMessage(deliveryNotesMsg);
+	}
 
 }
 

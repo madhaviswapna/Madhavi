@@ -45,6 +45,7 @@ public class Retrieval_Test_Data_By_Query {
 	static String Sql_SYW_Max_Member_OrderWithMaxSavings = null;
 	static String Sql_SYW_Max_Member_OrderZeroSavings = null;
 	static String Sql_NonSYW_Max_Member_Order = null;
+	public static String sql_layway_Phone = null;
 	
 	static Map<Integer, Object[]> result = new TreeMap<Integer, Object[]>();
 	public static String adj_eligible_orderID = null;
@@ -113,6 +114,7 @@ public class Retrieval_Test_Data_By_Query {
 	public static String SalesCheckReleaseEligible_SalesCheckNumber = null;
 	public static String UpdateSalesCheckIneligible_OrderID = null;
 	public static String UpdateSalesCheckIneligible_SalesCheck = null;
+	
 	
 
     
@@ -1228,6 +1230,8 @@ public class Retrieval_Test_Data_By_Query {
 	public static String SYW_Max_orderIdWithMaxSaving=null;
 	public static String SYW_Max_orderIdMaxSavingAmount=null;
 	public static String NonSYW_Max_Member_OrderId =null;
+	public static String layawayPhone =null;
+	
 	
 	public static ThreadLocal<Retrieval_Test_Data_By_Query> thread = new ThreadLocal<Retrieval_Test_Data_By_Query>() {
 		protected Retrieval_Test_Data_By_Query initialValue() {
@@ -2590,4 +2594,34 @@ public void fbm_line_item_cancellation_not_eligible() throws Exception{
 				}
 			try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
 		}
+	
+	public void searchLaywayPhone() throws Exception{
+
+		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
+		sql_layway_Phone = "select distinct phone_1 from layaway_order_detail lay, customer_contact_info cc, ord o "
+				+ "where  lay.ORDER_ID= o.ORDER_ID and cc.ADDRESS_ID = o.BILLING_ADDRESS_ID "
+				+ "order by lay.LAST_UPDATED_TS desc limit 1;";
+
+
+		System.out.println("------------------------------------+sql:"+sql_layway_Phone);
+		try {
+
+			st = conn.prepareStatement(sql_layway_Phone);
+			Reporter.log("SQL Query: "+sql_layway_Phone);
+			st.execute();
+			rs = st.getResultSet();
+			while(rs.next()){
+				layawayPhone = rs.getString("phone_1").toString();
+				System.out.println("----------------------------------------------------phone no"+layawayPhone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try{conn.close();st.close();} catch(Exception e) {e.printStackTrace();}
+	}
+
+
+
+
+
 }

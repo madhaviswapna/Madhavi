@@ -220,14 +220,14 @@ public class OrderSearch extends BaseTests{
             .verifyLayawayDetailsPageDisplayed();
 		}
 		
-		@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,groups = {TestGroup.MSPP0Tests,"MSP_Online_Search_Layaway_By_Phone_Number"}
-		, description = "MSP_Online_Search_Layaway_By_Phone_Number")
-		public void MSP_Online_Search_Layaway_By_PhoneNumber(TestData data) throws Exception {
+		@Test(dataProvider = "DP_LayawayPhone",groups = {TestGroup.MSPP0Tests,"MSP_Online_Search_Layaway_By_PhoneNumber"}
+		, description = "MSP_Online_Search_Layaway_By_PhoneNumber")
+		public void MSP_Online_Search_Layaway_By_PhoneNumber(String layawayPhone) throws Exception {
 			User user = new User();
-			String phNumber= getProductToTest("MSP_Layaway_Phone_Number");
-			//String phNumber= "9876543210";
+		//	String phNumber= getProductToTest("MSP_Layaway_Phone_Number");
+			//String phNumber= "8482478072";
 		
-			System.out.println("-----------------------------------------"+phNumber);
+			System.out.println("-----------------------------------------"+layawayPhone);
 			
 			if(url.contains("msp.prod.global")){
 				user.userName = "testonline0509";
@@ -242,7 +242,7 @@ public class OrderSearch extends BaseTests{
             .login(user)
             .closeWarningPopupWindow()
             .addlogType(TestStepType.WHEN)
-            .searchByLayawayphoneNumber(phNumber)
+            .searchByLayawayphoneNumber(layawayPhone)
             .addlogType(TestStepType.WHEN)
             .selectLayawayOrderFromSearchResults(1)
             ._OrderDetailsAction()
@@ -747,6 +747,16 @@ public class OrderSearch extends BaseTests{
 			System.out.println("----------------------------------------suborder[]:"+OrderID[0]);
 			Object testData[][] = {OrderID};
 			System.out.println("----------------------------------------test data:OrderID[]:"+testData[0][0]);
+			return (testData);		
+		}
+		
+		@DataProvider (name="DP_LayawayPhone",parallel=true)
+		public Object[][] DP_LayawayPhone() throws Exception{
+			Retrieval_Test_Data_By_Query.getRetrievalTestDataByQuery().searchLaywayPhone();
+			String layawayPhone[]={Retrieval_Test_Data_By_Query.layawayPhone};
+			System.out.println("----------------------------------------layaway]:"+layawayPhone[0]);
+			Object testData[][] = {layawayPhone};
+			System.out.println("----------------------------------------test data:layawayPhone[]:"+testData[0][0]);
 			return (testData);		
 		}
 		

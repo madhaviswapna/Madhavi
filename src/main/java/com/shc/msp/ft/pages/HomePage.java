@@ -235,7 +235,7 @@ public class HomePage extends Page {
 	private int invalidLoginCount = 1;
 	
 	public final Locator PERFORMANCE_SUPPORT_DISPLAY_MSG = new Locator("","(//performance-support)[2] | //performance-support","PERFORMANCE_SUPPORT_DISPLAY_MSG");
-	public final Locator PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE = new Locator("","//performance-support","PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE");
+	//public final Locator PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE = new Locator("","//performance-support","PERFORMANCE_SUPPORT_DISPLAY_ORDERDETAILSPAGE");
 	public final Locator PERFORMANCE_SUPPORT_NAME = new Locator("", "//*[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_NAME");
 	public final Locator PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS = new Locator("", "//*[contains(text(),'{0}')]/parent::*/preceding-sibling::img","PERFORMANCE_SUPPORT_ORDERSEARCH_RESULTS");
 	public final Locator PERFORMANCE_SUPPORT_ACTION_TAB = new Locator("PERFORMANCE_SUPPORT_ACTION_TAB", "//button[contains(text(),'{0}')]/preceding-sibling::img","PERFORMANCE_SUPPORT_ACTION_TAB");

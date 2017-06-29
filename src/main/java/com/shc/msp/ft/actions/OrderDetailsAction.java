@@ -14,6 +14,7 @@ import org.bouncycastle.asn1.x509.ReasonFlags;
 import org.json.JSONException;
 import org.xml.sax.SAXException;
 
+import com.shc.automation.AjaxCondition;
 import com.shc.automation.Logger;
 import com.shc.automation.dao.ProductData;
 import com.shc.automation.utils.TestUtils;
@@ -791,4 +792,20 @@ public OrderDetailsAction updateAddress() {
 		this.factory.orderdetailspage().updateAddress();
 		return this;
 	}
+	public OrderDetailsAction itemDetail(String orderType) {
+		Logger.log("Verify item detail having item name, div no ,item no",TestStepType.THEN);
+		this.factory.orderdetailspage().itemDetail(orderType);
+		return this;
+	}
+	
+	public OrderDetailsAction goToMiscellaneous() {
+		Logger.log("Navigating to Miscellaneous tab",TestStepType.THEN);
+		this.factory.orderdetailspage().goToMiscellaneous();
+		return this;
+	}
+	
+	
+	
+	
+	
 }
