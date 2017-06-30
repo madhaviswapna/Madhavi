@@ -528,7 +528,7 @@ public class OrderDetailsPage extends Page {
 	//public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and not(contains(text(),'Cancelled'))]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_NOT_CANCELLED= new Locator("","(//tr[@value='item'])[1]/td[2]","Line Item Name");
 	public final Locator LINE_ITEM_NAME_CANCELLED= new Locator("","//td[contains(@data-title,'Dos Item Status') and contains(text(),'Cancelled')]//ancestor::tr//td[contains(@data-title,'Description')]","Line Item Name");
-	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","(//tr[@value='item'])[{0}]","LINE ITEM ROW");
+	public final Locator LINE_ITEM_ROW= new Locator("LINE_ITEM_ROW","(//tr[@value='item'])[{0}]","LINE_ITEM_ROW");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[6]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_ORDERED= new Locator("","//th[contains(text(),'Available')]/ancestor::table/tbody[{0}]//td[10]","LINE ITEM ROW Quantity Available");
 	public final Locator LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE= new Locator("","//input[@name='selectedQuantity']//ancestor::tr//td[8]","LINE ITEM ROW Quantity Available Even Exchange");
@@ -653,7 +653,7 @@ public class OrderDetailsPage extends Page {
 
 	public final Locator PREFERRED_TIME_WINDOWS_NOT_AVAILABLE= new Locator("PREFERRED_TIME_WINDOWS_NOT_AVAILABLE","//div[contains(text(),'no preferred time windows available')]","PREFERRED_TIME_WINDOWS_NOT_AVAILABLE");
 
-	public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows (must qualify)')]/parent::div/following-sibling::div[contains(@ng-repeat,'recoveryWindowList')][{0}]","SERVICE_RECOVERY_WINDOW");
+	public final Locator SERVICE_RECOVERY_WINDOW= new Locator("SERVICE_RECOVERY_WINDOW","//strong[contains(text(),'Service Recovery Windows')]/parent::div/following-sibling::div[contains(@ng-repeat,'recoveryWindowList')][{0}]//button","SERVICE_RECOVERY_WINDOW");
 	public final Locator SERVICE_RECOVERY_WINDOW_COUNT= new Locator("SERVICE_RECOVERY_WINDOW_COUNT","//div[contains(@ng-repeat,'recoveryWindowList')]//button","SERVICE_RECOVERY_WINDOW_COUNT");
 
 	public final Locator ORIGINAL_TIME_WINDOW= new Locator("ORIGINAL_TIME_WINDOW","//strong[@info='time_window']//ancestor::div[@label='Time Window']/div/p/span","ORIGINAL_TIME_WINDOW");
@@ -6047,6 +6047,7 @@ public class OrderDetailsPage extends Page {
 		getContext().put("orderRouteStatus", orderRouteStatus);
 		getContext().put("multiLineItem", multiLineItem);
 		System.out.println("---------------------------------------------"+getContext().get("adjustmentOption"));
+		
 	}
 
 	public void verifyAdjustmentCapturedInInteractions(String adjust, String note){
@@ -6295,8 +6296,8 @@ public class OrderDetailsPage extends Page {
 			Logger.log("Click on the Line Item", TestStepType.STEP);
 			getAction().click(LINE_ITEM);
 			Logger.log("Select the Item on the row", TestStepType.SUBSTEP);
-			AjaxCondition.forElementVisible(LINE_ITEM_ROW).waitForResponse();
-			getAction().click(LINE_ITEM_ROW);
+			AjaxCondition.forElementVisible(LINE_ITEM_ROW.format(1)).waitForResponse();
+			getAction().click(LINE_ITEM_ROW.format(1));
 			AjaxCondition.forElementVisible(CONTINUE_BUTTON).waitForResponse();
 			getAction().scrollTo(CONTINUE_BUTTON);
 			Logger.log("Click on the Continue button", TestStepType.SUBSTEP);
