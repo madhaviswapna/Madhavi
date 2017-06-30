@@ -745,9 +745,9 @@ public class OrderDetailsAction extends BaseAction {
 		this.factory.orderdetailspage().verifyDateandUserInDeliveryOSHNote(str1,str2);
 		return this;
 	}
-	public OrderDetailsAction pickupEntireOrderTillConcessionPopUp() {
+	public OrderDetailsAction pickupEntireOrderTillConcessionPopUp(String reasoncode) {
 		Logger.log("Verify agent able to do pickup action",TestStepType.THEN);
-		this.factory.orderdetailspage().pickupEntireOrderTillConcessionPopUp();
+		this.factory.orderdetailspage().pickupEntireOrderTillConcessionPopUp(reasoncode);
 		return this;
 	}
 	public OrderDetailsAction rereserveItemTillOfferConcessionPopUp(String orderType,String order) {
@@ -804,7 +804,16 @@ public OrderDetailsAction updateAddress() {
 		return this;
 	}
 	
-	
+	public OrderDetailsAction enterClaimNumber(String claimNumber) {
+		Logger.log("enter claim number",TestStepType.THEN);
+		this.factory.orderdetailspage().enterClaimNumber(claimNumber);
+		return this;
+	}
+	public OrderDetailsAction verifyReturnPolicyWarningMessage() {
+		Logger.log("Verify the return item warning message if current date is more than 3 dates from delivery date",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyReturnPolicyWarningMessage();
+		return this;
+	}
 	
 	
 	

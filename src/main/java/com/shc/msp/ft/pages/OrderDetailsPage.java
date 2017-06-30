@@ -134,6 +134,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator REASON_CODE_TEXT = new Locator("REASON CODE TEXT","//label[text()='Reason Code']","Reason Code Text");
 	public final Locator REASON_CODE_DROPDOWN = new Locator("REASON CODE DROPDOWN","//select[@id='reasonCode']","Reason Code Dropdown");
 	public final Locator CASE_CREATED = new Locator("Case already created message","//div[contains(text(),'Order has open case in this queue already, please add notes and close interaction.')]","Case already created message");
+	public final Locator RETURN_DAMAGED_ITEM_WARNING_MSG = new Locator("Return policy for damaged item","//div[contains(text(),'The return policy for Damaged items is 3 days from the date of delivery.  This item is no longer eligible for return, as today is')]","Return policy for damaged item");
 
 	public final Locator REASON_CODE_OPTION = new Locator("","(//select[@id='reasonCode']//option)[{0}]","Reason Code Option");
 	public final Locator GUIDED_EXPERIENCE_TEXT = new Locator("GUIDED EXPERIENCE TEXT","//label[text()='Guided Experience']","Guided Experience Text");
@@ -464,6 +465,9 @@ public class OrderDetailsPage extends Page {
 	public final Locator WRAPUP_BUTTON= new Locator("","//button[contains(text(),'Wrap Up')]","wrap up button");
 	public final Locator REASON_FOR_PICKUP_DROPDOWN= new Locator("","//select[@class='input-sm ng-pristine ng-invalid ng-invalid-required']","Reason for pickup dropdown");
 	public final Locator REASON_FOR_PICKUP_DROPDOWN_OPTION= new Locator("","//select[@class='input-sm ng-pristine ng-invalid ng-invalid-required']/option[contains(text(),'Other')]","Reason for pickup dropdown option");
+	public final Locator REASON_FOR_PICKUP_DROPDOWN_OPTIONS= new Locator("","//select[@class='input-sm ng-pristine ng-invalid ng-invalid-required']/option[contains(text(),'{0}')]","Reason for pickup dropdown option");
+	
+	
 	public final Locator SELECT_ITEM= new Locator("","(//table/tbody[@class='ng-scope ng-isolate-scope mspselector selectedItemsForPickUp noselection'])[{0}]","Select item");
 	public final Locator SELECT_ITEM_NUMBER= new Locator("","//table/tbody[@class='ng-scope ng-isolate-scope mspselector selectedItemsForPickUp noselection']","Select item");
 	public final Locator PICKUP_QUANTITY= new Locator("","//input[@ng-model='items.selectedQuantity']","Pickup quantity");
@@ -6648,7 +6652,7 @@ public class OrderDetailsPage extends Page {
 		return this;
 
 	}
-	public void pickupEntireOrderTillConcessionPopUp(){
+	public void pickupEntireOrderTillConcessionPopUp(String reasoncode){
 
 		String orderRouteStatus= (String) getContext().get("orderRouteStatus");
 		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
@@ -6667,8 +6671,13 @@ public class OrderDetailsPage extends Page {
 			AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN).waitForResponse();
 			getAction().click(REASON_FOR_PICKUP_DROPDOWN);
 			getAction().waitFor(3000);
+			System.out.println("-------------------------------------------------+reasoncode:"+reasoncode);
 			AjaxCondition.forElementVisible(REASON_FOR_PICKUP_DROPDOWN_OPTION).waitForResponse();
-			getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
+			if(reasoncode.equalsIgnoreCase(""))
+				getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTION);
+			else
+				getAction().click(REASON_FOR_PICKUP_DROPDOWN_OPTIONS.format(reasoncode));
+			
 			getAction().waitFor(3000);
 			AjaxCondition.forElementVisible(PICKUP_QUANTITY).waitForResponse();
 			getAction().click(PICKUP_QUANTITY);
@@ -7025,6 +7034,22 @@ public OrderDetailsPage updateAddress(){
 		getAction().waitFor(3000);
 		AjaxCondition.forElementVisible(DELIVERYDETAILS_TABS.format("Miscellaneous")).waitForResponse(5);
 		getAction().click(DELIVERYDETAILS_TABS.format("Miscellaneous"));
+	}
+	
+	public OrderDetailsPage enterClaimNumber(String claimNumber){
+		Logger.log("Verify the claim pop up is displayed",TestStepType.STEP);
+		AjaxCondition.forElementVisible(CLAIM_NUMBER_ENTRY).waitWithoutException(30);
+		
+		getAction().click(CLAIM_NUMBER_ENTRY);
+		getAction().type(CLAIM_NUMBER, claimNumber);
+		getAction().waitFor(1000);
+		getAction().click(SUBMIT_BUTTON);		
+		return this;
+	}
+	public OrderDetailsPage verifyReturnPolicyWarningMessage(){
+		Logger.log("Verify the claim pop up is displayed",TestStepType.STEP);
+		AjaxCondition.forElementVisible(RETURN_DAMAGED_ITEM_WARNING_MSG).waitForResponse(500);
+		return this;
 	}
 }
 

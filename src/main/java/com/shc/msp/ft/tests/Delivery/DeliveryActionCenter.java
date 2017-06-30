@@ -173,7 +173,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
-		.rereserveItem("Partially Shipped","Line Item")
+		.rereserveItem("Open","Line Item")
 		.goToDeliveryNotes()
 		.verifyDataInDeliveryNotes("OSH/MSO-WEB: RERESERVATION")
 		._OrderDetailsAction()
@@ -284,7 +284,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.THEN)
 		.verifyPickupbuttonPresent()
 		.addlogType(TestStepType.THEN)
-		.pickupEntireOrderTillConcessionPopUp()
+		.pickupEntireOrderTillConcessionPopUp("")
 		.AcceptOfferConcession("OFFER_CONSESSION_YES_BUTTON,MEMBER_CONSESSION_YES_BUTTON,SELECT_CONSESSION_TYPE:Other:1,CONSESSION_AMOUNT:100:1,FINISH_BUTTON")
 		.goToActionCenter()
 		.addlogType(TestStepType.THEN)
@@ -2823,6 +2823,40 @@ public class DeliveryActionCenter extends BaseTestsEx{
 
 		;
 	}
+
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+	groups = {TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_Pickup_With_Damaged_ReasonCode_After_ThreeDaysOfDelivery"}
+	, description = "Verify order is created after pickup action", enabled = true)
+	public void MSP_Delivery_Test_Pickup_With_Damaged_ReasonCode_After_ThreeDaysOfDelivery(TestData data) throws ParseException {
 	
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Pickup_Eligible_Shipped_Order_DLVR_DT_GREATER_CURR_DT",true);
+	
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+	
+		.addlogType(TestStepType.WHEN)
+		.chooseShippedHDOrders()
+	
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.verifyLineItemDetail("Shipped")
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyPickupbuttonPresent()
+		.addlogType(TestStepType.THEN)
+		.pickupEntireOrderTillConcessionPopUp("Damage by Delivery Team")
+		.enterClaimNumber("12345678")
+		.verifyReturnPolicyWarningMessage();
+	}
 }
 
