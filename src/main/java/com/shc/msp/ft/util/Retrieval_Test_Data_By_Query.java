@@ -1016,11 +1016,13 @@ public class Retrieval_Test_Data_By_Query {
 		
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 		
-			Sql_Ready_for_Pickup_Email_Eligible = "select distinct o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
+			Sql_Ready_for_Pickup_Email_Eligible ="select o.SITE_GEN_ORD_ID,sc.SALES_CHECK_NUMBER from ord_item oi, ord o, sales_check sc  where oi.ORDER_ITEM_STS_CD = 'RFP' and sc.SALES_CHECK_ID=oi.SALES_CHECK_ID and o.SITE_GEN_ORD_ID=oi.ORDER_ID and o.ORDER_ID= sc.ORDER_ID and o.SITE_GEN_ORD_ID like '8%' and oi.SO_LINE_NUMBER = '1' and o.LAST_UPDATED_TS > DATE_SUB(CURDATE(),INTERVAL 90 DAY) ORDER BY RAND() limit 1;";
+				
+					/*"select distinct o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id "
 					+ "and oi.order_item_sts_cd in ("+ready_for_Pickup_Email_eligible_status+") "
 					+ "and o.SITE_ID not in ("+ready_for_Pickup_Email_store_exp+") and sc.SALES_CHECK_STS_CD NOT in ('NCON') "
-					+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') limit 1";
+					+ "and o.ORDER_STS_CD NOT in ('ABC','CSI','m','FRC','HLD','NCON','FDC','BAD','TEST','WFP','SHP','RET') and oi.order_item_sts_cd NOT in ('PCON','TEST') limit 1";*/
 	
 			Sql_Ready_for_Pickup_Email_Store = "select distinct o.site_gen_ord_id, sc.sales_check_number from ord o, ord_item oi, sales_check sc, ffm_method fm "
 					+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and "
@@ -1041,12 +1043,13 @@ public class Retrieval_Test_Data_By_Query {
 			
 			st = conn.prepareStatement(Sql_Ready_for_Pickup_Email_Eligible);
 			Reporter.log("SQL Query: "+Sql_Ready_for_Pickup_Email_Eligible);
+			System.out.println("SQL Query:: "+Sql_Ready_for_Pickup_Email_Eligible);
 			st.execute();
 			rs = st.getResultSet();
 			while(rs.next()){
-			ready_for_Pickup_Email_eligible_orderID = rs.getString("site_gen_ord_id");
+			ready_for_Pickup_Email_eligible_orderID = rs.getString("SITE_GEN_ORD_ID");
 			System.out.println("ready for pick up email eligible status: "+ready_for_Pickup_Email_eligible_orderID);
-			ready_for_Pickup_Email_eligible_SCNO = rs.getString("sales_check_number");
+			ready_for_Pickup_Email_eligible_SCNO = rs.getString("SALES_CHECK_NUMBER");
 			System.out.println("ready for pick up email eligible status SCNO: "+ready_for_Pickup_Email_eligible_SCNO);
 				}
 			} catch (SQLException e) {

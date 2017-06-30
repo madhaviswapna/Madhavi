@@ -285,17 +285,16 @@ public class SalesCheckLevelRuleActionTests extends BaseTests{
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.MSPP0Tests, "sales_Check_Level_ReadyForPickupEmail_Option_Eligible"}
             , description = "Verify ready for pickup mails", enabled = true, priority=53)
-    public void sales_Check_Level_ReadyForPickupEmail_Option_Eligible(TestData data) {
-		
-		String[] arr=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup").split("\\|");
+    public void sales_Check_Level_ReadyForPickupEmail_Option_Captured_Notes_Interaction(TestData data) throws Exception {
+		/*String[] arr=getProductToTest("MSP_OL_OrderEligibleForReadyForPickup").split("\\|");
 		String orderId=arr[0];
-		String salecheck=arr[1];
+		String salecheck=arr[1];*/
+		Retrieval_Test_Data_By_Query.ready_for_Pickup_Email_Data();
+		String orderId=Retrieval_Test_Data_By_Query.ready_for_Pickup_Email_eligible_orderID;
+		String salecheck=Retrieval_Test_Data_By_Query.ready_for_Pickup_Email_eligible_SCNO;		
 		System.out.println("---------------------------------------------"+orderId);
 		System.out.println("---------------------------------------------"+salecheck);
-		
-		//String orderId="840027665";
-		addCloneIDHostname(data);
-        
+		addCloneIDHostname(data);       
       
         User user = new User(); user.userName=UserPool.getUser();
        As.guestUser.goToHomePage()

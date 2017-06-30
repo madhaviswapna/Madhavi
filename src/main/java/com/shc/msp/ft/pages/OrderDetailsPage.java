@@ -2035,7 +2035,7 @@ public class OrderDetailsPage extends Page {
 		getAction().click(OK_BUTTON);
 
 		Logger.log("verifying contact history");
-		AjaxCondition.forElementPresent(OK_BUTTON).waitForResponse(3000);
+	//	AjaxCondition.forElementPresent(OK_BUTTON).waitForResponse(3000);
 		return this;
 
 	}
