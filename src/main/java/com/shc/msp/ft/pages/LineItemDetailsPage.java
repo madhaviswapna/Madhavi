@@ -1326,10 +1326,10 @@ public class LineItemDetailsPage extends Page {
 	    	   Logger.log("Verify Type of Adjustment is "+ type_des+" in Database", TestStepType.STEP);
 	    	   PageAssert.verifyEqual(type_des, adj_table_columns.get(0).getText());
 	    	   
-
-	    	   Logger.log("Verify Amount in Adjustment is "+"($"+df.format(amount.get(i))+")"+" in DataBase", TestStepType.STEP);
-	    	   PageAssert.verifyEqual("($"+formatter.format(amount.get(i))+")", adj_table_columns.get(1).getText());
-
+	    	   //Logger.log("Verify Amount in Adjustment is "+"($"+df.format(amount.get(i))+")"+" in DataBase", TestStepType.STEP);
+	    	   PageAssert.verifyTrue(adj_table_columns.get(1).getText().contains(formatter.format(amount.get(i))), "Verify Amount in Adjustment is "+"($"+df.format(amount.get(i))+")"+" in DataBase");
+	    	   System.out.println("Page value:  "+adj_table_columns.get(1).getText()+" DB Value:  "+formatter.format(amount.get(i)));
+	    	   
 	    	   Logger.log("Verify Date in Adjustment is "+date.get(i)+" in Database", TestStepType.STEP);
 			   PageAssert.verifyEqual(sdf2.format(sdf1.parse(date.get(i))), adj_table_columns.get(2).getText());
 
