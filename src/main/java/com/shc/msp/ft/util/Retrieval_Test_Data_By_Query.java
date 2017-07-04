@@ -2207,11 +2207,16 @@ public static void delivery_Details_OrderID() throws Exception{
 			+ "and oi.order_item_sts_cd NOT in ('PCON','TEST','') and o.site_gen_ord_id REGEXP '^-?[0-9]+$' and o.last_updated_ts > '"+lastMonthDate+" 01:01:01' "
 			+ "and o.last_updated_ts < '"+currentDate+" 01:01:01' order by o.last_updated_ts desc limit 1;";*/
 	
-	Sql_Delivery_Details_Eligible = "select o.site_gen_ord_id, sc.sales_check_number"
+	/*Sql_Delivery_Details_Eligible = "select o.site_gen_ord_id, sc.sales_check_number"
 			+" from ord o, ord_item oi, sales_check sc, ffm_method fm"
 			+" where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and"
 			+" oi.sales_check_id = sc.sales_check_id and o.site_gen_ord_id REGEXP '^-?[0-9]+$'  and fm.ffm_class_id='DDC' and   o.site_id = 40153 and o.ORDER_SERVICE_ORGINATING_SERVER  in ('QA')"
-			+" order by o.last_updated_ts desc limit 1";
+			+" order by o.last_updated_ts desc limit 1";*/
+	Sql_Delivery_Details_Eligible ="select o.site_gen_ord_id, sc.sales_check_number  from ord o, ord_item oi, sales_check sc, ffm_method fm  "
+			+ "where o.order_id = oi.order_id and o.order_id = sc.order_id and oi.ffm_method_id = fm.ffm_method_id and  oi.sales_check_id = sc.sales_check_id "
+			+ "and o.site_gen_ord_id REGEXP '^-?[0-9]+$'  and fm.ffm_class_id='DDC' and sc.SALES_CHECK_NUMBER is not null and o.site_id = 40153 "
+			+ "and o.ORDER_SERVICE_ORGINATING_SERVER  in ('QA') and o.LAST_UPDATED_TS > DATE_SUB(CURDATE(),INTERVAL 15 DAY) ORDER BY RAND() limit 1;";
+	
 	try {
 		
 		st = conn.prepareStatement(Sql_Delivery_Details_Eligible);
