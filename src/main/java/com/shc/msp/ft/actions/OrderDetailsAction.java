@@ -814,7 +814,11 @@ public OrderDetailsAction updateAddress() {
 		this.factory.orderdetailspage().verifyReturnPolicyWarningMessage();
 		return this;
 	}
-	
+	public OrderDetailsAction verifyEvenExchangeEntireOrderTillConcessionPopUp(String orderStatus,String reasoncode){
+		Logger.log("Verify, if Even Exchange for entire order till accept offer concession",TestStepType.THEN);
+		this.factory.orderdetailspage().verifyEvenExchangeEntireOrderTillConcessionPopUp(orderStatus,reasoncode);
+		return this;
+	}
 	
 	
 }

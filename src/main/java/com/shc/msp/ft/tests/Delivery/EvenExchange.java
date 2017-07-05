@@ -1,5 +1,7 @@
 package com.shc.msp.ft.tests.Delivery;
 
+import java.text.ParseException;
+
 import org.testng.annotations.Test;
 
 import com.shc.automation.data.TestData;
@@ -275,6 +277,41 @@ public class EvenExchange extends BaseTestsEx{
 		.verifyInvalidQuantityError("Even-Exchange");
 
 		;
+	}
+	
+	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
+	groups = {TestGroup.MSPP2DeliveryTests,"MSP_Delivery_Test_EvenExchange_With_Damaged_ReasonCode_After_ThreeDaysOfDelivery"}
+	, description = "Verify order is created after pickup action", enabled = true)
+	public void MSP_Delivery_Test_EvenExchange_With_Damaged_ReasonCode_After_ThreeDaysOfDelivery(TestData data) throws ParseException {
+	
+		addCloneIDHostname(data);
+		LogFormatterAction.beginSetup();
+		User user = new User(); user.userName=UserPool.getDeliveryUser();
+		String orderId= getProductToTest("Pickup_Eligible_Shipped_Order_DLVR_DT_GREATER_CURR_DT",true);
+	
+		As.guestUser.goToHomePage()
+		._NavigationAction()
+		.addlogType(TestStepType.WHEN)
+		.login(user)
+		.addlogType(TestStepType.THEN)
+		.VerifyDeliveryAgent()
+		.closeWarningPopupWindow()
+		.addlogType(TestStepType.WHEN)
+		.searchByDeliveryOrderId("2200", DcNumber.DC_NO)
+	
+		.addlogType(TestStepType.WHEN)
+		.chooseShippedHDOrders()
+	
+		._OrderDetailsAction()
+		.addlogType(TestStepType.WHEN)
+		.verifyLineItemDetail("Shipped")
+		.goToActionCenter()
+		.addlogType(TestStepType.THEN)
+		.verifyPickupbuttonPresent()
+		.addlogType(TestStepType.THEN)
+		.verifyEvenExchangeEntireOrderTillConcessionPopUp("Shipped","Damage by Delivery Team")
+		.enterClaimNumber("12345678")
+		.verifyReturnPolicyWarningMessage();
 	}
 
 }

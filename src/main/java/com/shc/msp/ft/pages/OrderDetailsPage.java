@@ -485,7 +485,7 @@ public class OrderDetailsPage extends Page {
 	public final Locator CATEGORY_CODE_DROPDOWN_OPTION= new Locator("","(//select[@ng-model='item.confirmationCategoryCode']/option[contains(text(),'Product')])[{0}]","Category drop down option");
 	public final Locator PICKUP_REASON_CODE_DROPDOWN= new Locator("","(//select[@ng-model='item.confirmationReasonCode'])[{0}]","Reasoncode drop down");
 	public final Locator REASON_CODE_DROPDOWN_OPTION= new Locator("","(//select[@ng-model='item.confirmationReasonCode']/option[contains(text(),'NOT Match Order') and @value=0])[{0}]","Reasoncode drop down option");
-	public final Locator REASON_CODE_DROPDOWN_OPTION_RERESERVE= new Locator("","(//select[@ng-model='item.reasonCode']/option[contains(text(),'Damage by Delivery Team          ')])[{0}]","Reasoncode drop down option");
+	public final Locator REASON_CODE_DROPDOWN_OPTION_RERESERVE= new Locator("","(//select[@ng-model='item.reasonCode']/option[contains(text(),'Damage by Delivery Team')])[{0}]","Reasoncode drop down option");
 	public final Locator CREATE_ORDER_BUTTON= new Locator("","//button[contains(text(),'Create Order')]","create order button");
 	public final Locator ORDERCREATED_OK_BUTTON= new Locator("","//button[text()='OK']","ORDERCREATED_OK_BUTTON");
 	public final Locator NEW_ORDER_CREATED_MSG= new Locator("","//div[@class='modal-body text-info ng-scope ng-binding']","new order created msg");
@@ -4862,6 +4862,7 @@ public class OrderDetailsPage extends Page {
 				AjaxCondition.forElementVisible(REASON_CODE_DROPDOWN_OPTION_RERESERVE.format(i)).waitForResponse();
 				getAction().click(REASON_CODE_DROPDOWN_OPTION_RERESERVE.format(i));
 			}
+			getAction().waitFor(10000);
 			Logger.log("Click Create Order button",TestStepType.STEP);
 			AjaxCondition.forElementVisible(RERESERVE_CREATE_ORDER_BUTTON).waitForResponse(5);
 			getAction().click(RERESERVE_CREATE_ORDER_BUTTON);
@@ -7050,6 +7051,68 @@ public OrderDetailsPage updateAddress(){
 	public OrderDetailsPage verifyReturnPolicyWarningMessage(){
 		Logger.log("Verify the claim pop up is displayed",TestStepType.STEP);
 		AjaxCondition.forElementVisible(RETURN_DAMAGED_ITEM_WARNING_MSG).waitForResponse(500);
+		return this;
+	}
+	public OrderDetailsPage verifyEvenExchangeEntireOrderTillConcessionPopUp(String orderStatus,String reasoncode){
+		List<String> list= new ArrayList<String>();
+		String orderRouteStatus= (String) getContext().get("orderRouteStatus");
+		String dosOrderNumber = getAction().getText(DELIVERYDETAILS_DOS_NUMBER);  
+		Logger.log("Click on Even Exchange Button",TestStepType.STEP);
+		try{
+			getAction().scrollTo(EVEN_EXCHANGE_BUTTON);
+			getAction().click(EVEN_EXCHANGE_BUTTON);
+		}catch(Exception e){
+			clickJ(EVEN_EXCHANGE_BUTTON);
+		}
+		getAction().waitFor(3000);
+		Logger.log("Click on Line Item",TestStepType.STEP);
+		int num=getAction().getVisibleElementCount(EVEN_EXCHANGE_ITEM_TABLE);
+		getContext().put("num", num);
+		for(int i=1;i<=num;i++){
+			AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM.format(i)).waitForResponse(5);
+			try {
+				getAction().scrollTo(EVEN_EXCHANGE_ITEM.format(i));
+				getAction().click(EVEN_EXCHANGE_ITEM.format(i));
+			} catch (Exception e) {
+				clickJ(EVEN_EXCHANGE_ITEM.format(i));
+			}
+
+			Logger.log("Select the Reason for even exchange",TestStepType.STEP);
+			AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i)).waitForResponse(5);
+			
+			//getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i), 3);
+
+			
+			if(reasoncode.equalsIgnoreCase(""))
+				getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i), 3);
+			else
+				getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format(i), 1);
+			
+			
+			Logger.log("Click on Continue",TestStepType.STEP);
+			AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY_COUNT.format(i)).waitForResponse();
+			getAction().type(LINE_ITEM_ROW_QUANTITY_COUNT.format(i), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
+			getAction().waitFor(1000);
+		}
+		AjaxCondition.forElementVisible(ACTION_CETNER_CONTINUE_BUTTON).waitForResponse(5);
+		getAction().click(ACTION_CETNER_CONTINUE_BUTTON);
+
+		try {
+			if(orderRouteStatus.equalsIgnoreCase("ON TIME")){
+				getAction().waitFor(3000);
+				verifyDayOfDelivery("Delivery Driver","Select Items");
+				if("DELIVERY DRIVER".equalsIgnoreCase("Delivery Driver")){
+					AjaxCondition.forElementVisible(CONTINUE_TO_RETURN_EXCHANGE_ITEM).waitForResponse();
+					getAction().click(CONTINUE_TO_RETURN_EXCHANGE_ITEM);}}
+		} catch (NullPointerException e ) {
+			orderRouteStatus="";
+		}
+
+		/*if(orderStatus.equalsIgnoreCase("Shipped")||orderStatus.equalsIgnoreCase("Partially Shipped")||orderStatus.equalsIgnoreCase("Released")){
+			Logger.log("Click 'No' on the Consession confirmation dialog",TestStepType.STEP);
+			AjaxCondition.forElementVisible(OFFER_CONSESSION_NO_BUTTON).waitForResponse(5);
+			getAction().click(OFFER_CONSESSION_NO_BUTTON);
+		}*/
 		return this;
 	}
 }
