@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -125,7 +126,8 @@ public class HomePage extends Page {
 	//public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[3]//tr[2]//td[contains(@id,'datepicker')][1]","Selected DOS Data");
 	//public final Locator SELECTED_DOS_DATE = new Locator("","(//table)[2]//tr[5]//td[contains(@id,'datepicker')][1]","Selected From Data");
 	public final Locator SELECTED_DOS_DATE = new Locator("","((//table)[3]//span[contains(text(),'{0}') and @class='ng-binding'])","Selected DOS Data");
-
+	public final Locator SELECTED_TRIVIAl_DOS_DATE = new Locator("SELECTED_TRIVIAl_DOS_DATE","((//table)[3]//span[contains(text(),'{0}') and @class='ng-binding text-muted'])","SELECTED_TRIVIAl_DOS_DATE");
+	
 	public final Locator FIRSTNAME_FIELD = new Locator("FIRSTNAME_FIELD", "//input[@name='firstName']", "First Name Field");
 	public final Locator LASTNAME_FIELD = new Locator("LASTNAME_FIELD", "//input[@name='lastName']", "Last Name Field");
 	public final Locator SALESCHECK_FIELD = new Locator("SALESCHECK_FIELD", "//input[@name='salesCheck']", "Sales Check Field");
@@ -977,15 +979,27 @@ public class HomePage extends Page {
 	public HomePage  searchDOSOrdersByDate(){
 		selectOrderTab();
 		getAction().waitFor(1000);
-		DateFormat df = new SimpleDateFormat("dd");
+		/*DateFormat df = new SimpleDateFormat("dd");
 	    Date dateobj = new Date();
-	    String todaysDate = df.format(dateobj);
+	    String todaysDate = df.format(dateobj);*/
+	    Calendar calendar =  Calendar.getInstance();		
+		int maxDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int today = calendar.get(Calendar.DAY_OF_MONTH);
+		calendar.add(Calendar.DATE, 2);
+		int nextDate = calendar.get(Calendar.DAY_OF_MONTH);
+		String searchDate = Integer.toString(nextDate);
 		Logger.log("Click on from date button " , TestStepType.SUBSTEP);
 		AjaxCondition.forElementVisible(DOS_DATEFROM_FIELD).waitForResponse();
 		getAction().click(DOS_DATEFROM_FIELD);
 		getAction().waitFor(1000);
-		AjaxCondition.forElementVisible(SELECTED_DOS_DATE.format(todaysDate)).waitForResponse();
-		getAction().click(SELECTED_DOS_DATE.format(todaysDate));
+		
+		if(today<(maxDays-2)){
+			AjaxCondition.forElementVisible(SELECTED_DOS_DATE.format(searchDate)).waitForResponse();
+			getAction().click(SELECTED_DOS_DATE.format(searchDate));
+		}else{
+			AjaxCondition.forElementVisible(SELECTED_TRIVIAl_DOS_DATE.format(searchDate)).waitForResponse();
+			getAction().click(SELECTED_TRIVIAl_DOS_DATE.format(searchDate));
+		}
 		getAction().waitFor(1000);
 		Logger.log("Delivery Date Selected is "+ getAction().getValue(DOS_DATEFROM_FIELD), TestStepType.DATA_CAPTURE);
 		Logger.log("Click on Search Button", TestStepType.STEP);

@@ -1092,10 +1092,10 @@ public class OrderDetailsPage extends Page {
 					PageAssert.verifyEqual(searchVal, cellphone);
 				}
 			}
+			String orderRouteStatus=getAction().getText(ORDER_ROUTE_STATUS);
+			getContext().put("orderRouteStatus", orderRouteStatus);
+			System.out.println("orderRouteStatus----"+orderRouteStatus+"****");
 		}	
-		String orderRouteStatus=getAction().getText(ORDER_ROUTE_STATUS);
-		getContext().put("orderRouteStatus", orderRouteStatus);
-		System.out.println("orderRouteStatus----"+orderRouteStatus+"****");
 		return this;
 	}
 
