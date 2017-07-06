@@ -1660,8 +1660,8 @@ public class OrderDetailsPage extends Page {
 		AjaxCondition.forElementVisible(EVEN_EXCHANGE_ITEM_DROPDOWN.format("1")).waitForResponse(5);
 		getAction().selectUsingIndex(EVEN_EXCHANGE_ITEM_DROPDOWN.format("1"), 3);
 		Logger.log("Click on Continue",TestStepType.STEP);
-		AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1)).waitForResponse();
-		getAction().type(LINE_ITEM_ROW_QUANTITY.format(1), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
+		AjaxCondition.forElementVisible(LINE_ITEM_ROW_QUANTITY.format(1,1)).waitForResponse();
+		getAction().type(LINE_ITEM_ROW_QUANTITY.format(1,1), getAction().getText(LINE_ITEM_ROW_QUANTITY_AVAILABLE_EVEN_EXCHANGE));
 		getAction().waitFor(1000);
 
 
