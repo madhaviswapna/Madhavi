@@ -954,6 +954,7 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.login(user)
 		.deleteCasesforOrderfromDB("queue.queueDescreption", "HD - Account Validation")
+		.deleteAssignedCasesforUserfromDB(user.userName)
 		.addlogType(TestStepType.THEN)
 		.VerifyDeliveryAgent()
 		.closeWarningPopupWindow()
