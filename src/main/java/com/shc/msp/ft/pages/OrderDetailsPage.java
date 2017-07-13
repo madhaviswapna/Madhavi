@@ -6391,8 +6391,8 @@ public class OrderDetailsPage extends Page {
 
 		String lDate = getAction().getText(DELIVERY_DATE);
 		String pend2 = getAction().getText(PEND_CODE);
-
-		if (type.equalsIgnoreCase("OPEN")) {
+		System.out.println("Current date   :: "+currentDeliveryDate+" New Date  :: "+lDate);
+				if (type.equalsIgnoreCase("OPEN")) {
 			PageAssert.verifyEqual(pend2, "");
 		} else if (type.equalsIgnoreCase("RELEASED")) {
 			PageAssert.verifyEqual(pend2, "TBR");
@@ -6402,7 +6402,7 @@ public class OrderDetailsPage extends Page {
 
 		//Logger.log("Verified that pend code before reshedule was: " + pend1 + " and pend code after reshedule is:" + pend2, TestStepType.VERIFICATION_PASSED);
 
-		SimpleDateFormat simpleDate = new SimpleDateFormat("mm/dd/yyyy");
+		SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = simpleDate.parse(currentDeliveryDate);
 		System.out.println();
 		Date date2 = simpleDate.parse(lDate);
