@@ -137,11 +137,11 @@ instance"
 			<scope>test</scope>
 		</dependency>
 
-	 	<dependency>
+	 	<!-- <dependency>
 			<groupId>com.shc.automation</groupId>
 			<artifactId>cars-dao-framework</artifactId>
 			<version>2.10.11</version>
-		</dependency>
+		</dependency> -->
 		<!-- <dependency>
 			<groupId>com.shc.automation</groupId>
 			<artifactId>cars-webdriver-framework</artifactId>
