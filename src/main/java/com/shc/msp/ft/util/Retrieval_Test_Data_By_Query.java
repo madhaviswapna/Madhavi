@@ -2609,7 +2609,7 @@ public void fbm_line_item_cancellation_not_eligible() throws Exception{
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
 		sql_layway_Phone = "select distinct phone_1 from layaway_order_detail lay, customer_contact_info cc, ord o "
 				+ "where  lay.ORDER_ID= o.ORDER_ID and cc.ADDRESS_ID = o.BILLING_ADDRESS_ID "
-				+ "order by lay.LAST_UPDATED_TS desc limit 1;";
+				+ "and lay.LAST_UPDATED_TS< DATE_SUB(CURDATE(),INTERVAL 30 DAY) order by RAND() limit 1;";
 
 
 		System.out.println("------------------------------------+sql:"+sql_layway_Phone);
