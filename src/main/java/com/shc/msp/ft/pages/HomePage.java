@@ -1169,10 +1169,12 @@ public class HomePage extends Page {
 		return this;
 	}
 	public HomePage selectLayawayOrderFromSearchResults(int index){
-		Logger.log("Click on search result number " + index);
-		AjaxCondition.forElementVisible(LAYAWAY_SEARCH_RESULT.format(index)).waitWithoutException(5);
-		getAction().waitFor(2000);
-		getAction().click(LAYAWAY_SEARCH_RESULT.format(index));
+		
+		if (getAction().isVisible(LAYAWAY_SEARCH_RESULT.format(index))) {
+			Logger.log("Click on search result number " + index);
+			AjaxCondition.forElementVisible(LAYAWAY_SEARCH_RESULT.format(index)).waitWithoutException(5);
+			getAction().waitFor(2000);
+			getAction().click(LAYAWAY_SEARCH_RESULT.format(index));}
 		return this;
 	}
 	
