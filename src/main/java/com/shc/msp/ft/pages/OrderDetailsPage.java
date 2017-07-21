@@ -1909,6 +1909,11 @@ public class OrderDetailsPage extends Page {
 		Logger.log("Verify trail balance submit button", TestStepType.STEP);
 		AjaxCondition.forElementVisible(TRIAL_BALANCE_POPUP_SUBMIT_BUTTON).waitForResponse();
 		getAction().click(TRIAL_BALANCE_POPUP_SUBMIT_BUTTON);
+		getAction().waitFor(3000);
+		if(getAction().isVisible(TRIAL_BALANCE_POPUP_SUBMIT_BUTTON)){
+			Logger.log("Clicking on the Submit button again");
+			getAction().click(TRIAL_BALANCE_POPUP_SUBMIT_BUTTON);
+		}
 		AjaxCondition.forElementVisible(TRIAL_BALANCE_OK).waitForResponse(3000);
 		getAction().click(TRIAL_BALANCE_OK);
 		return this;
