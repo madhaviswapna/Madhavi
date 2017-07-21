@@ -2813,7 +2813,9 @@ public class OrderDetailsPage extends Page {
 					PageAssert.verifyEqual(type_des, adj_table_columns.get(0).getText());
 
 					Logger.log("Verify adjustment amount in database ("+amount.get(i)+") matches with application("+adj_table_columns.get(1).getText()+")", TestStepType.STEP);
-					PageAssert.verifyEqual("($"+formatter.format(amount.get(i))+")", adj_table_columns.get(1).getText());
+					//PageAssert.verifyEqual("($"+formatter.format(amount.get(i))+")", adj_table_columns.get(1).getText());
+					PageAssert.verifyTrue(adj_table_columns.get(1).getText().contains(formatter.format(amount.get(i))), "Verify Amount in Adjustment is "+"($"+df.format(amount.get(i))+")"+" in DataBase");
+					System.out.println("Page value:  "+adj_table_columns.get(1).getText()+" DB Value:  "+formatter.format(amount.get(i)));
 
 					Logger.log("Verify adjustment date in database ("+sdf2.format(sdf1.parse(date.get(i)))+") matches with date in application ("+adj_table_columns.get(2).getText()+")", TestStepType.STEP);
 					PageAssert.verifyEqual(sdf2.format(sdf1.parse(date.get(i))), adj_table_columns.get(2).getText());
@@ -4767,7 +4769,8 @@ public class OrderDetailsPage extends Page {
 		System.out.println("Adjustment "+retrievedAdj.equalsIgnoreCase(adjust));
 		SoftAssert.checkConditionAndContinueOnFailure("Verify "+adjust+" is the latest adjustment in the table", retrievedAdj.equalsIgnoreCase(adjust));
 		System.out.println("Amount "+retrievedAmount.contains(amount));
-		SoftAssert.checkConditionAndContinueOnFailure("Verify adjustment amount", retrievedAmount.contains(amount));
+		SoftAssert.checkConditionAndContinueOnFailure("Verify adjustment amount Displayed Amount:- "+retrievedAmount+"  Expected Amount :- "+amount, retrievedAmount.contains(amount));
+		System.out.println("Verify adjustment amount Displayed Amount:- "+retrievedAmount+"  Expected Amount :- "+amount);
 		return this;		
 	}
 
