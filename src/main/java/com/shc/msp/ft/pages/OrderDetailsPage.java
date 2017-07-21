@@ -786,7 +786,10 @@ public class OrderDetailsPage extends Page {
 	public final Locator FIRST_SUGGESTED_ADDRESS = new Locator ("FIRST_SUGGESTED_ADDRESS","(//div[@value='address']//b)[1]","FIRST_SUGGESTED_ADDRESS");
 	
 	public final Locator ITEM_DETAIL = new Locator("ITEM_DETAIL", "//td[contains(text(),'{0}')]/following-sibling::td[contains(text(),'{1}')]/following-sibling::td[contains(text(),'{2}')]", "ITEM_DETAIL");
+	public final Locator PEND_CODE_ALERT = new Locator("PEND_CODE_ALERT", "//div[contains(text(),'{0}')]", "PEND_CODE_ALERT");
+	public final Locator PEND_CODE_ALERT_NAME = new Locator("PEND_CODE_ALERT_NAME", "//h4[contains(text(),'Pended Order')]", "PEND_CODE_ALERT_NAME");
 
+	
 	
 	Map<String, List<String>> map =new LinkedHashMap<>();
 
@@ -1000,8 +1003,12 @@ public class OrderDetailsPage extends Page {
 			Locator[] loc3={CONTRACT_START_DATE, END_DATE, WEEKS_OF_DURATION, LAST_PAYMENT_DATE, FUTURE};
 			//Locator[] loc4={ORIGIN_STORE, ORIGIN_STORE_TYPE, PICK_UP_LOC_STORE, ADDRESS, CITY,STATE,PHONE};
 			
+		
+			
+			
 			
 			for (int i = 0; i < loc.length; i++) {
+				
 				
 				
 				Logger.log( getAction().getText(loc[i]), TestStepType.STEP);
@@ -1042,6 +1049,10 @@ public class OrderDetailsPage extends Page {
 
 	//For Delivery Flow - Verification for the DOS order details page
 	public OrderDetailsPage verifySearchedDOSOrderIsDisplayed(String searchVal, String searchField) {
+		
+		if(getAction().isVisible(PEND_CODE_ALERT_NAME))
+			verifyPendCodeAlertMsg();	
+			
 		Logger.log("Verify if Order Details Page is displayed", TestStepType.VERIFICATION_STEP);
 		getAction().waitFor(2000);
 		if(AjaxCondition.forElementVisible(NO_RESULTS_FOUND).waitWithoutException(1)) 	
@@ -7122,6 +7133,19 @@ public OrderDetailsPage updateAddress(){
 			getAction().click(OFFER_CONSESSION_NO_BUTTON);
 		}*/
 		return this;
+	}
+	
+	public OrderDetailsPage verifyPendCodeAlertMsg(){
+		String alertMsg="This order is pended.  Please take appropriate action to remove the pend code"
+				+ " to make sure the order is delivered when expected. "
+				+ "Reschedule action will remove most pend codes.";
+		Logger.log("Click on pend code alert",TestStepType.STEP);
+		AjaxCondition.forElementVisible(PEND_CODE_ALERT.format(alertMsg)).waitForResponse(5);
+		SoftAssert.checkElementAndContinueOnFailure(PEND_CODE_ALERT.format(alertMsg), "Pended order msg", CheckLocatorFor.isVisible);
+		getAction().click(OK_BUTTON);
+		return this;
+		
+		
 	}
 }
 

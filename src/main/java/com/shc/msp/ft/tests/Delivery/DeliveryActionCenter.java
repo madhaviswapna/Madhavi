@@ -1871,14 +1871,16 @@ public class DeliveryActionCenter extends BaseTestsEx{
 	}
 
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
-			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification"}
+			groups = {TestGroup.QA_Environment,TestGroup.MSPP0DeliveryTests,"Delivery_SCIM_Update_Captured_Notes_Verification_PartiallyShippedOrder"}
 	, description = "Verify if Scim code can be updated and verify interaction and contact history notes ", enabled = true)
 	public void Delivery_SCIM_Update_Captured_Notes_Verification_PartiallyShippedOrder(TestData data) throws Exception {
 		addCloneIDHostname(data);
 		LogFormatterAction.beginSetup();
 		User user = new User(); 
 		user.userName=UserPool.getDeliveryUser();
-		String orderId= getProductToTest("Reschedule_Released_HD_Order",true);
+		String[] values= getProductToTest("Rereserve_Eligible_Partially_shipped_Order",true).split(",");
+		String orderId=values[0];
+		String dc_no=values[1];
 		System.out.println("--------------------------------------------------------------------OrderId:"+orderId);
 
 		As.guestUser.goToHomePage()
@@ -1890,30 +1892,34 @@ public class DeliveryActionCenter extends BaseTestsEx{
 		.addlogType(TestStepType.WHEN)
 		.closeWarningPopupWindow()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.searchByDeliveryOrderId(orderId,dc_no)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyupdateScimCode("Released")		
+		.verifySearchedDOSOrderIsDisplayed(orderId, "dosorderId")
 		.addlogType(TestStepType.THEN)
-		.verifyLineItemDetail("Released")		
+		.verifyupdateScimCode("Open")		
+		.addlogType(TestStepType.THEN)
+		.verifyLineItemDetail("Open")		
 		.addlogType(TestStepType.THEN)
 		.verifyAdjustmentCapturedInInteractionsForScimCode("Update Scim Code")		
 		.addlogType(TestStepType.WHEN)
 		.goToActionCenter()		
 		.addlogType(TestStepType.WHEN)
-		.wrapUpOrderWithoutContactDelivery()	
-		._NavigationAction()
+		.wrapUpOrderWithoutContactDelivery();
+		/*._NavigationAction()
 		.addlogType(TestStepType.WHEN)
-		.searchByDeliveryOrderId(orderId, DcNumber.DC_NO)
+		.logout()
+		.login(user)
+		.searchByDeliveryOrderId(orderId,dc_no)
 		.addlogType(TestStepType.WHEN)
 		.selectOrderInMyRecentDeliveryInteractions(1)
 		.addlogType(TestStepType.WHEN)
 		.closeWarningPopupWindow()
 		._OrderDetailsAction()
 		.addlogType(TestStepType.THEN)
-		.verifyActionCapturedHistoryNotes();
+		.verifyActionCapturedHistoryNotes();*/
 	}
 	@Test(dataProvider = "TestData", dataProviderClass = TestDataProvider.class,
 			groups = {TestGroup.QA_Environment,TestGroup.MSPP1DeliveryTests,"Reschedule_Preferred_Service_Window_Verification_Open_Order"}
