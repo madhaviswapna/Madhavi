@@ -413,11 +413,8 @@ public class SalesCheckDetailsPage extends Page {
 		if(url.contains("mspapp301p.dev.ch3.s.com:9680")){
 			partialsaraLinkPopUpWinUrl = FrameworkProperties.SELENIUM_BASE_URL+"/saraCheck/getReceiptBySalesCheck?"
 					+ "salesCheckId="+getAction().getText(SALES_CHECK_DETAILS_SC_NO);//+"&ordDate="+purchaseDate+"&storeId="+storeId
-			System.out.println();System.out.println();System.out.println();
-			System.out.println("If part :---- "+partialsaraLinkPopUpWinUrl);
-			System.out.println();System.out.println();System.out.println();
 		}else{
-			partialsaraLinkPopUpWinUrl = FrameworkProperties.SELENIUM_BASE_URL+"/saraCheck/getReceiptBySalesCheck?"
+			partialsaraLinkPopUpWinUrl = /*FrameworkProperties.SELENIUM_BASE_URL+*/"/saraCheck/getReceiptBySalesCheck?"
 					+ "salesCheckId="+getAction().getText(SALES_CHECK_DETAILS_SC_NO);//+"&ordDate="+purchaseDate+"&storeId="+storeId
 			System.out.println();System.out.println();System.out.println();
 			System.out.println("Else part :---- "+partialsaraLinkPopUpWinUrl);
