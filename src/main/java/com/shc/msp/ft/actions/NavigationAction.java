@@ -272,7 +272,13 @@ public class NavigationAction extends BaseAction {
 
     public NavigationAction searchCustomer(){
     	Logger.log("Agent selects Search Customer option from menu",TestStepType.GIVEN);
-		this.factory.homePage().searchCustomer();
+		//this.factory.homePage().searchCustomer();
+    	try {
+			this.factory.orderDetailsAction().clickSearchAnotherOrder();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return this;
 	}
 
