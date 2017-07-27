@@ -414,11 +414,8 @@ public class SalesCheckDetailsPage extends Page {
 			partialsaraLinkPopUpWinUrl = FrameworkProperties.SELENIUM_BASE_URL+"/saraCheck/getReceiptBySalesCheck?"
 					+ "salesCheckId="+getAction().getText(SALES_CHECK_DETAILS_SC_NO);//+"&ordDate="+purchaseDate+"&storeId="+storeId
 		}else{
-			partialsaraLinkPopUpWinUrl = /*FrameworkProperties.SELENIUM_BASE_URL+*/"/saraCheck/getReceiptBySalesCheck?"
+			partialsaraLinkPopUpWinUrl = "/saraCheck/getReceiptBySalesCheck?"
 					+ "salesCheckId="+getAction().getText(SALES_CHECK_DETAILS_SC_NO);//+"&ordDate="+purchaseDate+"&storeId="+storeId
-			System.out.println();System.out.println();System.out.println();
-			System.out.println("Else part :---- "+partialsaraLinkPopUpWinUrl);
-			System.out.println();System.out.println();System.out.println();
 		}
 		if(getAction().findElement(SALES_CHECK_DETAILS_SC_NO).isEnabled()){
 			getAction().waitFor(1000);
@@ -433,9 +430,7 @@ public class SalesCheckDetailsPage extends Page {
 			getAction().driver.switchTo().window(newSaradwinID);
 
 			getAction().waitFor(2000);
-			System.out.println();System.out.println();System.out.println();
-			System.out.println("current window url   "+getAction().driver.getCurrentUrl());
-			System.out.println();System.out.println();System.out.println();
+			
 			Logger.log("Verify Sara link Pop up Window URL", TestStepType.STEP);
 			PageAssert.verifyPartiallyEqual(getAction().driver.getCurrentUrl(), partialsaraLinkPopUpWinUrl);
 			
