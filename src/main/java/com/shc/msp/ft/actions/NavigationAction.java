@@ -272,16 +272,16 @@ public class NavigationAction extends BaseAction {
 
     public NavigationAction searchCustomer(){
     	Logger.log("Agent selects Search Customer option from menu",TestStepType.GIVEN);
-		//this.factory.homePage().searchCustomer();
-    	try {
-			this.factory.orderDetailsAction().clickSearchAnotherOrder();
-			this.factory.homePage().resetOnlineSearch();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.factory.homePage().searchCustomer();
         return this;
 	}
+    
+    public NavigationAction clickSearchAnotherOrderLink(){
+    	Logger.log("Click on search for another order, followed by click on reset button",TestStepType.WHEN);
+    	this.factory.orderDetailsAction().clickSearchAnotherOrder();
+		this.factory.homePage().resetOnlineSearch();
+		return this;
+    }
 
 	public NavigationAction searchByPhoneForSpecPeriod(String phoneNumber) {
 		this.factory.homePage().searchByPhoneForSpecPeriod(phoneNumber);
