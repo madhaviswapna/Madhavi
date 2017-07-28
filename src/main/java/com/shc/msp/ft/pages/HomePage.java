@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -87,6 +86,7 @@ public class HomePage extends Page {
 	public final Locator CASE_NUMBER_FIELD = new Locator("", "//input[@name='caseNumber']", "Case number ");
 	public final Locator CASE_TAB = new Locator("", "//div[contains(@ng-click,'Case')]", "Case Tab ");
 	public final Locator SEARCH_BUTTON = new Locator("", "//button[@ng-click='searchCustomer()']", "Search button");
+	public final Locator RESET_BUTTON_ONLINE_SEARCH = new Locator("","(//button[contains(text(),'Reset')])[1]", "RESET_BUTTON_ONLINE_SEARCH");
 	public final Locator SEARCH_CASE_BUTTON = new Locator("", "(//button[contains(@ng-click,'searchCase')])[2]", "Search Case button");
 	public final Locator LOGOUT_BUTTON = new Locator("", "//button[contains(@ng-click,'submitLogout')]", "Logout button");
 	public final Locator NO_RESULT = new Locator("0 RESULT", "//div[contains(@ng-if,'data.customers.length == 0')]", "No Result");
@@ -1415,6 +1415,14 @@ public class HomePage extends Page {
 			getAction().waitFor(2000);
 		}
 		return this;
+	}
+	
+	public HomePage resetOnlineSearch(){
+		Logger.log("Click on the Reset button");
+		AjaxCondition.forElementVisible(RESET_BUTTON_ONLINE_SEARCH).waitWithoutException(5);
+		getAction().scrollTo(RESET_BUTTON_ONLINE_SEARCH);
+		getAction().click(RESET_BUTTON_ONLINE_SEARCH);
+		return this;		
 	}
 
 	public HomePage searchByEmail(String email){

@@ -275,6 +275,7 @@ public class NavigationAction extends BaseAction {
 		//this.factory.homePage().searchCustomer();
     	try {
 			this.factory.orderDetailsAction().clickSearchAnotherOrder();
+			this.factory.homePage().resetOnlineSearch();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
