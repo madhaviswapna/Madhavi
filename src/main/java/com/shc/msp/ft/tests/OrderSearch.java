@@ -74,7 +74,7 @@ public class OrderSearch extends BaseTests{
 	            .addlogType(TestStepType.WHEN)
 	            .clickSearchAnotherOrderLink()
 	            .addlogType(TestStepType.WHEN)
-	            .searchByEmail(email)
+	            .searchByEmail("omsauto123@gmail.com")
 	             .selectOrderInMyRecentInteractions(1)
 	             .closeWarningPopupWindow()
 	            ._OrderDetailsAction()
