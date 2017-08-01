@@ -451,7 +451,7 @@ public class SalesCheckDetailsPage extends Page {
 		String saleschecknumberText = getAction().getText(HEADER_SALES_CHECK_SUMMARY);
 		String saleschecknumber = saleschecknumberText.split(" ")[saleschecknumberText.split(" ").length-1];
 		Connection conn = null; PreparedStatement st = null; ResultSet rs = null; conn = MysqlDBConnection.getmysqlConnection();
-		String payment_sc_check = null;
+		String payment_sc_check = "";
 
 		String sql ="select psc.PAYMENT_SALES_CHECK_NUMBER from sales_check sc,payment_sales_check psc "
 				+ "where sc.order_id = psc.order_id and sc.sales_check_number = ?;";
@@ -461,7 +461,7 @@ public class SalesCheckDetailsPage extends Page {
 			st.execute();
 			rs = st.getResultSet();
 			while(rs.next()){
-				payment_sc_check = rs.getString("PAYMENT_SALES_CHECK_NUMBER") ;
+				payment_sc_check += rs.getString("PAYMENT_SALES_CHECK_NUMBER") ;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -474,9 +474,9 @@ public class SalesCheckDetailsPage extends Page {
 				
 			    SoftAssert.checkConditionAndContinueOnFailure("Payment Sales Check column is Present",
 	            		getAction().getText(STORE_POS_TO_WEB_DETAIL_TEXT).equalsIgnoreCase("Payment Sales Check:"));
-				
+				String paymentSCNo =  getAction().getText(STORE_POS_TO_WEB_DETAIL);
 				Logger.log("Verify Payment Sales Check is "+ payment_sc_check+" in database matches with application", TestStepType.STEP);
-				PageAssert.verifyEqual(payment_sc_check, getAction().getText(STORE_POS_TO_WEB_DETAIL));
+				PageAssert.verifyPartiallyEqual(payment_sc_check, paymentSCNo);
 				
 			    SoftAssert.checkConditionAndContinueOnFailure("Payment Sales Check in DB matches with application",
 	            		getAction().getText(STORE_POS_TO_WEB_DETAIL).equalsIgnoreCase(payment_sc_check));
