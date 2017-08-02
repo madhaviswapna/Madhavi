@@ -479,7 +479,7 @@ public class SalesCheckDetailsPage extends Page {
 				PageAssert.verifyPartiallyEqual(payment_sc_check, paymentSCNo);
 				
 			    SoftAssert.checkConditionAndContinueOnFailure("Payment Sales Check in DB matches with application",
-	            		getAction().getText(STORE_POS_TO_WEB_DETAIL).equalsIgnoreCase(payment_sc_check));
+			    		payment_sc_check.contains(getAction().getText(STORE_POS_TO_WEB_DETAIL)));
 			    
 			}else{
 				Reporter.log("Failed Retrieval Data for Store POS to Web Table~");
