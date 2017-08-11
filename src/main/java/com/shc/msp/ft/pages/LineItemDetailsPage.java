@@ -1311,7 +1311,7 @@ public class LineItemDetailsPage extends Page {
     		int adj_table_rows_count = adj_table_rows.size();
     		String type_des = null;	
     		System.out.println("table rows"+adj_table_rows_count);
-    		for (int i=0; i<adj_table_rows_count; i++){
+    		for (int i=0; i<adj_table_rows_count; i+=3){
 			   List<WebElement> adj_table_columns = adj_table_rows.get(i).findElements(By.tagName("td"));
 			   if (type.get(i).equals("TADJ")){
 				   type_des = "SALESTAX";

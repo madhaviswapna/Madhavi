@@ -2812,7 +2812,7 @@ public class OrderDetailsPage extends Page {
 				List<WebElement> adj_table_rows = adjustmentstable.findElements(By.tagName("tr"));
 				int adj_table_rows_count = adj_table_rows.size();
 
-				for (int i=0; i<adj_table_rows_count; i++){
+				for (int i=0; i<adj_table_rows_count; i+=3){
 
 					List<WebElement> adj_table_columns = adj_table_rows.get(i).findElements(By.tagName("td"));
 					if (type.get(i).equals("TADJ")){
