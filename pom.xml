@@ -405,6 +405,7 @@ instance"
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
+							<encoding>UTF-8</encoding>
 							<outputDirectory>${project.build.directory}/classes/
 							</outputDirectory>
 							<resources>
