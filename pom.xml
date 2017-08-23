@@ -15,7 +15,6 @@ instance"
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<db.env>PROD</db.env>
 		<retry.count />
 		<parallel />
